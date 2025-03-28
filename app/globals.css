@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 10% 8%;
+    --foreground: 210 40% 98%;
+    --card: 220 10% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 10% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 200 85% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 10% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 10% 15%;
+    --muted-foreground: 210 40% 80%;
+    --accent: 45 90% 50%;
+    --accent-foreground: 210 40% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 10% 18%;
+    --input: 220 10% 18%;
+    --ring: 200 85% 50%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-darkgray-950 text-snow-100;
+  }
+}
+
+/* ナビゲーションリンクのスタイル */
+.nav-link {
+  @apply text-sm font-medium text-snow-300 transition-colors hover:text-snow-50;
+}
+
+.nav-link.active {
+  @apply text-snow-50 font-semibold;
+}
+
+/* 縦書きテキスト用のスタイル */
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-darkgray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-darkgray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-darkgray-500;
+}
+
+/* ヒーローセクションのタイトルアニメーション */
+.hero-title {
+  @apply tracking-tight;
+  letter-spacing: -0.02em;
+  font-family: var(--font-playfair);
+}
+
+.hero-title span {
+  @apply inline-block;
+}
+
+.hero-subtitle {
+  @apply tracking-wide uppercase text-ice-400;
+  letter-spacing: 0.2em;
+  font-family: var(--font-inter);
+}
+
+/* フォントクラス */
+.font-serif {
+  font-family: var(--font-noto-serif);
+}
+
+.font-sans {
+  font-family: var(--font-noto-sans);
+}
+
+.font-display {
+  font-family: var(--font-playfair);
+}
+
+.font-zen {
+  font-family: var(--font-zen);
+}
+
+.font-mplus {
+  font-family: var(--font-mplus);
+}
+
+/* 雪のエフェクト */
+.snowflake {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
