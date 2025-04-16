@@ -28,7 +28,7 @@ const services = {
     title: "旅館運営代行",
     subtitle: "RYOKAN MANAGEMENT",
     description:
-      "伝統的な旅館の運営をトータルサポート。予約管理、接客対応、清掃、設備管理、料理の手配まで、旅館運営に必要なすべてのサービスを提供します。",
+      "旅館業法に基づく旅館の運営をトータルサポート。予約管理、接客対応、清掃、設備管理、料理の手配まで、旅館運営に必要なすべてのサービスを提供します。",
     heroImage: "/images/traditional-ryokan.png",
     benefits: [
       {
@@ -177,7 +177,7 @@ const services = {
     title: "民泊運営代行",
     subtitle: "MINPAKU MANAGEMENT",
     description:
-      "Airbnbなどの民泊物件の運営を完全代行。予約管理、ゲスト対応、清掃、メンテナンスまで、すべてのプロセスをプロフェッショナルが担当します。",
+      "住宅宿泊業法に基づく民泊の運営を完全代行。予約管理、ゲスト対応、清掃、メンテナンスまで、すべてのプロセスをプロフェッショナルが担当します。",
     content: [
       {
         title: "民泊運営代行とは？",
@@ -293,6 +293,10 @@ const services = {
       },
     ],
   },
+}
+
+export function generateStaticParams() {
+  return Object.keys(services).map((service) => ({ service }));
 }
 
 export default function ServicePage({ params }: { params: { service: string } }) {

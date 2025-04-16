@@ -32,7 +32,7 @@ const propertyDetails = {
     date: "2022.07.12",
     title: "北海道ニセコ・倶知安・ルスツ地域の土地買取専門 - 地域発展をサポートするワールドワイドベース",
     description:
-      "ニセコ・倶知安・ルスツ地域の土地を専門に買取しています。世界中から注目を集めるリゾートエリアで、インバウンド需要が高く、投資価���の高い土地です。民泊施設やホテル建設に最適な土地をご紹介します。",
+      "ニセコ・倶知安・ルスツ地域の土地を専門に買取しています。世界中から注目を集めるリゾートエリアで、インバウンド需要が高く、投資価値の高い土地です。民泊施設やホテル建設に最適な土地をご紹介します。",
     images: [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
@@ -49,6 +49,12 @@ const propertyDetails = {
     area: "ニセコ",
   },
   // 他の物件データも同様に定義
+}
+
+export function generateStaticParams() {
+  return Object.keys(propertyDetails).map((slug) => ({
+    slug: slug,
+  }))
 }
 
 export default function PropertyDetailPage({ params }: { params: { slug: string } }) {
@@ -185,7 +191,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
                   <Mail className="h-5 w-5 text-primary" />
                   <div>
                     <div className="text-sm text-muted-foreground">メール</div>
-                    <div className="font-bold">info@cleannest-hokkaido.com</div>
+                    <div className="font-bold">info@cleannest-hokkaido.com.jp</div>
                   </div>
                 </div>
                 <Button className="w-full">お問い合わせフォーム</Button>
@@ -202,7 +208,16 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
               </div>
               <div className="p-4">
                 <div className="relative aspect-video mb-2">
-                  <Image src="/placeholder.svg?height=300&width=500" alt="地図" fill className="object-cover" />
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2915.2105498236546!2d141.34456867692078!3d43.06420447104607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0b2974d2c3f903%3A0xa5e2b18cdd4a47a5!2z5pyt5bmM5biC6LGK5bmz5Yy65bmz5bKp5LiJ5p2h!5e0!3m2!1sja!2sjp!4v1709456924980!5m2!1sja!2sjp"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                  />
                 </div>
                 <p className="text-sm text-muted-foreground">{property.details.location}</p>
               </div>

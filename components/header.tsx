@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 import { useState, useEffect } from "react"
 
 interface HeaderProps {
@@ -74,7 +74,25 @@ export function Header({ currentPath = "/" }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button className="bg-paleblue-500 hover:bg-paleblue-600 text-white" asChild>
+          {/* 電話番号 (PC表示のみ) */}
+          <a 
+            href="tel:011-827-7441" 
+            className={`hidden md:flex items-center gap-2 text-lg font-medium text-gold-500 hover:text-gold-600 hover:scale-105 transition-all duration-200 ${
+              scrolled ? 'text-gold-600' : 'text-gold-500'
+            }`}
+          >
+            <Phone className="h-5 w-5" />
+            011-827-7441
+          </a>
+
+          <Button 
+            className={`text-white px-6 py-2.5 h-auto text-base rounded-lg shadow-md transition-all duration-300 ${
+              scrolled 
+                ? 'bg-gold-500 hover:bg-gold-600'
+                : 'bg-gray-800 hover:bg-gray-700'
+            }`} 
+            asChild
+          >
             <Link href="/#contact">お問い合わせ</Link>
           </Button>
 

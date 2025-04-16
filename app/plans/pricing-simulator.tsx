@@ -1,18 +1,18 @@
 "use client"
 
 import { CardFooter } from "@/components/ui/card"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { HelpCircle, Check, ChevronRight } from "lucide-react"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Check, ChevronRight } from "lucide-react" // Removed HelpCircle as it wasn't used
+// Removed Tooltip imports as they weren't used
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
-// 料金データ
+// Pricing data remains the same
 const pricingData = {
   basicFees: [
     {
@@ -122,8 +122,7 @@ const pricingData = {
     {
       id: "tablet",
       name: "タブレット",
-      description:
-        "・ゲストが利用するタブレット料（端末セットアップ込）\n・Lenovo9インチ（※KEEYLSの場合のみ11インチ対応可）",
+      description: "・ゲストが利用するタブレット料（端末セットアップ込）\n・Lenovo9インチ（※KEEYLSの場合のみ11インチ対応可）",
       required: false,
       prices: {
         fe: {
@@ -139,8 +138,7 @@ const pricingData = {
     {
       id: "smartlock",
       name: "IoTスマートロック連携キー",
-      description:
-        "・システムと自動連携できるゲスト用キー（複数選択可）\n・民泊営業の場合と旅館営業の場合でシステムとキーが異なります",
+      description: "・システムと自動連携できるゲスト用キー（複数選択可）\n・民泊営業の場合と旅館営業の場合でシステムとキーが異なります",
       required: true,
       prices: {
         fe: {
@@ -148,8 +146,24 @@ const pricingData = {
           ryokan: "別途見積",
         },
         ws: {
-          minpaku: "別途見積",
+          minpaku: 30000,
           ryokan: "別途見積",
+        },
+      },
+    },
+    {
+      id: "keeyls-integration",
+      name: "予約システム連携費用",
+      description: "・複数の予約システム間の連携機能\n・施設単位で必要（※部屋単位ではない）",
+      required: false,
+      prices: {
+        fe: {
+          minpaku: 0,
+          ryokan: 50000,
+        },
+        ws: {
+          minpaku: 0,
+          ryokan: 50000,
         },
       },
     },
@@ -157,10 +171,11 @@ const pricingData = {
   runningCosts: [
     {
       id: "airhost-hms",
-      name: "AirHost HMS",
-      description: "・SC＋PMS（Wブッキング防止、予約情報自動連携）\n・ダイナミックプライシング機能、レポート機能",
+      name: "ホスト管理システム（Premium）",
+      description: "・SC+PMS機能（予約情報連携、レポートなど）",
       required: true,
       monthly: true,
+      perRoom: false,
       prices: {
         fe: {
           minpaku: 3000,
@@ -171,14 +186,24 @@ const pricingData = {
           ryokan: 3000,
         },
       },
+      requiredFor: {
+        fe: {
+          minpaku: true,
+          ryokan: true,
+        },
+        ws: {
+          minpaku: true,
+          ryokan: true,
+        },
+      }
     },
     {
       id: "airhost-one",
-      name: "AirHost ONE",
-      description:
-        "・自動チェックイン/アウトシステム\n・セルフチェックイン機能、本人確認機能、アップセル機能（時間予約・レンタル）",
+      name: "ゲスト管理システム（Premium）",
+      description: "・自動チェックイン/アウト、アップセル機能",
       required: true,
       monthly: true,
+      perRoom: false,
       prices: {
         fe: {
           minpaku: 2000,
@@ -189,6 +214,16 @@ const pricingData = {
           ryokan: 2000,
         },
       },
+      requiredFor: {
+        fe: {
+          minpaku: true,
+          ryokan: true,
+        },
+        ws: {
+          minpaku: true,
+          ryokan: true,
+        },
+      }
     },
     {
       id: "video-call",
@@ -196,14 +231,43 @@ const pricingData = {
       description: "・ゲストのチェックイン時ビデオ通話による本人確認",
       required: false,
       monthly: true,
+      perRoom: false,
       prices: {
         fe: {
-          minpaku: 6000,
-          ryokan: 0,
+          minpaku: 0,
+          ryokan: 5000,
         },
         ws: {
-          minpaku: 6000,
-          ryokan: 0,
+          minpaku: 0,
+          ryokan: 5000,
+        },
+      },
+      requiredFor: {
+        fe: {
+          minpaku: false,
+          ryokan: true,
+        },
+        ws: {
+          minpaku: false,
+          ryokan: true,
+        },
+      }
+    },
+    {
+      id: "smartlock-monthly",
+      name: "IoTスマートロック連携",
+      description: "・システムと自動連携させた場合の月額利用料\n・スマートロックを連携させた場合は部屋ごとに必要です",
+      required: false,
+      monthly: true,
+      perRoom: true,
+      prices: {
+        fe: {
+          minpaku: 300,
+          ryokan: 300,
+        },
+        ws: {
+          minpaku: 300,
+          ryokan: 300,
         },
       },
       requiredFor: {
@@ -215,35 +279,17 @@ const pricingData = {
           minpaku: false,
           ryokan: false,
         },
-      },
-    },
-    {
-      id: "smartlock-monthly",
-      name: "IoTスマートロック連携",
-      description:
-        "・システムと自動連携させた場合の月額利用料\n・AirHostのスマートロックを連携させた場合は部屋ごとに必要です",
-      required: false,
-      monthly: true,
-      prices: {
-        fe: {
-          minpaku: 300,
-          ryokan: 300,
-        },
-        ws: {
-          minpaku: 300,
-          ryokan: 300,
-        },
-      },
+      }
     },
   ],
   optionalCosts: [
     {
       id: "booking-engine-1",
       name: "ブッキングエンジン①",
-      description:
-        "・自社サイトでの宿泊予約機能搭載・連携に必要な基本料金\n・OTAを介さず自社サイトによる宿泊予約から決済までを実現します",
+      description: "・自社サイトでの宿泊予約機能搭載・連携に必要な基本料金\n・OTAを介さず自社サイトによる宿泊予約から決済までを実現します",
       required: false,
       monthly: true,
+      perRoom: false,
       prices: {
         fe: {
           minpaku: 5000,
@@ -254,12 +300,21 @@ const pricingData = {
           ryokan: 5000,
         },
       },
+      requiredFor: {
+        fe: {
+          minpaku: false,
+          ryokan: false,
+        },
+        ws: {
+          minpaku: false,
+          ryokan: false,
+        },
+      }
     },
     {
       id: "booking-engine-2",
       name: "ブッキングエンジン②",
-      description:
-        "・自社サイトでの宿泊予約機能搭載・連携に必要な月額料金\n・部屋ごとに毎月発生するランニングコストになります",
+      description: "・自社サイトでの宿泊予約機能搭載・連携に必要な月額料金\n・部屋ごとに毎月発生するランニングコストになります",
       required: false,
       monthly: true,
       perRoom: true,
@@ -273,12 +328,21 @@ const pricingData = {
           ryokan: 100,
         },
       },
+      requiredFor: {
+        fe: {
+          minpaku: false,
+          ryokan: false,
+        },
+        ws: {
+          minpaku: false,
+          ryokan: false,
+        },
+      }
     },
     {
       id: "payment-integration",
       name: "決済連携機能③",
-      description:
-        "・ブッキングエンジン搭載した場合に必要な決済連携料金\n・部屋ごとに毎月発生するランニングコストになります",
+      description: "・ブッキングエンジン搭載した場合に必要な決済連携料金\n・部屋ごとに毎月発生するランニングコストになります",
       required: false,
       monthly: true,
       perRoom: true,
@@ -292,75 +356,119 @@ const pricingData = {
           ryokan: 300,
         },
       },
+      requiredFor: {
+        fe: {
+          minpaku: false,
+          ryokan: false,
+        },
+        ws: {
+          minpaku: false,
+          ryokan: false,
+        },
+      }
     },
   ],
 }
 
-// プランの選択肢
+// Plan options remain the same (data only)
 const planOptions = [
   {
     id: "fe",
     name: "ファミリー・エクスペリエンス・プラン",
     description:
       "家族での思い出作りに最適なプラン。北海道の自然や文化を体験できるアクティビティと快適な宿泊施設を組み合わせました。",
-    color: "blue",
   },
   {
     id: "ws",
     name: "ワーケーション・スマート・プラン",
     description:
       "仕事と休暇を両立させる新しいライフスタイル「ワーケーション」に最適なプラン。快適な作業環境と北海道の自然を満喫できます。",
-    color: "amber",
   },
 ]
 
-// 営業タイプの選択肢
+// Business type options remain the same (data only)
 const businessTypeOptions = [
   {
     id: "minpaku",
     name: "民泊営業",
     description: "住宅宿泊事業法（民泊新法）に基づく営業形態です。年間提供日数の上限は180日となります。",
-    icon: "🏠",
   },
   {
     id: "ryokan",
     name: "旅館営業",
     description:
       "旅館業法に基づく営業形態です。年間提供日数の制限はありませんが、より厳格な基準を満たす必要があります。",
-    icon: "🏮",
   },
 ]
 
+// Interfaces remain the same
+interface PriceOption {
+  id: string;
+  name: string;
+  description: string;
+  required: boolean;
+  prices: {
+    fe: {
+      minpaku: number | string;
+      ryokan: number | string;
+    };
+    ws: {
+      minpaku: number | string;
+      ryokan: number | string;
+    };
+  };
+  isPercentage?: boolean;
+  monthly?: boolean;
+  perRoom?: boolean;
+  requiredFor?: {
+    fe: {
+      minpaku: boolean;
+      ryokan: boolean;
+    };
+    ws: {
+      minpaku: boolean;
+      ryokan: boolean;
+    };
+  };
+}
+
+interface SelectedOptions {
+  [key: string]: boolean;
+}
+
+interface ResultOption {
+  id: string;
+  name: string;
+  price: number | string;
+  selected: boolean;
+  monthly?: boolean;
+  isPercentage?: boolean;
+}
+
 export default function PricingSimulator() {
-  // ステップ管理
+  // State and core logic remain the same
   const [currentStep, setCurrentStep] = useState(1)
   const totalSteps = 5
-
-  // 選択内容
   const [plan, setPlan] = useState<"fe" | "ws">("fe")
   const [businessType, setBusinessType] = useState<"minpaku" | "ryokan">("minpaku")
   const [roomCount, setRoomCount] = useState<number>(1)
   const [estimatedMonthlyRevenue, setEstimatedMonthlyRevenue] = useState<number>(300000)
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, boolean>>({})
-
-  // 計算結果
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({})
   const [initialCost, setInitialCost] = useState<number>(0)
   const [monthlyCost, setMonthlyCost] = useState<number>(0)
   const [percentageCost, setPercentageCost] = useState<number>(0)
   const [monthlyCommission, setMonthlyCommission] = useState<number>(0)
   const [totalMonthlyCost, setTotalMonthlyCost] = useState<number>(0)
+  const [resultOptions, setResultOptions] = useState<ResultOption[]>([])
 
-  // 初期選択状態を設定
   useEffect(() => {
-    const initialOptions: Record<string, boolean> = {}
-
-    // 必須項目を選択状態に
+    const initialOptions: SelectedOptions = {}
     ;[
       ...pricingData.basicFees,
       ...pricingData.systemFees,
       ...pricingData.runningCosts,
       ...pricingData.optionalCosts,
-    ].forEach((item) => {
+    ].forEach((item: PriceOption) => {
       if (item.required) {
         initialOptions[item.id] = true
       } else if (item.requiredFor && item.requiredFor[plan][businessType]) {
@@ -369,75 +477,53 @@ export default function PricingSimulator() {
         initialOptions[item.id] = false
       }
     })
-
     setSelectedOptions(initialOptions)
   }, [plan, businessType])
 
-  // 料金計算
   useEffect(() => {
     let initial = 0
     let monthly = 0
     let percentage = 0
-
-    // 基本料金
-    pricingData.basicFees.forEach((fee) => {
+    const results: ResultOption[] = []
+    ;[
+      ...pricingData.basicFees,
+      ...pricingData.systemFees,
+      ...pricingData.runningCosts,
+      ...pricingData.optionalCosts,
+    ].forEach((fee) => {
       if (selectedOptions[fee.id]) {
         const price = fee.prices[plan][businessType]
         if (typeof price === "number") {
           if (fee.isPercentage) {
             percentage += price
+          } else if (fee.monthly) {
+            if (fee.perRoom) {
+              monthly += price * roomCount;
+            } else {
+              monthly += price;
+            }
           } else {
-            initial += price
+             initial += price;
           }
         }
-      }
-    })
-
-    // システム料金
-    pricingData.systemFees.forEach((fee) => {
-      if (selectedOptions[fee.id]) {
-        const price = fee.prices[plan][businessType]
-        if (typeof price === "number") {
-          initial += price
-        }
-      }
-    })
-
-    // ランニングコスト
-    pricingData.runningCosts.forEach((fee) => {
-      if (selectedOptions[fee.id]) {
-        const price = fee.prices[plan][businessType]
-        if (typeof price === "number") {
-          if (fee.perRoom) {
-            monthly += price * roomCount
-          } else {
-            monthly += price
-          }
-        }
-      }
-    })
-
-    // オプションコスト
-    pricingData.optionalCosts.forEach((fee) => {
-      if (selectedOptions[fee.id]) {
-        const price = fee.prices[plan][businessType]
-        if (typeof price === "number") {
-          if (fee.perRoom) {
-            monthly += price * roomCount
-          } else {
-            monthly += price
-          }
-        }
+        results.push({
+          id: fee.id,
+          name: fee.name,
+          price: price,
+          selected: true,
+          monthly: fee.monthly,
+          isPercentage: fee.isPercentage,
+        });
       }
     })
 
     const commission = Math.round(estimatedMonthlyRevenue * (percentage / 100))
-
     setInitialCost(initial)
     setMonthlyCost(monthly)
     setPercentageCost(percentage)
     setMonthlyCommission(commission)
-    setTotalMonthlyCost(monthly + commission)
+    setTotalMonthlyCost(monthly + commission) // Keep calculation consistent
+    setResultOptions(results)
   }, [selectedOptions, plan, businessType, roomCount, estimatedMonthlyRevenue])
 
   const handleOptionChange = (id: string, checked: boolean) => {
@@ -454,21 +540,18 @@ export default function PricingSimulator() {
     return price
   }
 
-  // 次のステップへ進む
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1)
     }
   }
 
-  // 前のステップへ戻る
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
     }
   }
 
-  // 最初からやり直す
   const resetSimulator = () => {
     setCurrentStep(1)
     setPlan("fe")
@@ -477,437 +560,664 @@ export default function PricingSimulator() {
     setEstimatedMonthlyRevenue(300000)
   }
 
+  // JSX with updated class names for black/white/gray theme
   return (
-    <TooltipProvider>
-      <div className="w-full">
-        <Card className="bg-darkgray-800 border-darkgray-700 overflow-hidden">
-          {/* ステッププログレスバー */}
-          <div className="relative h-2 bg-darkgray-700">
-            <div
-              className="absolute top-0 left-0 h-full bg-ice-600 transition-all duration-300"
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            ></div>
+    // Simplified border and kept white background
+    <div className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">
+      {/* Simplified header border and text colors */}
+      <div className="px-6 py-6 border-b border-gray-300">
+        <h3 className="text-2xl font-light text-black mb-2">料金シミュレーター</h3>
+        <p className="text-gray-700">
+          お客様の条件に合わせた概算料金をシミュレーションできます。
+        </p>
+      </div>
+
+      <div className="p-6">
+        {/* Step 1: プランタイプ選択 */}
+        <div className={`${currentStep === 1 ? "block" : "hidden"}`}>
+          <h4 className="text-xl font-medium text-black mb-6">ステップ1: プランタイプを選択</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card Styling Updated */}
+            <Card
+              className={cn(
+                "cursor-pointer transition-all duration-200 hover:shadow-md",
+                plan === "fe"
+                  ? "border-black bg-gray-100" // Selected: Black border, light gray bg
+                  : "border-gray-300 hover:border-gray-400" // Default: Gray border
+              )}
+              onClick={() => setPlan("fe")}
+            >
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  {/* Badge Styling Updated */}
+                  <Badge variant="secondary" className="border border-gray-300">
+                    ファミリー・エクスペリエンス
+                  </Badge>
+                  {plan === "fe" && (
+                    // Checkmark Styling Updated
+                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                  )}
+                </div>
+                {/* Text colors simplified */}
+                <h5 className="text-lg font-medium text-black mb-2">家族向け体験プラン</h5>
+                <p className="text-gray-600 text-sm">
+                  家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる宿泊施設の運営をサポートします。
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn(
+                "cursor-pointer transition-all duration-200 hover:shadow-md",
+                plan === "ws"
+                  ? "border-black bg-gray-100" // Selected
+                  : "border-gray-300 hover:border-gray-400" // Default
+              )}
+              onClick={() => setPlan("ws")}
+            >
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <Badge variant="secondary" className="border border-gray-300">
+                    ワーケーション・ステイ
+                  </Badge>
+                  {plan === "ws" && (
+                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                  )}
+                </div>
+                <h5 className="text-lg font-medium text-black mb-2">ワーケーション向けプラン</h5>
+                <p className="text-gray-600 text-sm">
+                  ワーケーションや長期滞在のビジネス利用に最適なプラン。快適な仕事環境と滞在空間を提供します。
+                </p>
+              </CardContent>
+            </Card>
           </div>
 
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-2xl text-snow-50">料金シミュレーション</CardTitle>
-                <CardDescription className="text-snow-300">
-                  ステップに沿って選択するだけで、簡単に料金を計算できます。
+          <div className="mt-8 flex justify-end">
+            {/* Button Styling Updated */}
+            <Button
+              onClick={nextStep}
+              disabled={!plan}
+              className={cn(
+                "px-6",
+                plan
+                  ? "bg-black hover:bg-gray-800 text-white" // Enabled: Black bg
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed" // Disabled: Default gray
+              )}
+            >
+              次へ
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Step 2: 営業タイプ選択 */}
+        <div className={`${currentStep === 2 ? "block" : "hidden"}`}>
+          <h4 className="text-xl font-medium text-black mb-6">ステップ2: 営業タイプを選択</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Apply similar card/badge/checkmark style updates as Step 1 */}
+            <Card
+              className={cn(
+                "cursor-pointer transition-all duration-200 hover:shadow-md",
+                businessType === "minpaku"
+                  ? "border-black bg-gray-100"
+                  : "border-gray-300 hover:border-gray-400"
+              )}
+              onClick={() => setBusinessType("minpaku")}
+            >
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <Badge variant="secondary" className="border border-gray-300">
+                    民泊営業
+                  </Badge>
+                  {businessType === "minpaku" && (
+                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                  )}
+                </div>
+                <h5 className="text-lg font-medium text-black mb-2">住宅宿泊事業法（民泊）</h5>
+                <p className="text-gray-600 text-sm">
+                  住宅宿泊事業法に基づく民泊営業。年間提供日数の上限があり、手続きが比較的簡単です。
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card
+              className={cn(
+                "cursor-pointer transition-all duration-200 hover:shadow-md",
+                businessType === "ryokan"
+                  ? "border-black bg-gray-100"
+                  : "border-gray-300 hover:border-gray-400"
+              )}
+              onClick={() => setBusinessType("ryokan")}
+            >
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <Badge variant="secondary" className="border border-gray-300">
+                    旅館営業
+                  </Badge>
+                  {businessType === "ryokan" && (
+                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                  )}
+                </div>
+                <h5 className="text-lg font-medium text-black mb-2">旅館業法（簡易宿所）</h5>
+                <p className="text-gray-600 text-sm">
+                  旅館業法に基づく営業。年間日数制限がなく、法人・個人を問わず営業が可能です。
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-8 flex justify-between">
+            {/* Back button kept as outline */}
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              className="border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+              戻る
+            </Button>
+            {/* Next button style updated */}
+            <Button
+              onClick={nextStep}
+              disabled={!businessType}
+              className={cn(
+                "px-6",
+                businessType
+                  ? "bg-black hover:bg-gray-800 text-white"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              )}
+            >
+              次へ
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Step 3: 部屋数と売上予想 */}
+        <div className={`${currentStep === 3 ? "block" : "hidden"}`}>
+          <h4 className="text-xl font-medium text-black mb-6">ステップ3: 規模と売上予想</h4>
+
+          <div className="space-y-6">
+            {/* Card border simplified */}
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                {/* Text colors simplified */}
+                <CardTitle className="text-lg font-medium text-black">
+                  部屋数を選択
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  運営する部屋数を選択してください
                 </CardDescription>
-              </div>
-              <div className="flex items-center space-x-1">
-                {Array.from({ length: totalSteps }).map((_, index) => (
-                  <div
-                    key={index}
-                    className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all",
-                      currentStep > index + 1
-                        ? "bg-ice-600 text-white"
-                        : currentStep === index + 1
-                          ? "bg-ice-600/20 text-ice-400 border border-ice-600"
-                          : "bg-darkgray-700 text-snow-400",
-                    )}
-                  >
-                    {index + 1}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </CardHeader>
-
-          <CardContent className="p-0">
-            {/* ステップ1: プラン選択 */}
-            {currentStep === 1 && (
-              <div className="p-6 space-y-6">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-snow-50">ステップ1: プラン選択</h3>
-                  <p className="text-snow-300 mt-2">目的に合わせたプランをお選びください</p>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {planOptions.map((option) => (
-                    <div
-                      key={option.id}
-                      className={cn(
-                        "relative cursor-pointer rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1",
-                        plan === option.id
-                          ? `border-2 border-${option.color}-500 shadow-lg`
-                          : "border border-darkgray-700 hover:border-darkgray-600",
-                      )}
-                      onClick={() => setPlan(option.id as "fe" | "ws")}
-                    >
-                      {plan === option.id && (
-                        <div
-                          className={`absolute top-3 right-3 w-6 h-6 rounded-full bg-${option.color}-500 flex items-center justify-center`}
-                        >
-                          <Check className="h-4 w-4 text-white" />
-                        </div>
-                      )}
-                      <div className={`h-2 bg-${option.color}-500`}></div>
-                      <div className="p-6">
-                        <h4 className="text-lg font-bold text-snow-50 mb-2">{option.name}</h4>
-                        <p className="text-sm text-snow-300">{option.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* ステップ2: 営業タイプ選択 */}
-            {currentStep === 2 && (
-              <div className="p-6 space-y-6">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-snow-50">ステップ2: 営業タイプ選択</h3>
-                  <p className="text-snow-300 mt-2">営業形態をお選びください</p>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {businessTypeOptions.map((option) => (
-                    <div
-                      key={option.id}
-                      className={cn(
-                        "relative cursor-pointer rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1",
-                        businessType === option.id
-                          ? "border-2 border-ice-500 shadow-lg"
-                          : "border border-darkgray-700 hover:border-darkgray-600",
-                      )}
-                      onClick={() => setBusinessType(option.id as "minpaku" | "ryokan")}
-                    >
-                      {businessType === option.id && (
-                        <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-ice-500 flex items-center justify-center">
-                          <Check className="h-4 w-4 text-white" />
-                        </div>
-                      )}
-                      <div className="p-6">
-                        <div className="flex items-center mb-3">
-                          <span className="text-2xl mr-2">{option.icon}</span>
-                          <h4 className="text-lg font-bold text-snow-50">{option.name}</h4>
-                        </div>
-                        <p className="text-sm text-snow-300">{option.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* ステップ3: 部屋数と予想売上 */}
-            {currentStep === 3 && (
-              <div className="p-6 space-y-6">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-snow-50">ステップ3: 部屋数と予想売上</h3>
-                  <p className="text-snow-300 mt-2">運営する部屋数と予想される月間売上を入力してください</p>
-                </div>
-
-                <div className="grid gap-8 md:grid-cols-2">
-                  <div className="bg-darkgray-700/30 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-snow-50 mb-4">部屋数</h4>
-                    <p className="text-sm text-snow-300 mb-4">
-                      運営する部屋の数を選択してください。部屋数によって一部の料金が変動します。
-                    </p>
-
-                    <div className="flex items-center justify-center mt-6">
-                      <button
-                        className="w-10 h-10 rounded-l-lg bg-darkgray-700 text-snow-100 flex items-center justify-center hover:bg-darkgray-600 transition-colors"
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col space-y-4">
+                  <div className="flex items-center justify-between">
+                    {/* Text color simplified */}
+                    <span className="text-sm font-medium text-gray-700">部屋数: {roomCount}室</span>
+                    <div className="flex items-center space-x-2">
+                      {/* +/- Buttons kept as outline */}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 w-8 p-0 flex items-center justify-center border-gray-300"
                         onClick={() => setRoomCount(Math.max(1, roomCount - 1))}
                       >
                         -
-                      </button>
-                      <div className="w-20 h-10 bg-darkgray-800 flex items-center justify-center text-xl font-bold text-snow-50">
-                        {roomCount}
-                      </div>
-                      <button
-                        className="w-10 h-10 rounded-r-lg bg-darkgray-700 text-snow-100 flex items-center justify-center hover:bg-darkgray-600 transition-colors"
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 w-8 p-0 flex items-center justify-center border-gray-300"
                         onClick={() => setRoomCount(roomCount + 1)}
                       >
                         +
-                      </button>
+                      </Button>
                     </div>
-                    <p className="text-center text-sm text-snow-400 mt-2">部屋</p>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
 
-                  <div className="bg-darkgray-700/30 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-snow-50 mb-4">予想月間売上</h4>
-                    <p className="text-sm text-snow-300 mb-4">
-                      月間の予想売上を入力してください。運営代行料（売上の20%）の計算に使用されます。
-                    </p>
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  予想月間売上
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  全部屋の合計の月間予想売上を選択してください（運営手数料の計算に使用されます）
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    {/* Text colors simplified */}
+                    <span className="text-sm font-medium text-gray-700 mb-2 block">
+                      予想月間売上: {new Intl.NumberFormat('ja-JP').format(estimatedMonthlyRevenue)}円/月
+                    </span>
+                    {/* Range input accent color updated */}
+                    <input
+                      type="range"
+                      min="100000"
+                      max="2000000"
+                      step="50000"
+                      value={estimatedMonthlyRevenue}
+                      onChange={(e) => setEstimatedMonthlyRevenue(parseInt(e.target.value))}
+                      className="w-full accent-black" // Changed accent color
+                    />
+                    {/* Text colors simplified */}
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>10万円</span>
+                      <span>100万円</span>
+                      <span>200万円</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-                    <div className="mt-6">
-                      <input
-                        type="range"
-                        min="100000"
-                        max="1000000"
-                        step="10000"
-                        value={estimatedMonthlyRevenue}
-                        onChange={(e) => setEstimatedMonthlyRevenue(Number(e.target.value))}
-                        className="w-full h-2 bg-darkgray-600 rounded-lg appearance-none cursor-pointer"
-                      />
-                      <div className="flex justify-between text-xs text-snow-400 mt-1">
-                        <span>10万円</span>
-                        <span>100万円</span>
-                      </div>
-                      <div className="text-center mt-4">
-                        <span className="text-2xl font-bold text-ice-400">
-                          {new Intl.NumberFormat("ja-JP").format(estimatedMonthlyRevenue)}
+          <div className="mt-8 flex justify-between">
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              className="border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+              戻る
+            </Button>
+            {/* Next button style updated */}
+            <Button
+              onClick={nextStep}
+              className="bg-black hover:bg-gray-800 text-white px-6"
+            >
+              次へ
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Step 4: オプション選択 */}
+        <div className={`${currentStep === 4 ? "block" : "hidden"}`}>
+          <h4 className="text-xl font-medium text-black mb-6">ステップ4: オプションを選択</h4>
+
+          <div className="space-y-6">
+            {/* Card border and text colors simplified */}
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  基本料金
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  初期費用と基本サービス料金
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {pricingData.basicFees.map((fee) => (
+                  <div key={fee.id} className="flex items-start">
+                    {/* Checkbox Styling Updated */}
+                    <Checkbox
+                      id={`basic-${fee.id}`}
+                      checked={fee.required || selectedOptions[fee.id]}
+                      onCheckedChange={(checked) =>
+                        handleOptionChange(fee.id, checked as boolean)
+                      }
+                      disabled={fee.required}
+                      // Updated checked/disabled styles
+                      className={cn(
+                        "data-[state=checked]:bg-black data-[state=checked]:border-black", // Checked: black bg/border
+                        fee.required ? "border-gray-400 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300" : "" // Disabled: gray border/checked bg
+                      )}
+                    />
+                    <div className="ml-3">
+                      {/* Text colors simplified */}
+                      <label
+                        htmlFor={`basic-${fee.id}`}
+                        className={cn("text-sm font-medium cursor-pointer", fee.required ? "text-gray-500" : "text-black")}
+                      >
+                        {fee.name}{" "}
+                        {fee.required && (
+                          <span className="text-xs text-gray-500 ml-1">必須</span>
+                        )}
+                      </label>
+                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
+                        {fee.description}
+                      </p>
+                      <p className="text-sm text-gray-700 mt-1">
+                        料金:{" "}
+                        <span className="font-medium">
+                          {formatPrice(
+                            fee.prices[plan][businessType]
+                          )}
                         </span>
-                        <span className="text-snow-300 ml-1">円/月</span>
-                      </div>
+                      </p>
                     </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Repeat simplification for System Fees, Running Costs, Optional Costs cards */}
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  システム費用
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  予約・管理システムの初期費用
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {pricingData.systemFees.map((fee) => (
+                  <div key={fee.id} className="flex items-start">
+                    <Checkbox
+                      id={`system-${fee.id}`}
+                      checked={fee.required || selectedOptions[fee.id]}
+                      onCheckedChange={(checked) =>
+                        handleOptionChange(fee.id, checked as boolean)
+                      }
+                      disabled={fee.required}
+                       className={cn(
+                        "data-[state=checked]:bg-black data-[state=checked]:border-black",
+                        fee.required ? "border-gray-400 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300" : ""
+                      )}
+                    />
+                    <div className="ml-3">
+                       <label
+                        htmlFor={`system-${fee.id}`}
+                        className={cn("text-sm font-medium cursor-pointer", fee.required ? "text-gray-500" : "text-black")}
+                      >
+                        {fee.name}{" "}
+                        {fee.required && (
+                          <span className="text-xs text-gray-500 ml-1">必須</span>
+                        )}
+                      </label>
+                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
+                        {fee.description}
+                      </p>
+                      <p className="text-sm text-gray-700 mt-1">
+                        料金:{" "}
+                        <span className="font-medium">
+                          {formatPrice(
+                            fee.prices[plan][businessType]
+                          )}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  月額費用
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  継続的な運営に必要な月額費用
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {pricingData.runningCosts.map((fee) => (
+                  <div key={fee.id} className="flex items-start">
+                    <Checkbox
+                      id={`running-${fee.id}`}
+                      checked={fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType]) || selectedOptions[fee.id]}
+                      onCheckedChange={(checked) =>
+                        handleOptionChange(fee.id, checked as boolean)
+                      }
+                      disabled={fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])}
+                      className={cn(
+                        "data-[state=checked]:bg-black data-[state=checked]:border-black",
+                        (fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])) ? "border-gray-400 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300" : ""
+                      )}
+                    />
+                    <div className="ml-3">
+                       <label
+                        htmlFor={`running-${fee.id}`}
+                        className={cn("text-sm font-medium cursor-pointer", (fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])) ? "text-gray-500" : "text-black")}
+                      >
+                        {fee.name}{" "}
+                        {(fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])) && (
+                          <span className="text-xs text-gray-500 ml-1">必須</span>
+                        )}
+                      </label>
+                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
+                        {fee.description}
+                      </p>
+                      <p className="text-sm text-gray-700 mt-1">
+                        料金:{" "}
+                        <span className="font-medium">
+                          {formatPrice(
+                            fee.prices[plan][businessType]
+                          )}
+                          {fee.monthly ? "/月" : ""}
+                          {fee.perRoom ? " (部屋毎)" : ""}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+             <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  追加オプション
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  必要に応じて選択できる追加サービス
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {pricingData.optionalCosts.map((fee) => (
+                  <div key={fee.id} className="flex items-start">
+                    <Checkbox
+                      id={`option-${fee.id}`}
+                      checked={selectedOptions[fee.id]}
+                      onCheckedChange={(checked) =>
+                        handleOptionChange(fee.id, checked as boolean)
+                      }
+                      className="data-[state=checked]:bg-black data-[state=checked]:border-black"
+                    />
+                    <div className="ml-3">
+                      <label
+                        htmlFor={`option-${fee.id}`}
+                        className="text-sm font-medium text-black cursor-pointer"
+                      >
+                        {fee.name}
+                      </label>
+                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
+                        {fee.description}
+                      </p>
+                      <p className="text-sm text-gray-700 mt-1">
+                        料金:{" "}
+                        <span className="font-medium">
+                          {formatPrice(
+                            fee.prices[plan][businessType]
+                          )}
+                          {fee.monthly ? "/月" : ""}
+                          {fee.perRoom ? " (部屋毎)" : ""}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-8 flex justify-between">
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              className="border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+              戻る
+            </Button>
+            <Button
+              onClick={nextStep}
+              className="bg-black hover:bg-gray-800 text-white px-6"
+            >
+              次へ
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Step 5: 見積り結果 */}
+        <div className={`${currentStep === 5 ? "block" : "hidden"}`}>
+          <h4 className="text-xl font-medium text-black mb-6">見積り結果</h4>
+
+          <div className="space-y-6">
+            {/* Result cards simplified */}
+            <Card className="border-gray-300">
+              <CardHeader>
+                <CardTitle className="text-lg font-medium text-black">
+                  選択したプラン
+                </CardTitle>
+                <CardDescription className="text-gray-600">
+                  {plan === "fe" ? "ファミリー・エクスペリエンス" : "ワーケーション・ステイ"} /{" "}
+                  {businessType === "minpaku" ? "民泊営業" : "旅館営業"} /
+                  {roomCount}部屋 /
+                  予想月売上: {formatPrice(estimatedMonthlyRevenue)}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  初期費用
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {resultOptions
+                    .filter(option => option.selected && !option.monthly && !option.isPercentage)
+                    .map(option => (
+                      <div key={`${option.id}-initial`} className="flex justify-between items-center py-1">
+                        {/* Text colors simplified */}
+                        <span className="text-gray-700">{option.name}</span>
+                        <span className="font-medium text-gray-800">
+                          {formatPrice(option.price)}
+                        </span>
+                      </div>
+                    ))}
+
+                  {resultOptions.some(option => option.selected && !option.monthly && !option.isPercentage && option.price === "別途見積") && (
+                    <div className="flex justify-between items-center py-1 text-gray-600">
+                      <span>別途見積もりが必要な項目が含まれます</span>
+                      <span>-</span>
+                    </div>
+                  )}
+
+                  {/* Separator simplified */}
+                  <Separator className="my-2 bg-gray-200" />
+                  <div className="flex justify-between items-center py-1">
+                    <span className="font-medium text-black">初期費用合計</span>
+                    <span className="font-bold text-black">
+                      {resultOptions.some(option => option.selected && !option.monthly && !option.isPercentage && option.price === "別途見積")
+                        ? "一部別途見積"
+                        : `${initialCost.toLocaleString()}円`}
+                    </span>
                   </div>
                 </div>
-              </div>
-            )}
+              </CardContent>
+            </Card>
 
-            {/* ステップ4: オプション選択 */}
-            {currentStep === 4 && (
-              <div className="p-6 space-y-6">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-snow-50">ステップ4: オプション選択</h3>
-                  <p className="text-snow-300 mt-2">必要なオプションを選択してください</p>
+            <Card className="border-gray-300">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-medium text-black">
+                  月額費用
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                   {/* Fixed costs */}
+                   {resultOptions
+                    .filter(option => option.selected && option.monthly && !option.isPercentage)
+                    .map(option => (
+                      <div key={`${option.id}-monthly`} className="flex justify-between items-center py-1">
+                         <span className="text-gray-700">{option.name}</span>
+                         <span className="font-medium text-gray-800">
+                          {typeof option.price === "number"
+                            ? `${(option.perRoom ? option.price * roomCount : option.price).toLocaleString()}円/月`
+                            : option.price}
+                          {option.perRoom && typeof option.price === 'number' && ` (${option.price.toLocaleString()}円/部屋)`}
+                        </span>
+                      </div>
+                   ))}
+
+                   {/* Percentage costs */}
+                   {resultOptions.filter(option => option.selected && option.isPercentage).length > 0 && (
+                    <div className="flex justify-between items-center py-1 text-gray-700">
+                      <span>{resultOptions.find(o => o.selected && o.isPercentage)?.name} (予想売上 {formatPrice(estimatedMonthlyRevenue)} に対して)</span>
+                      <span>
+                        {formatPrice(monthlyCommission)}/月 ({resultOptions.find(o => o.selected && o.isPercentage)?.price}%)
+                      </span>
+                    </div>
+                   )}
+
+                  <Separator className="my-2 bg-gray-200" />
+                  <div className="flex justify-between items-center py-1">
+                    <span className="font-medium text-black">月額費用合計 (概算)</span>
+                    <span className="font-bold text-black">
+                      {`${(monthlyCost + monthlyCommission).toLocaleString()}円/月`}
+                    </span>
+                  </div>
+                   <p className="text-xs text-gray-500 pt-2">
+                      内訳: 固定費 {monthlyCost.toLocaleString()}円 + 成果報酬 (売上の{percentageCost}%) {monthlyCommission.toLocaleString()}円
+                    </p>
                 </div>
+              </CardContent>
+            </Card>
+          </div>
 
-                <div className="space-y-6">
-                  <div className="bg-darkgray-700/30 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-snow-50 mb-4">必須項目</h4>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {[...pricingData.basicFees, ...pricingData.systemFees, ...pricingData.runningCosts]
-                        .filter((item) => item.required)
-                        .map((item) => (
-                          <div key={item.id} className="flex items-start space-x-2">
-                            <Checkbox
-                              id={item.id}
-                              checked={true}
-                              disabled={true}
-                              className="mt-1 border-darkgray-600 data-[state=checked]:bg-ice-600 data-[state=checked]:border-ice-600"
-                            />
-                            <div className="grid gap-1.5">
-                              <label htmlFor={item.id} className="font-medium text-snow-200 flex items-center">
-                                {item.name}
-                                <Badge className="ml-2 bg-ice-600/20 text-ice-400 border-none">必須</Badge>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <button className="ml-1 text-snow-400 hover:text-snow-200">
-                                      <HelpCircle className="h-4 w-4" />
-                                    </button>
-                                  </TooltipTrigger>
-                                  <TooltipContent className="max-w-xs bg-darkgray-800 border-darkgray-700">
-                                    <p className="text-snow-200 whitespace-pre-line">{item.description}</p>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </label>
-                              <p className="text-sm text-snow-400">
-                                {typeof item.prices[plan][businessType] === "number"
-                                  ? new Intl.NumberFormat("ja-JP").format(item.prices[plan][businessType] as number) +
-                                    "円"
-                                  : item.prices[plan][businessType]}
-                                {item.isPercentage ? "%" : ""}
-                                {item.monthly ? "/月" : ""}
-                                {item.perRoom ? " × 部屋数" : ""}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
+          {/* Note box simplified */}
+          <div className="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <p className="text-gray-700 text-sm">
+              ※ 表示価格はすべて税抜きです。別途消費税がかかります。
+              <br />※ こちらはシミュレーション結果であり、実際の料金は物件の状況や詳細な要件によって異なる場合があります。
+              <br />※ 詳細なお見積りについては、お問い合わせください。
+            </p>
+          </div>
 
-                  <div className="bg-darkgray-700/30 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-snow-50 mb-4">オプション項目</h4>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {[
-                        ...pricingData.basicFees,
-                        ...pricingData.systemFees,
-                        ...pricingData.runningCosts,
-                        ...pricingData.optionalCosts,
-                      ]
-                        .filter((item) => !item.required)
-                        .map((item) => (
-                          <div key={item.id} className="flex items-start space-x-2">
-                            <Checkbox
-                              id={item.id}
-                              checked={selectedOptions[item.id] || false}
-                              onCheckedChange={(checked) => handleOptionChange(item.id, checked as boolean)}
-                              className="mt-1 border-darkgray-600 data-[state=checked]:bg-ice-600 data-[state=checked]:border-ice-600"
-                            />
-                            <div className="grid gap-1.5">
-                              <label htmlFor={item.id} className="font-medium text-snow-200 flex items-center">
-                                {item.name}
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <button className="ml-1 text-snow-400 hover:text-snow-200">
-                                      <HelpCircle className="h-4 w-4" />
-                                    </button>
-                                  </TooltipTrigger>
-                                  <TooltipContent className="max-w-xs bg-darkgray-800 border-darkgray-700">
-                                    <p className="text-snow-200 whitespace-pre-line">{item.description}</p>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </label>
-                              <p className="text-sm text-snow-400">
-                                {typeof item.prices[plan][businessType] === "number"
-                                  ? new Intl.NumberFormat("ja-JP").format(item.prices[plan][businessType] as number) +
-                                    "円"
-                                  : item.prices[plan][businessType]}
-                                {item.isPercentage ? "%" : ""}
-                                {item.monthly ? "/月" : ""}
-                                {item.perRoom ? " × 部屋数" : ""}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ステップ5: 結果表示 */}
-            {currentStep === 5 && (
-              <div className="p-6 space-y-6">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-snow-50">シミュレーション結果</h3>
-                  <p className="text-snow-300 mt-2">選択内容に基づく料金シミュレーション結果です</p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="bg-darkgray-700/30 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-snow-50 mb-4">選択内容</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-sm text-snow-400">プラン</p>
-                        <p className="text-snow-100">{planOptions.find((p) => p.id === plan)?.name}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-snow-400">営業タイプ</p>
-                        <p className="text-snow-100">{businessTypeOptions.find((b) => b.id === businessType)?.name}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-snow-400">部屋数</p>
-                        <p className="text-snow-100">{roomCount}部屋</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-snow-400">予想月間売上</p>
-                        <p className="text-snow-100">{formatPrice(estimatedMonthlyRevenue)}/月</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-darkgray-700/30 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-snow-50 mb-4">費用内訳</h4>
-
-                    <div className="space-y-4">
-                      <div className="bg-darkgray-800 rounded-lg p-4">
-                        <h5 className="font-medium text-snow-100 mb-2">初期費用（一回のみ）</h5>
-                        <div className="space-y-2">
-                          {[...pricingData.basicFees, ...pricingData.systemFees]
-                            .filter(
-                              (item) =>
-                                selectedOptions[item.id] &&
-                                !item.isPercentage &&
-                                typeof item.prices[plan][businessType] === "number",
-                            )
-                            .map((item) => (
-                              <div key={item.id} className="flex justify-between text-sm">
-                                <span className="text-snow-300">{item.name}</span>
-                                <span className="text-snow-100">
-                                  {formatPrice(item.prices[plan][businessType] as number)}
-                                </span>
-                              </div>
-                            ))}
-                          <Separator className="my-2 bg-darkgray-600" />
-                          <div className="flex justify-between font-medium">
-                            <span className="text-snow-100">初期費用合計</span>
-                            <span className="text-ice-400">{formatPrice(initialCost)}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-darkgray-800 rounded-lg p-4">
-                        <h5 className="font-medium text-snow-100 mb-2">月額費用</h5>
-                        <div className="space-y-2">
-                          {[...pricingData.runningCosts, ...pricingData.optionalCosts]
-                            .filter(
-                              (item) => selectedOptions[item.id] && typeof item.prices[plan][businessType] === "number",
-                            )
-                            .map((item) => (
-                              <div key={item.id} className="flex justify-between text-sm">
-                                <span className="text-snow-300">{item.name}</span>
-                                <span className="text-snow-100">
-                                  {formatPrice(
-                                    (item.prices[plan][businessType] as number) * (item.perRoom ? roomCount : 1),
-                                  )}
-                                  /月
-                                </span>
-                              </div>
-                            ))}
-                          <div className="flex justify-between text-sm">
-                            <span className="text-snow-300">運営代行料（売上の{percentageCost}%）</span>
-                            <span className="text-snow-100">{formatPrice(monthlyCommission)}/月</span>
-                          </div>
-                          <Separator className="my-2 bg-darkgray-600" />
-                          <div className="flex justify-between font-medium">
-                            <span className="text-snow-100">月額費用合計</span>
-                            <span className="text-ice-400">{formatPrice(totalMonthlyCost)}/月</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-ice-600/20 border border-ice-600/30 rounded-xl p-6">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <h4 className="text-xl font-bold text-ice-400 mb-2">総費用</h4>
-                        <p className="text-snow-300 text-sm mb-4 md:mb-0">初期費用と月額費用の合計です</p>
-                      </div>
-                      <div className="text-right">
-                        <div className="mb-1">
-                          <span className="text-snow-300 text-sm">初期費用（一回のみ）:</span>
-                          <span className="text-snow-100 font-bold ml-2">{formatPrice(initialCost)}</span>
-                        </div>
-                        <div>
-                          <span className="text-snow-300 text-sm">月額費用:</span>
-                          <span className="text-ice-400 text-2xl font-bold ml-2">
-                            {formatPrice(totalMonthlyCost)}/月
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </CardContent>
-
-          <CardFooter className="flex justify-between p-6 bg-darkgray-700/30 border-t border-darkgray-700">
-            {currentStep > 1 ? (
-              <Button
-                variant="outline"
-                onClick={prevStep}
-                className="text-snow-100 border-darkgray-600 hover:bg-darkgray-700"
-              >
-                戻る
-              </Button>
-            ) : (
-              <div></div>
-            )}
-
-            {currentStep < totalSteps ? (
-              <Button onClick={nextStep} className="bg-ice-600 hover:bg-ice-700 text-white">
-                次へ
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Button>
-            ) : (
-              <Button onClick={resetSimulator} className="bg-ice-600 hover:bg-ice-700 text-white">
-                最初からやり直す
-              </Button>
-            )}
-          </CardFooter>
-        </Card>
+          <div className="mt-8 flex justify-between">
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              className="border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+              戻る
+            </Button>
+            <Button
+              onClick={resetSimulator}
+              className="bg-black hover:bg-gray-800 text-white px-6"
+            >
+              もう一度見積る
+            </Button>
+          </div>
+        </div>
       </div>
-    </TooltipProvider>
+
+      {/* Footer kept neutral */}
+      <CardFooter className="bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-between">
+        <div className="text-sm text-gray-500">
+          ステップ {currentStep} / 5
+        </div>
+        {/* Link color simplified */}
+        <Link href="/contact" className="text-black hover:text-gray-700 text-sm font-medium">
+          詳細なお見積りを依頼
+        </Link>
+      </CardFooter>
+    </div>
   )
 }
-

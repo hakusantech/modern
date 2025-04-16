@@ -1,0 +1,6 @@
+# Allow all user agents
+User-agent: *
+Allow: /
+
+# Sitemap (サイトマップがあれば場所を指定)
+# Sitemap: https://yourdomain.com/sitemap.xml 

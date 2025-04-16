@@ -18,78 +18,137 @@ module.exports = {
     },
     extend: {
       colors: {
+        // モダンでプレミアムなカラースキーム
+        primary: {
+          DEFAULT: "#D4AF37", // リッチゴールド
+          50: "#FBF7E4",
+          100: "#F7EFC5",
+          200: "#F0E087",
+          300: "#E9D04A",
+          400: "#E2C01C",
+          500: "#D4AF37", // プライマリ
+          600: "#B28E1B",
+          700: "#906D13",
+          800: "#6E4C0B",
+          900: "#4C2B03",
+          950: "#2A1801",
+        },
+        // ベースとなる黒系
+        base: {
+          DEFAULT: "#121212", // ほぼ黒
+          50: "#2C2C2C",
+          100: "#262626",
+          200: "#202020",
+          300: "#1A1A1A",
+          400: "#161616",
+          500: "#121212", // ダークベース
+          600: "#0E0E0E",
+          700: "#0A0A0A",
+          800: "#060606",
+          900: "#020202",
+          950: "#000000",
+        },
+        // コンテンツ背景用白系
+        content: {
+          DEFAULT: "#FFFFFF",
+          50: "#FFFFFF",
+          100: "#F9F9F9",
+          200: "#F5F5F5",
+          300: "#F0F0F0",
+          400: "#E6E6E6",
+          500: "#DADADA",
+          600: "#CCCCCC",
+          700: "#ABABAB",
+          800: "#8A8A8A",
+          900: "#636363",
+          950: "#303030",
+        },
+        // アクセントカラー
+        accent: {
+          DEFAULT: "#D4AF37", // ゴールド
+          light: "#F0E087",
+          dark: "#906D13",
+        },
+        // テキストカラー
+        text: {
+          DEFAULT: "#2C2C2C", // ほぼ黒（コンテンツエリア上）
+          light: "#F9F9F9", // ほぼ白（暗い背景上）
+          muted: "#8A8A8A", // グレー（控えめなテキスト）
+          gold: "#D4AF37", // ゴールド（強調）
+        },
+        
+        // 既存のカラーは残しておく
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+        
+        // 以下は既存のカラー定義
+        paleblue: {
+          50: "#f2f8ff",
+          100: "#e6f1ff",
+          200: "#d1e2ff",
+          300: "#a6c7ff",
+          400: "#759ef8",
+          500: "#4c82f0",
+          600: "#3366df",
+          700: "#254ecc",
+          800: "#1f41a6",
+          900: "#0e2057",
+          950: "#091337",
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        // ダークグレーのカラーパレット
         darkgray: {
-          50: "#f7f7f7",
-          100: "#e3e3e3",
-          200: "#c8c8c8",
-          300: "#a4a4a4",
-          400: "#818181",
-          500: "#666666",
-          600: "#515151",
-          700: "#3a3a3a",
-          800: "#262626",
-          900: "#171717",
-          950: "#0a0a0a",
+          50: "#f6f6f7",
+          100: "#e1e3e5",
+          200: "#c2c5ca",
+          300: "#9ca1aa",
+          400: "#777e8c",
+          500: "#5c6372",
+          600: "#484d5a",
+          700: "#3a3e49",
+          800: "#2e3239",
+          900: "#282a30",
+          950: "#171920",
         },
-        // 雪のような白色
         snow: {
           50: "#ffffff",
-          100: "#fafafa",
-          200: "#f5f5f5",
-          300: "#e5e5e5",
-          400: "#d4d4d4",
-          500: "#b3b3b3",
-          600: "#9e9e9e",
-          700: "#757575",
-          800: "#616161",
-          900: "#424242",
+          100: "#f9faff",
+          200: "#f3f5ff",
+          300: "#e8ebff",
+          400: "#d1d7ff",
+          500: "#b9c2ff",
+          600: "#a2aeff",
+          700: "#7c8efd",
+          800: "#5a6ef9",
+          900: "#3a4dd6",
+          950: "#131c50",
         },
-        // アクセントカラー（氷のような青）
         ice: {
-          50: "#f0f9ff",
-          100: "#e0f2fe",
-          200: "#bae6fd",
-          300: "#7dd3fc",
-          400: "#38bdf8",
-          500: "#0ea5e9",
-          600: "#0284c7",
-          700: "#0369a1",
-          800: "#075985",
-          900: "#0c4a6e",
+          50: "#eefbfd",
+          100: "#d5f3fa",
+          200: "#b0e8f5",
+          300: "#76d6ed",
+          400: "#33bade",
+          500: "#17a0c7",
+          600: "#147fa8",
+          700: "#166788",
+          800: "#195571",
+          900: "#1a475f",
+          950: "#0e2c3d",
+        },
+        gold: {
+          50: "#fbf7e4",
+          100: "#f7efc5",
+          200: "#f0e087",
+          300: "#e9d04a",
+          400: "#e2c01c",
+          500: "#d4af37",
+          600: "#b28e1b",
+          700: "#906d13",
+          800: "#6e4c0b",
+          900: "#4c2b03",
+          950: "#2a1801",
         },
       },
       borderRadius: {
@@ -107,14 +166,23 @@ module.exports = {
           to: { height: 0 },
         },
         progressAnimation: {
-          "0%": { width: "0%" },
-          "100%": { width: "100%" },
+          from: { width: "0%" },
+          to: { width: "100%" },
+        },
+        floatUp: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        pulse: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0.5 },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        progress: "progressAnimation var(--duration) linear forwards",
+        "float": "floatUp 3s ease-in-out infinite",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "var(--font-noto-sans)", "system-ui", "sans-serif"],

@@ -44,7 +44,7 @@ export function Sidebar({
               <Mail className="h-5 w-5 text-gold-600 mt-0.5" />
               <div>
                 <div className="text-sm text-muted-foreground">メール</div>
-                <div className="font-medium">info@cleannest-hokkaido.com</div>
+                <div className="font-medium">info@cleannest-hokkaido.com.jp</div>
               </div>
             </div>
             <div className="flex items-start gap-3">

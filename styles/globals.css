@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .container {
+    @apply max-w-full lg:max-w-[80%];
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -9,6 +15,27 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* セクション表示アニメーション */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0; /* 初期状態は非表示 */
+  }
+
+  /* カードホバーエフェクト用（既存のものと併用） */
+  .smooth-transition {
+    @apply transition-all duration-300 ease-in-out;
   }
 }
 

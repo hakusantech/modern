@@ -1,449 +1,315 @@
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Check, FileText, ClipboardCheck, Shield, Clock } from "lucide-react"
-import { PageLayout } from "@/components/page-layout"
-import { Section } from "@/components/section"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ArrowRight, Check, FileText, Building2, Calendar, Shield } from "lucide-react"
+
+export const metadata = {
+  title: "許認可申請サポート | CleanNest Hokkaido",
+  description: "札幌・北海道の住宅宿泊事業法(民泊)、旅館業法の許認可申請をサポート。手続きの煩雑さからオーナー様を解放し、スムーズな開業をサポートします。",
+}
+
+const steps = [
+  {
+    title: "無料相談",
+    description: "申請内容について専門スタッフが丁寧にヒアリングします。必要書類や手続きの流れをご説明します。",
+    points: [
+      "物件の用途や立地条件の確認",
+      "申請に必要な書類の説明",
+      "法律上の制約事項の説明",
+      "申請から許可までの流れ"
+    ],
+    icon: FileText,
+    duration: "約30分〜1時間",
+  },
+  {
+    title: "現地調査",
+    description: "物件の状況を確認し、法律上の要件を満たすための調査を行います。必要に応じて改修プランをご提案します。",
+    points: [
+      "物件の現状確認と撮影",
+      "法的要件との適合性チェック",
+      "必要な改修箇所の洗い出し",
+      "周辺環境の確認"
+    ],
+    icon: Building2,
+    duration: "約1〜2時間",
+  },
+  {
+    title: "書類作成サポート",
+    description: "申請に必要な書類を専門スタッフが作成サポートします。申請書類の記入から添付書類の準備まで、すべてサポートします。",
+    points: [
+      "申請書の作成と記入サポート",
+      "平面図や配置図の作成サポート",
+      "各種証明書類の取得サポート",
+      "添付書類の収集と整理サポート"
+    ],
+    icon: FileText,
+    duration: "約1〜2週間",
+  },
+  {
+    title: "申請・許可取得サポート",
+    description: "行政機関への申請手続きをサポートします。申請後も進捗状況を随時報告し、許可取得までフォローします。",
+    points: [
+      "行政機関への申請手続きサポート",
+      "追加資料の提出対応",
+      "申請状況の進捗報告",
+      "許可証の受け取りサポート"
+    ],
+    icon: Shield,
+    duration: "約1〜3ヶ月",
+  },
+]
 
 export default function PermitsPage() {
   return (
-    <PageLayout
-      title="各種申請許可サポート"
-      subtitle="PERMIT SUPPORT"
-      description="民泊営業に必要な各種許認可の申請をサポート。住宅宿泊事業法（民泊新法）の届出、旅館業法の許可申請など、複雑な手続きをサポートします。"
-      breadcrumbs={[{ label: "サービス", href: "/services" }, { label: "各種申請許可サポート" }]}
-    >
+    <div className="pt-16 bg-white">
       {/* ヒーローセクション */}
-      <Section background="darkgray-900" className="pt-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <Badge variant="ice" className="mb-2">
-              CleanNest Hokkaido
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-snow-50">複雑な申請手続きを専門家がサポート</h2>
-            <p className="text-snow-300">
-              民泊や旅館業を始めるには、様々な許認可や申請が必要です。法律や条例の理解、複雑な書類作成、行政機関とのやり取りなど、
-              専門知識が求められる手続きを、経験豊富な専門スタッフが完全サポートします。
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <Check className="h-5 w-5 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-snow-300">住宅宿泊事業法（民泊新法）の届出</span>
-              </div>
-              <div className="flex items-start">
-                <Check className="h-5 w-5 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-snow-300">旅館業法の許可申請</span>
-              </div>
-              <div className="flex items-start">
-                <Check className="h-5 w-5 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-snow-300">消防法・建築基準法関連の手続き</span>
-              </div>
-              <div className="flex items-start">
-                <Check className="h-5 w-5 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-snow-300">保健所への届出・許可申請</span>
-              </div>
-            </div>
-            <div className="pt-4">
-              <Button variant="gold" size="lg" className="text-white" asChild>
-                <Link href="/#contact">
-                  無料相談を予約する
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
-            <Image
-              src="/images/permit-application-support.png"
-              alt="申請書類の手続きをサポートする専門スタッフ"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-darkgray-900/80 to-transparent"></div>
-            <div className="absolute bottom-6 left-6 right-6 bg-darkgray-900/80 backdrop-blur-sm p-4 rounded-lg">
-              <h3 className="text-xl font-bold text-snow-50">専門知識で安心サポート</h3>
-              <p className="text-sm text-snow-300">複雑な申請手続きを経験豊富なスタッフがトータルサポート</p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* サービス内容セクション */}
-      <Section title="申請サポートサービス" subtitle="SERVICES" background="darkgray-950">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="bg-darkgray-800 border-darkgray-700 hover:border-ice-600/30 transition-all">
-            <div className="h-2 bg-gradient-to-r from-ice-500 to-ice-400"></div>
-            <CardHeader>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="bg-ice-600/10 p-3 rounded-lg">
-                  <FileText className="h-6 w-6 text-ice-400" />
-                </div>
-                <CardTitle className="text-snow-50">民泊新法届出サポート</CardTitle>
-              </div>
-              <CardDescription className="text-snow-300">
-                住宅宿泊事業法（民泊新法）に基づく届出を完全サポート。必要書類の作成から提出まで代行します。
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">届出書類の作成・提出</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">安全措置の確認・対応</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">近隣住民への説明サポート</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-darkgray-800 border-darkgray-700 hover:border-ice-600/30 transition-all">
-            <div className="h-2 bg-gradient-to-r from-ice-500 to-ice-400"></div>
-            <CardHeader>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="bg-ice-600/10 p-3 rounded-lg">
-                  <ClipboardCheck className="h-6 w-6 text-ice-400" />
-                </div>
-                <CardTitle className="text-snow-50">旅館業許可申請サポート</CardTitle>
-              </div>
-              <CardDescription className="text-snow-300">
-                旅館業法に基づく許可申請を完全サポート。簡易宿所、旅館・ホテル営業の許可取得をサポートします。
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">許可申請書類の作成・提出</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">構造設備基準の確認・対応</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">保健所との調整・立会い</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-darkgray-800 border-darkgray-700 hover:border-ice-600/30 transition-all">
-            <div className="h-2 bg-gradient-to-r from-ice-500 to-ice-400"></div>
-            <CardHeader>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="bg-ice-600/10 p-3 rounded-lg">
-                  <Shield className="h-6 w-6 text-ice-400" />
-                </div>
-                <CardTitle className="text-snow-50">消防・建築関連手続き</CardTitle>
-              </div>
-              <CardDescription className="text-snow-300">
-                消防法・建築基準法に基づく各種手続きをサポート。安全基準を満たすための対応を支援します。
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">消防設備の確認・届出</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">用途変更手続きのサポート</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-snow-300">消防署・建築課との調整</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </Section>
-
-      {/* 申請プロセスセクション */}
-      <Section title="申請サポートの流れ" subtitle="PROCESS" background="darkgray-900">
-        <div className="relative">
-          {/* 背景ライン */}
-          <div className="absolute top-12 left-0 right-0 h-1 bg-darkgray-800 hidden md:block"></div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 rounded-full bg-ice-600/10 border-4 border-darkgray-900 flex items-center justify-center mb-4 z-10">
-                  <span className="text-3xl font-bold text-ice-400">01</span>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-center text-snow-50">無料相談</h3>
-                <p className="text-sm text-center text-snow-300">
-                  物件の状況や営業形態をヒアリングし、必要な許認可を特定します。
-                </p>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 rounded-full bg-ice-600/10 border-4 border-darkgray-900 flex items-center justify-center mb-4 z-10">
-                  <span className="text-3xl font-bold text-ice-400">02</span>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-center text-snow-50">現地調査</h3>
-                <p className="text-sm text-center text-snow-300">
-                  物件を実際に確認し、法的要件を満たすための課題を特定します。
-                </p>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 rounded-full bg-ice-600/10 border-4 border-darkgray-900 flex items-center justify-center mb-4 z-10">
-                  <span className="text-3xl font-bold text-ice-400">03</span>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-center text-snow-50">書類作成・提出</h3>
-                <p className="text-sm text-center text-snow-300">必要な申請書類を作成し、行政機関へ提出します。</p>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 rounded-full bg-ice-600/10 border-4 border-darkgray-900 flex items-center justify-center mb-4 z-10">
-                  <span className="text-3xl font-bold text-ice-400">04</span>
-                </div>
-                <h3 className="text-lg font-bold mb-2 text-center text-snow-50">許可取得</h3>
-                <p className="text-sm text-center text-snow-300">
-                  行政機関の審査・検査に立ち会い、許可取得までサポートします。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* タブセクション */}
-      <Section title="申請サポートの詳細" subtitle="DETAILS" background="darkgray-950">
-        <Tabs defaultValue="minpaku" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="minpaku">民泊新法</TabsTrigger>
-            <TabsTrigger value="ryokan">旅館業法</TabsTrigger>
-            <TabsTrigger value="other">その他の申請</TabsTrigger>
-          </TabsList>
-          <TabsContent value="minpaku" className="space-y-6">
-            <Card className="bg-darkgray-800 border-darkgray-700">
-              <CardHeader>
-                <CardTitle className="text-snow-50">住宅宿泊事業法（民泊新法）について</CardTitle>
-                <CardDescription className="text-snow-300">
-                  2018年6月に施行された住宅宿泊事業法（民泊新法）に基づく届出と運営について
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">届出の流れ</h4>
-                  <p className="text-snow-300">
-                    住宅宿泊事業を行うには、都道府県知事（または政令市長・特別区長）への届出が必要です。届出には様々な書類や要件確認が必要となり、専門的な知識が求められます。
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">必要書類</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">住宅宿泊事業届出書</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">住宅の図面</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">登記事項証明書</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">住宅の写真</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">欠格事由に該当しない誓約書</span>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">運営上の義務</h4>
-                  <p className="text-snow-300">
-                    届出後も、宿泊者名簿の作成・備付け、外国人宿泊者の本人確認、標識の掲示、近隣住民とのトラブル防止措置など、様々な義務があります。これらの対応もサポートします。
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="ryokan" className="space-y-6">
-            <Card className="bg-darkgray-800 border-darkgray-700">
-              <CardHeader>
-                <CardTitle className="text-snow-50">旅館業法について</CardTitle>
-                <CardDescription className="text-snow-300">
-                  旅館業法に基づく旅館・ホテル営業、簡易宿所営業の許可申請について
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">許可申請の流れ</h4>
-                  <p className="text-snow-300">
-                    旅館業を営むには、保健所を通じて都道府県知事（または政令市長・特別区長）の許可が必要です。申請には構造設備基準や環境衛生基準など、様々な要件を満たす必要があります。
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">営業種別</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">旅館・ホテル営業：客室数や床面積などの要件あり</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">簡易宿所営業：比較的要件が緩和されている</span>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">必要書類</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">営業許可申請書</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">施設の平面図</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">設備の概要</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Check className="h-4 w-4 text-ice-400 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-snow-300">付近の見取図</span>
-                    </li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="other" className="space-y-6">
-            <Card className="bg-darkgray-800 border-darkgray-700">
-              <CardHeader>
-                <CardTitle className="text-snow-50">その他の申請手続き</CardTitle>
-                <CardDescription className="text-snow-300">
-                  民泊・旅館業に関連するその他の申請手続きについて
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">消防法関連</h4>
-                  <p className="text-snow-300">
-                    宿泊施設には消防法に基づく様々な設備設置や届出が必要です。消防用設備等（自動火災報知設備、誘導灯など）の設置や防火管理者の選任など、安全に関わる重要な手続きをサポートします。
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">建築基準法関連</h4>
-                  <p className="text-snow-300">
-                    住宅を宿泊施設として使用する場合、建築基準法上の用途変更が必要になることがあります。特に簡易宿所や旅館・ホテル営業の場合は、用途変更手続きが必要なケースが多く、専門的な対応が求められます。
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-snow-100 mb-2">食品衛生法関連</h4>
-                  <p className="text-snow-300">
-                    宿泊者に食事を提供する場合は、食品衛生法に基づく飲食店営業許可が必要です。厨房設備や手洗い設備など、保健所の基準に適合した設備が求められます。
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </Section>
-
-      {/* メリットセクション */}
-      <Section title="申請サポートのメリット" background="darkgray-900">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="bg-darkgray-800 border-darkgray-700 hover:border-ice-600/30 transition-all hover:-translate-y-1 hover:shadow-lg">
-            <CardHeader>
-              <div className="flex flex-col items-center text-center">
-                <Clock className="h-12 w-12 text-ice-400 mb-4" />
-                <CardTitle className="text-snow-50">時間と労力の節約</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-snow-300">
-                複雑な申請手続きを専門家に任せることで、オーナー様の貴重な時間と労力を節約できます。
-                書類作成や行政機関とのやり取りなど、煩雑な作業から解放されます。
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-darkgray-800 border-darkgray-700 hover:border-ice-600/30 transition-all hover:-translate-y-1 hover:shadow-lg">
-            <CardHeader>
-              <div className="flex flex-col items-center text-center">
-                <Shield className="h-12 w-12 text-ice-400 mb-4" />
-                <CardTitle className="text-snow-50">確実な許可取得</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-snow-300">
-                経験豊富な専門スタッフが対応することで、申請の不備や不足を防ぎ、スムーズな許可取得が可能になります。
-                法改正にも常に対応し、最新の情報に基づいたサポートを提供します。
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-darkgray-800 border-darkgray-700 hover:border-ice-600/30 transition-all hover:-translate-y-1 hover:shadow-lg">
-            <CardHeader>
-              <div className="flex flex-col items-center text-center">
-                <FileText className="h-12 w-12 text-ice-400 mb-4" />
-                <CardTitle className="text-snow-50">トータルサポート</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-snow-300">
-                申請手続きだけでなく、運営開始後の各種届出や報告義務など、継続的なコンプライアンス対応もサポート。
-                安心して事業に集中できる環境を整えます。
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </Section>
-
-      {/* CTA セクション */}
-      <Section background="darkgray-800" className="rounded-xl">
-        <Card className="bg-gradient-to-br from-darkgray-800 to-darkgray-900 border-none shadow-xl overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-ice-600/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
-          <CardContent className="p-8 md:p-12 relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <section className="relative py-24 bg-white overflow-hidden">
+        {/* デコレーション要素 */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-300 to-transparent"></div>
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-300 to-transparent"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-2 text-snow-50">申請サポートのお問い合わせ</h2>
-                <p className="text-snow-300">
-                  サービスの詳細や料金、申請に必要な条件などについてのご質問は、お気軽にお問い合わせください。
-                  専門スタッフが丁寧にご説明いたします。
+                <div className="inline-block mb-4">
+                  <div className="relative">
+                    <span className="inline-block w-16 h-px bg-gold-400"></span>
+                    <span className="inline-block w-3 h-3 rounded-full bg-gold-400 -mt-1 ml-1"></span>
+                  </div>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+                  各種<span className="text-gold-500 font-normal">申請許可</span>
+                </h1>
+                <p className="text-lg text-gray-600 max-w-xl font-light">
+                  複雑な申請手続きをプロフェッショナルが代行。住宅宿泊事業法（民泊）や旅館業法の許認可申請を確実にサポートし、スムーズな開業をお手伝いします。
                 </p>
               </div>
-              <div>
-                <Button variant="gold" size="lg" className="text-white whitespace-nowrap" asChild>
+              
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <span className="text-gray-700">住宅宿泊事業法(民泊)の申請サポート</span>
+                </div>
+                <div className="flex items-start">
+                  <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <span className="text-gray-700">旅館業法の許可申請サポート</span>
+                </div>
+                <div className="flex items-start">
+                  <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <span className="text-gray-700">必要書類の作成・収集サポート</span>
+                </div>
+                <div className="flex items-start">
+                  <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <span className="text-gray-700">申請から許可取得までの完全サポート</span>
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <Button className="bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-white font-normal px-8 py-6 h-auto text-lg shadow-lg shadow-gold-300/20 hover:shadow-xl hover:shadow-gold-300/30 transition-all duration-300 border-none" asChild>
                   <Link href="/#contact">
-                    お問い合わせをする
+                    無料相談を予約する
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      </Section>
-    </PageLayout>
+            
+            <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl border border-gold-100">
+              <Image
+                src="/images/permit-application-support.png"
+                alt="各種申請許可サポート"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-sm p-4 rounded-lg border border-gold-100">
+                <h3 className="text-xl font-light text-gray-900">法的手続きを<span className="text-gold-500">スムーズに</span></h3>
+                <p className="text-sm text-gray-600">専門知識を持つプロフェッショナルが申請をサポート</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* 申請種類セクション */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
+              申請<span className="text-gold-500 font-normal">種類</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              宿泊施設を運営するためには、物件の種類や運営形態によって異なる法律に基づく申請が必要です。
+              専門知識を持つ私たちが、最適な申請方法をご提案します。
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="bg-white border border-gold-100 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-gold-400 to-gold-500"></div>
+              <CardHeader>
+                <CardTitle className="text-xl font-light text-gray-900">住宅宿泊事業法（民泊法）</CardTitle>
+                <CardDescription className="text-gray-600">
+                  年間提供日数180日以内の住宅を活用した宿泊サービス
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">
+                  2018年6月に施行された住宅宿泊事業法に基づく民泊の申請をサポートします。
+                  住宅宿泊事業者（ホスト）としての登録に必要な手続きをサポートします。
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">都道府県知事等への届出サポート</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">安全措置・衛生措置の確認</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">近隣住民への説明資料作成</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">法令に基づく書類作成・提出</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white border border-gold-100 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-gold-400 to-gold-500"></div>
+              <CardHeader>
+                <CardTitle className="text-xl font-light text-gray-900">旅館業法</CardTitle>
+                <CardDescription className="text-gray-600">
+                  年間を通じて営業可能な宿泊施設の許可申請
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4">
+                  旅館業法に基づく簡易宿所や旅館・ホテルの営業許可申請をサポートします。
+                  年間を通じて営業したい方に適した申請方法です。
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">保健所への許可申請サポート</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">構造設備の基準適合確認</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">消防法に基づく設備確認</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-gray-700">営業開始までの完全サポート</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+      
+      {/* 申請サポートプロセスセクション */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
+              申請サポート<span className="text-gold-500 font-normal">プロセス</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              申請から許可取得まで、専門スタッフが一貫してサポートします。
+              複雑な手続きをわかりやすく説明し、スムーズな開業をお手伝いします。
+            </p>
+          </div>
+          
+          <div className="space-y-16">
+            {steps.map((step, index) => (
+              <div key={index} className={`relative ${index < steps.length - 1 ? "pb-16" : ""}`}>
+                {index < steps.length - 1 && (
+                  <div className="absolute left-10 top-20 bottom-0 w-px bg-gold-100"></div>
+                )}
+                
+                <div className="flex flex-col md:flex-row gap-8">
+                  <div className="flex flex-col items-center md:items-start">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 flex items-center justify-center shadow-lg shadow-gold-300/20 z-10">
+                      <step.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="mt-4 flex items-center gap-2">
+                      <Calendar className="h-4 w-4 text-gold-500" />
+                      <span className="text-sm text-gray-600">{step.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1 bg-white rounded-lg shadow-md border border-gold-100 p-6 md:p-8">
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">
+                      {index + 1}. {step.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{step.description}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {step.points.map((point, pointIndex) => (
+                        <div key={pointIndex} className="flex items-start">
+                          <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                          <span className="text-gray-700">{point}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* CTAセクション */}
+      <section className="py-24 bg-gray-50 relative">
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-300 to-transparent"></div>
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-300 to-transparent"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden border border-gold-100">
+            <div className="p-10 sm:p-12 relative">
+              {/* 装飾 */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gold-50 rounded-bl-full"></div>
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-gold-50 rounded-tr-full"></div>
+              
+              <div className="relative text-center max-w-2xl mx-auto">
+                <h2 className="text-3xl font-light mb-6 text-gray-900">
+                  複雑な申請手続きは<span className="text-gold-500">プロ</span>にお任せください
+                </h2>
+                <p className="text-gray-600 mb-10 text-lg">
+                  法律や規制を熟知した専門スタッフが、申請から許可取得までをトータルサポート。<br />
+                  あなたの大切な時間とエネルギーを本来の事業に集中できます。
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button className="bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-white font-normal px-8 py-6 h-auto text-lg shadow-lg shadow-gold-300/20 hover:shadow-xl hover:shadow-gold-300/30 transition-all duration-300 border-none" asChild>
+                    <Link href="/#contact">
+                      無料相談を予約する
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" className="border-gold-200 text-gray-700 hover:bg-gold-50 font-normal px-8 py-6 h-auto text-lg" asChild>
+                    <Link href="/services">
+                      他のサービスを見る
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }
 

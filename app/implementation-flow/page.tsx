@@ -1,583 +1,214 @@
+import { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
+  Check,
   Clock,
-  FileText,
-  Building,
-  ShoppingCart,
-  Smartphone,
+  ChevronDown,
+  MessageCircle,
+  ClipboardCheck,
+  Settings,
   Users,
-  Wrench,
-  ClipboardList,
-  AlertTriangle,
-  CheckCircle2,
-  XCircle,
-  ArrowDown,
-  Frown,
-  Smile,
+  Calendar,
+  ChevronRight,
+  Building,
+  FileText,
+  User,
+  CheckCircle,
+  Phone,
 } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "導入の流れ｜CleanNest Hokkaido",
+  description: "CleanNest Hokkaidoの民泊運営代行サービス導入プロセスをご紹介。初回相談から運営開始まで、わかりやすく8ステップでサポートします。専門コンサルタントが伴走し、スムーズな導入をお約束します。",
+}
+
+// 導入フローの各ステップ
+const implementationSteps = [
+  {
+    step: "01",
+    title: "無料相談",
+    description: "お客様から寄せられる立地や物件、賃貸物件か所有物件かをヒアリングして最適なプランをご提案いたします。弊社（札幌市）まで来られなくてもオンラインでのビデオミーティングも可能です。",
+    icon: Phone,
+    color: "gold",
+  },
+  {
+    step: "02",
+    title: "企画決定",
+    description: "賃貸物件または所有物件、実際のけま出しまたは出張宿泊などから企画を決定します。弊社とご用意したオプションから最適なプランをお選びいただけます。",
+    icon: CheckCircle,
+    color: "gold",
+  },
+  {
+    step: "03",
+    title: "現地調査",
+    description: "周辺のゲスト宿泊者の予約状況や稼働率など、総合施設などとの関連調査を行います。この調査における「立地力」と「物件力」が大きく集客に影響を与えます。",
+    icon: Building,
+    color: "gold",
+  },
+  {
+    step: "04",
+    title: "申請準備",
+    description: "消防法令や保健所（旅館業申請）または北海道庁局（住宅宿泊申請）など、各行政機関や窓場所における所有または貸出の申請に必要な「書類」や「書面」などについて調査を行い、申請の準備を進めます。",
+    icon: FileText,
+    color: "gold",
+  },
+  {
+    step: "05",
+    title: "契約手続き",
+    description: "民泊営業（旅館業等）に必要な家具や条件を満たすことが確認できたら、いよいよ契約手続きの準備を行います。契約締結後はスムーズにオープンに向けて動き出します。",
+    icon: User,
+    color: "gold",
+  },
+  {
+    step: "06",
+    title: "申請手続き",
+    description: "各行政機関に必要書類を提出し、許可（届け出）するために必要な防災設備等を施設に設置します。順番としては、消防設備の設置が先で、その設備確認書をもとに保健所や道庁の許可申請を行います。このタイミングで、消防設備などのメンテナンスコストについても説明します。",
+    icon: Calendar,
+    color: "gold",
+  },
+  {
+    step: "07",
+    title: "設備導入",
+    description: "民泊営業（旅館業等）に必要な家具や条件を満たすための設備を導入します。同時に、インターネット回線の開通やスマートロック、タブレット用の管理システムのセットアップ、スマートキーとの連携など設備の設置を行います。",
+    icon: Settings,
+    color: "gold",
+  },
+  {
+    step: "08",
+    title: "運営開始",
+    description: "施設に必要なすべての設備が整ったら、安心しておまかせください。開設に必要な高品質な写真の撮影、OTA等（airbnb, Booking.com）に登録し、予約受付を開始します。宿泊ゲストの予約からチェックイン/チェックアウトまでをサポートする運営が始まります。",
+    icon: Clock,
+    color: "gold",
+  },
+]
 
 export default function ImplementationFlowPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-darkgray-950 text-snow-100">
-      <main className="flex-1 pt-20">
-        {/* Breadcrumb */}
-        <div className="container py-4 text-sm">
-          <div className="flex items-center gap-1 text-snow-400">
-            <Link href="/" className="hover:text-ice-400">
-              ホーム
-            </Link>
-            <span>•</span>
-            <span>導入の流れ</span>
+    <main className="min-h-screen pb-24">
+      {/* ヒーローセクション */}
+      <section className="bg-gray-50 py-24 border-b border-gray-200">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl font-light text-gray-900 mb-6">
+              導入の流れ
+              <span className="block text-2xl sm:text-3xl mt-2 text-gold-600">実績豊富な専門家がサポート</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              初回相談から運営開始まで、わかりやすく8ステップでサポート。<br />
+              専門コンサルタントが事業開始から運営開始までを全面的にサポートします。
+            </p>
+            
+            <div className="flex justify-center">
+              <div className="inline-flex items-center text-sm text-gray-500">
+                <Link href="/" className="hover:text-gold-600 transition-colors">
+                  ホーム
+                </Link>
+                <ChevronRight className="h-4 w-4 mx-2" />
+                <span className="text-gray-900">導入の流れ</span>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Hero Section */}
-        <section className="bg-darkgray-950 py-16 md:py-24">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-snow-50">民泊・旅館運営の導入フロー</h1>
-              <p className="text-xl text-snow-300 mb-8">
-                民泊や旅館の運営を始めるには、多くの手続きや準備が必要です。
-                一人で全てを行うのは大変な作業です。CleanNest Hokkaidoなら、
-                その負担を大幅に軽減し、スムーズな運営をサポートします。
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" className="bg-ice-600 hover:bg-ice-700 text-white" asChild>
-                  <Link href="#solution">
-                    CleanNestのソリューションを見る
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-snow-100 border-darkgray-700 hover:bg-darkgray-800"
-                  asChild
-                >
-                  <Link href="/#contact">無料相談を予約する</Link>
-                </Button>
-              </div>
-            </div>
+      {/* 導入フロー概要 */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-light text-gray-900 mb-6">
+              スムーズな導入プロセス
+            </h2>
+            <p className="text-lg text-gray-600">
+              CleanNest Hokkaidoでは、民泊運営の立ち上げから運営までをトータルでサポート。<br />
+              未経験のオーナー様でも安心してスタートできる体制を整えています。
+            </p>
           </div>
-        </section>
-
-        {/* DIY Flow Section */}
-        <section className="py-16 md:py-24 bg-darkgray-950">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-900/30 mb-4">
-                <Frown className="h-8 w-8 text-red-500" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-snow-50">一人で全てを行う場合</h2>
-              <p className="text-xl text-snow-300">
-                民泊や旅館の運営を一人で始めようとすると、多くの課題に直面します。
-                時間、専門知識、人脈など、様々なリソースが必要となります。
-              </p>
-            </div>
-
-            {/* Timeline */}
+          
+          {/* 導入ステップのタイムライン */}
+          <div className="max-w-5xl mx-auto">
             <div className="relative">
-              {/* Vertical Line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-darkgray-800"></div>
-
-              {/* Step 1 */}
-              <div className="relative mb-20">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">
-                    1
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="md:text-right order-2 md:order-1">
-                    <h3 className="text-2xl font-bold mb-3 text-snow-50">物件選定と調査</h3>
-                    <p className="text-snow-300 mb-4">
-                      民泊や旅館に適した物件を見つけ、法規制や条例を調査する必要があります。
-                      地域によって異なる規制や、建物の構造上の制約など、専門的な知識が必要です。
-                    </p>
-                    <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-red-400">課題</h4>
-                          <ul className="text-sm text-red-300 space-y-1 mt-1">
-                            <li>• 地域ごとに異なる法規制の理解</li>
-                            <li>• 物件の適性評価に専門知識が必要</li>
-                            <li>• 収益性の正確な予測が困難</li>
-                            <li>• 調査に膨大な時間がかかる</li>
-                          </ul>
+              {/* 中央の線 - PCのみ表示 */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-gold-200 hidden md:block"></div>
+              
+              {/* 各ステップ */}
+              <div className="space-y-24">
+                {implementationSteps.map((step, index) => (
+                  <div key={index} className="relative">
+                    {/* ステップ番号と中央丸マーク - PCのみ表示 */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 -top-5 bg-gold-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold hidden md:flex">
+                      {step.step}
+                    </div>
+                    
+                    {/* コンテンツエリア */}
+                    <div className="md:grid md:grid-cols-2 md:gap-16 items-center">
+                      <div className={`mb-8 md:mb-0 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                        <div className="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 h-full">
+                          {/* モバイルでのみ表示するステップ番号 */}
+                          <div className="flex items-center mb-4 md:hidden">
+                            <div className="bg-gold-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mr-3">
+                              {step.step}
+                            </div>
+                            <h3 className="text-xl font-medium text-gray-900">{step.title}</h3>
+                          </div>
+                          
+                          {/* PCでのみ表示するタイトル */}
+                          <h3 className="text-xl font-medium text-gray-900 mb-4 hidden md:block">{step.title}</h3>
+                          
+                          <p className="text-gray-600 leading-relaxed">
+                            {step.description}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className={`${index % 2 === 1 ? 'md:order-1 text-right' : 'text-left'}`}>
+                        <div className={`inline-block rounded-full p-6 ${index % 2 === 0 ? 'bg-gold-50' : 'bg-gray-50'}`}>
+                          <step.icon className={`h-16 w-16 ${index % 2 === 0 ? 'text-gold-500' : 'text-gray-400'}`} />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="order-1 md:order-2 flex items-center justify-center">
-                    <Building className="h-24 w-24 text-red-500/50" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="relative mb-20">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">
-                    2
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="order-2">
-                    <h3 className="text-2xl font-bold mb-3 text-snow-50">許認可申請と書類準備</h3>
-                    <p className="text-snow-300 mb-4">
-                      民泊新法（住宅宿泊事業法）や旅館業法に基づく申請手続きは複雑です。
-                      消防法や建築基準法など、関連する法令への対応も必要となります。
-                    </p>
-                    <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-red-400">課題</h4>
-                          <ul className="text-sm text-red-300 space-y-1 mt-1">
-                            <li>• 複雑な申請書類の作成</li>
-                            <li>• 行政機関とのやり取りに時間がかかる</li>
-                            <li>• 申請が却下されるリスク</li>
-                            <li>• 法改正への対応</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <FileText className="h-24 w-24 text-red-500/50" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="relative mb-20">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">
-                    3
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="md:text-right order-2 md:order-1">
-                    <h3 className="text-2xl font-bold mb-3 text-snow-50">内装設計と家具調達</h3>
-                    <p className="text-snow-300 mb-4">
-                      ゲストに喜ばれる内装設計と、適切な家具・家電の選定が必要です。
-                      コストと品質のバランスを考慮しながら、魅力的な空間を作る必要があります。
-                    </p>
-                    <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-red-400">課題</h4>
-                          <ul className="text-sm text-red-300 space-y-1 mt-1">
-                            <li>• デザインセンスが必要</li>
-                            <li>• 家具・家電の選定と調達に時間がかかる</li>
-                            <li>• 予算管理が難しい</li>
-                            <li>• 搬入・設置の手配</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="order-1 md:order-2 flex items-center justify-center">
-                    <ShoppingCart className="h-24 w-24 text-red-500/50" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div className="relative mb-20">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">
-                    4
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="order-2">
-                    <h3 className="text-2xl font-bold mb-3 text-snow-50">予約システム構築</h3>
-                    <p className="text-snow-300 mb-4">
-                      Airbnbなどの予約サイトへの登録や、自社サイトの構築、予約管理システムの導入など、
-                      ITシステムの構築が必要です。
-                    </p>
-                    <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-red-400">課題</h4>
-                          <ul className="text-sm text-red-300 space-y-1 mt-1">
-                            <li>• 複数の予約サイトの管理が煩雑</li>
-                            <li>• システム連携の技術的知識が必要</li>
-                            <li>• ダブルブッキングのリスク</li>
-                            <li>• 料金設定の最適化が難しい</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <Smartphone className="h-24 w-24 text-red-500/50" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 5 */}
-              <div className="relative mb-20">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">
-                    5
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="md:text-right order-2 md:order-1">
-                    <h3 className="text-2xl font-bold mb-3 text-snow-50">スタッフ採用と教育</h3>
-                    <p className="text-snow-300 mb-4">
-                      清掃スタッフやフロントスタッフの採用、教育が必要です。
-                      特に外国人ゲスト対応のための語学力や、おもてなしの心を育てることが重要です。
-                    </p>
-                    <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-red-400">課題</h4>
-                          <ul className="text-sm text-red-300 space-y-1 mt-1">
-                            <li>• 良質なスタッフの確保が難しい</li>
-                            <li>• 教育・研修に時間がかかる</li>
-                            <li>• シフト管理が煩雑</li>
-                            <li>• 人件費の負担</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="order-1 md:order-2 flex items-center justify-center">
-                    <Users className="h-24 w-24 text-red-500/50" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 6 */}
-              <div className="relative mb-20">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">
-                    6
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="order-2">
-                    <h3 className="text-2xl font-bold mb-3 text-snow-50">運営と保守管理</h3>
-                    <p className="text-snow-300 mb-4">
-                      日々の運営や、設備の保守管理、トラブル対応など、継続的な業務が発生します。
-                      24時間365日の対応が求められることもあります。
-                    </p>
-                    <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-red-400">課題</h4>
-                          <ul className="text-sm text-red-300 space-y-1 mt-1">
-                            <li>• 24時間対応の負担</li>
-                            <li>• 設備トラブルへの迅速な対応</li>
-                            <li>• 清掃品質の維持</li>
-                            <li>• クレーム対応のストレス</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <Wrench className="h-24 w-24 text-red-500/50" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Result */}
-              <div className="relative">
-                <div className="flex items-center justify-center mb-8">
-                  <div className="z-10 flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white">
-                    <XCircle className="h-6 w-6" />
-                  </div>
-                </div>
-                <div className="max-w-2xl mx-auto bg-red-900/20 border border-red-900/30 rounded-xl p-6 text-center">
-                  <h3 className="text-2xl font-bold text-red-400 mb-4">一人で行う場合の結果</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                    <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                      <Clock className="h-8 w-8 text-red-500 mb-2" />
-                      <p className="text-sm font-medium text-snow-100">膨大な時間</p>
-                    </div>
-                    <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                      <AlertTriangle className="h-8 w-8 text-red-500 mb-2" />
-                      <p className="text-sm font-medium text-snow-100">高いリスク</p>
-                    </div>
-                    <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                      <FileText className="h-8 w-8 text-red-500 mb-2" />
-                      <p className="text-sm font-medium text-snow-100">複雑な手続き</p>
-                    </div>
-                    <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm md:col-span-3 md:max-w-xs md:mx-auto">
-                      <Frown className="h-8 w-8 text-red-500 mb-2" />
-                      <p className="text-sm font-medium text-snow-100">精神的負担</p>
-                    </div>
-                  </div>
-                  <p className="text-red-300">
-                    一人で全てを行うと、多くの時間と労力、専門知識が必要となり、
-                    本来の目的である「収益を上げること」に集中できなくなります。
-                  </p>
-                </div>
-              </div>
-
-              {/* Transition Arrow */}
-              <div className="flex justify-center my-16">
-                <div className="flex flex-col items-center">
-                  <ArrowDown className="h-12 w-12 text-ice-400 animate-bounce" />
-                  <p className="mt-4 text-xl font-medium text-ice-400">CleanNest Hokkaidoなら</p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Solution Section */}
-        <section id="solution" className="py-16 md:py-24 bg-darkgray-950">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-900/30 mb-4">
-                <Smile className="h-8 w-8 text-green-500" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-snow-50">CleanNest Hokkaidoのソリューション</h2>
-              <p className="text-xl text-snow-300">
-                CleanNest Hokkaidoなら、民泊・旅館運営の複雑なプロセスを シンプルな3ステップで実現できます。
-              </p>
-            </div>
-
-            {/* 3 Steps Solution */}
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
-              {/* Step 1 */}
-              <div className="bg-darkgray-900 border border-darkgray-800 rounded-xl shadow-sm overflow-hidden">
-                <div className="bg-ice-600 text-white p-4 text-center">
-                  <span className="inline-block w-8 h-8 rounded-full bg-white text-ice-600 font-bold text-lg leading-8">
-                    1
-                  </span>
-                  <h3 className="text-xl font-bold mt-2">無料相談</h3>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-center h-24 mb-4">
-                    <FileText className="h-16 w-16 text-ice-400/50" />
-                  </div>
-                  <p className="text-snow-300 mb-4">
-                    お客様のニーズや物件の状況をヒアリングし、最適なプランをご提案します。
-                    収益シミュレーションや必要な手続きについても詳しくご説明します。
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">物件の収益性診断</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">法規制の確認</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">最適なプランの提案</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="bg-darkgray-900 border border-darkgray-800 rounded-xl shadow-sm overflow-hidden">
-                <div className="bg-ice-600 text-white p-4 text-center">
-                  <span className="inline-block w-8 h-8 rounded-full bg-white text-ice-600 font-bold text-lg leading-8">
-                    2
-                  </span>
-                  <h3 className="text-xl font-bold mt-2">契約・準備</h3>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-center h-24 mb-4">
-                    <Building className="h-16 w-16 text-ice-400/50" />
-                  </div>
-                  <p className="text-snow-300 mb-4">
-                    契約後、弊社が全ての準備を代行します。許認可申請、内装設計、家具調達、
-                    システム構築など、開業に必要な全ての準備を一括で行います。
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">許認可申請の代行</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">内装設計と家具調達</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">予約システムの構築</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="bg-darkgray-900 border border-darkgray-800 rounded-xl shadow-sm overflow-hidden">
-                <div className="bg-ice-600 text-white p-4 text-center">
-                  <span className="inline-block w-8 h-8 rounded-full bg-white text-ice-600 font-bold text-lg leading-8">
-                    3
-                  </span>
-                  <h3 className="text-xl font-bold mt-2">運営開始</h3>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-center h-24 mb-4">
-                    <Smartphone className="h-16 w-16 text-ice-400/50" />
-                  </div>
-                  <p className="text-snow-300 mb-4">
-                    開業後は、予約管理、ゲスト対応、清掃、メンテナンスなど、
-                    全ての運営業務を弊社が代行します。オーナー様は収益だけを受け取るだけです。
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">予約・ゲスト対応</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">清掃・メンテナンス</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                      <span className="text-snow-200">収益レポートの提供</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Benefits */}
-            <div className="max-w-3xl mx-auto">
-              <div className="bg-green-900/20 border border-green-900/30 rounded-xl p-6 text-center">
-                <h3 className="text-2xl font-bold text-green-400 mb-4">CleanNest Hokkaidoを選ぶメリット</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                    <Clock className="h-8 w-8 text-green-500 mb-2" />
-                    <p className="text-sm font-medium text-snow-100">時間の節約</p>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                    <CheckCircle2 className="h-8 w-8 text-green-500 mb-2" />
-                    <p className="text-sm font-medium text-snow-100">リスク軽減</p>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                    <ClipboardList className="h-8 w-8 text-green-500 mb-2" />
-                    <p className="text-sm font-medium text-snow-100">手続き代行</p>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-darkgray-800 rounded-lg shadow-sm">
-                    <Smile className="h-8 w-8 text-green-500 mb-2" />
-                    <p className="text-sm font-medium text-snow-100">精神的余裕</p>
-                  </div>
-                </div>
-                <p className="text-green-300">
-                  CleanNest Hokkaidoにお任せいただくことで、オーナー様は煩雑な業務から解放され、
-                  本来の目的である「収益を上げること」に集中できます。
-                  専門知識と経験を持つプロフェッショナルが、最高品質のサービスを提供します。
-                </p>
-              </div>
+      {/* CTAセクション */}
+      <section className="py-20 bg-gray-50 mt-20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-light text-gray-900 mb-8">
+              スムーズな民泊運営を始めてみませんか？
+            </h2>
+            <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+              「どこから始めたらいいのかわからない」という方も、
+              まずはお気軽にご相談ください。民泊のプロフェッショナルが
+              あなたの物件の可能性を最大限に引き出します。
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link 
+                href="/contact"
+                className="inline-block px-8 py-4 bg-gold-500 text-white hover:bg-gold-600 transition-colors text-lg tracking-wide shadow-md rounded-md"
+              >
+                無料相談を予約する
+              </Link>
+              
+              <Link 
+                href="/services"
+                className="inline-block px-8 py-4 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors text-lg tracking-wide shadow-sm rounded-md"
+              >
+                サービス詳細を見る
+              </Link>
             </div>
           </div>
-        </section>
-
-        {/* Comparison Section */}
-        <section className="py-16 md:py-24 bg-darkgray-950">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-snow-50">自己運営 vs CleanNest Hokkaido</h2>
-              <p className="text-snow-300">自己運営とCleanNest Hokkaidoのサービスを比較してみましょう。</p>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr>
-                    <th className="p-4 text-left bg-darkgray-800 border border-darkgray-700 text-snow-100">項目</th>
-                    <th className="p-4 text-center bg-red-900/20 border border-darkgray-700 text-snow-100">自己運営</th>
-                    <th className="p-4 text-center bg-green-900/20 border border-darkgray-700 text-snow-100">
-                      CleanNest Hokkaido
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="p-4 border border-darkgray-700 font-medium text-snow-100">初期準備期間</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-red-900/20 text-red-300">3〜6ヶ月</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-green-900/20 text-green-300">
-                      1〜2ヶ月
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 border border-darkgray-700 font-medium text-snow-100">必要な専門知識</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-red-900/20 text-red-300">
-                      多岐にわたる知識が必要
-                    </td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-green-900/20 text-green-300">
-                      不要（すべてお任せ）
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 border border-darkgray-700 font-medium text-snow-100">オーナーの時間的負担</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-red-900/20 text-red-300">
-                      大きい（24時間対応）
-                    </td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-green-900/20 text-green-300">
-                      最小限（収益確認のみ）
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 border border-darkgray-700 font-medium text-snow-100">トラブル対応</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-red-900/20 text-red-300">自己対応</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-green-900/20 text-green-300">
-                      すべて代行
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 border border-darkgray-700 font-medium text-snow-100">収益最大化</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-red-900/20 text-red-300">
-                      知識と経験による
-                    </td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-green-900/20 text-green-300">
-                      プロによる最適化
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 border border-darkgray-700 font-medium text-snow-100">初期投資リスク</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-red-900/20 text-red-300">高い</td>
-                    <td className="p-4 text-center border border-darkgray-700 bg-green-900/20 text-green-300">低い</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-12 md:py-16 bg-darkgray-900">
-          <div className="container">
-            <div className="max-w-4xl mx-auto bg-darkgray-900 text-white rounded-xl overflow-hidden shadow-xl">
-              <div className="p-8 md:p-12">
-                <h2 className="text-3xl font-bold mb-4 text-snow-50">まずは無料相談から</h2>
-                <p className="mb-6 text-snow-300">
-                  民泊・旅館運営に関するお悩みや疑問点を、お気軽にご相談ください。
-                  経験豊富なコンサルタントが、最適なプランをご提案いたします。
-                </p>
-                <Button size="lg" className="bg-ice-600 hover:bg-ice-700 text-white" asChild>
-                  <Link href="/#contact">
-                    無料相談を予約する
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
   )
 }
 

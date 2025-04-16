@@ -14,9 +14,9 @@ const slides = [
   {
     id: 1,
     image: "/images/sapporo-clock-tower.jpeg",
-    title: "札幌の魅力を収益に",
-    subtitle: "HASSLE-FREE MANAGEMENT",
-    description: "民泊運営はすべてお任せください。",
+    title: "インバウンド専門民泊運営代行",
+    subtitle: "CleanNest Hokkaido",
+    description: "北海道No.1を目指す",
     cta: {
       text: "詳しく見る",
       url: "/services",
@@ -25,9 +25,9 @@ const slides = [
   {
     id: 2,
     image: "/images/modern-traveler.png",
-    title: "札幌の魅力を収益に",
-    subtitle: "COMPLETE MANAGEMENT",
-    description: "民泊運営はすべてお任せください。",
+    title: "インバウンド専門民泊運営代行",
+    subtitle: "CleanNest Hokkaido",
+    description: "北海道No.1を目指す",
     cta: {
       text: "詳しく見る",
       url: "/property-introduction",
@@ -36,9 +36,9 @@ const slides = [
   {
     id: 3,
     image: "/images/sapporo-tv-tower-illumination.jpg",
-    title: "札幌の魅力を収益に",
-    subtitle: "INBOUND SPECIALISTS",
-    description: "民泊運営はすべてお任せください。",
+    title: "インバウンド専門民泊運営代行",
+    subtitle: "CleanNest Hokkaido",
+    description: "北海道No.1を目指す",
     cta: {
       text: "詳しく見る",
       url: "/property-introduction",
@@ -133,16 +133,6 @@ export function HeroSlideshow() {
               </div>
               <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">{slide.title}</h1>
               <p className="text-white text-xl md:text-2xl mt-6 font-light font-sans">{slide.description}</p>
-              <div className="mt-8">
-                <Button
-                  variant="default"
-                  size="lg"
-                  className="bg-paleblue-600 hover:bg-paleblue-700 text-white px-10 py-7 text-xl font-bold rounded-md shadow-lg hover:shadow-xl transition-all"
-                  asChild
-                >
-                  <Link href={slide.cta.url}>{slide.cta.text}</Link>
-                </Button>
-              </div>
             </div>
           </div>
         </div>
@@ -199,14 +189,9 @@ export function HeroSlideshow() {
           <div className="flex-1">
             <p className="text-sm md:text-base font-medium text-white">
               <span className="text-gold-500 mr-2 font-bold">札幌の不動産オーナー様へ:</span>
-              インバウンド対応で収益最大化
+              <span className="font-bold text-white">インバウンド対応で収益最大化</span>
             </p>
-            <p className="text-xs md:text-sm text-snow-300 mt-2">札幌の民泊代行サービスで安定した高収益を実現</p>
-          </div>
-          <div className="mt-4">
-            <Button variant="gold" size="sm" className="text-white w-full font-bold shadow-lg" asChild>
-              <Link href="/property-recruitment">詳しく見る</Link>
-            </Button>
+            <p className="text-xs md:text-sm text-white mt-2">札幌の民泊代行サービスで安定した高収益を実現</p>
           </div>
         </div>
       </div>
