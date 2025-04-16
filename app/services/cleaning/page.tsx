@@ -187,32 +187,35 @@ export default function CleaningPage() {
             </p> */}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 smooth-transition">
+            {/* Card 2-1 */}
+            <div className="p-6 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg smooth-transition transform hover:-translate-y-1 text-center">
               <div className="flex justify-center mb-4">
-                <div className="bg-gold-100 p-3 rounded-full">
+                <div className="bg-gold-50 p-3 rounded-full ring-2 ring-gold-100">
                   <Clock className="h-6 w-6 text-gold-600" />
                 </div>
               </div>
-              <h4 className="font-medium text-gray-800 mb-2 text-lg text-center">一元管理システム</h4>
-              <p className="text-gray-600 text-sm text-center leading-relaxed">各施設のスケジュール、清掃箇所、担当清掃員の配置などすべてをデジタルで管理。</p>
+              <h4 className="font-medium text-gray-800 mb-3 text-lg">一元管理システム</h4>
+              <p className="text-gray-600 text-sm leading-relaxed">各施設のスケジュール、清掃箇所、担当清掃員の配置などすべてをデジタルで管理。</p>
             </div>
-            <div className="p-6 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 smooth-transition" style={{ animationDelay: '0.1s' }}>
+            {/* Card 2-2 */}
+            <div className="p-6 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg smooth-transition transform hover:-translate-y-1 text-center" style={{ animationDelay: '0.1s' }}>
               <div className="flex justify-center mb-4">
-                 <div className="bg-gold-100 p-3 rounded-full">
-                  <Share2 className="h-6 w-6 text-gold-600" /> {/* Share2 アイコンに変更 */}
+                 <div className="bg-gold-50 p-3 rounded-full ring-2 ring-gold-100">
+                  <Share2 className="h-6 w-6 text-gold-600" />
                 </div>
               </div>
-              <h4 className="font-medium text-gray-800 mb-2 text-lg text-center">自動スケジュール共有</h4>
-              <p className="text-gray-600 text-sm text-center leading-relaxed">清掃業者と情報をリアルタイムに共有することで、清掃忘れや遅延を未然に防止。</p>
+              <h4 className="font-medium text-gray-800 mb-3 text-lg">自動スケジュール共有</h4>
+              <p className="text-gray-600 text-sm leading-relaxed">清掃業者と情報をリアルタイムに共有することで、清掃忘れや遅延を未然に防止。</p>
             </div>
-            <div className="p-6 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 smooth-transition" style={{ animationDelay: '0.2s' }}>
+            {/* Card 2-3 */}
+            <div className="p-6 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg smooth-transition transform hover:-translate-y-1 text-center" style={{ animationDelay: '0.2s' }}>
                <div className="flex justify-center mb-4">
-                 <div className="bg-gold-100 p-3 rounded-full">
-                  <ShieldCheck className="h-6 w-6 text-gold-600" /> {/* ShieldCheck アイコンに変更 */}
+                 <div className="bg-gold-50 p-3 rounded-full ring-2 ring-gold-100">
+                  <ShieldCheck className="h-6 w-6 text-gold-600" />
                 </div>
               </div>
-              <h4 className="font-medium text-gray-800 mb-2 text-lg text-center">予防的メンテナンス</h4>
-              <p className="text-gray-600 text-sm text-center leading-relaxed">システム上で点検項目を管理し、問題が発生する前に対応することで、常に清潔な状態をキープ。</p>
+              <h4 className="font-medium text-gray-800 mb-3 text-lg">予防的メンテナンス</h4>
+              <p className="text-gray-600 text-sm leading-relaxed">システム上で点検項目を管理し、問題が発生する前に対応することで、常に清潔な状態をキープ。</p>
             </div>
           </div>
         </div>
@@ -327,12 +330,12 @@ export default function CleaningPage() {
           {/* Card 4-1, 4-2 */} 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="p-8 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg smooth-transition transform hover:-translate-y-1">
-                   <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-gold-100 p-3 rounded-full flex-shrink-0">
+                   <div className="flex items-start gap-4">
+                    <div className="bg-gold-50 p-3 rounded-full ring-2 ring-gold-100 flex-shrink-0 mt-1">
                       <ShoppingBag className="h-6 w-6 text-gold-600" />
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 text-xl mb-2">ゲストの忘れ物</h4>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-800 text-xl mb-3">ゲストの忘れ物</h4>
                       <ul className="list-none space-y-2 text-gray-600 text-sm leading-relaxed">
                         <li><span className="font-semibold text-gold-700">迅速な報告・保管:</span> 発見次第、速やかにホスト様へ連絡し、大切に保管します。</li>
                         <li><span className="font-semibold text-gold-700">安全な引渡し:</span> ホスト様の指示に従い、ゲストへの連絡体制を確立します。</li>
@@ -341,12 +344,12 @@ export default function CleaningPage() {
                   </div>
                 </div>
                 <div className="p-8 bg-gray-50 rounded-lg border border-gold-100 shadow-md hover:shadow-lg smooth-transition transform hover:-translate-y-1" style={{ animationDelay: '0.1s' }}>
-                   <div className="flex items-start gap-4 mb-4">
-                     <div className="bg-gold-100 p-3 rounded-full flex-shrink-0">
+                   <div className="flex items-start gap-4">
+                     <div className="bg-gold-50 p-3 rounded-full ring-2 ring-gold-100 flex-shrink-0 mt-1">
                       <ShieldAlert className="h-6 w-6 text-gold-600" />
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 text-xl mb-2">設備・備品の破損</h4>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-800 text-xl mb-3">設備・備品の破損</h4>
                       <ul className="list-none space-y-2 text-gray-600 text-sm leading-relaxed">
                         <li><span className="font-semibold text-gold-700">発見時の即時対応:</span> 状況を写真撮影の上、速やかにホスト様へ報告します。</li>
                         <li><span className="font-semibold text-gold-700">補償サポート:</span> ゲストへの請求や保険適用など、迅速な修復・補償対応をサポートします。</li>
