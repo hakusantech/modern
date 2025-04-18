@@ -115,7 +115,7 @@ export function Footer() {
                   <span className="text-xl font-bold text-white">CleanNest<br/>Hokkaido</span>
                 </div>
                 <p className="text-sm text-gray-400">
-                  札幌を中心に民泊運営代行サービスを提供。\n                  インバウンド対応に特化し、予約管理から清掃まで一括サポートします。
+                  札幌を中心に民泊運営代行サービスを提供。インバウンド旅行客に特化し、予約管理から清掃まで一括サポートします。
                 </p>
               </div>
               
@@ -157,9 +157,15 @@ export function Footer() {
                     会社概要
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
-                  <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors">
+                  <a 
+                    href="https://www.ehpcorp.net/contact" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                  >
                     お問い合わせ
-                  </Link>
+                    <ExternalLink className="ml-1 h-3 w-3" />
+                  </a>
                 </nav>
               </div>
               

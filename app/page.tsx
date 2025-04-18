@@ -268,7 +268,7 @@ export default function HomePage() {
               <h2 className="text-4xl font-light text-gray-900 mb-10 leading-tight">
                 CleanNest Hokkaidoが目指す<br />
                 <span className="font-medium">3つのコアバリュー</span>
-              </h2>
+          </h2>
               
               <div className="space-y-8">
                 <div className="flex">
@@ -303,8 +303,8 @@ export default function HomePage() {
                     <h3 className="text-xl font-medium text-gray-900 mb-2">インバウンド客を通じた「地方創生」</h3>
                     <p className="text-gray-600 leading-relaxed">
                       物件の活用が、インバウンド旅行客の誘致と<span className="font-semibold text-gray-800">地域経済の活性化</span>に直結します。オーナー様と共に、北海道の持続可能な未来と発展に貢献します。
-                    </p>
-                  </div>
+          </p>
+        </div>
                 </div>
               </div>
               
@@ -400,8 +400,8 @@ export default function HomePage() {
           ) : (
             <div className="text-center py-12 px-6 bg-white rounded-lg shadow-md border border-gray-200">
               <p className="text-gray-500">ニュース・お知らせは現在準備中です。今しばらくお待ちください。</p>
-            </div>
-          )}
+                  </div>
+                )}
         </div>
       </section>
 
@@ -465,8 +465,8 @@ export default function HomePage() {
               完全に自動化された民泊運営を実現します。オーナー様の手間を最小限に、
               収益を最大限に。
             </p>
-          </div>
-          
+              </div>
+              
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {automationFeatures.map((feature, index) => (
               <div key={index} className="flex items-start">
@@ -494,8 +494,8 @@ export default function HomePage() {
               CleanNest Hokkaidoが<br />
               <span className="font-medium">選ばれる4つの魅力</span>
             </h2>
-          </div>
-          
+                </div>
+                
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {advantages.map((advantage, index) => (
               <div key={index} className="border border-gray-200 p-8 hover:border-gold-500 transition-colors">
@@ -581,10 +581,10 @@ export default function HomePage() {
                 導入プロセスの詳細を見る
                 <ArrowRight className="ml-2 h-4 w-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
               </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* 8. 料金プラン（FEP＆WSPプラン）紹介 */}
       <section className="py-32 bg-white">
@@ -682,12 +682,12 @@ export default function HomePage() {
               </div>
               
               <div className="text-center">
-                <Link 
+            <Link 
                   href="/plans"
                   className="inline-block px-8 py-3 md:px-10 md:py-4 border border-gray-900 text-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-all duration-300 text-base md:text-lg w-full md:w-auto"
-                >
+            >
                   詳細を見る
-                </Link>
+            </Link>
               </div>
             </div>
           </div>
@@ -701,18 +701,18 @@ export default function HomePage() {
             <h2 className="text-4xl font-light text-gray-900 mb-8">
               まずは無料相談から<br />
               <span className="font-medium">お気軽にお問い合わせください</span>
-            </h2>
+          </h2>
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
               民泊運営のプロフェッショナルが、お客様の物件に最適な
               運営プランをご提案いたします。
-            </p>
-            
-            <Link 
-              href="/contact"
+          </p>
+          
+          <Link 
+            href="/contact"
               className="inline-block px-12 py-5 bg-gold-500 text-white hover:bg-gold-600 transition-colors text-xl tracking-wide shadow-lg"
-            >
+          >
               無料相談を予約する
-            </Link>
+          </Link>
           </div>
         </div>
       </section>

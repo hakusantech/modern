@@ -74,7 +74,7 @@ export function Header({ currentPath = "/" }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-4">
-          {/* 電話番号 (常に表示) */}
+          {/* 電話番号 (常に表示、スマホではアイコンのみ) */}
           <a 
             href="tel:011-827-7441" 
             className={`flex items-center gap-2 text-lg font-medium text-gold-500 hover:text-gold-600 hover:scale-105 transition-all duration-200 ${
@@ -82,7 +82,7 @@ export function Header({ currentPath = "/" }: HeaderProps) {
             }`}
           >
             <Phone className="h-5 w-5" />
-            011-827-7441
+            <span className="hidden md:inline">011-827-7441</span>
           </a>
 
           <Button 

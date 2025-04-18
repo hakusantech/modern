@@ -288,9 +288,9 @@ export function ContactForm() {
                   </label>
                   <p className="text-gray-500">
                     個人情報の取り扱いについては、
-                    <a href="#" className="text-primary-600 hover:text-primary-800 underline">
+                    <span className="text-primary-600">
                       プライバシーポリシー
-                    </a>
+                    </span>
                     をご確認ください。
                   </p>
                   {errors.privacyPolicy && <p className="mt-1 text-sm text-red-500">{errors.privacyPolicy}</p>}
