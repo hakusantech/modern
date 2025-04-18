@@ -59,7 +59,7 @@ export function Header({ currentPath = "/" }: HeaderProps) {
               alt="CleanNest Hokkaido"
               width={240}
               height={80}
-              className="h-16 w-auto"
+              className="h-20 w-auto"
             />
           </Link>
         </div>
@@ -74,10 +74,10 @@ export function Header({ currentPath = "/" }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-4">
-          {/* 電話番号 (PC表示のみ) */}
+          {/* 電話番号 (常に表示) */}
           <a 
             href="tel:011-827-7441" 
-            className={`hidden md:flex items-center gap-2 text-lg font-medium text-gold-500 hover:text-gold-600 hover:scale-105 transition-all duration-200 ${
+            className={`flex items-center gap-2 text-lg font-medium text-gold-500 hover:text-gold-600 hover:scale-105 transition-all duration-200 ${
               scrolled ? 'text-gold-600' : 'text-gold-500'
             }`}
           >
