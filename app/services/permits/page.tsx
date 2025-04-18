@@ -281,9 +281,9 @@ export const PermitsPage = () => (
                 <div className="w-20 h-20 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 flex items-center justify-center shadow-lg shadow-gold-300/20 z-10">
                   <step.icon className="h-10 w-10 text-white" />
                 </div>
-                <div className="mt-4 flex items-center gap-2">
-                  <Calendar className="h-5 w-5 text-gold-500" />
-                  <span className="text-lg font-medium text-gray-600">{step.duration}</span>
+                <div className="mt-4 flex items-center gap-2 w-full">
+                  <Calendar className="h-5 w-5 text-gold-500 flex-shrink-0" />
+                  <span className="text-lg font-medium text-gray-600 whitespace-nowrap">{step.duration}</span>
                 </div>
               </div>
 
