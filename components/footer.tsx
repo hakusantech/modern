@@ -98,13 +98,13 @@ export function Footer() {
         </div>
       </div>
       
-      {/* 中間セクション：サイトマップ - テキスト色調整 */}
+      {/* 中間セクション：サイトマップ - 再構成 */}
       <div className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-              {/* 会社情報 */}
-              <div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+              {/* ロゴ */}
+              <div className="col-span-2 md:col-span-1">
                 <div className="flex items-center gap-3 mb-6">
                   <Image 
                     src="/images/snowflake-logo.png" 
@@ -114,79 +114,75 @@ export function Footer() {
                   />
                   <span className="text-xl font-bold text-white">CleanNest<br/>Hokkaido</span>
                 </div>
-                <p className="text-white mb-6">
-                  札幌を中心に民泊運営代行サービスを提供。
-                  インバウンド対応に特化し、予約管理から清掃まで一括サポートします。
+                <p className="text-sm text-gray-400">
+                  札幌を中心に民泊運営代行サービスを提供。\n                  インバウンド対応に特化し、予約管理から清掃まで一括サポートします。
                 </p>
               </div>
               
-              {/* サービス */}
+              {/* サービス情報 */}
               <div>
-                <h3 className="text-white font-bold text-lg mb-6 border-b border-gold-500/30 pb-2">サービス</h3>
+                <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">サービス情報</h3>
                 <nav className="space-y-3">
                   <Link href="/about" className="block text-gray-300 hover:text-white transition-colors">
                     CleanNest Hokkaidoとは
                   </Link>
-                  <Link href="/services/minpaku" className="block text-gray-300 hover:text-white transition-colors">
-                    民泊運営代行
+                  <Link href="/services" className="block text-gray-300 hover:text-white transition-colors">
+                    民泊代行サービス一覧
+                  </Link>
+                  <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors">
+                    取材申込みはこちら
                   </Link>
                 </nav>
               </div>
               
-              {/* 会社情報 */}
+              {/* 運営会社情報 */}
               <div>
-                <h3 className="text-white font-bold text-lg mb-6 border-b border-gold-500/30 pb-2">会社情報</h3>
+                <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">運営会社情報</h3>
                 <nav className="space-y-3">
-                  <Link href="/about" className="block text-gray-300 hover:text-white transition-colors">
-                    CleanNest Hokkaidoとは
-                  </Link>
-                  <Link href="/plans" className="block text-gray-300 hover:text-white transition-colors">
-                    料金プラン
-                  </Link>
-                  <Link href="/owner-recruitment" className="block text-gray-300 hover:text-white transition-colors">
-                    オーナー様募集
-                  </Link>
+                  <a 
+                    href="https://www.ehpcorp.net/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                  >
+                    運営会社 (株)EHP
+                    <ExternalLink className="ml-1 h-3 w-3" />
+                  </a>
+                  <a 
+                    href="https://www.ehpcorp.net/info" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                  >
+                    会社概要
+                    <ExternalLink className="ml-1 h-3 w-3" />
+                  </a>
                   <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors">
                     お問い合わせ
                   </Link>
-                  <a 
-                    href="https://www.mlit.go.jp/kankocho/minpaku/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center text-gray-300 hover:text-white transition-colors pt-2 border-t border-gray-700/50 mt-3"
-                  >
-                    民泊制度総合サイト (観光庁)
-                    <ExternalLink className="ml-1 h-3 w-3" />
-                  </a>
                 </nav>
               </div>
               
               {/* 関連情報 */}
               <div>
-                <h3 className="text-white font-bold text-lg mb-6 border-b border-gold-500/30 pb-2">関連情報</h3>
+                <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">関連情報</h3>
                 <nav className="space-y-3">
-                  <Link href="/privacy-policy" className="block text-gray-300 hover:text-white transition-colors">
-                    プライバシーポリシー
-                  </Link>
-                  <Link href="/terms" className="block text-gray-300 hover:text-white transition-colors">
-                    利用規約
-                  </Link>
                   <a 
-                    href="https://www.mlit.go.jp/kankocho/minpaku/overview/minpaku/law1.html" 
+                    href="#" // TODO: 北海道民泊ポータルサイトの実際のURLを追加
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center text-gray-300 hover:text-white transition-colors"
                   >
-                    住宅宿泊事業法について
+                    北海道民泊ポータルサイト
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
                   <a 
-                    href="https://www.jnto.go.jp/ja/" 
+                    href="https://www.mlit.go.jp/kankocho/minpaku/" // 民泊制度ポータルサイトのURL
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center text-gray-300 hover:text-white transition-colors"
                   >
-                    日本政府観光局
+                    民泊制度ポータルサイト
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
                 </nav>
@@ -196,12 +192,22 @@ export function Footer() {
         </div>
       </div>
       
-      {/* コピーライト - テキスト色調整 */}
-      <div className="py-6 text-center">
-        <div className="container mx-auto px-4">
-          <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} 株式会社EHP All Rights Reserved.
-          </p>
+      {/* コピーライトとポリシーリンク */}
+      <div className="border-t border-gray-700/50 py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-400 text-center md:text-left">
+              &copy; {new Date().getFullYear()} 株式会社EHP All Rights Reserved.
+            </p>
+            <nav className="flex gap-4 text-sm">
+              <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
+                プライバシーポリシー
+              </Link>
+              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+                利用規約
+              </Link>
+            </nav>
+          </div>
         </div>
       </div>
     </footer>
