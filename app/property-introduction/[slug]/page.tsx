@@ -226,12 +226,9 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
             {/* 関連物件 */}
             <div className="border rounded-lg overflow-hidden">
               <div className="bg-muted p-4">
-                <h3 className="text-lg font-bold flex items-center gap-2">
-                  <Home className="h-5 w-5" />
-                  関連物件
-                </h3>
+                <h3 className="text-lg font-bold">関連物件</h3>
               </div>
-              <div className="p-4 space-y-4">
+              <div className="p-6 space-y-4">
                 <div className="flex gap-3">
                   <div className="relative w-20 h-20 flex-shrink-0">
                     <Image
@@ -242,12 +239,26 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
                     />
                   </div>
                   <div>
-                    <p className=\"text-sm font-medium line-clamp-2\">\n                      【賃貸物件】小樽運河沿い 歴史的建造物の1階テナント\n                    </p>
-                    <p className=\"text-xs text-muted-foreground mt-1\">小樽</p>
+                    <p className="text-sm font-medium line-clamp-2">
+                      【賃貸物件】小樽運河沿い 歴史的建造物の1階テナント
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">小樽</p>
                   </div>
                 </div>
-                <div className=\"flex gap-3\">\n                  <div className=\"relative w-20 h-20 flex-shrink-0\">\n                    <Image\n                      src=\"/placeholder.svg?height=100&width=100\"\n                      alt=\"関連物件\"\n                      fill\n                      className=\"object-cover rounded\"\n                    />\n                  </div>\n                  <div>\n                    <p className=\"text-sm font-medium line-clamp-2\">\n                      【売買物件】ニセコビュープロパティ - 羊蹄山が見える別荘用地\n                    </p>
-                    <p className=\"text-xs text-muted-foreground mt-1\">ニセコ</p>
+                <div className="flex gap-3">
+                  <div className="relative w-20 h-20 flex-shrink-0">
+                    <Image
+                      src="/placeholder.svg?height=100&width=100"
+                      alt="関連物件"
+                      fill
+                      className="object-cover rounded"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium line-clamp-2">
+                      【売買物件】ニセコビュープロパティ - 羊蹄山が見える別荘用地
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">ニセコ</p>
                   </div>
                 </div>
               </div>
