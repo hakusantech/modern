@@ -174,7 +174,7 @@ export function Footer() {
                 <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">関連情報</h3>
                 <nav className="space-y-3">
                   <a 
-                    href="#" // TODO: 北海道民泊ポータルサイトの実際のURLを追加
+                    href="https://www.pref.hokkaido.lg.jp/kz/kkd/minpaku/portal.html"
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center text-gray-300 hover:text-white transition-colors"
@@ -183,7 +183,7 @@ export function Footer() {
                     <ExternalLink className="ml-1 h-3 w-3" />
                   </a>
                   <a 
-                    href="https://www.mlit.go.jp/kankocho/minpaku/" // 民泊制度ポータルサイトのURL
+                    href="https://www.mlit.go.jp/kankocho/minpaku/"
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center text-gray-300 hover:text-white transition-colors"
