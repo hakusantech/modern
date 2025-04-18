@@ -94,11 +94,6 @@ const serviceItems = [
     title: "物件売買＆賃貸契約",
     description: "民泊運営に適した物件の売買・賃貸仲介。法的リスクを回避し、安全な契約締結までトータルサポート。",
     icon: Building
-  },
-  {
-    title: "各種許可申請サポート",
-    description: "住宅宿泊事業法・旅館業法など、複雑な許認可申請を専門スタッフが丁寧にガイド。スムーズな開業を実現。",
-    icon: Shield
   }
 ];
 
@@ -246,14 +241,6 @@ export default function HomePage() {
           </div>
         </div>
         
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="flex items-center space-x-4">
-            <span className="w-2 h-2 bg-gold-500 rounded-full"></span>
-            <span className="w-2 h-2 bg-white/50 rounded-full"></span>
-            <span className="w-2 h-2 bg-white/50 rounded-full"></span>
-          </div>
-        </div>
-        
         {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gold-500/10 to-transparent z-0 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/50 to-transparent z-0 pointer-events-none"></div>
@@ -367,41 +354,35 @@ export default function HomePage() {
       {/* 3. 新着情報（NEWS） */}
       <section className="py-32 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-12">
-            <div>
+          <div className="w-[80%] mx-auto">
+            <div className="mb-12">
               <p className="text-sm uppercase tracking-[0.2em] text-gold-500 mb-2">LATEST NEWS</p>
               <h2 className="text-4xl font-light text-gray-900">News</h2>
             </div>
-            <Link 
-              href="/news" // お知らせ一覧ページへのリンク (現状存在しない場合は後で作成)
-              className="mt-4 sm:mt-0 inline-flex items-center text-black border-b border-gold-500 pb-1 hover:border-gold-600 transition-colors group"
-            >
-              すべてのお知らせを見る
-              <ArrowRight className="ml-2 h-4 w-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
 
-          {news.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {news.slice(0, 3).map((item, index) => (
-                <Link key={index} href={item.link} className="block group">
-                  <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                    <p className="text-sm text-gray-500 mb-2">{item.date}</p>
-                    <h3 className="text-lg font-medium text-gray-900 group-hover:text-gold-600 transition-colors">
-                      {item.title}
-                    </h3>
-                    <div className="mt-4 text-right">
-                      <span className="text-sm text-gold-500 group-hover:underline">詳しく見る</span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 px-6 bg-white rounded-lg shadow-md border border-gray-200">
-              <p className="text-gray-500">ニュース・お知らせは現在準備中です。今しばらくお待ちください。</p>
-                  </div>
-                )}
+            {news.length > 0 ? (
+              <table className="w-full bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                <tbody>
+                  {news.map((item, index) => (
+                    <tr key={index} className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors">
+                      <td className="py-5 px-6 text-sm text-gray-500 w-32">{item.date}</td>
+                      <td className="py-5 px-6">
+                        <Link href={item.link} className="block">
+                          <h3 className="text-lg font-medium text-gray-900 hover:text-gold-600 transition-colors">
+                            {item.title}
+                          </h3>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="text-center py-12 px-6 bg-white rounded-lg shadow-md border border-gray-200">
+                <p className="text-gray-500">ニュース・お知らせは現在準備中です。今しばらくお待ちください。</p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -423,11 +404,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
             {serviceItems.map((service, index) => (
               <div key={index} className="group bg-white rounded-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-gray-100 hover:border-gold-300">
-                <div className="mb-5">
-                  <div className="w-14 h-14 bg-gold-50 rounded-lg flex items-center justify-center mb-5 group-hover:bg-gold-100 transition-colors">
-                    <service.icon className="h-7 w-7 text-gold-500" />
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-gold-50 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:bg-gold-100 transition-colors">
+                    <service.icon className="h-10 w-10 text-gold-500" />
                   </div>
-                  <h3 className="text-xl font-medium text-gray-900 mb-3 group-hover:text-gold-600 transition-colors">{service.title}</h3>
+                  <h3 className="text-2xl font-medium text-gray-900 mb-4 group-hover:text-gold-600 transition-colors">{service.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
                 </div>
               </div>
@@ -498,9 +479,11 @@ export default function HomePage() {
                 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {advantages.map((advantage, index) => (
-              <div key={index} className="border border-gray-200 p-8 hover:border-gold-500 transition-colors">
-                <advantage.icon className="h-8 w-8 text-gold-500 mb-6" />
-                <h3 className="text-xl font-medium text-gray-900 mb-4">{advantage.title}</h3>
+              <div key={index} className="border border-gray-200 p-8 hover:border-gold-500 transition-colors text-center">
+                <div className="flex justify-center mb-6">
+                  <advantage.icon className="h-12 w-12 text-gold-500" />
+                </div>
+                <h3 className="text-2xl font-medium text-gray-900 mb-4">{advantage.title}</h3>
                 <p className="text-gray-600">
                   {advantage.description}
                 </p>
@@ -526,9 +509,9 @@ export default function HomePage() {
           
           {/* プロセスカード - 新デザイン */}
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-8">
               {process.map((step, index) => (
-                <div key={index} className="relative">
+                <div key={index} className="relative mb-8 md:mb-0">
                   {/* 次のステップへの矢印 - モバイルでは表示しない */}
                   {index < process.length - 1 && (
                     <div className="absolute top-24 -right-4 w-8 h-8 transform rotate-45 border-t-2 border-r-2 border-gold-200 z-10 hidden md:block"></div>
@@ -682,13 +665,98 @@ export default function HomePage() {
               </div>
               
               <div className="text-center">
-            <Link 
+                <Link 
                   href="/plans"
                   className="inline-block px-8 py-3 md:px-10 md:py-4 border border-gray-900 text-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-all duration-300 text-base md:text-lg w-full md:w-auto"
-            >
+                >
                   詳細を見る
-            </Link>
+                </Link>
               </div>
+            </div>
+          </div>
+          
+          <div className="mt-16 border border-gold-200 p-6 md:p-10 lg:p-12 hover:border-gold-500 transition-all group bg-white shadow-lg max-w-4xl mx-auto">
+            <div className="text-center mb-8 md:mb-12">
+              <div className="inline-block px-4 py-1 bg-gold-50 text-gold-600 rounded-full mb-4 font-medium">新プラン</div>
+              <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-3">
+                ファミリー・エクスペリエンス<br/>旅館営業プラン
+              </h3>
+              <p className="text-xl text-gold-500 font-medium">初期費用 ¥300,000〜</p>
+            </div>
+            
+            <p className="text-center text-gray-700 mb-8 max-w-2xl mx-auto">
+              家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる旅館施設の運営をサポートします。
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              <div className="bg-gold-50 p-6 rounded-lg">
+                <h4 className="text-lg font-medium text-gray-900 mb-4 text-center">プラン特徴</h4>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">伝統的な旅館スタイルの民泊運営</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">日本文化体験プログラムの提供</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">家族向けアクティビティの企画</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">多言語対応サービス</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gold-50 p-6 rounded-lg">
+                <h4 className="text-lg font-medium text-gray-900 mb-4 text-center">サポート内容</h4>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">旅館業法許可取得サポート</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">和風インテリアデザイン＆設置</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">地域体験プログラムの開発</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">専門チームによる継続サポート</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-center">
+              <Link 
+                href="/plans/ryokan"
+                className="inline-block px-8 py-3 md:px-10 md:py-4 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 text-base md:text-lg shadow-md"
+              >
+                詳細を見る
+              </Link>
             </div>
           </div>
         </div>

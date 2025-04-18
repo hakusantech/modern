@@ -233,7 +233,7 @@ export default function RentalPropertiesPage() {
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-5 w-5 mr-2 text-primary" />
-                  <span>info@cleannest-hokkaido.com.jp</span>
+                  <span>info@cleannest-hokkaido.jp</span>
                 </div>
               </div>
               <Button size="lg" className="mt-4">

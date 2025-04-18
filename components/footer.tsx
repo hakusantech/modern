@@ -44,8 +44,8 @@ export function Footer() {
                     <Mail className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
                       <h3 className="font-medium text-gray-900 mb-1">メールアドレス</h3>
-                      <a href="mailto:info@cleannest-hokkaido.com.jp" className="text-gray-700 hover:text-gold-700 transition-colors">
-                        info@cleannest-hokkaido.com.jp
+                      <a href="mailto:info@cleannest-hokkaido.jp" className="text-gray-700 hover:text-gold-700 transition-colors">
+                        info@cleannest-hokkaido.jp
                       </a>
                     </div>
                   </div>

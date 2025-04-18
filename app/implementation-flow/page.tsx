@@ -181,12 +181,6 @@ export default function ImplementationFlowPage() {
               面倒な許認可申請、日々の予約管理やゲスト対応はすべてプロにお任せ。<br />
               オーナー様は手間なく、安心して民泊運営を始められます。
             </p>
-            <Button className="bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-white font-normal px-8 py-3 h-auto text-base shadow-lg shadow-gold-300/20 hover:shadow-xl hover:shadow-gold-300/30 transition-all duration-300 border-none" asChild>
-              <Link href="/services/minpaku">
-                詳しくはこちら
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>

@@ -79,7 +79,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-gold-400 flex-shrink-0" />
-                <span className="text-sm text-gray-300">info@cleannest-hokkaido.com.jp</span>
+                <span className="text-sm text-gray-300">info@cleannest-hokkaido.jp</span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-gold-400 mt-0.5 flex-shrink-0" />

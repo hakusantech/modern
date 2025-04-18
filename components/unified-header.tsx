@@ -51,7 +51,7 @@ export function UnifiedHeader() {
     { href: "/services", label: "民泊運営代行", hasDropdown: true },
     // { href: "/rental-properties", label: "民泊物件貸出" }, // 一時的に非表示
     // { href: "/property-introduction", label: "民泊物件紹介" }, // 一時的に非表示
-    // { href: "/contact", label: "お問い合わせ" }, // 金色のボタンのみ残すため削除
+    { href: "/contact", label: "お問い合わせ" }, // 金色のボタンから通常のリンクに変更
   ]
 
   // サービスドロップダウン項目
@@ -250,11 +250,14 @@ export function UnifiedHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 relative ${
-                  isActive(item.href) ? "text-primary-300" : "text-text-light hover:text-primary-300 hover:bg-base-50/10"
-                }`}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 relative overflow-hidden",
+                  isActive(item.href)
+                    ? "text-primary-300 bg-base-50/10"
+                    : "text-text-light hover:text-primary-300 hover:bg-base-50/10"
+                )}
               >
-                {item.label}
+                <span>{item.label}</span>
                 {isActive(item.href) && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 rounded-full"></span>
                 )}
@@ -263,115 +266,108 @@ export function UnifiedHeader() {
           )}
         </nav>
 
-        <div className="flex items-center space-x-3 md:space-x-6">
-          {/* お問い合わせボタン */}
-          <div className="hidden md:flex items-center">
-            <Button variant="gold" size="sm" className="text-sm md:text-base py-2 px-4 md:py-2 md:px-5 font-medium shadow-md hover:shadow-lg bg-primary-500 hover:bg-primary-600 text-white" asChild>
-              <Link href="/contact">お問い合わせ</Link>
-            </Button>
+        {/* 右側の要素（電話番号、モバイルメニューボタン） */}
+        <div className="flex items-center space-x-4">
+          {/* 電話番号と営業時間 (Desktop) */}
+          <div className="hidden lg:flex flex-col items-end">
+            <a href="tel:011-827-7441" className="font-semibold text-base text-white hover:text-primary-300 transition-colors">011-827-7441</a>
+            <span className="text-xs text-gray-300 mt-0.5">9:30〜18:30（土日除く）</span>
           </div>
 
           {/* モバイルメニューボタン */}
-          <Sheet>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <button
                 className="lg:hidden p-2 rounded-full text-white hover:bg-base-400 transition-all duration-200 hover:text-primary-300"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={() => setMobileMenuOpen(true)}
                 aria-label={mobileMenuOpen ? "メニューを閉じる" : "メニューを開く"}
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent side="left" className="w-full max-w-xs bg-base-500 p-6 flex flex-col text-text-light border-l-0 border-r border-primary-500/20">
               <SheetHeader>
-                <SheetTitle>メニュー</SheetTitle>
+                <SheetTitle className="text-primary-300">メニュー</SheetTitle>
               </SheetHeader>
-              <div className="text-sm text-muted-foreground py-4">
-                <div className="flex flex-col space-y-2">
-                  {mainNavItems.map((item) => (
-                    <div key={item.href}>
-                      {item.hasDropdown ? (
-                        <>
-                          <Link
-                            href="/services"
-                            className={`block w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
-                              pathname === "/services"
-                                ? "bg-base-300 text-primary-300"
-                                : "text-text-light hover:bg-base-300 hover:text-primary-300"
-                            }`}
-                            onClick={closeMenu}
-                          >
-                            {item.label}
-                          </Link>
-                          <button
-                            className="block w-full text-left px-4 py-2 text-xs text-primary-400 hover:text-primary-500 transition-all duration-200"
-                            onClick={() => setServiceDropdownOpen(!serviceDropdownOpen)}
-                            aria-expanded={serviceDropdownOpen}
-                          >
-                            <span className="flex items-center">
-                              サブメニューを{serviceDropdownOpen ? '閉じる' : '開く'}
-                              <ChevronDown
-                                className={`ml-1 h-3 w-3 transition-transform duration-200 ${
-                                  serviceDropdownOpen ? "rotate-180" : ""
-                                }`}
-                              />
-                            </span>
-                          </button>
-
-                          <AnimatePresence>
-                            {serviceDropdownOpen && (
-                              <motion.div
-                                className="ml-4 mt-1 space-y-1 border-l border-primary-800/20 pl-2"
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                {serviceItems.map((service) => (
-                                  <Link
-                                    key={service.href}
-                                    href={service.href}
-                                    className={`flex items-center px-4 py-3 rounded-md text-sm transition-all duration-200 ${
-                                      isActive(service.href)
-                                        ? "bg-base-300 text-primary-300 font-medium"
-                                        : "text-text-light hover:bg-base-300 hover:text-primary-300"
-                                    }`}
-                                    onClick={closeMenu}
-                                  >
-                                    <span>{service.label}</span>
-                                  </Link>
-                                ))}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </>
-                      ) : (
+              <nav className="mt-6 space-y-1 flex-1 overflow-y-auto">
+                {mainNavItems.map((item) => (
+                  <div key={item.href}>
+                    {item.hasDropdown ? (
+                      <>
                         <Link
-                          href={item.href}
-                          className={`block px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
-                            isActive(item.href)
-                              ? "bg-base-300 text-primary-300"
-                              : "text-text-light hover:bg-base-300 hover:text-primary-300"
+                          href="/services"
+                          className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${
+                            pathname === "/services"
+                              ? "bg-base-400 text-primary-300"
+                              : "hover:bg-base-400 hover:text-primary-300"
                           }`}
                           onClick={closeMenu}
                         >
                           {item.label}
                         </Link>
-                      )}
-                    </div>
-                  ))}
+                        <button
+                          className="block w-full text-left px-4 py-2 text-xs text-primary-400 hover:text-primary-500 transition-all duration-200"
+                          onClick={() => setServiceDropdownOpen(!serviceDropdownOpen)}
+                          aria-expanded={serviceDropdownOpen}
+                        >
+                          <span className="flex items-center">
+                            サブメニューを{serviceDropdownOpen ? '閉じる' : '開く'}
+                            <ChevronDown
+                              className={`ml-1 h-3 w-3 transition-transform duration-200 ${
+                                serviceDropdownOpen ? "rotate-180" : ""
+                              }`}
+                            />
+                          </span>
+                        </button>
 
-                  <div className="pt-3 mt-3 border-t border-primary-800/20 space-y-3">
-                    <Link
-                      href="/contact"
-                      className="flex items-center justify-center px-4 py-3 rounded-md text-sm font-medium bg-primary-500 text-white hover:bg-primary-600 transition-all duration-200 shadow-lg"
-                      onClick={closeMenu}
-                    >
-                      お問い合わせ
-                    </Link>
+                        <AnimatePresence>
+                          {serviceDropdownOpen && (
+                            <motion.div
+                              className="ml-4 mt-1 space-y-1 border-l border-primary-800/20 pl-2"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {serviceItems.map((service) => (
+                                <Link
+                                  key={service.href}
+                                  href={service.href}
+                                  className={`flex items-center px-4 py-3 rounded-md text-sm transition-all duration-200 ${
+                                    isActive(service.href)
+                                      ? "bg-base-400 text-primary-300 font-medium"
+                                      : "hover:bg-base-400 hover:text-primary-300"
+                                  }`}
+                                  onClick={closeMenu}
+                                >
+                                  <span>{service.label}</span>
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${
+                          isActive(item.href)
+                            ? "bg-base-400 text-primary-300"
+                            : "hover:bg-base-400 hover:text-primary-300"
+                        }`}
+                        onClick={closeMenu}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </div>
-                </div>
+                ))}
+              </nav>
+              {/* 電話番号と営業時間 (Mobile) */}
+              <div className="mt-6 pt-4 border-t border-primary-500/20 text-center">
+                 <a href="tel:011-827-7441" className="font-semibold text-base text-white hover:text-primary-300 transition-colors d-block">011-827-7441</a>
+                 <p className="text-sm text-gray-300 mt-1">9:30〜18:30（土日除く）</p>
               </div>
             </SheetContent>
           </Sheet>

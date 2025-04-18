@@ -46,7 +46,8 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-20">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
                         <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
                       </tr>
                     </thead>
@@ -60,26 +61,32 @@ export function PricingTable() {
                       <PricingRow
                         title="企画料*"
                         description="宿泊施設の設計・インバウンド最適化・コンセプト立案"
-                        price="220,000円"
+                        price="150,000円"
                         required={true}
                       />
                       <PricingRow
                         title="許認可申請サポート"
-                        description="住宅宿泊事業法に関する申請を行政書士がサポート（民泊運営には許認可が必須です）"
+                        description="旅館業法に関する申請"
                         price="70,000円〜"
                         required={true}
-                        tooltip="行政書士による申請代行費用です。事案により変動する場合があります。"
+                        tooltip="行政書士による申請代行費用です。事案により変動する場合があります。必要な場合のみ。"
                       />
                       <PricingRow
                         title="調査代行料"
                         description="申請要件調査・消防法確認など"
                         price="100,000円"
+                        required={false}
+                      />
+                      <PricingRow
+                        title="運営代行料"
+                        description="住宅宿泊管理業者として宿泊施設を管理運用する運営代行料。宿泊売上代金に対して一律20％を申し受けます（※OTA費用は別途必要）"
+                        price="売上の20%"
                         required={true}
                       />
                       <PricingRow
                         title="家具家電・什器備品 設置"
                         description="コンセプトに合わせた家具家電・什器備品の選定・購入・設置（設置コスト含む）"
-                        price="別途見積"
+                        price="100万円"
                         required={true}
                         tooltip="物件規模やコンセプトにより変動します。ご予算に応じた提案も可能です。"
                       />
@@ -107,7 +114,7 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={true}
+                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
@@ -135,17 +142,28 @@ export function PricingTable() {
                         required={true}
                       />
                       <PricingRow
+                        title="鍵管理システム"
+                        description="スマートロックおよび物理鍵の管理システム"
+                        price="1,000円"
+                        required={true}
+                      />
+                      <PricingRow
+                        title="自動チェックインシステム"
+                        description="ゲスト向け自動チェックインおよび施設案内システム"
+                        price="2,000円"
+                        required={true}
+                      />
+                      <PricingRow
                         title="ビデオ通話"
-                        description="セルフチェックイン時の本人確認補助（キーチェックイン時など）"
-                        price="5,000円"
-                        required={false}
-                        tooltip="旅館業法では必須ですが、民泊では運営形態により任意です。キーステーション利用時の遠隔確認などにも。"
+                        description="リモートチェックインおよびゲストサポート用ビデオ通話システム"
+                        price="3,000円"
+                        required={true}
                       />
                       <PricingRow
                         title="スマートロックシステム連携"
                         description="スマートロックシステム(OPELO等)の月額利用料"
                         price="300円/部屋"
-                        required={true}
+                        required={false}
                       />
 
                       {/* オプション費用セクション */}
@@ -206,7 +224,8 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-20">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
                         <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
                       </tr>
                     </thead>
@@ -220,16 +239,10 @@ export function PricingTable() {
                       <PricingRow
                         title="企画料*"
                         description="宿泊施設の設計・インバウンド最適化・コンセプト立案"
-                        price="220,000円"
+                        price="300,000円"
                         required={true}
                       />
-                      <PricingRow
-                        title="許認可申請サポート"
-                        description="住宅宿泊事業法に関する申請を行政書士がサポート（民泊運営には許認可が必須です）"
-                        price="70,000円〜"
-                        required={true}
-                        tooltip="行政書士による申請代行費用です。事案により変動する場合があります。"
-                      />
+                      
                       <PricingRow
                         title="調査代行料"
                         description="申請要件調査・消防法確認など"
@@ -272,7 +285,7 @@ export function PricingTable() {
                       <PricingRow
                         title="システム連携設定"
                         description="旅館業法対応のための追加システム連携（施設単位）"
-                        price="10,000円"
+                        price="50,000円"
                         required={true}
                         tooltip="旅館業営業に必要な帳簿管理システム等との連携設定です。"
                       />
@@ -280,7 +293,7 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={true}
+                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
@@ -308,17 +321,28 @@ export function PricingTable() {
                         required={true}
                       />
                       <PricingRow
-                        title="ビデオ通話チェックイン"
-                        description="本人確認のためのビデオ通話（旅館業法必須）"
-                        price="5,000円"
+                        title="鍵管理システム"
+                        description="スマートロックおよび物理鍵の管理システム"
+                        price="1,000円"
                         required={true}
-                        tooltip="旅館業法では対面またはそれに準ずる本人確認が必須です。"
+                      />
+                      <PricingRow
+                        title="自動チェックインシステム"
+                        description="ゲスト向け自動チェックインおよび施設案内システム"
+                        price="2,000円"
+                        required={true}
+                      />
+                      <PricingRow
+                        title="ビデオ通話"
+                        description="リモートチェックインおよびゲストサポート用ビデオ通話システム"
+                        price="3,000円"
+                        required={true}
                       />
                       <PricingRow
                         title="スマートロックシステム連携"
                         description="スマートロックシステム(OPELO等)の月額利用料"
                         price="300円/部屋"
-                        required={true}
+                        required={false}
                       />
 
                       {/* オプション費用セクション */}
@@ -379,7 +403,8 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-20">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
                         <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
                       </tr>
                     </thead>
@@ -393,7 +418,7 @@ export function PricingTable() {
                       <PricingRow
                         title="企画料*"
                         description="ワークスペース設計・ビジネス利用最適化"
-                        price="170,000円"
+                        price="100,000円"
                         required={true}
                       />
                       <PricingRow
@@ -407,7 +432,7 @@ export function PricingTable() {
                         title="調査代行料"
                         description="申請要件調査・消防法確認など"
                         price="100,000円"
-                        required={true}
+                        required={false}
                       />
                       <PricingRow
                         title="家具家電・什器備品 設置"
@@ -440,12 +465,12 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={true}
+                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
                         description="ゲスト用スマートロック連携デバイス（物理キー不要、キーステーション利用にも対応）"
-                        price="30,000円"
+                        price="別途見積"
                         required={true}
                       />
 
@@ -468,17 +493,10 @@ export function PricingTable() {
                         required={true}
                       />
                       <PricingRow
-                        title="ビデオ通話"
-                        description="セルフチェックイン時の本人確認補助（キーチェックイン時など）"
-                        price="5,000円"
-                        required={false}
-                        tooltip="旅館業法では必須ですが、民泊では運営形態により任意です。キーステーション利用時の遠隔確認などにも。"
-                      />
-                      <PricingRow
                         title="スマートロックシステム連携"
                         description="スマートロックシステム(OPELO等)の月額利用料"
                         price="300円/部屋"
-                        required={true}
+                        required={false}
                       />
 
                       {/* オプション費用 */}
@@ -539,7 +557,8 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-20">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
                         <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
                       </tr>
                     </thead>
@@ -553,21 +572,15 @@ export function PricingTable() {
                       <PricingRow
                         title="企画料*"
                         description="ワークスペース設計・ビジネス利用最適化"
-                        price="170,000円"
+                        price="250,000円"
                         required={true}
                       />
-                      <PricingRow
-                        title="許認可申請サポート"
-                        description="住宅宿泊事業法に関する申請を行政書士がサポート（民泊運営には許認可が必須です）"
-                        price="70,000円〜"
-                        required={true}
-                        tooltip="行政書士による申請代行費用です。事案により変動する場合があります。"
-                      />
+                      
                       <PricingRow
                         title="調査代行料"
                         description="申請要件調査・消防法確認など"
                         price="100,000円"
-                        required={true}
+                        required={false}
                       />
                       <PricingRow
                         title="運営代行料"
@@ -605,7 +618,7 @@ export function PricingTable() {
                       <PricingRow
                         title="システム連携設定"
                         description="旅館業法対応のための追加システム連携（施設単位）"
-                        price="10,000円"
+                        price="50,000円"
                         required={true}
                         tooltip="旅館業営業に必要な帳簿管理システム等との連携設定です。"
                       />
@@ -613,7 +626,7 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={true}
+                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
@@ -641,17 +654,28 @@ export function PricingTable() {
                         required={true}
                       />
                       <PricingRow
-                        title="ビデオ通話チェックイン"
-                        description="本人確認のためのビデオ通話（旅館業法必須）"
-                        price="5,000円"
+                        title="鍵管理システム"
+                        description="スマートロックおよび物理鍵の管理システム"
+                        price="1,000円"
                         required={true}
-                        tooltip="旅館業法では対面またはそれに準ずる本人確認が必須です。"
+                      />
+                      <PricingRow
+                        title="自動チェックインシステム"
+                        description="ゲスト向け自動チェックインおよび施設案内システム"
+                        price="2,000円"
+                        required={true}
+                      />
+                      <PricingRow
+                        title="ビデオ通話"
+                        description="リモートチェックインおよびゲストサポート用ビデオ通話システム"
+                        price="3,000円"
+                        required={true}
                       />
                       <PricingRow
                         title="スマートロックシステム連携"
                         description="スマートロックシステム(OPELO等)の月額利用料"
                         price="300円/部屋"
-                        required={true}
+                        required={false}
                       />
 
                       {/* オプション費用 */}
@@ -728,8 +752,9 @@ function PricingRow({
       </td>
       <td className="py-3 px-2 sm:px-4 text-center">
         {required === true && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
-        {required === false && <XCircle className="h-5 w-5 text-red-400 mx-auto" />}
-        {required === undefined && <span className="text-gray-400">-</span>}
+      </td>
+      <td className="py-3 px-2 sm:px-4 text-center">
+        {required === false && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
       </td>
       <td className="py-3 px-2 sm:px-4 text-right font-medium text-gray-700">{price}</td>
     </tr>

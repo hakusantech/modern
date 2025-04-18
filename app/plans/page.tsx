@@ -5,6 +5,7 @@ import { PricingTable } from "./pricing-table"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { PenTool, Search, Settings, HomeIcon, ShoppingBag, Server, Tablet, Lock, Video, CalendarDays, CreditCard, Phone } from "lucide-react"
+import PricingSimulator from "./price-simulator"
 
 // アイコンマッピング
 const iconMap = {
@@ -190,30 +191,6 @@ export default function PlansPage() {
           </div>
         </section>
 
-        {/* シミュレーターセクション */}
-        <section className="py-20 bg-gray-50">
-          <div className="container">
-            <div className="text-center mb-12">
-              <Badge variant="ice" className="mb-4">料金シミュレーション</Badge>
-              <h2 className="text-3xl font-light mb-3 text-gray-900">料金シミュレーター</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-                お客様の条件に合わせた概算料金をシミュレーションできます。
-                詳細なお見積りは無料相談で承ります。
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-gold-500 hover:bg-gold-600 text-white shadow-md"
-                asChild
-              >
-                <Link href="https://v0-fe-plan-pricing-8dv2bx.vercel.app/" target="_blank" rel="noopener noreferrer">
-                  料金シミュレーターを開く
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-20 bg-white relative overflow-hidden">
           <div className="container relative">
@@ -234,6 +211,20 @@ export default function PlansPage() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </section>
+
+        {/* 料金シミュレーターセクション */}
+        <section className="py-20 bg-gray-50">
+          <div className="container">
+            <div className="text-center mb-12">
+              <Badge variant="ice" className="mb-4">料金シミュレーション</Badge>
+              <h2 className="text-3xl font-light mb-3 text-gray-900">料金シミュレーター</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+                プランと営業形態による費用をシミュレーションできます
+              </p>
+              <PricingSimulator />
+            </div>
           </div>
         </section>
       </main>

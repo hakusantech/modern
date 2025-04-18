@@ -21,6 +21,38 @@ type FormErrors = {
   [key in keyof FormData]?: string
 }
 
+// サーバーアクションを作成
+async function submitContactForm(formData: FormData) {
+  try {
+    // フォームデータを処理
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || '',
+        inquiryType: formData.inquiryType,
+        message: formData.message,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('サーバーへの送信に失敗しました');
+    }
+
+    const data = await response.json();
+
+    // 成功したレスポンスを返す
+    return { success: true };
+  } catch (error) {
+    console.error('送信エラー:', error);
+    return { success: false, error: '送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。' };
+  }
+}
+
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -69,6 +101,14 @@ export function ContactForm() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     setFormData((prev) => ({ ...prev, attachments: files }));
+    
+    // ファイル名を保存
+    const fileNames = files ? Array.from(files).map(file => file.name) : [];
+    setAttachedFileNames(fileNames);
+  }
+
+  const validateForm = () => {
+    const newErrors: FormErrors = {}
 
     if (!formData.name.trim()) {
       newErrors.name = "お名前を入力してください"
@@ -107,23 +147,28 @@ export function ContactForm() {
     setSubmitError(null)
 
     try {
-      // 実際のAPIエンドポイントに置き換える
-      // ここではデモのため、タイムアウトを使用
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // 送信成功
-      setIsSubmitted(true)
-      if (formRef.current) {
-        formRef.current.reset()
+      // 実際のAPIエンドポイントを呼び出す
+      const result = await submitContactForm(formData);
+      
+      if (result.success) {
+        // 送信成功
+        setIsSubmitted(true)
+        if (formRef.current) {
+          formRef.current.reset()
+        }
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          inquiryType: "",
+          message: "",
+          privacyPolicy: false,
+        })
+        setAttachedFileNames([]);
+      } else {
+        // エラーメッセージを設定
+        setSubmitError(result.error || "送信に失敗しました。もう一度お試しください。");
       }
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        inquiryType: "",
-        message: "",
-        privacyPolicy: false,
-      })
     } catch (error) {
       console.error("送信エラー:", error)
       setSubmitError("送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。")
@@ -149,14 +194,14 @@ export function ContactForm() {
             exit={{ opacity: 0, y: -20 }}
             className="p-8 flex flex-col items-center justify-center text-center"
           >
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-              <CheckCircle className="w-10 h-10 text-primary-600" />
+            <div className="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center mb-6">
+              <CheckCircle className="w-10 h-10 text-gold-600" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">お問い合わせありがとうございます</h2>
             <p className="text-gray-600 mb-8 max-w-md">
               内容を確認次第、担当者よりご連絡いたします。通常2営業日以内にご返信いたしますので、しばらくお待ちください。
             </p>
-            <Button onClick={resetForm} className="bg-primary-600 hover:bg-primary-700 text-white">
+            <Button onClick={resetForm} className="bg-gold-600 hover:bg-gold-700 text-white">
               <ArrowLeft className="mr-2 h-4 w-4" />
               フォームに戻る
             </Button>
@@ -191,7 +236,7 @@ export function ContactForm() {
                   placeholder="山田 太郎"
                   className={`w-full px-4 py-2 bg-white border ${
                     errors.name ? "border-red-500" : "border-gray-300"
-                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
+                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-colors`}
                 />
                 {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
               </div>
@@ -209,7 +254,7 @@ export function ContactForm() {
                   placeholder="example@email.com"
                   className={`w-full px-4 py-2 bg-white border ${
                     errors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
+                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-colors`}
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
               </div>
@@ -225,7 +270,7 @@ export function ContactForm() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="090-1234-5678"
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-colors"
                 />
               </div>
 
@@ -240,7 +285,7 @@ export function ContactForm() {
                   onChange={handleChange}
                   className={`w-full px-4 py-2 bg-white border ${
                     errors.inquiryType ? "border-red-500" : "border-gray-300"
-                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors appearance-none`}
+                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-colors appearance-none`}
                 >
                   {inquiryTypes.map((type) => (
                     <option key={type.value} value={type.value}>
@@ -264,7 +309,7 @@ export function ContactForm() {
                   placeholder="お問い合わせ内容をご記入ください"
                   className={`w-full px-4 py-2 bg-white border ${
                     errors.message ? "border-red-500" : "border-gray-300"
-                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none`}
+                  } rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-colors resize-none`}
                 ></textarea>
                 {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
               </div>
@@ -277,7 +322,7 @@ export function ContactForm() {
                     type="checkbox"
                     checked={formData.privacyPolicy}
                     onChange={handleCheckboxChange}
-                    className={`w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500 ${
+                    className={`w-4 h-4 rounded border-gray-300 text-gold-600 focus:ring-gold-500 ${
                       errors.privacyPolicy ? "border-red-500" : ""
                     }`}
                   />
@@ -288,9 +333,9 @@ export function ContactForm() {
                   </label>
                   <p className="text-gray-500">
                     個人情報の取り扱いについては、
-                    <span className="text-primary-600">
+                    <a href="/privacy-policy" className="text-gold-600 hover:text-gold-800 underline" target="_blank">
                       プライバシーポリシー
-                    </span>
+                    </a>
                     をご確認ください。
                   </p>
                   {errors.privacyPolicy && <p className="mt-1 text-sm text-red-500">{errors.privacyPolicy}</p>}
@@ -302,7 +347,7 @@ export function ContactForm() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 rounded-md transition-colors flex items-center justify-center"
+                className="w-full bg-gold-600 hover:bg-gold-700 text-white font-medium py-3 rounded-md transition-colors flex items-center justify-center"
               >
                 {isSubmitting ? (
                   <>

@@ -191,7 +191,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
                   <Mail className="h-5 w-5 text-primary" />
                   <div>
                     <div className="text-sm text-muted-foreground">メール</div>
-                    <div className="font-bold">info@cleannest-hokkaido.com.jp</div>
+                    <div className="font-bold">info@cleannest-hokkaido.jp</div>
                   </div>
                 </div>
                 <Button className="w-full">お問い合わせフォーム</Button>

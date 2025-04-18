@@ -265,41 +265,31 @@ export const PermitsPage = () => (
 
         <div className="space-y-16 max-w-5xl mx-auto">
           {steps.map((step, index) => (
-            <div
-              key={step.title}
-              className={`relative md:grid md:grid-cols-[auto,1fr] md:gap-8 ${
-                index < steps.length - 1 ? "pb-16" : ""
-              }`}
-            >
-              {/* 縦ライン（最後以外） */}
-              {index < steps.length - 1 && (
-                <div className="absolute left-10 top-10 bottom-16 w-px bg-gold-200" />
-              )}
-
-              {/* -------- アイコン列 -------- */}
-              <div className="flex flex-col items-center flex-none md:w-20">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 flex items-center justify-center shadow-lg shadow-gold-300/20 z-10">
-                  <step.icon className="h-10 w-10 text-white" />
+            <div key={step.title} className="relative">
+              <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 flex items-center justify-center shadow-lg shadow-gold-300/20">
+                    <step.icon className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 w-full">
+                    <Calendar className="h-5 w-5 text-gold-500 flex-shrink-0" />
+                    <span className="text-lg font-medium text-gray-600 whitespace-nowrap">{step.duration}</span>
+                  </div>
                 </div>
-                <div className="mt-4 flex items-center gap-2 w-full">
-                  <Calendar className="h-5 w-5 text-gold-500 flex-shrink-0" />
-                  <span className="text-lg font-medium text-gray-600 whitespace-nowrap">{step.duration}</span>
-                </div>
-              </div>
 
-              {/* -------- カード本体 -------- */}
-              <div className="bg-white rounded-lg shadow-md border border-gold-100 p-6 md:p-8">
-                <h3 className="text-xl font-medium text-gray-900 mb-2">
-                  {index + 1}. {step.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{step.description}</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {step.points.map((point) => (
-                    <div key={point} className="flex items-start">
-                      <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">{point}</span>
-                    </div>
-                  ))}
+                <div className="bg-white rounded-lg shadow-md border border-gold-100 p-6 md:p-8">
+                  <h3 className="text-xl font-medium text-gray-900 mb-2">
+                    {index + 1}. {step.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{step.description}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {step.points.map((point) => (
+                      <div key={point} className="flex items-start">
+                        <Check className="h-4 w-4 text-gold-500 mr-2 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">{point}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
