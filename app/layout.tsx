@@ -82,7 +82,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   verification: {
-    google: "google-site-verification-code", // Googleサーチコンソール用の実際のコードに置き換えてください
+    google: "7wjuzirx-E_57wKdFQm1AvCVc1p10USoBq671o5r2HM",
   },
 }
 

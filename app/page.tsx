@@ -150,19 +150,19 @@ const process = [
 // ニュース記事
 const news = [
   {
-    date: "2023.12.15",
-    title: "札幌市における新たな民泊登録制度がスタートしました",
-    link: "/news/sapporo-new-registration"
+    date: "2025.04.20",
+    title: "民泊運営代行サービス『CleanNest Hokkaido』はじめました。",
+    link: "/news/service-launch" // 仮のリンク
   },
   {
-    date: "2023.11.20",
-    title: "インバウンド対応物件の需要が急増中！最新の市場動向レポート",
-    link: "/news/inbound-market-report"
+    date: "2025.04.21",
+    title: "新規住宅宿泊事業者（民泊オーナー）を募集開始します。",
+    link: "/news/owner-recruitment-start" // 仮のリンク
   },
   {
-    date: "2023.10.05",
-    title: "CleanNest Hokkaido、札幌市内で管理物件30棟を達成",
-    link: "/news/property-milestone"
+    date: "2025.04.21",
+    title: "空室対策として民泊転貸可の不動産物件を募集します。",
+    link: "/news/property-recruitment-start" // 仮のリンク
   }
 ];
 
@@ -263,8 +263,8 @@ export default function HomePage() {
             <div className="order-2 lg:order-1">
               <p className="text-sm uppercase tracking-[0.2em] text-gold-500 mb-3">OUR PHILOSOPHY</p>
               <h2 className="text-4xl font-light text-gray-900 mb-10 leading-tight">
-                CleanNest Hokkaidoの<br />
-                <span className="font-medium">3つの価値提供</span>
+                CleanNest Hokkaidoが目指す<br />
+                <span className="font-medium">3つのコアバリュー</span>
               </h2>
               
               <div className="space-y-8">
@@ -273,9 +273,9 @@ export default function HomePage() {
                     <span className="text-gold-500 font-medium">01</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">ゲスト満足度の追求</h3>
-                    <p className="text-gray-600">
-                      世界中からのゲストに対して、言語対応・施設品質・細やかなサービスなど、最高レベルのホスピタリティを提供し、満足度を追求します。
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">不動産収益の最大化と価値向上</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      最先端の運営手法とデータ分析に基づき、オーナー様の不動産が生み出す収益を最大化し、その価値を持続的に高めます。
                     </p>
                   </div>
                 </div>
@@ -285,9 +285,9 @@ export default function HomePage() {
                     <span className="text-gold-500 font-medium">02</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">オーナー資産の最大化</h3>
-                    <p className="text-gray-600">
-                      最先端の運営手法と徹底した市場分析によって、物件の収益を最大化し、長期的な資産価値向上に貢献します。
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">北海道の魅力を世界に発信</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      最高レベルのホスピタリティでゲスト満足度を高め、レビューを通じて北海道の素晴らしい体験を世界中に広めます。
                     </p>
                   </div>
                 </div>
@@ -297,9 +297,9 @@ export default function HomePage() {
                     <span className="text-gold-500 font-medium">03</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">地域・社会への貢献</h3>
-                    <p className="text-gray-600">
-                      北海道の魅力を世界に発信し、インバウンド観光の活性化を通じて地域経済と文化交流の発展に寄与します。
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">インバウンド客を通じた地方創生</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      増加するインバウンド旅行客を呼び込み、地域経済の活性化と文化交流を促進することで、北海道の持続的な発展に貢献します。
                     </p>
                   </div>
                 </div>
@@ -363,30 +363,43 @@ export default function HomePage() {
       </section>
 
       {/* 3. 新着情報（NEWS） */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-32 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-12">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-12">
             <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-gold-500 mb-3">LATEST</p>
+              <p className="text-sm uppercase tracking-[0.2em] text-gold-500 mb-2">LATEST NEWS</p>
               <h2 className="text-4xl font-light text-gray-900">News</h2>
             </div>
             <Link 
-              href="/news"
-              className="inline-flex items-center text-black hover:text-gray-600 transition-colors group"
+              href="/news" // お知らせ一覧ページへのリンク (現状存在しない場合は後で作成)
+              className="mt-4 sm:mt-0 inline-flex items-center text-black border-b border-gold-500 pb-1 hover:border-gold-600 transition-colors group"
             >
-              一覧を見る
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              すべてのお知らせを見る
+              <ArrowRight className="ml-2 h-4 w-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          
-          {/* 準備中表示 */}
-          <div className="flex flex-col items-center justify-center py-16 bg-white/80 border border-gray-100 rounded-lg">
-            <div className="w-16 h-16 rounded-full border-2 border-gold-200 flex items-center justify-center mb-4">
-              <Clock className="h-8 w-8 text-gold-400" />
+
+          {news.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {news.slice(0, 3).map((item, index) => (
+                <Link key={index} href={item.link} className="block group">
+                  <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <p className="text-sm text-gray-500 mb-2">{item.date}</p>
+                    <h3 className="text-lg font-medium text-gray-900 group-hover:text-gold-600 transition-colors">
+                      {item.title}
+                    </h3>
+                    <div className="mt-4 text-right">
+                      <span className="text-sm text-gold-500 group-hover:underline">詳しく見る</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-            <h3 className="text-2xl font-light text-gray-700 mb-2">準備中です</h3>
-            <p className="text-gray-500">ニュース・お知らせは現在準備中です。今しばらくお待ちください。</p>
-          </div>
+          ) : (
+            <div className="text-center py-12 px-6 bg-white rounded-lg shadow-md border border-gray-200">
+              <p className="text-gray-500">ニュース・お知らせは現在準備中です。今しばらくお待ちください。</p>
+            </div>
+          )}
         </div>
       </section>
 

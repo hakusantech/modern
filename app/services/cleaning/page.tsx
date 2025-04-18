@@ -9,18 +9,18 @@ import { Badge } from "@/components/ui/badge"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "民泊清掃サポートサービス | CleanNest Hokkaido",
-  description: "札幌・北海道でインバウンド対応の民泊清掃サービスを提供。徹底した衛生管理と高品質なサービスでゲストの満足度を高め、高評価レビューの獲得に貢献します。ホテルライクなリネンサプライや水回りの徹底清掃など、専門スタッフがサポートします。",
-  keywords: "民泊清掃,Airbnb清掃,インバウンド,外国人観光客,札幌,北海道,清掃サポート,ターンオーバー,リネン交換,アメニティ補充",
+  title: "民泊・ホテル清掃サポートサービス | CleanNest Hokkaido",
+  description: "札幌・北海道でインバウンド対応の民泊・ホテル清掃サービスを提供。徹底した衛生管理と高品質なサービスでゲストの満足度を高め、高評価レビューの獲得に貢献します。ホテルライクなリネンサプライや水回りの徹底清掃など、専門スタッフがサポートします。",
+  keywords: "民泊清掃,ホテル清掃,Airbnb清掃,インバウンド,外国人観光客,札幌,北海道,清掃サポート,ターンオーバー,リネン交換,アメニティ補充",
   openGraph: {
-    title: "インバウンド対応の高品質民泊清掃サービス | CleanNest Hokkaido",
-    description: "札幌・北海道で外国人観光客向け民泊施設の高品質清掃サービスを提供。5つ星評価獲得のための徹底的な清掃で、オーナー様の運営をサポートします。",
+    title: "インバウンド対応の高品質民泊・ホテル清掃サービス | CleanNest Hokkaido",
+    description: "札幌・北海道で外国人観光客向け民泊・ホテル施設の高品質清掃サービスを提供。5つ星評価獲得のための徹底的な清掃で、オーナー様の運営をサポートします。",
     images: [
       {
         url: "/images/cleaning-service.png",
         width: 1200,
         height: 630,
-        alt: "CleanNest Hokkaido - インバウンド対応の民泊清掃サービス",
+        alt: "CleanNest Hokkaido - インバウンド対応の民泊・ホテル清掃サービス",
       },
     ],
   },
@@ -51,7 +51,7 @@ export default function CleaningPage() {
                   </div>
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight">
-                  <span className="text-gold-500 font-normal">5つ星レビュー</span>を獲得する<br />民泊清掃サービス
+                  <span className="text-gold-500 font-normal">5つ星レビュー</span>を獲得する<br />民泊・ホテル清掃サービス
                 </h1>
                 <p className="text-lg md:text-xl text-gray-600 max-w-xl font-light leading-relaxed">
                   ゲスト満足度を最大化する徹底清掃。<br />ホテル品質のリネンと細やかな気配りで、最高の滞在体験を提供し、高評価レビュー獲得を強力にサポートします。
@@ -115,7 +115,7 @@ export default function CleaningPage() {
               徹底した衛生管理と高品質なサービスを実現することで、ゲストの安心・満足を追求し、ホスト様の信頼にも応えていきます。
             </p>
           </div>
-
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* 1-1. ホテルライクなリネンサプライ */}
             <div className="bg-white p-8 rounded-lg shadow-lg border border-gold-100 hover:shadow-xl smooth-transition transform hover:-translate-y-1">
@@ -298,7 +298,7 @@ export default function CleaningPage() {
                 <li><span className="font-semibold text-gold-700 block">定期チェック・補充:</span> トイレットペーパー、洗剤、アメニティ等を欠品前に補充。</li>
                 <li><span className="font-semibold text-gold-700 block">安全な運用:</span> 予備も準備し、ゲストの不便を未然に防止。</li>
               </ul>
-            </div>
+                  </div>
              {/* Card 3-6 */}
             <div className="p-6 bg-white rounded-lg border border-gold-100 shadow-md hover:shadow-lg smooth-transition transform hover:-translate-y-1 text-center" style={{ animationDelay: '0.5s' }}>
                <div className="flex justify-center mb-4">
@@ -309,7 +309,7 @@ export default function CleaningPage() {
               <h4 className="font-medium text-gray-800 mb-3 text-lg">整理整頓</h4>
               <ul className="list-none space-y-2 text-gray-600 text-sm leading-relaxed">
                 <li><span className="font-semibold text-gold-700 block">設備・備品の管理:</span> リモコン、カトラリー等を定位置に戻し、整然とした環境を維持。</li>
-              </ul>
+                </ul>
             </div>
           </div>
         </div>
@@ -353,7 +353,7 @@ export default function CleaningPage() {
                       <ul className="list-none space-y-2 text-gray-600 text-sm leading-relaxed">
                         <li><span className="font-semibold text-gold-700">発見時の即時対応:</span> 状況を写真撮影の上、速やかにホスト様へ報告します。</li>
                         <li><span className="font-semibold text-gold-700">補償サポート:</span> ゲストへの請求や保険適用など、迅速な修復・補償対応をサポートします。</li>
-                      </ul>
+                </ul>
                     </div>
                   </div>
                 </div>
@@ -397,17 +397,96 @@ export default function CleaningPage() {
                    <div className="flex justify-center mb-4">
                      <div className="bg-gold-50 p-3 rounded-full ring-2 ring-gold-100">
                       <Award className="h-6 w-6 text-gold-600" />
-                    </div>
+              </div>
                   </div>
                   <h4 className="font-medium text-gray-800 mb-3 text-lg">競争力の強化</h4>
                   <p className="text-gray-600 text-sm leading-relaxed">高評価レビューは競合物件との差別化を促進し、インバウンド旅行客からの支持を獲得します。</p>
                 </div>
-          </div>
+              </div>
         </div>
       </section>
       {/* ----- 清掃品質がもたらす価値 End ----- */}
 
-      {/* ----- 既存のコンテンツは削除します ----- */}
+      {/* 民泊清掃のこだわりセクション */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-light text-gray-900 mb-4">民泊清掃へのこだわり</h2>
+            <p className="text-lg text-gray-600">
+              清掃業務にこだわりを持ち、品質の高いクリーニングサービスを提供することで、
+              ゲストの満足度を向上させます。
+            </p>
+              </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="bg-gray-50 p-8 rounded-lg shadow-sm">
+              <h3 className="text-xl font-medium text-gray-900 mb-4">清掃の基本理念</h3>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <ShieldCheck className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 font-medium">清潔で安全な空間の提供</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      ゲストに清潔で安全な空間を提供することで、快適な滞在と高評価を実現します。
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckSquare className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 font-medium">細部へのこだわり</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      小さな汚れや傷も見逃さない細部へのこだわりが、高品質な清掃サービスの基本です。
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <Award className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 font-medium">プロフェッショナリズム</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      専門的な知識と経験を持つスタッフによる、一貫した高品質のサービスを提供します。
+                    </p>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+            <div className="bg-gray-50 p-8 rounded-lg shadow-sm">
+              <h3 className="text-xl font-medium text-gray-900 mb-4">清掃のプロセス</h3>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <Camera className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 font-medium">ビフォー・アフター記録</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      清掃の前後で写真を撮影し、清掃品質の確認と透明性の確保を行います。
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <FileCheck className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 font-medium">チェックリストの活用</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      詳細なチェックリストに基づいて清掃を実施し、漏れのない徹底した清掃を実現します。
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <MessageSquare className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 font-medium">フィードバックの反映</p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      オーナーやゲストからのフィードバックを積極的に取り入れ、サービス品質の向上に努めます。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* CTAセクション */}
       <section className="py-24 bg-gradient-to-b from-white to-gold-50 relative animate-fade-in-up" style={{ animationDelay: '1.0s' }}>
