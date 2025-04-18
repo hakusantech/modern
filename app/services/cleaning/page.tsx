@@ -65,7 +65,7 @@ export default function CleaningPage() {
                 </div>
                 <div className="flex items-start">
                   <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
-                  <span className="text-gray-700">清掃予定のシステム管理</span>
+                  <span className="text-gray-700">清掃業務のシステム化</span>
                 </div>
                 <div className="flex items-start">
                   <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
@@ -179,12 +179,12 @@ export default function CleaningPage() {
       </section>
       {/* ----- CleanNest Hokkaidoのこだわり End ----- */}
 
-      {/* ----- 清掃予定のシステム管理 Start ----- */}
+      {/* ----- 清掃業務のシステム化 Start ----- */}
       <section className="py-24 bg-white animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4 tracking-tight">
-              2. <span className="text-gold-500 font-normal">清掃予定のシステム管理</span>
+              2. <span className="text-gold-500 font-normal">清掃業務のシステム化</span>
             </h2>
             {/* <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
               デジタル管理で効率化と信頼性を確保します。
@@ -224,7 +224,7 @@ export default function CleaningPage() {
           </div>
         </div>
       </section>
-      {/* ----- 清掃予定のシステム管理 End ----- */}
+      {/* ----- 清掃業務のシステム化 End ----- */}
 
       {/* ----- 民泊清掃の基本内容 Start ----- */}
       <section className="py-24 bg-gray-50 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
@@ -234,7 +234,8 @@ export default function CleaningPage() {
               3. <span className="text-gold-500 font-normal">民泊清掃の基本内容</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
-              ゲストが体験する空間の質は、細部に宿る美しさによって決まります。私たちの清掃は、単なる清潔さを超え、洗練された滞在体験を演出するための基盤です。
+              ゲストが体験する空間の質は、細部に宿る美しさによって決まります。<br />
+              私たちの清掃は、単なる清潔さを超えて、ゲストが自宅で過ごすような快適さを提供します
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
