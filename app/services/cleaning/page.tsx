@@ -50,7 +50,7 @@ export default function CleaningPage() {
                     <span className="inline-block w-3 h-3 rounded-full bg-gold-400 -mt-1 ml-1"></span>
                   </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 leading-tight">
                   <span className="text-gold-500 font-normal">5つ星レビュー</span>を獲得する<br />民泊・ホテル清掃サービス
                 </h1>
                 <p className="text-lg md:text-xl text-gray-600 max-w-xl font-light leading-relaxed">
@@ -65,7 +65,7 @@ export default function CleaningPage() {
                 </div>
                 <div className="flex items-start">
                   <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
-                  <span className="text-gray-700">水回りの徹底清掃</span>
+                  <span className="text-gray-700">清掃予定のシステム管理</span>
                 </div>
                 <div className="flex items-start">
                   <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
@@ -73,7 +73,11 @@ export default function CleaningPage() {
                 </div>
                 <div className="flex items-start">
                   <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
-                  <span className="text-gray-700">消耗品補充・設備点検</span>
+                  <span className="text-gray-700">消耗品補充</span>
+                </div>
+                <div className="flex items-start">
+                  <Check className="h-5 w-5 text-gold-500 mr-3 mt-1 flex-shrink-0" />
+                  <span className="text-gray-700">ゲストの忘れ物チェック</span>
                 </div>
               </div>
               
@@ -112,7 +116,7 @@ export default function CleaningPage() {
               CleanNest Hokkaidoの<span className="text-gold-500 font-normal">こだわり</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
-              徹底した衛生管理と高品質なサービスを実現することで、ゲストの安心・満足を追求し、ホスト様の信頼にも応えていきます。
+              徹底した衛生管理と高品質なサービスを実現することで、ゲストの安心・満足を追求し、5つ星レビューを獲得します
             </p>
           </div>
           
