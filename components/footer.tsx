@@ -8,24 +8,24 @@ export function Footer() {
     <footer className="relative text-text-light overflow-hidden bg-gray-900">
       {/* 装飾的な要素 */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary-500/30 to-transparent"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-[100px] opacity-50 pointer-events-none"></div>
+      {/* <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-[100px] opacity-50 pointer-events-none"></div> */}
       
       {/* 上部セクション：お問い合わせと地図 */}
       <div className="relative pt-20 pb-16 bg-gray-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-              {/* お問い合わせ情報 */}
-              <div>
+              {/* お問い合わせ情報 - 背景白に変更 */}
+              <div className="bg-white p-8 md:p-10 rounded-lg shadow-lg text-gray-800">
                 <div className="mb-8">
                   <div className="inline-block mb-4">
                     <div className="relative">
-                      <span className="inline-block w-12 h-1 bg-primary-500"></span>
-                      <span className="inline-block w-3 h-3 rounded-full bg-primary-500 -mt-1 ml-1"></span>
+                      <span className="inline-block w-12 h-1 bg-gold-500"></span>
+                      <span className="inline-block w-3 h-3 rounded-full bg-gold-500 -mt-1 ml-1"></span>
                     </div>
                   </div>
-                  <h2 className="text-3xl font-bold mb-4 text-white">お問い合わせ</h2>
-                  <p className="text-text-light/70 max-w-md">
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">お問い合わせ</h2>
+                  <p className="text-gray-600 max-w-md">
                     札幌の民泊運営でお悩みの方はお気軽にご相談ください。
                     専門スタッフが丁寧にサポートいたします。
                   </p>
@@ -33,44 +33,44 @@ export function Footer() {
                 
                 <div className="space-y-5 mb-10">
                   <div className="flex items-start">
-                    <MapPin className="h-5 w-5 text-primary-400 mt-1 mr-3 flex-shrink-0" />
+                    <MapPin className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
-                      <h3 className="font-medium text-white mb-1">所在地</h3>
-                      <p className="text-text-light/70">〒062-0933 北海道札幌市豊平区平岸三条8-6-1 信和リッチ2階</p>
+                      <h3 className="font-medium text-gray-900 mb-1">所在地</h3>
+                      <p className="text-gray-700">〒062-0933 北海道札幌市豊平区平岸三条8-6-1 信和リッチ2階</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
-                    <Mail className="h-5 w-5 text-primary-400 mt-1 mr-3 flex-shrink-0" />
+                    <Mail className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
-                      <h3 className="font-medium text-white mb-1">メールアドレス</h3>
-                      <a href="mailto:info@cleannest-hokkaido.com.jp" className="text-text-light/70 hover:text-primary-300 transition-colors">
+                      <h3 className="font-medium text-gray-900 mb-1">メールアドレス</h3>
+                      <a href="mailto:info@cleannest-hokkaido.com.jp" className="text-gray-700 hover:text-gold-700 transition-colors">
                         info@cleannest-hokkaido.com.jp
                       </a>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
-                    <Phone className="h-5 w-5 text-primary-400 mt-1 mr-3 flex-shrink-0" />
+                    <Phone className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
-                      <h3 className="font-medium text-white mb-1">電話番号</h3>
-                      <a href="tel:011-827-7441" className="text-text-light/70 hover:text-primary-300 transition-colors">
+                      <h3 className="font-medium text-gray-900 mb-1">電話番号</h3>
+                      <a href="tel:011-827-7441" className="text-gray-700 hover:text-gold-700 transition-colors">
                         011-827-7441
                       </a>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
-                    <Clock className="h-5 w-5 text-primary-400 mt-1 mr-3 flex-shrink-0" />
+                    <Clock className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
-                      <h3 className="font-medium text-white mb-1">営業時間</h3>
-                      <p className="text-text-light/70">9:30〜18:30（土日除く）</p>
+                      <h3 className="font-medium text-gray-900 mb-1">営業時間</h3>
+                      <p className="text-gray-700">9:30〜18:30（土日除く）</p>
                     </div>
                   </div>
                 </div>
                 
                 <Button 
-                  className="bg-primary-500 hover:bg-primary-600 text-base-950 px-8 py-6 h-auto rounded-lg font-medium text-lg shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300" 
+                  className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-8 py-6 h-auto rounded-lg font-medium text-lg shadow-lg shadow-gold-400/30 hover:shadow-xl hover:shadow-gold-400/40 transition-all duration-300" 
                   asChild
                 >
                   <Link href="/contact">
@@ -80,18 +80,17 @@ export function Footer() {
                 </Button>
               </div>
               
-              {/* 地図 */}
-              <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl border border-base-300/30">
-                <div className="absolute inset-0 bg-primary-500/10"></div>
+              {/* 地図 - URL更新 */} 
+              <div className="relative h-[400px] lg:h-full rounded-xl overflow-hidden shadow-xl border border-gray-700">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2915.2105498236546!2d141.34456867692078!3d43.06420447104607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0b2974d2c3f903%3A0xa5e2b18cdd4a47a5!2z5pyt5bmM5biC6LGK5bmz5Yy65bmz5bKp5LiJ5p2h!5e0!3m2!1sja!2sjp!4v1709456924980!5m2!1sja!2sjp"
+                  src="https://maps.google.com/maps?q=%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E5%B9%B3%E5%B2%B8%E4%B8%89%E6%9D%A18-6-1%20%E4%BF%A1%E5%92%8C%E3%83%AA%E3%83%83%E3%83%81&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="relative z-10 grayscale-0 contrast-100 mix-blend-normal transition-all duration-500"
+                  className="relative z-10 grayscale contrast-125"
                 />
               </div>
             </div>

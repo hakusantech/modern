@@ -7,7 +7,22 @@ import { ArrowRight, CheckCircle2, Building2, Users, Sparkles, MapPin, BarChart,
 import Image from "next/image"
 import { motion } from "framer-motion"
 
-// Animation variants (Keep these)
+// Enhanced Animation variants
+const heroFadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: "easeOut" } 
+  }
+};
+
+const heroStaggerChildren = {
+  visible: { 
+    transition: { staggerChildren: 0.15, delayChildren: 0.3 } // Stagger children slightly later
+  }
+};
+
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
@@ -24,153 +39,132 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white text-gray-800 antialiased">
 
-      {/* --- NEW CONTENT - START --- */}
+      {/* --- Enhanced Hero Section - START --- */}
       <motion.section
         initial="hidden"
         animate="visible"
-        variants={fadeIn}
-        className="py-24 md:py-32 bg-gray-100"
+        variants={heroStaggerChildren} // Apply stagger to the section
+        className="relative min-h-screen w-full overflow-hidden flex items-center justify-center text-center bg-gray-900"
+      >
+        {/* Background Image - Changed to Hurano */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hurano.png" // Changed background image
+            alt="北海道 富良野の美しい夏景色 - CleanNest Hokkaido"
+            fill
+            priority
+            className="object-cover opacity-40 scale-105" // Slightly increased scale and opacity
+          />
+          {/* Refined Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-white">
+          <div className="max-w-4xl mx-auto">
+            <motion.h1 
+              variants={heroFadeInUp} // Apply enhanced variant
+              className="text-5xl md:text-6xl lg:text-7xl font-light mb-10 leading-tight tracking-tight text-shadow-md"
+            >
+              <span className="text-gold-300">“北海道の魅力”</span>を世界へ。<br />
+              そしてあなたの物件を<br className="md:hidden"/>
+              <span className="font-medium text-white">次の可能性へ。</span>
+            </motion.h1>
+            
+            <motion.div variants={heroFadeInUp} className="space-y-6 text-lg md:text-xl text-gray-200 mb-12 font-light leading-relaxed max-w-3xl mx-auto">
+              <p> 
+                観光地として世界から注目される北海道。
+                その一方で、使われずに眠る物件や空き家が数多く存在しています。
+              </p>
+              <p>
+                CleanNest Hokkaidoは、「北海道の魅力」と「あなたの不動産」に新しい価値を吹き込み、
+                世界中の旅行者を通じた<span className="font-medium text-gold-400">"地方創生"</span>の一翼を担います。
+              </p>
+              <p> 
+                不動産オーナーの皆さまには、ただ貸すだけではない、
+                <span className="font-medium text-gold-400">"資産価値の向上"</span>と<span className="font-medium text-gold-400">"安定した収益最大化"</span>をご提案。
+                そしてその先には、日本の地方を活性化し、次世代へとつなぐ使命があります。
+              </p>
+            </motion.div>
+
+            <motion.div variants={heroFadeInUp} className="mt-16">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white text-lg h-16 px-12 rounded-md shadow-lg hover:shadow-xl transition-all duration-300 border-none transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500 focus:ring-offset-gray-900"
+              >
+                <Link href="/contact">
+                  無料相談はこちら
+                  <ArrowRight className="ml-3 h-5 w-5" />
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+         {/* スクロールインジケーター */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-400 z-10"
+        >
+          <span className="text-xs mb-2 uppercase tracking-widest">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }} // Bounce effect
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ArrowDown className="h-5 w-5 text-gold-400" />
+          </motion.div>
+        </motion.div>
+      </motion.section>
+      {/* --- Enhanced Hero Section - END --- */}
+
+      {/* --- Concept Messages Section - START --- */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={staggerChildren}
+        className="py-24 md:py-32 bg-white"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h1 
-              variants={itemFadeIn} 
-              className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-8 leading-tight"
-            >
-              “北海道の魅力”を世界へ。<br />そして"あなたの物件"を<br className="md:hidden"/>次の可能性へ。
-            </motion.h1>
-            <motion.p 
-              variants={itemFadeIn} 
-              className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed font-light"
-            >
-              観光地として世界から注目される北海道。
-              その一方で、使われずに眠る物件や空き家が数多く存在しています。
-            </motion.p>
-            <motion.p 
-              variants={itemFadeIn} 
-              className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed font-light"
-            >
-              CleanNest Hokkaidoは、「北海道の魅力」と「あなたの不動産」に新しい価値を吹き込み、
-              世界中の旅行者を通じた<span className="font-medium text-gold-600">"地方創生"</span>の一翼を担います。
-            </motion.p>
-            <motion.p 
-              variants={itemFadeIn} 
-              className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed font-light"
-            >
-              不動産オーナーの皆さまには、ただ貸すだけではない、
-              <span className="font-medium text-gold-600">"資産価値の向上"</span>と<span className="font-medium text-gold-600">"安定した収益最大化"</span>をご提案します。
-            </motion.p>
-            <motion.p 
-              variants={itemFadeIn} 
-              className="text-lg md:text-xl text-gray-700 mb-12 leading-relaxed font-light"
-            >
-              そしてその先には、日本の地方を活性化し、次世代へとつなぐ使命があります。
-            </motion.p>
-          </div>
-
           <motion.div 
-            variants={staggerChildren}
-            className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto text-center"
+            variants={fadeIn}
+            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
           >
-            <motion.div variants={itemFadeIn}>
-              <Globe className="h-10 w-10 text-blue-500 mx-auto mb-4"/>
-              <h2 className="text-2xl font-light text-gray-900 mb-4">世界中の旅行者が、<br />地域経済の起爆剤になる。</h2>
-              <p className="text-gray-600 leading-relaxed">
-                私たちは北海道を"訪れる理由"を創り出し、地方に活力をもたらします。インバウンドを通じた地域経済への波及効果を、オーナー様と共に実現します。
-              </p>
-            </motion.div>
-            <motion.div variants={itemFadeIn}>
-              <Building2 className="h-10 w-10 text-green-500 mx-auto mb-4"/>
-              <h2 className="text-2xl font-light text-gray-900 mb-4">空き家が、<br />"世界の宿泊施設"になる。</h2>
-              <p className="text-gray-600 leading-relaxed">
-                清掃、運営、プロモーションのすべてをトータルサポート。不動産の空室リスクを減らし、安定収益化を可能にします。
-              </p>
-            </motion.div>
-            <motion.div variants={itemFadeIn}>
-              <Sparkles className="h-10 w-10 text-gold-500 mx-auto mb-4"/>
-              <h2 className="text-2xl font-light text-gray-900 mb-4">日本の"美しさと快適さ"を<br />世界標準に。</h2>
-              <p className="text-gray-600 leading-relaxed">
-                清潔で快適な空間、安心の無人チェックイン、日本らしいおもてなし。CleanNestが創る宿泊体験は、単なる"宿"を超え、北海道のブランドを世界へ伝えます。
-              </p>
-            </motion.div>
+            {[
+              {
+                icon: Globe,
+                title: "地方創生 × インバウンド",
+                text: "世界中の旅行者が、地域経済の起爆剤になる。私たちは北海道を訪れる理由を創り出し、地方に活力をもたらします。インバウンドを通じた地域経済への波及効果を、オーナー様と共に実現します。"
+              },
+              {
+                icon: TrendingUp, // Changed from Building2 for better fit
+                title: "不動産の収益最大化",
+                text: "空き家が、「世界の宿泊施設」になる。清掃、運営、プロモーションのすべてをトータルサポート。不動産の空室リスクを減らし、安定収益化を可能にします。"
+              },
+              {
+                icon: Sparkles,
+                title: "北海道の価値を世界へ",
+                text: "日本の「美しさと快適さ」を世界標準に。清潔で快適な空間、安心の無人チェックイン、日本らしいおもてなし。CleanNestが創る宿泊体験は、単なる宿を超え、北海道のブランドを世界へ伝えます。"
+              }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                variants={itemFadeIn}
+                className="bg-gray-50 border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
+              >
+                <item.icon className="h-12 w-12 text-gold-500 mb-6"/>
+                <h2 className="text-2xl font-medium text-gray-900 mb-4">{item.title}</h2>
+                <p className="text-gray-600 leading-relaxed flex-grow">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </motion.section>
-      {/* --- NEW CONTENT - END --- */}
-
-      {/* ヒーローセクション */}
-      <section className="relative min-h-screen w-full overflow-hidden flex items-center">
-        {/* 装飾的な背景要素 */}
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src="/images/sapporo-tv-tower-illumination.jpg"
-            alt="CleanNest Hokkaido"
-            fill
-            priority
-            className="object-cover opacity-10 scale-110 blur-sm"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/90" />
-        </div>
-
-        {/* メインコンテンツ */}
-        <div className="relative z-10 container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-5xl mx-auto"
-          >
-            <h1 className="text-6xl md:text-8xl font-light text-gray-900 mb-8 tracking-tight leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-600 to-gold-400 block mb-4">
-                CleanNest
-              </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 block">
-                Hokkaido
-              </span>
-            </h1>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 font-light">
-                  北海道の不動産に
-                  <span className="text-gold-600 font-normal">新しい価値</span>
-                  を。
-                  <br className="hidden md:block" />
-                  世界が認める
-                  <span className="text-gold-600 font-normal">"民泊"</span>
-                  という可能性を。
-                </p>
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gold-500 hover:bg-gold-600 text-white text-lg h-14 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <Link href="/contact">
-                    無料相談を始める
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              </div>
-              <div className="relative h-[300px] md:h-[400px]">
-                <Image
-                  src="/images/sapporo-tv-tower-illumination.jpg"
-                  alt="CleanNest Hokkaido"
-                  fill
-                  className="object-cover rounded-2xl shadow-2xl"
-                />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* スクロールインジケーター */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-400"
-        >
-          <ArrowDown className="h-6 w-6 text-gold-500" />
-        </motion.div>
-      </section>
+      {/* --- Concept Messages Section - END --- */}
 
       {/* ミッションステートメント */}
       <section className="py-32 md:py-40 relative overflow-hidden bg-gray-50">
@@ -410,33 +404,33 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* --- NEW CONCLUDING STATEMENT - START --- */}
-      <motion.section
+      {/* --- FINAL CONCLUDING TEXT - START --- */}
+      <motion.section 
+        className="py-24 md:py-32 bg-gradient-to-t from-gold-100 via-white to-white"
         initial="hidden"
         whileInView="visible"
+        viewport={{ once: true }}
         variants={fadeIn}
-        viewport={{ once: true, amount: 0.5 }}
-        className="py-24 md:py-32 bg-gray-800 text-white"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xl md:text-2xl mb-6 leading-relaxed font-light">
+          <div className="max-w-3xl mx-auto text-center text-gray-700 text-lg md:text-xl leading-relaxed font-light space-y-6">
+            <p>
               CleanNest Hokkaidoは、北海道の不動産と地域の未来に、新しい風を吹き込みます。
             </p>
-            <p className="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed font-light">
+            <p>
               私たちは、使われていない物件を、世界中の旅行者を迎える空間へと再生し、
               オーナー様の資産価値を高めると同時に、北海道の地域活性化に貢献しています。
             </p>
-            <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed font-light">
+            <p className="font-medium text-gold-700">
               "観光"と"収益"と"地方創生"をつなぐ、新しい宿泊事業のかたち。
             </p>
-            <p className="text-2xl md:text-3xl text-gold-400 font-medium">
+            <p>
               それが、CleanNest Hokkaidoの想いです。
             </p>
           </div>
         </div>
       </motion.section>
-      {/* --- NEW CONCLUDING STATEMENT - END --- */}
+      {/* --- FINAL CONCLUDING TEXT - END --- */}
 
     </div>
   )

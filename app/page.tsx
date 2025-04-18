@@ -19,6 +19,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  verification: {
+    google: "7wjuzirx-E_57wKdFQm1AvCVc1p10USoBq671o5r2HM",
+  },
 }
 
 // 自動化サービスの特徴
@@ -273,9 +276,9 @@ export default function HomePage() {
                     <span className="text-gold-500 font-medium">01</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">不動産収益の最大化と価値向上</h3>
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">不動産収益の「最大化」と価値「向上」</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      最先端の運営手法とデータ分析に基づき、オーナー様の不動産が生み出す収益を最大化し、その価値を持続的に高めます。
+                      単なる賃貸収入を超え、民泊運営による<span className="font-semibold text-gray-800">高収益化</span>と、将来的な<span className="font-semibold text-gray-800">不動産価値の向上</span>を実現します。データに基づいた戦略で、オーナー様の資産を最大限に活かします。
                     </p>
                   </div>
                 </div>
@@ -285,9 +288,9 @@ export default function HomePage() {
                     <span className="text-gold-500 font-medium">02</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">北海道の魅力を世界に発信</h3>
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">北海道の魅力を「世界に発信」</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      最高レベルのホスピタリティでゲスト満足度を高め、レビューを通じて北海道の素晴らしい体験を世界中に広めます。
+                      オーナー様の物件が、世界中のゲストにとって北海道の魅力を体験する<span className="font-semibold text-gray-800">特別な拠点</span>となります。最高の滞在体験を提供し、良い口コミを通じて北海道ブランドを高めます。
                     </p>
                   </div>
                 </div>
@@ -297,9 +300,9 @@ export default function HomePage() {
                     <span className="text-gold-500 font-medium">03</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">インバウンド客を通じた地方創生</h3>
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">インバウンド客を通じた「地方創生」</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      増加するインバウンド旅行客を呼び込み、地域経済の活性化と文化交流を促進することで、北海道の持続的な発展に貢献します。
+                      物件の活用が、インバウンド旅行客の誘致と<span className="font-semibold text-gray-800">地域経済の活性化</span>に直結します。オーナー様と共に、北海道の持続可能な未来と発展に貢献します。
                     </p>
                   </div>
                 </div>
@@ -316,47 +319,46 @@ export default function HomePage() {
               </div>
             </div>
             
-            <div className="order-1 lg:order-2 relative">
-              {/* 洗練された写真レイアウト - 改善版 */}
-              <div className="relative">
-                {/* メイン画像 */}
-                <div className="overflow-hidden rounded-lg shadow-xl">
-                  <div className="aspect-[4/3] relative">
-                    <Image 
-                      src="/images/kimono-experience.png"
-                      alt="CleanNest Hokkaido Philosophy"
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-                
-                {/* 重なる小さい画像1 */}
-                <div className="absolute -bottom-10 -right-10 w-2/3 overflow-hidden rounded-lg shadow-lg border-4 border-white">
-                  <div className="aspect-[4/3] relative">
-                    <Image 
-                      src="/images/sapporo-modern-bedroom.png"
-                      alt="Premium Property"
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-                
-                {/* 装飾的な要素 */}
-                <div className="absolute -top-6 -left-6 w-24 h-24 border-2 border-gold-400 rounded-sm z-10"></div>
-                <div className="absolute -top-3 -left-3 w-24 h-24 bg-gold-50 rounded-sm z-0"></div>
+            <div className="order-1 lg:order-2 relative h-[500px] md:h-[600px]">
+              {/* 画像コンテナ - 3つの画像を配置 */}
+              {/* 画像1: 富良野 (メイン、背面) */}
+              <div className="absolute inset-0 overflow-hidden rounded-lg shadow-xl">
+                <Image 
+                  src="/images/hurano.png"
+                  alt="北海道 富良野の美しい風景"
+                  fill
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
-              {/* アクセント画像 - 小さく配置 */}
-              <div className="absolute -bottom-12 -left-12 w-32 h-32 overflow-hidden rounded-lg shadow-lg border-4 border-white hidden md:block">
-                <Image 
-                  src="/images/sapporo-tv-tower-illumination.jpg"
-                  alt="Sapporo Night View"
-                  fill
-                  className="object-cover"
-                />
+              {/* 画像2: スキー (前面、右下) */}
+              <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 lg:-bottom-10 lg:-right-10 w-1/2 md:w-7/12 overflow-hidden rounded-lg shadow-lg border-4 border-white z-10">
+                <div className="aspect-[3/4] relative">
+                  <Image 
+                    src="/images/ski.png"
+                    alt="北海道でのスキー体験"
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
               </div>
+
+              {/* 画像3: 着物 (前面、左下) */}
+               <div className="absolute bottom-16 left-4 md:bottom-24 md:left-8 lg:-bottom-16 lg:-left-12 w-1/3 md:w-5/12 overflow-hidden rounded-lg shadow-lg border-4 border-white z-20">
+                <div className="aspect-[4/3] relative">
+                  <Image 
+                    src="/images/kimono-experience.png"
+                    alt="北海道での着物文化体験"
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+              </div>
+              
+              {/* 装飾的な要素 */}
+              {/* <div className="absolute -top-6 -left-6 w-24 h-24 border-2 border-gold-400 rounded-sm z-10"></div> */}
+              {/* <div className="absolute -top-3 -left-3 w-24 h-24 bg-gold-50 rounded-sm z-0"></div> */}
             </div>
           </div>
         </div>
