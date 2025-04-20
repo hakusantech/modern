@@ -125,13 +125,13 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mb-24"
+            className="mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-extralight text-center tracking-wider">
-              <span className="text-gold-400 font-light">PROCESS</span>
-              <span className="block mt-2 text-white text-4xl md:text-6xl font-thin tracking-tight">課題から価値創造へ</span>
+            <h2 className="text-3xl md:text-4xl font-light text-center tracking-wide">
+              <span className="text-gold-400">PROCESS</span>
+              <span className="block mt-2 text-white text-3xl md:text-5xl font-light">価値創造の流れ</span>
             </h2>
-            <div className="w-16 h-1 bg-gold-500 mx-auto mt-8" />
+            <div className="w-12 h-0.5 bg-gold-500 mx-auto mt-6" />
           </motion.div>
 
           {/* ワークフロー表現 */}
@@ -311,73 +311,23 @@ export default function AboutPage() {
       </motion.section>
       {/* --- Concept Messages Section - END --- */}
 
-      {/* ミッションステートメント */}
-      <section className="py-32 md:py-40 relative overflow-hidden bg-gray-50">
+      {/* ミッションステートメント - 見出しだけに簡略化 */}
+      <section className="py-24 md:py-32 relative overflow-hidden bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl mx-auto text-center"
           >
-            <h2 className="text-4xl md:text-6xl font-light text-center mb-24 text-gray-900">
+            <h2 className="text-4xl md:text-6xl font-light text-gray-900">
               CleanNest Hokkaido が掲げる
               <span className="block mt-4 text-transparent bg-clip-text bg-gradient-to-r from-gold-600 to-gold-400">
                 3つのS
               </span>
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Sustain",
-                  subtitle: "持続可能な運営",
-                  description: "適切な価値で長く続く運用を実現。資産価値の向上と安定した収益を両立します。",
-                  image: "/images/4.png"
-                },
-                {
-                  title: "Sanitary",
-                  subtitle: "清潔な環境",
-                  description: "徹底した清掃と管理で、常に清潔で快適な空間を提供します。",
-                  image: "/images/5.png"
-                },
-                {
-                  title: "Select",
-                  subtitle: "選ばれる品質",
-                  description: "世界中のゲストから信頼され、選ばれ続ける施設品質を維持します。",
-                  image: "/images/6.png"
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className="group"
-                >
-                  <div className="bg-white rounded-2xl p-8 shadow-xl border border-gold-200 hover:border-gold-400 transition-all duration-300 h-full transform hover:-translate-y-2">
-                    <div className="flex flex-col items-center mb-6">
-                      <div className="relative w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-gold-200 shadow-md">
-                        <Image 
-                          src={item.image}
-                          alt={item.subtitle}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <h2 className="text-4xl font-medium text-gold-500">
-                        {item.title}
-                      </h2>
-                    </div>
-                    <h3 className="text-2xl font-medium mb-4 text-gray-900 text-center">{item.subtitle}</h3>
-                    <p className="text-gray-700 leading-relaxed font-light text-lg text-center">
-                      {item.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <div className="w-32 h-0.5 bg-gold-500 mx-auto mt-8 mb-8"></div>
           </motion.div>
         </div>
       </section>
@@ -511,7 +461,7 @@ export default function AboutPage() {
                 {
                   icon: Building2,
                   title: "ワンストップで全てを支援",
-                  description: "物件の企画・収支設計から、家具家電手配、行政対応、OTA集客、清掃・レビュー管理まで。開業から運用・拡大まで、すべて私たちが伴走します。"
+                  description: "企画設計から家具家電手配、行政対応、集客、清掃管理まで。あらゆる場面で確かなサポートを提供し、開業から運営まで伴走します。"
                 },
                 {
                   icon: Users,
@@ -615,25 +565,24 @@ export default function AboutPage() {
 
       {/* --- FINAL CONCLUDING TEXT - ENHANCED VERSION --- */}
       <motion.section 
-        className="py-32 md:py-48 relative overflow-hidden bg-gray-900 text-white"
+        className="py-32 md:py-48 relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeIn}
       >
-        {/* 背景画像 - クリアに表示 */}
+        {/* Remove background image and replace with pure CSS gradient design */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/Xin Chao (3).png"
-            alt="CleanNest Hokkaido 北海道の風景"
-            fill
-            className="object-cover"
-          />
+          {/* Subtle gradient pattern */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 via-black to-gray-800 opacity-80"></div>
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-gold-500/10 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-radial from-gold-500/10 to-transparent"></div>
         </div>
         
-        {/* シンプルな装飾ライン */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gold-500/50" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gold-500/50" />
+        {/* Elegant gold borders */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -646,16 +595,61 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="text-center mb-20"
               >
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-tight tracking-wide text-black bg-white/80 py-6 px-4 rounded-lg shadow-lg [text-shadow:1px_1px_2px_rgba(0,0,0,0.2)]">
-                  CleanNest Hokkaidoは<br className="hidden sm:inline" />
-                  <span className="relative inline-block">
-                    <span className="relative z-10">北海道の不動産と地域の未来に、</span>
-                    <span className="absolute bottom-0 left-0 w-full h-1 bg-gold-500"></span>
-                  </span><br className="hidden sm:inline" />
-                  <span className="text-gold-600 font-bold">新しい価値を創造します。</span>
-                </h2>
+                <div className="px-6 sm:px-10 py-16 sm:py-20 mx-auto max-w-4xl">
+                  <div className="bg-gradient-to-br from-gray-900 to-black p-10 sm:p-16 rounded-3xl shadow-2xl relative overflow-hidden">
+                    {/* Single elegant border with perfect corners */}
+                    <div className="absolute inset-0 rounded-3xl border border-gold-400/50"></div>
+                    
+                    {/* Simple diagonal accent line */}
+                    <div className="absolute top-0 right-0 w-16 h-16">
+                      <div className="w-20 h-0.5 bg-gold-500/50 absolute top-6 right-0 rotate-45 origin-right"></div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16">
+                      <div className="w-20 h-0.5 bg-gold-500/50 absolute bottom-6 left-0 rotate-45 origin-left"></div>
+                    </div>
+                    
+                    <div className="relative z-10">
+                      <div className="space-y-12">
+                        {/* Elegant label */}
+                        <div>
+                          <span className="inline-block px-4 py-1.5 border-b border-gold-500/40 text-gold-300 uppercase tracking-[0.25em] text-xs">Vision Statement</span>
+                        </div>
+                        
+                        {/* Company name with perfect contrast */}
+                        <div className="space-y-1">
+                          <div className="flex items-center justify-center space-x-2">
+                            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gold-300 to-amber-200 bg-clip-text text-transparent leading-none tracking-tight">CleanNest Hokkaido</span>
+                            <span className="text-white text-3xl sm:text-4xl md:text-5xl">は</span>
+                          </div>
+                        </div>
+                        
+                        {/* Clear middle section with improved spacing */}
+                        <div className="text-2xl sm:text-3xl md:text-4xl text-white leading-relaxed tracking-tight">
+                          <span>北海道の</span>
+                          <span className="font-medium text-gold-300 border-b border-gold-400 mx-1">不動産</span>
+                          <span>と</span>
+                          <span className="font-medium text-gold-300 border-b border-gold-400 mx-1">地域の未来</span>
+                          <span>に、</span>
+                        </div>
+                        
+                        {/* Impactful final statement */}
+                        <div className="pt-2">
+                          <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-gold-400 via-amber-300 to-gold-500 bg-clip-text text-transparent leading-tight inline-block">
+                            新しい価値を創造
+                          </div>
+                          <div className="text-white text-2xl sm:text-3xl md:text-4xl mt-2">
+                            します。
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Simple elegant divider */}
+                      <div className="mt-12 w-24 h-px bg-gold-500/50 mx-auto"></div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
               
               {/* 価値提案部分 - シンプル化したカードデザイン */}

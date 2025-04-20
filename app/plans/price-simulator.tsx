@@ -368,7 +368,7 @@ export default function PricingSimulator() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
       <TooltipProvider>
         <Tabs
           defaultValue="fe"
@@ -376,12 +376,18 @@ export default function PricingSimulator() {
           onValueChange={(value) => setPlanType(value as PlanType)}
           className="w-full"
         >
-          <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="fe" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white font-semibold text-base">
-              FEプラン（ファミリー・エクスペリエンス）
+          <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-8">
+            <TabsTrigger 
+              value="fe" 
+              className="data-[state=active]:bg-gold-600 data-[state=active]:text-white font-semibold text-xs sm:text-sm md:text-base py-2 px-1 sm:px-2 md:px-4 truncate"
+            >
+              <span className="hidden sm:inline">FEプラン（</span>ファミリー・エクスペリエンス<span className="hidden sm:inline">）</span>
             </TabsTrigger>
-            <TabsTrigger value="ws" className="data-[state=active]:bg-blue-700 data-[state=active]:text-white font-semibold text-base">
-              WSプラン（ワーカーズ・スマート）
+            <TabsTrigger 
+              value="ws" 
+              className="data-[state=active]:bg-blue-700 data-[state=active]:text-white font-semibold text-xs sm:text-sm md:text-base py-2 px-1 sm:px-2 md:px-4 truncate"
+            >
+              <span className="hidden sm:inline">WSプラン（</span>ワーカーズ・スマート<span className="hidden sm:inline">）</span>
             </TabsTrigger>
           </TabsList>
 
@@ -480,61 +486,61 @@ function SimulatorContent({
   const accentBorder = accentColor === "gold" ? "border-gold-300" : "border-blue-300";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* 入力フォーム */}
       <Card className="bg-white border-gray-300 shadow-md">
-        <CardHeader className="pb-4">
+        <CardHeader className="pb-2 sm:pb-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
             <div>
-              <Badge className={`mb-2 ${accentBgLight} ${accentText} hover:${accentBgMedium} border-none font-medium text-sm`}>
+              <Badge className={`mb-2 ${accentBgLight} ${accentText} hover:${accentBgMedium} border-none font-medium text-xs sm:text-sm`}>
                 {getPlanName()}
               </Badge>
-              <CardTitle className="text-xl sm:text-2xl text-gray-900 font-semibold">料金シミュレーター</CardTitle>
-              <CardDescription className="text-sm sm:text-base text-gray-700 mt-2 font-medium">
+              <CardTitle className="text-lg sm:text-xl md:text-2xl text-gray-900 font-semibold">料金シミュレーター</CardTitle>
+              <CardDescription className="text-xs sm:text-sm md:text-base text-gray-700 mt-1 sm:mt-2 font-medium">
                 必要な情報を入力して、民泊営業と旅館営業の費用を比較します
               </CardDescription>
             </div>
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6">
           {/* 部屋数と想定売上 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="roomCount" className="text-black font-bold text-base">部屋数</Label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="roomCount" className="text-black font-bold text-sm sm:text-base">部屋数</Label>
               <Input
                 id="roomCount"
                 type="number"
                 min="1"
                 value={roomCount}
                 onChange={(e) => setRoomCount(Number.parseInt(e.target.value) || 1)}
-                className="border-2 border-gray-500 focus:border-gray-900 bg-white text-black font-medium text-lg"
+                className="border-2 border-gray-500 focus:border-gray-900 bg-white text-black font-medium text-base sm:text-lg h-10 sm:h-12"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="revenue" className="text-black font-bold text-base">月間想定売上（円）</Label>
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="revenue" className="text-black font-bold text-sm sm:text-base">月間想定売上（円）</Label>
               <Input
                 id="revenue"
                 type="number"
                 min="0"
                 value={estimatedRevenue}
                 onChange={(e) => setEstimatedRevenue(Number.parseInt(e.target.value) || 0)}
-                className="border-2 border-gray-500 focus:border-gray-900 bg-white text-black font-medium text-lg"
+                className="border-2 border-gray-500 focus:border-gray-900 bg-white text-black font-medium text-base sm:text-lg h-10 sm:h-12"
               />
             </div>
           </div>
 
           {/* オプション選択 */}
-          <div className="space-y-3">
-            <h3 className="text-md font-semibold text-gray-900">任意オプション</h3>
-            <div className="space-y-2">
+          <div className="space-y-2 sm:space-y-3">
+            <h3 className="text-sm sm:text-md font-semibold text-gray-900">任意オプション</h3>
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="surveyService"
                   checked={options.surveyService}
                   onCheckedChange={() => handleOptionChange("surveyService")}
-                  className={accentBorder}
+                  className={`${accentBorder} h-4 w-4 sm:h-5 sm:w-5`}
                 />
-                <Label htmlFor="surveyService" className="text-gray-800 font-medium">
+                <Label htmlFor="surveyService" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
                   調査代行料（申請要件調査・消防法確認など）
                 </Label>
               </div>
@@ -543,9 +549,9 @@ function SimulatorContent({
                   id="tablet" 
                   checked={options.tablet} 
                   onCheckedChange={() => handleOptionChange("tablet")} 
-                  className={accentBorder}
+                  className={`${accentBorder} h-4 w-4 sm:h-5 sm:w-5`}
                 />
-                <Label htmlFor="tablet" className="text-gray-800 font-medium">
+                <Label htmlFor="tablet" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
                   チェックイン用タブレット
                 </Label>
               </div>
@@ -554,9 +560,9 @@ function SimulatorContent({
                   id="smartLock"
                   checked={options.smartLock}
                   onCheckedChange={() => handleOptionChange("smartLock")}
-                  className={accentBorder}
+                  className={`${accentBorder} h-4 w-4 sm:h-5 sm:w-5`}
                 />
-                <Label htmlFor="smartLock" className="text-gray-800 font-medium">
+                <Label htmlFor="smartLock" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
                   スマートロック連携キー
                 </Label>
               </div>
@@ -565,21 +571,21 @@ function SimulatorContent({
                   id="bookingEngine"
                   checked={options.bookingEngine}
                   onCheckedChange={() => handleOptionChange("bookingEngine")}
-                  className={accentBorder}
+                  className={`${accentBorder} h-4 w-4 sm:h-5 sm:w-5`}
                 />
-                <Label htmlFor="bookingEngine" className="text-gray-800 font-medium">
+                <Label htmlFor="bookingEngine" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
                   自社予約エンジン
                 </Label>
               </div>
               {options.bookingEngine && (
-                <div className="flex items-center space-x-2 ml-6">
+                <div className="flex items-center space-x-2 ml-4 sm:ml-6">
                   <Checkbox
                     id="paymentIntegration"
                     checked={options.paymentIntegration}
                     onCheckedChange={() => handleOptionChange("paymentIntegration")}
-                    className={accentBorder}
+                    className={`${accentBorder} h-4 w-4 sm:h-5 sm:w-5`}
                   />
-                  <Label htmlFor="paymentIntegration" className="text-gray-800 font-medium">
+                  <Label htmlFor="paymentIntegration" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
                     決済連携機能
                   </Label>
                 </div>
@@ -588,14 +594,14 @@ function SimulatorContent({
           </div>
 
           {/* 別途見積もり項目のカスタム金額入力 */}
-          <div className="space-y-3">
-            <h3 className="text-md font-semibold text-gray-900">別途見積もり項目のカスタム金額</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className={`p-4 ${accentBgLight} rounded-lg`}>
-                <h4 className="text-sm font-semibold mb-2 text-gray-900">民泊営業</h4>
-                <div className="space-y-2">
+          <div className="space-y-2 sm:space-y-3">
+            <h3 className="text-sm sm:text-md font-semibold text-gray-900">別途見積もり項目のカスタム金額</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className={`p-3 sm:p-4 ${accentBgLight} rounded-lg`}>
+                <h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-gray-900">民泊営業</h4>
+                <div className="space-y-1.5 sm:space-y-2">
                   <div className="space-y-1">
-                    <Label htmlFor="furniture-minpaku" className="text-gray-800 font-medium">
+                    <Label htmlFor="furniture-minpaku" className="text-gray-800 font-medium text-xs sm:text-sm">
                       家具家電・什器備品 設置
                     </Label>
                     <Input
@@ -610,11 +616,11 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
-                      className="border-gray-400 focus:border-gray-800 bg-white"
+                      className="border-gray-400 focus:border-gray-800 bg-white h-8 sm:h-10 text-sm sm:text-base"
                     />
                   </div>
                   <div className="space-y-1">
-                    <Label htmlFor="consumables-minpaku" className="text-gray-800 font-medium">
+                    <Label htmlFor="consumables-minpaku" className="text-gray-800 font-medium text-xs sm:text-sm">
                       消耗品 提供・交換
                     </Label>
                     <Input
@@ -629,16 +635,16 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
-                      className="border-gray-400 focus:border-gray-800 bg-white"
+                      className="border-gray-400 focus:border-gray-800 bg-white h-8 sm:h-10 text-sm sm:text-base"
                     />
                   </div>
                 </div>
               </div>
-              <div className={`p-4 ${accentBgLight} rounded-lg`}>
-                <h4 className="text-sm font-semibold mb-2 text-gray-900">旅館営業</h4>
-                <div className="space-y-2">
+              <div className={`p-3 sm:p-4 ${accentBgLight} rounded-lg`}>
+                <h4 className="text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2 text-gray-900">旅館営業</h4>
+                <div className="space-y-1.5 sm:space-y-2">
                   <div className="space-y-1">
-                    <Label htmlFor="furniture-ryokan" className="text-gray-800 font-medium">
+                    <Label htmlFor="furniture-ryokan" className="text-gray-800 font-medium text-xs sm:text-sm">
                       家具家電・什器備品 設置
                     </Label>
                     <Input
@@ -653,11 +659,11 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
-                      className="border-gray-400 focus:border-gray-800 bg-white"
+                      className="border-gray-400 focus:border-gray-800 bg-white h-8 sm:h-10 text-sm sm:text-base"
                     />
                   </div>
                   <div className="space-y-1">
-                    <Label htmlFor="consumables-ryokan" className="text-gray-800 font-medium">
+                    <Label htmlFor="consumables-ryokan" className="text-gray-800 font-medium text-xs sm:text-sm">
                       消耗品 提供・交換
                     </Label>
                     <Input
@@ -672,7 +678,7 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
-                      className="border-gray-400 focus:border-gray-800 bg-white"
+                      className="border-gray-400 focus:border-gray-800 bg-white h-8 sm:h-10 text-sm sm:text-base"
                     />
                   </div>
                 </div>
@@ -683,99 +689,99 @@ function SimulatorContent({
       </Card>
 
       {/* 計算結果の比較表示 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* 民泊営業の結果 */}
         <Card className={`${accentBorder} ${accentBgLight} shadow-md`}>
-          <CardHeader className="pb-2 border-b border-gray-300">
-            <CardTitle className="text-lg font-bold text-gray-900">民泊営業</CardTitle>
-            <CardDescription className={`${accentText} font-medium`}>{getPlanName()}</CardDescription>
+          <CardHeader className="pb-2 border-b border-gray-300 px-3 sm:px-6 py-3 sm:py-4">
+            <CardTitle className="text-base sm:text-lg font-bold text-gray-900">民泊営業</CardTitle>
+            <CardDescription className={`${accentText} font-medium text-xs sm:text-sm`}>{getPlanName()}</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4 pt-4">
-            <div className="space-y-2">
+          <CardContent className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 px-3 sm:px-6">
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-800 font-medium">初期費用合計</span>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.initialCost)}円</span>
+                <span className="text-xs sm:text-sm text-gray-800 font-medium">初期費用合計</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.initialCost)}円</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-800 font-medium">月額費用（システム等）</span>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.monthlyCost)}円/月</span>
+                <span className="text-xs sm:text-sm text-gray-800 font-medium">月額費用（システム等）</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.monthlyCost)}円/月</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <span className="text-sm text-gray-800 font-medium">運営代行料（月額）</span>
+                  <span className="text-xs sm:text-sm text-gray-800 font-medium">運営代行料（月額）</span>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <InfoIcon className="h-4 w-4 text-gray-500 ml-1 cursor-help" />
+                      <InfoIcon className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500 ml-1 cursor-help" />
                     </TooltipTrigger>
-                    <TooltipContent className="bg-white text-gray-800 border-gray-300">
+                    <TooltipContent className="bg-white text-gray-800 border-gray-300 text-xs sm:text-sm">
                       <p className="font-medium">売上の20%として計算</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.managementFee)}円/月</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.managementFee)}円/月</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-800 font-semibold">月額費用合計</span>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.totalMonthlyCost)}円/月</span>
+                <span className="text-xs sm:text-sm text-gray-800 font-semibold">月額費用合計</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.totalMonthlyCost)}円/月</span>
               </div>
             </div>
 
-            <div className={`p-4 ${accentBgMedium} rounded-lg mt-4 border ${accentBorder}`}>
+            <div className={`p-3 sm:p-4 ${accentBgMedium} rounded-lg mt-2 sm:mt-4 border ${accentBorder}`}>
               <div className="flex justify-between items-center">
-                <span className="font-semibold text-gray-900">年間総コスト（概算）</span>
-                <span className="text-xl font-bold text-gray-900">{formatCurrency(results.minpaku.yearlyCost)}円</span>
+                <span className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">年間総コスト（概算）</span>
+                <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{formatCurrency(results.minpaku.yearlyCost)}円</span>
               </div>
-              <p className="text-xs text-gray-700 mt-2 font-medium">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
+              <p className="text-xxs sm:text-xs text-gray-700 mt-1 sm:mt-2 font-medium">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
             </div>
           </CardContent>
         </Card>
 
         {/* 旅館営業の結果 */}
         <Card className={`${accentBorder} ${accentBgLight} shadow-md`}>
-          <CardHeader className="pb-2 border-b border-gray-300">
-            <CardTitle className="text-lg font-bold text-gray-900">旅館営業</CardTitle>
-            <CardDescription className={`${accentText} font-medium`}>{getPlanName()}</CardDescription>
+          <CardHeader className="pb-2 border-b border-gray-300 px-3 sm:px-6 py-3 sm:py-4">
+            <CardTitle className="text-base sm:text-lg font-bold text-gray-900">旅館営業</CardTitle>
+            <CardDescription className={`${accentText} font-medium text-xs sm:text-sm`}>{getPlanName()}</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4 pt-4">
-            <div className="space-y-2">
+          <CardContent className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 px-3 sm:px-6">
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-800 font-medium">初期費用合計</span>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.initialCost)}円</span>
+                <span className="text-xs sm:text-sm text-gray-800 font-medium">初期費用合計</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.initialCost)}円</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-800 font-medium">月額費用（システム等）</span>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.monthlyCost)}円/月</span>
+                <span className="text-xs sm:text-sm text-gray-800 font-medium">月額費用（システム等）</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.monthlyCost)}円/月</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <span className="text-sm text-gray-800 font-medium">運営代行料（月額）</span>
+                  <span className="text-xs sm:text-sm text-gray-800 font-medium">運営代行料（月額）</span>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <InfoIcon className="h-4 w-4 text-gray-500 ml-1 cursor-help" />
+                      <InfoIcon className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500 ml-1 cursor-help" />
                     </TooltipTrigger>
-                    <TooltipContent className="bg-white text-gray-800 border-gray-300">
+                    <TooltipContent className="bg-white text-gray-800 border-gray-300 text-xs sm:text-sm">
                       <p className="font-medium">売上の20%として計算</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.managementFee)}円/月</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.managementFee)}円/月</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-800 font-semibold">月額費用合計</span>
-                <span className="text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.totalMonthlyCost)}円/月</span>
+                <span className="text-xs sm:text-sm text-gray-800 font-semibold">月額費用合計</span>
+                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.totalMonthlyCost)}円/月</span>
               </div>
             </div>
 
-            <div className={`p-4 ${accentBgMedium} rounded-lg mt-4 border ${accentBorder}`}>
+            <div className={`p-3 sm:p-4 ${accentBgMedium} rounded-lg mt-2 sm:mt-4 border ${accentBorder}`}>
               <div className="flex justify-between items-center">
-                <span className="font-semibold text-gray-900">年間総コスト（概算）</span>
-                <span className="text-xl font-bold text-gray-900">{formatCurrency(results.ryokan.yearlyCost)}円</span>
+                <span className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">年間総コスト（概算）</span>
+                <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{formatCurrency(results.ryokan.yearlyCost)}円</span>
               </div>
-              <p className="text-xs text-gray-700 mt-2 font-medium">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
+              <p className="text-xxs sm:text-xs text-gray-700 mt-1 sm:mt-2 font-medium">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
             </div>
           </CardContent>
         </Card>
@@ -783,74 +789,76 @@ function SimulatorContent({
 
       {/* 比較サマリー */}
       <Card className="bg-white border-gray-300 shadow-md">
-        <CardHeader className="pb-2 border-b border-gray-300">
-          <CardTitle className="text-lg font-bold text-gray-900">民泊営業と旅館営業の比較</CardTitle>
+        <CardHeader className="pb-2 border-b border-gray-300 px-3 sm:px-6 py-3 sm:py-4">
+          <CardTitle className="text-base sm:text-lg font-bold text-gray-900">民泊営業と旅館営業の比較</CardTitle>
         </CardHeader>
-        <CardContent className="pt-4">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-300">
-                  <th className="text-left py-2 text-gray-900 font-bold">項目</th>
-                  <th className="text-right py-2 text-gray-900 font-bold">民泊営業</th>
-                  <th className="text-center py-2 px-2">
-                    <ArrowRightIcon className={`h-4 w-4 ${accentText}`} />
-                  </th>
-                  <th className="text-right py-2 text-gray-900 font-bold">旅館営業</th>
-                  <th className="text-right py-2 text-gray-900 font-bold">差額</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-2 font-medium text-gray-800">初期費用</td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.minpaku.initialCost)}円</td>
-                  <td></td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.ryokan.initialCost)}円</td>
-                  <td className="text-right font-medium text-gray-800">
-                    {calculateDifference(results.ryokan.initialCost, results.minpaku.initialCost)}円
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-2 font-medium text-gray-800">月額費用（システム等）</td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.minpaku.monthlyCost)}円</td>
-                  <td></td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.ryokan.monthlyCost)}円</td>
-                  <td className="text-right font-medium text-gray-800">
-                    {calculateDifference(results.ryokan.monthlyCost, results.minpaku.monthlyCost)}円
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-2 font-medium text-gray-800">運営代行料（月額）</td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.minpaku.managementFee)}円</td>
-                  <td></td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.ryokan.managementFee)}円</td>
-                  <td className="text-right font-medium text-gray-800">
-                    {calculateDifference(results.ryokan.managementFee, results.minpaku.managementFee)}円
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-2 font-medium text-gray-800">月額費用合計</td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.minpaku.totalMonthlyCost)}円</td>
-                  <td></td>
-                  <td className="text-right font-medium text-gray-800">{formatCurrency(results.ryokan.totalMonthlyCost)}円</td>
-                  <td className="text-right font-medium text-gray-800">
-                    {calculateDifference(results.ryokan.totalMonthlyCost, results.minpaku.totalMonthlyCost)}円
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-2 font-semibold text-gray-900">年間総コスト</td>
-                  <td className="text-right font-bold text-gray-900">{formatCurrency(results.minpaku.yearlyCost)}円</td>
-                  <td></td>
-                  <td className="text-right font-bold text-gray-900">{formatCurrency(results.ryokan.yearlyCost)}円</td>
-                  <td className="text-right font-bold text-gray-900">
-                    {calculateDifference(results.ryokan.yearlyCost, results.minpaku.yearlyCost)}円
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <CardContent className="pt-3 sm:pt-4 px-3 sm:px-6">
+          <div className="overflow-x-auto -mx-3 sm:-mx-6">
+            <div className="inline-block min-w-full align-middle px-3 sm:px-6">
+              <table className="min-w-full divide-y divide-gray-300">
+                <thead>
+                  <tr className="border-b border-gray-300">
+                    <th scope="col" className="text-left py-2 text-xs sm:text-sm text-gray-900 font-bold whitespace-nowrap">項目</th>
+                    <th scope="col" className="text-right py-2 text-xs sm:text-sm text-gray-900 font-bold whitespace-nowrap px-1 sm:px-2">民泊営業</th>
+                    <th scope="col" className="text-center py-2 px-1 sm:px-2 w-6 sm:w-8">
+                      <ArrowRightIcon className={`h-3 w-3 sm:h-4 sm:w-4 ${accentText} mx-auto`} />
+                    </th>
+                    <th scope="col" className="text-right py-2 text-xs sm:text-sm text-gray-900 font-bold whitespace-nowrap px-1 sm:px-2">旅館営業</th>
+                    <th scope="col" className="text-right py-2 text-xs sm:text-sm text-gray-900 font-bold whitespace-nowrap px-1 sm:px-2">差額</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  <tr className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">初期費用</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.minpaku.initialCost)}円</td>
+                    <td></td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.ryokan.initialCost)}円</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">
+                      {calculateDifference(results.ryokan.initialCost, results.minpaku.initialCost)}円
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">月額費用（システム等）</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.minpaku.monthlyCost)}円</td>
+                    <td></td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.ryokan.monthlyCost)}円</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">
+                      {calculateDifference(results.ryokan.monthlyCost, results.minpaku.monthlyCost)}円
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">運営代行料（月額）</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.minpaku.managementFee)}円</td>
+                    <td></td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.ryokan.managementFee)}円</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">
+                      {calculateDifference(results.ryokan.managementFee, results.minpaku.managementFee)}円
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">月額費用合計</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.minpaku.totalMonthlyCost)}円</td>
+                    <td></td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">{formatCurrency(results.ryokan.totalMonthlyCost)}円</td>
+                    <td className="text-right text-xs sm:text-sm font-medium text-gray-800 whitespace-nowrap">
+                      {calculateDifference(results.ryokan.totalMonthlyCost, results.minpaku.totalMonthlyCost)}円
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-900 whitespace-nowrap">年間総コスト</td>
+                    <td className="text-right text-xs sm:text-sm font-bold text-gray-900 whitespace-nowrap">{formatCurrency(results.minpaku.yearlyCost)}円</td>
+                    <td></td>
+                    <td className="text-right text-xs sm:text-sm font-bold text-gray-900 whitespace-nowrap">{formatCurrency(results.ryokan.yearlyCost)}円</td>
+                    <td className="text-right text-xs sm:text-sm font-bold text-gray-900 whitespace-nowrap">
+                      {calculateDifference(results.ryokan.yearlyCost, results.minpaku.yearlyCost)}円
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div className="text-sm text-gray-800 mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
+          <div className="text-xxs sm:text-xs md:text-sm text-gray-800 mt-3 sm:mt-4 p-2 sm:p-4 bg-gray-100 rounded-lg border border-gray-300">
             <p className="font-medium">※ 表示価格はすべて税抜きです。別途消費税がかかります。</p>
             <p className="font-medium">※ 運営代行料は最低利用料金が設定される場合があります。</p>
             <p className="font-medium">※ 実際の費用は物件状況により変動します。詳細はお問合せください。</p>
