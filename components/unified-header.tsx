@@ -278,7 +278,7 @@ export function UnifiedHeader() {
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <button
-                className="lg:hidden p-2 rounded-full text-white hover:bg-base-400 transition-all duration-200 hover:text-primary-300"
+                className="lg:hidden p-2 rounded-full text-white bg-base-400/50 hover:bg-base-300 transition-all duration-200"
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label={mobileMenuOpen ? "メニューを閉じる" : "メニューを開く"}
                 aria-expanded={mobileMenuOpen}
@@ -297,7 +297,7 @@ export function UnifiedHeader() {
                       <>
                         <Link
                           href="/services"
-                          className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${
+                          className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium transition-all duration-200 text-white ${
                             pathname === "/services"
                               ? "bg-base-400 text-primary-300"
                               : "hover:bg-base-400 hover:text-primary-300"
@@ -334,7 +334,7 @@ export function UnifiedHeader() {
                                 <Link
                                   key={service.href}
                                   href={service.href}
-                                  className={`flex items-center px-4 py-3 rounded-md text-sm transition-all duration-200 ${
+                                  className={`flex items-center px-4 py-3 rounded-md text-sm transition-all duration-200 text-white ${
                                     isActive(service.href)
                                       ? "bg-base-400 text-primary-300 font-medium"
                                       : "hover:bg-base-400 hover:text-primary-300"
@@ -351,7 +351,7 @@ export function UnifiedHeader() {
                     ) : (
                       <Link
                         href={item.href}
-                        className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${
+                        className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 text-white ${
                           isActive(item.href)
                             ? "bg-base-400 text-primary-300"
                             : "hover:bg-base-400 hover:text-primary-300"

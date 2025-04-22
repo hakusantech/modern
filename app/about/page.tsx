@@ -44,7 +44,7 @@ export default function AboutPage() {
         initial="hidden"
         animate="visible"
         variants={heroStaggerChildren} // Apply stagger to the section
-        className="relative min-h-screen w-full overflow-hidden flex items-center justify-center text-center bg-gray-900"
+        className="relative min-h-[80vh] sm:min-h-screen w-full overflow-hidden flex items-center justify-center text-center bg-gray-900"
       >
         {/* Background Image - Changed to Hurano */}
         <div className="absolute inset-0 z-0">
@@ -63,7 +63,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto -mt-16">
             <motion.h1 
               variants={heroFadeInUp} // Apply enhanced variant
-              className="text-4xl md:text-5xl lg:text-7xl font-medium mb-8 leading-10 tracking-tight text-white [text-shadow:2px_2px_6px_rgb(0_0_0_/_60%)] whitespace-nowrap"
+              className="text-4xl leading-snug md:text-6xl font-medium mb-8 tracking-tight text-white [text-shadow:2px_2px_6px_rgb(0_0_0_/_60%)]"
             >
               北海道の魅力を世界へ<br />
               <br />
@@ -121,10 +121,10 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Title */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.5 }}
             className="mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-light text-center tracking-wide">
@@ -141,14 +141,14 @@ export default function AboutPage() {
 
             {/* 課題ブロック */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.5 }}
               className="flex flex-col md:flex-row items-center mb-32"
             >
               <div className="w-full md:w-1/2 mb-12 md:mb-0 md:pr-16">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+                <div className="aspect-video relative overflow-hidden rounded-lg max-h-60">
                   <Image
                     src="/images/akiya.png"
                     alt="北海道の空き家問題"
@@ -183,14 +183,14 @@ export default function AboutPage() {
 
             {/* 目的ブロック */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.5 }}
               className="flex flex-col md:flex-row-reverse items-center mb-32"
             >
               <div className="w-full md:w-1/2 mb-12 md:mb-0 md:pl-16">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+                <div className="aspect-video relative overflow-hidden rounded-lg max-h-60">
                   <Image
                     src="/images/u1749683721_Interior_of_a_cozy_Hokkaido_minpaku_guesthouse_at_b46beebe-d85d-4be3-836d-06dd18aa9523_3.png"
                     alt="北海道の価値創造"
@@ -222,14 +222,14 @@ export default function AboutPage() {
 
             {/* ソリューションブロック */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.5 }}
               className="flex flex-col md:flex-row items-center"
             >
               <div className="w-full md:w-1/2 mb-12 md:mb-0 md:pr-16">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+                <div className="aspect-video relative overflow-hidden rounded-lg max-h-60">
                   <Image
                     src="/images/hurano.png"
                     alt="世界の宿泊施設への変革"
@@ -268,9 +268,9 @@ export default function AboutPage() {
       <motion.section
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.5 }}
         variants={staggerChildren}
-        className="py-24 md:py-32 bg-white"
+        className="py-16 md:py-32 bg-white"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
@@ -297,9 +297,9 @@ export default function AboutPage() {
               <motion.div 
                 key={index}
                 variants={itemFadeIn}
-                className="bg-gray-50 border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
+                className="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
               >
-                <item.icon className="h-12 w-12 text-gold-500 mb-6"/>
+                <item.icon className="w-10 h-10 shrink-0 text-gold-500 mb-6"/>
                 <h2 className="text-2xl font-medium text-gray-900 mb-4">{item.title}</h2>
                 <p className="text-gray-600 leading-relaxed flex-grow">
                   {item.text}
@@ -355,7 +355,7 @@ export default function AboutPage() {
             className="max-w-7xl mx-auto text-white"
           >
             {/* Single large transparent container with all content */}
-            <div className="bg-black/30 p-12 md:p-16 rounded-lg backdrop-blur-sm [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] w-full">
+            <div className="bg-black/30 p-8 md:p-16 rounded-lg [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] w-full">
               <h2 className="text-5xl md:text-7xl font-extralight mb-12 text-center tracking-wider leading-tight">
                 なぜいま民泊なのか？
               </h2>
@@ -368,7 +368,7 @@ export default function AboutPage() {
                     なぜ北海道なのか？
                   </h3>
                   
-                  <p className="text-2xl md:text-3xl text-center leading-relaxed">
+                  <p className="text-base leading-normal md:text-2xl text-center">
                     2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
                   </p>
                   <p className="text-3xl md:text-4xl text-center text-gold-300 font-light">
@@ -380,11 +380,11 @@ export default function AboutPage() {
                 <div className="mx-auto w-full max-w-4xl">
                   <h3 className="text-2xl md:text-3xl font-light mb-10 text-white uppercase tracking-widest text-center">北海道へのインバウンド旅行者推移</h3>
                   
-                  <div className="grid grid-cols-3 gap-8 w-4/5 mx-auto">
+                  <div className="grid grid-cols-1 max-w-xs mx-auto md:max-w-none md:grid-cols-3 gap-8 w-4/5">
                     <div className="bg-black/20 p-8 rounded-lg backdrop-blur-sm">
                       <div className="flex flex-col items-center">
-                        <span className="text-lg uppercase tracking-wider text-gray-300 mb-2">2024</span>
-                        <span className="text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">3,687<span className="text-base">万人</span></span>
+                        <span className="text-base uppercase tracking-wider text-gray-300 mb-2">2024</span>
+                        <span className="text-3xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">3,687<span className="text-sm">万人</span></span>
                         <div className="mt-3 text-white text-lg uppercase tracking-wider">過去最高を記録</div>
                       </div>
                     </div>
@@ -478,12 +478,12 @@ export default function AboutPage() {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="group"
                 >
                   <div className="bg-white rounded-2xl p-8 shadow-xl border border-gold-200 hover:border-gold-400 transition-all duration-300 h-full transform hover:-translate-y-2">
-                    <feature.icon className="h-16 w-16 text-gold-500 mb-8 transform group-hover:scale-110 transition-transform duration-300" />
+                    <feature.icon className="w-10 h-10 md:w-12 md:h-12 shrink-0 text-gold-500 mb-6 md:mb-8 transform group-hover:scale-110 transition-transform duration-300" />
                     <h3 className="text-2xl font-medium mb-4 text-gray-900">{feature.title}</h3>
                     <p className="text-gray-700 leading-relaxed font-light text-lg">{feature.description}</p>
                   </div>
@@ -537,7 +537,7 @@ export default function AboutPage() {
               民泊運営を始めたい方も、物件の活用にお悩みの方も――<br />
               あなたの物件に秘められた可能性を、私たちが引き出します。
             </p>
-            <div className="flex flex-col sm:flex-row gap-8 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 asChild
                 size="lg"
@@ -663,27 +663,27 @@ export default function AboutPage() {
                 <div className="grid md:grid-cols-3 gap-6 lg:gap-10 relative">
                   {[
                     {
-                      icon: <Building2 className="h-16 w-16 text-gold-600 mb-8" />,
+                      icon: <Building2 className="w-10 h-10 md:w-12 md:h-12 shrink-0 text-gold-600 mb-6 md:mb-8" />,
                       title: "空間の再生",
                       text: "使われていない物件を、世界中の旅行者を迎える特別な体験空間へと再生します"
                     },
                     {
-                      icon: <TrendingUp className="h-16 w-16 text-gold-600 mb-8" />,
+                      icon: <TrendingUp className="w-10 h-10 md:w-12 md:h-12 shrink-0 text-gold-600 mb-6 md:mb-8" />,
                       title: "価値の向上",
                       text: "オーナー様の資産価値を高め、持続可能な収益モデルを実現します"
                     },
                     {
-                      icon: <MountainSnow className="h-16 w-16 text-gold-600 mb-8" />,
+                      icon: <MountainSnow className="w-10 h-10 md:w-12 md:h-12 shrink-0 text-gold-600 mb-6 md:mb-8" />,
                       title: "地域との共創",
                       text: "北海道の地域活性化に貢献し、インバウンド観光と地方創生をつなぎます"
                     }
                   ].map((item, index) => (
                     <motion.div
                       key={index}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.7, delay: index * 0.2 }}
-                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      viewport={{ once: true, amount: 0.5 }}
                       className="flex flex-col items-center text-center p-8 md:p-10 bg-white rounded-2xl border-2 border-gray-300 hover:border-gold-500 transition-all duration-300 shadow-xl"
                     >
                       {item.icon}
@@ -698,10 +698,10 @@ export default function AboutPage() {
               
               {/* クライマックスメッセージ - シンプル化したデザイン */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, amount: 0.5 }}
                 className="text-center py-16 px-6 bg-white rounded-3xl border-2 border-gray-300 shadow-xl"
               >
                 <h3 className="text-3xl md:text-5xl font-medium leading-tight mb-10 [text-shadow:1px_1px_2px_rgba(0,0,0,0.1)]">
@@ -718,10 +718,10 @@ export default function AboutPage() {
               
               {/* 最終CTA部分 - シンプル化したボタン */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true, amount: 0.5 }}
                 className="flex flex-col items-center"
               >
                 <p className="text-2xl text-gray-900 mb-10 max-w-2xl mx-auto text-center leading-relaxed font-medium bg-white/90 py-4 px-6 rounded-lg shadow-lg">

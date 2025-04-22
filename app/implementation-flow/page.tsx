@@ -103,7 +103,7 @@ export default function ImplementationFlowPage() {
   return (
     <main className="min-h-screen pb-24 bg-white antialiased">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-gold-50 via-white to-white py-24 border-b border-gray-200 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-gold-50 via-white to-white py-16 sm:py-24 border-b border-gray-200 overflow-hidden">
         {/* 装飾: 右上の円 */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gold-100 rounded-full opacity-30 blur-3xl"></div>
         {/* 装飾: 左下の円 */}
@@ -111,13 +111,16 @@ export default function ImplementationFlowPage() {
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl font-light text-gray-900 mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 mb-6">
               導入の流れ
               <span className="block text-2xl sm:text-3xl mt-2 text-gold-500">専門スタッフがトータルサポート</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed font-light">
+            <p className="hidden sm:block text-xl text-gray-600 mb-8 leading-snug sm:leading-relaxed font-light">
               初回相談から運営開始後のフォローまで、CleanNest Hokkaidoが<br />
               オーナー様の民泊事業を責任を持ってサポートいたします。
+            </p>
+            <p className="sm:hidden text-lg text-gray-600 mb-8 leading-snug font-light">
+              初回相談から運営開始まで、民泊事業を責任を持ってサポートします。
             </p>
           </div>
         </div>
@@ -143,27 +146,38 @@ export default function ImplementationFlowPage() {
               const connectorColor = isAfter ? 'bg-blue-300' : 'bg-gold-300';
 
               return (
-                <div key={index} className="relative pl-16 md:pl-20 pb-12 group">
+                <div key={index} className="relative pl-14 md:pl-20 pb-6 md:pb-12 group">
                   {/* Step Circle */}
-                  <div className={`absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full border-2 ${circleBorderColor} ${circleBgColor} shadow-sm`}>
-                    <span className={`text-xl font-semibold ${circleTextColor}`}>
+                  <div className={`absolute left-6 md:left-8 top-0 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border-2 ${circleBorderColor} ${circleBgColor} shadow-sm`}>
+                    <span className={`text-base md:text-xl font-bold ${circleTextColor}`}>
                       {step.step}
                     </span>
                   </div>
 
                   {/* Step Connector (visible on medium screens and up, hidden for the last item) */}
                   {!isLast && (
-                     <div className={`absolute left-[31px] top-16 h-12 w-px ${connectorColor} hidden md:block`}></div>
+                     <div className={`absolute left-[35px] md:left-[39px] top-12 md:top-16 h-12 w-px ${connectorColor} hidden md:block`}></div>
                   )}
-                  
+                   
                   {/* Content Card */}
-                  <div className={`ml-4 relative ${isStart ? 'border-l-4 border-gray-500 pl-6 py-4 -ml-1' : ''}`}>
+                  <div className={`ml-4 relative max-w-[90vw] sm:bg-transparent bg-gray-50/80 rounded-lg p-3 sm:p-0 ${isStart ? 'border-l-4 border-gray-500 pl-6 py-4 -ml-1' : ''}`}>
                      {/* Highlight for the 'start' phase */}
                      {isStart && (
                       <div className="absolute -left-[10px] top-1/2 -translate-y-1/2 w-4 h-4 bg-gray-500 rounded-full border-2 border-white shadow"></div>
                     )}
-                    <h3 className={`text-xl font-medium ${titleColor} mb-2`}>{step.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    <h3 className={`text-lg md:text-xl font-bold ${titleColor} mb-1.5 md:mb-2`}>{step.title}</h3>
+                    <p className="text-gray-700 sm:text-gray-600 text-sm sm:text-base leading-snug sm:leading-relaxed">
+                      <span className="hidden sm:inline">{step.description}</span>
+                      <span className="sm:hidden">
+                        {step.phase === 'before' && <span className="inline-block bg-gold-50 text-gold-700 px-2 py-0.5 rounded mb-1">準備フェーズ</span>}
+                        {step.phase === 'start' && <span className="inline-block bg-gray-100 text-gray-700 px-2 py-0.5 rounded mb-1">開始フェーズ</span>}
+                        {step.phase === 'after' && <span className="inline-block bg-blue-50 text-blue-700 px-2 py-0.5 rounded mb-1">運営フェーズ</span>}
+                        <br />
+                        {step.phase === 'before' && '許認可申請や設備導入など、開業に向けた準備をサポート。'}
+                        {step.phase === 'start' && 'CleanNest Hokkaidoが運営を開始。'}
+                        {step.phase === 'after' && '予約管理やゲスト対応、清掃など運営業務を代行。'}
+                      </span>
+                    </p>
                   </div>
                 </div>
               );
@@ -173,13 +187,16 @@ export default function ImplementationFlowPage() {
       </section>
 
       {/* Link to Minpaku Service */}
-      <section className="py-16 bg-gray-50 mt-16 border-t border-gray-200">
+      <section className="py-16 bg-gray-50 mt-12 sm:mt-16 border-t border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl font-light text-gray-900 mb-4">民泊運営もCleanNestにおまかせ！</h2>
-            <p className="text-gray-600 mb-8 leading-relaxed font-light">
+            <p className="hidden sm:block text-gray-600 mb-8 leading-snug sm:leading-relaxed font-light">
               面倒な許認可申請、日々の予約管理やゲスト対応はすべてプロにお任せ。<br />
               オーナー様は手間なく、安心して民泊運営を始められます。
+            </p>
+            <p className="sm:hidden text-gray-600 mb-8 leading-snug font-light">
+              許認可申請から運営まで、すべてプロにお任せください。
             </p>
           </div>
         </div>
