@@ -24,19 +24,25 @@ type FormErrors = {
 // サーバーアクションを作成
 async function submitContactForm(formData: FormData) {
   try {
-    // フォームデータを処理
+    // FormDataオブジェクトを作成
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('phone', formData.phone || '');
+    form.append('inquiryType', formData.inquiryType);
+    form.append('message', formData.message);
+
+    // 添付ファイルの処理
+    if (formData.attachments) {
+      Array.from(formData.attachments).forEach((file) => {
+        form.append('attachments', file);
+      });
+    }
+
+    // フォームデータを送信
     const response = await fetch('/api/contact', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || '',
-        inquiryType: formData.inquiryType,
-        message: formData.message,
-      }),
+      body: form,
     });
 
     if (!response.ok) {
@@ -272,6 +278,43 @@ export function ContactForm() {
                   placeholder="090-1234-5678"
                   className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-colors"
                 />
+              </div>
+
+              {/* ファイルアップロード */}
+              <div>
+                <label htmlFor="attachments" className="block text-sm font-medium text-gray-700 mb-1">
+                  添付ファイル <span className="text-gray-500 text-xs">(任意)</span>
+                </label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                  <div className="space-y-1 text-center">
+                    <Upload className="mx-auto h-12 w-12 text-gray-400" />
+                    <div className="flex text-sm text-gray-600">
+                      <label htmlFor="attachments" className="relative cursor-pointer bg-white rounded-md font-medium text-gold-600 hover:text-gold-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gold-500">
+                        <span>ファイルを選択</span>
+                        <input
+                          id="attachments"
+                          name="attachments"
+                          type="file"
+                          className="sr-only"
+                          multiple
+                          onChange={handleFileChange}
+                        />
+                      </label>
+                      <p className="pl-1">またはドラッグ&ドロップ</p>
+                    </div>
+                    <p className="text-xs text-gray-500">PDF, Word, Excel, 画像ファイルなど</p>
+                    {attachedFileNames.length > 0 && (
+                      <div className="mt-2 text-sm text-gray-500">
+                        <p>選択されたファイル:</p>
+                        <ul className="list-disc list-inside">
+                          {attachedFileNames.map((name, index) => (
+                            <li key={index}>{name}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div>
