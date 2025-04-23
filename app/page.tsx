@@ -806,7 +806,7 @@ export default function HomePage() {
       </section>
 
       {/* オーナー募集リンク */}
-      <div className="fixed bottom-8 right-8 z-50 hidden md:block">
+      <div className="fixed bottom-24 right-8 z-50 hidden md:block">
         <Link 
           href="/owner-recruitment/"
           className="block p-4 bg-black text-white rounded-md shadow-lg hover:bg-gray-900 transition-colors transform hover:-translate-y-1 duration-300"
