@@ -593,101 +593,108 @@ export default function HomePage() {
               料金プラン
             </h2>
             <p className="text-gray-600">
-              ニーズに合わせた2つのプランをご用意しています。
-              初期費用から運用コストまで、わかりやすく透明性のある料金体系です。
+              物件のタイプと運営スタイルに合わせた2つのプランをご用意しています。
+              お客様のニーズに最適なプランをお選びいただけます。
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            <div className="border border-gray-200 p-6 md:p-10 lg:p-12 hover:border-gold-500 transition-all group">
-              <div className="text-center mb-8 md:mb-12">
-                <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-3">
-                  <span className="md:hidden">
-                    ファミリー・エクスペリエンス・<br />プラン
-                  </span>
-                  <span className="hidden md:inline">
-                    ファミリー・エクスペリエンス・プラン
-                  </span>
+          <div className="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
+            {/* FEPプラン */}
+            <div className="flex-1 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col">
+              {/* プランヘッダー */}
+              <div className="bg-gradient-to-r from-gold-500 to-gold-600 text-white px-6 py-8 text-center">
+                <h3 className="text-2xl md:text-3xl font-medium mb-3">
+                  ファミリー・エクスペリエンス
                 </h3>
-                <p className="text-xl text-gold-500 font-medium">FEP</p>
+                <p className="text-xl font-bold">FEPプラン</p>
               </div>
               
-              <div className="space-y-4 mb-8 md:mb-12">
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">家族連れや長期滞在のゲストに最適</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">快適性と体験を重視した運営スタイル</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">安定した高い口コミ評価を実現</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">収益率と顧客満足度のバランスを重視</p>
-                </div>
+              {/* プラン特徴 */}
+              <div className="px-6 py-8 flex-grow">
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">家族連れや長期滞在のゲストに最適な運営スタイル</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">快適性と体験価値を重視した設備とサービス</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">安定した高評価レビューによるブランド構築</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
+                    </div>
+                    <p className="text-gray-700">長期的な収益と資産価値向上を重視</p>
+                  </li>
+                </ul>
               </div>
               
-              <div className="text-center">
+              {/* フッターとCTAボタン */}
+              <div className="px-6 py-6 bg-gray-50 text-center">
                 <Link 
                   href="/plans"
-                  className="inline-block px-8 py-3 md:px-10 md:py-4 border border-gray-900 text-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-all duration-300 text-base md:text-lg w-full md:w-auto"
+                  className="inline-block px-8 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 rounded shadow-md w-full font-medium"
                 >
                   詳細を見る
                 </Link>
               </div>
             </div>
             
-            <div className="border border-gray-200 p-6 md:p-10 lg:p-12 hover:border-gold-500 transition-all group">
-              <div className="text-center mb-8 md:mb-12">
-                <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-3">
-                  ワーカー・スマート・プラン
+            {/* WSPプラン */}
+            <div className="flex-1 bg-white rounded-lg shadow-lg border-2 border-blue-400 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col relative">
+              {/* プランヘッダー */}
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-8 text-center">
+                <h3 className="text-2xl md:text-3xl font-medium mb-3">
+                  ワーカー・スマート
                 </h3>
-                <p className="text-xl text-gold-500 font-medium">WSP</p>
+                <p className="text-xl font-bold">WSPプラン</p>
               </div>
               
-              <div className="space-y-4 mb-8 md:mb-12">
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">ビジネス利用や短期滞在者向け</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">効率性と収益最大化を重視</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">自動化システムを最大限に活用</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                  </div>
-                  <p className="text-gray-700">高稼働率・高単価を実現する戦略的な運営</p>
-                </div>
+              {/* プラン特徴 */}
+              <div className="px-6 py-8 flex-grow bg-white">
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                    </div>
+                    <p className="text-gray-800 font-medium">ビジネス利用や短期滞在者向けの効率的な運営</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                    </div>
+                    <p className="text-gray-800 font-medium">最大限の自動化システムで運営コストを最適化</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                    </div>
+                    <p className="text-gray-800 font-medium">高稼働率と収益最大化を重視した運営戦略</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
+                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                    </div>
+                    <p className="text-gray-800 font-medium">スマートロック活用で遠隔チェックイン対応</p>
+                  </li>
+                </ul>
               </div>
               
-              <div className="text-center">
+              {/* フッターとCTAボタン */}
+              <div className="px-6 py-6 bg-blue-100 text-center">
                 <Link 
                   href="/plans"
-                  className="inline-block px-8 py-3 md:px-10 md:py-4 border border-gray-900 text-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-all duration-300 text-base md:text-lg w-full md:w-auto"
+                  className="inline-block px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded shadow-md w-full font-medium"
                 >
                   詳細を見る
                 </Link>
@@ -695,89 +702,33 @@ export default function HomePage() {
             </div>
           </div>
           
-          <div className="mt-16 border border-gold-200 p-6 md:p-10 lg:p-12 hover:border-gold-500 transition-all group bg-white shadow-lg max-w-4xl mx-auto">
-            <div className="text-center mb-8 md:mb-12">
-              <div className="inline-block px-4 py-1 bg-gold-50 text-gold-600 rounded-full mb-4 font-medium">新プラン</div>
-              <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-3">
-                ファミリー・エクスペリエンス<br/>旅館営業プラン
-              </h3>
-              <p className="text-xl text-gold-500 font-medium">初期費用 ¥300,000〜</p>
-            </div>
-            
-            <p className="text-center text-gray-700 mb-8 max-w-2xl mx-auto">
-              家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる旅館施設の運営をサポートします。
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-              <div className="bg-gold-50 p-6 rounded-lg">
-                <h4 className="text-lg font-medium text-gray-900 mb-4 text-center">プラン特徴</h4>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">伝統的な旅館スタイルの民泊運営</p>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">日本文化体験プログラムの提供</p>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">家族向けアクティビティの企画</p>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">多言語対応サービス</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gold-50 p-6 rounded-lg">
-                <h4 className="text-lg font-medium text-gray-900 mb-4 text-center">サポート内容</h4>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">旅館業法許可取得サポート</p>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">和風インテリアデザイン＆設置</p>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">地域体験プログラムの開発</p>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mr-3 flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                    </div>
-                    <p className="text-gray-700">専門チームによる継続サポート</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="text-center">
+          {/* 料金シミュレーター案内 */}
+          <div className="mt-16 text-center">
+            <div className="max-w-3xl mx-auto mb-6 p-8 bg-gray-50 rounded-lg shadow-md border border-gray-100">
+              <h3 className="text-xl font-medium text-gray-900 mb-4">料金シミュレーターで概算費用を確認</h3>
+              <p className="text-gray-600 mb-6">
+                お持ちの物件の部屋数・運営スタイルに合わせた料金プランの概算費用を
+                シミュレーションで確認できます。
+              </p>
               <Link 
-                href="/plans/ryokan"
-                className="inline-block px-8 py-3 md:px-10 md:py-4 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 text-base md:text-lg shadow-md"
+                href="/plans#simulator"
+                className="inline-flex items-center px-6 py-3 bg-gray-900 text-white hover:bg-gray-800 transition-all duration-300 rounded shadow-md font-medium"
               >
-                詳細を見る
+                料金シミュレーターを使う
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
+          </div>
+          
+          {/* 問い合わせCTA */}
+          <div className="mt-8 text-center">
+            <Link 
+              href="/contact"
+              className="inline-flex items-center text-gray-900 hover:text-gold-600 transition-colors group"
+            >
+              詳しい料金についてはお問い合わせください
+              <ChevronRight className="ml-1 h-4 w-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>

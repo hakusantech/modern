@@ -46,9 +46,9 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
+                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -224,9 +224,9 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
+                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -403,9 +403,9 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
+                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -557,9 +557,9 @@ export function PricingTable() {
                     <thead>
                       <tr className="border-b border-gray-200">
                         <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium">料金</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
+                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
+                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -733,30 +733,30 @@ function PricingRow({
   tooltip?: string
 }) {
   return (
-    <tr className="border-b border-gray-100 hover:bg-gray-50/50">
-      <td className="py-3 px-2 sm:px-4">
+    <tr className="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50">
+      <td className="py-3 px-2 sm:px-4 align-top">
         <div className="flex items-center">
-          <span className="text-gray-800 font-medium">{title}</span>
+          <span className="font-medium text-gray-800">{title}</span>
           {tooltip && (
             <Tooltip>
               <TooltipTrigger asChild>
-                <HelpCircle className="h-4 w-4 text-gray-400 ml-1.5 cursor-help" />
+                <HelpCircle className="ml-1 h-3 w-3 text-gray-400 cursor-help" />
               </TooltipTrigger>
               <TooltipContent>
-                <p>{tooltip}</p>
+                <p className="max-w-xs text-xs">{tooltip}</p>
               </TooltipContent>
             </Tooltip>
           )}
         </div>
-        <p className="text-xs text-gray-500 mt-0.5 hidden md:block">{description}</p>
+        <p className="text-xs text-gray-500 mt-0.5">{description}</p>
       </td>
-      <td className="py-3 px-2 sm:px-4 text-center">
+      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
         {required === true && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
       </td>
-      <td className="py-3 px-2 sm:px-4 text-center">
-        {required === false && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
+      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
+        {required === false && <span className="text-gray-400">-</span>}
       </td>
-      <td className="py-3 px-2 sm:px-4 text-right font-medium text-gray-700">{price}</td>
+      <td className="py-3 px-2 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200">{price}</td>
     </tr>
   )
 }

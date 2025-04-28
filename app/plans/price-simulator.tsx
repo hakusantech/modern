@@ -700,12 +700,12 @@ function SimulatorContent({
             <div className="space-y-1.5 sm:space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-xs sm:text-sm text-gray-800 font-medium">初期費用合計</span>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.initialCost)}円</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.minpaku.initialCost)}円</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
                 <span className="text-xs sm:text-sm text-gray-800 font-medium">月額費用（システム等）</span>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.monthlyCost)}円/月</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.minpaku.monthlyCost)}円/月</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
@@ -719,21 +719,21 @@ function SimulatorContent({
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.managementFee)}円/月</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.minpaku.managementFee)}円/月</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
                 <span className="text-xs sm:text-sm text-gray-800 font-semibold">月額費用合計</span>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.minpaku.totalMonthlyCost)}円/月</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.minpaku.totalMonthlyCost)}円/月</span>
               </div>
             </div>
 
             <div className={`p-3 sm:p-4 ${accentBgMedium} rounded-lg mt-2 sm:mt-4 border ${accentBorder}`}>
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">年間総コスト（概算）</span>
-                <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{formatCurrency(results.minpaku.yearlyCost)}円</span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.minpaku.yearlyCost)}円</span>
               </div>
-              <p className="text-xxs sm:text-xs text-gray-700 mt-1 sm:mt-2 font-medium">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
+              <p className="text-xs sm:text-sm text-gray-700 mt-1 sm:mt-2">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
             </div>
           </CardContent>
         </Card>
@@ -748,12 +748,12 @@ function SimulatorContent({
             <div className="space-y-1.5 sm:space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-xs sm:text-sm text-gray-800 font-medium">初期費用合計</span>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.initialCost)}円</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.ryokan.initialCost)}円</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
                 <span className="text-xs sm:text-sm text-gray-800 font-medium">月額費用（システム等）</span>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.monthlyCost)}円/月</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.ryokan.monthlyCost)}円/月</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
@@ -767,21 +767,21 @@ function SimulatorContent({
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.managementFee)}円/月</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.ryokan.managementFee)}円/月</span>
               </div>
               <Separator className="bg-gray-300" />
               <div className="flex justify-between items-center">
                 <span className="text-xs sm:text-sm text-gray-800 font-semibold">月額費用合計</span>
-                <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">{formatCurrency(results.ryokan.totalMonthlyCost)}円/月</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.ryokan.totalMonthlyCost)}円/月</span>
               </div>
             </div>
 
             <div className={`p-3 sm:p-4 ${accentBgMedium} rounded-lg mt-2 sm:mt-4 border ${accentBorder}`}>
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">年間総コスト（概算）</span>
-                <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{formatCurrency(results.ryokan.yearlyCost)}円</span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 font-mono">{formatCurrency(results.ryokan.yearlyCost)}円</span>
               </div>
-              <p className="text-xxs sm:text-xs text-gray-700 mt-1 sm:mt-2 font-medium">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
+              <p className="text-xs sm:text-sm text-gray-700 mt-1 sm:mt-2">※ 初期費用 + (月額費用合計 × 12ヶ月)</p>
             </div>
           </CardContent>
         </Card>

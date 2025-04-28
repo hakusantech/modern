@@ -140,12 +140,39 @@ export function Header({ currentPath = "/" }: HeaderProps) {
                 {link.label}
               </Link>
             ))}
-             <Button asChild size="lg"
+            
+            {/* Contact button moved up */}
+            <Button asChild size="lg"
               className="mt-6 w-full bg-gold-500 hover:bg-gold-600 text-white border-none shadow-md hover:shadow-lg transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               <Link href="/#contact">お問い合わせ</Link>
             </Button>
+
+            {/* Footer links below separator */}
+            <div className="pt-5 border-t border-gray-200 space-y-2">
+              <Link
+                href="/privacy-policy"
+                className={cn(
+                  "block py-1 text-gray-500 hover:text-gold-500 transition-colors text-sm font-medium",
+                  isActive("/privacy-policy") ? "text-gold-500 font-semibold" : ""
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                プライバシーポリシー
+              </Link>
+              <Link
+                href="/terms"
+                className={cn(
+                  "block py-1 text-gray-500 hover:text-gold-500 transition-colors text-sm font-medium",
+                  isActive("/terms") ? "text-gold-500 font-semibold" : ""
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                利用規約
+              </Link>
+            </div>
+
           </nav>
         </div>
       </div>
