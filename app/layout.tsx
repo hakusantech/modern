@@ -28,7 +28,7 @@ const mPlus = M_PLUS_1p({
 export const metadata: Metadata = {
   title: "CleanNest Hokkaido｜札幌・北海道のインバウンド特化型民泊運営代行",
   description:
-    "札幌・北海道でインバウンド需要に特化した民泊運営の完全代行サービスを提供。Airbnb・Booking.comなどの多言語対応予約管理から清掃、外国人ゲスト対応まで一貫して対応し、物件オーナー様の収益を最大化します。札幌の民泊運営なら「CleanNest Hokkaido」にお任せください。",
+    "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
   keywords: [
     "札幌,民泊,運営代行,インバウンド,外国人観光客,Airbnb,Booking.com,管理,清掃,民泊代行,民泊管理,北海道,多言語対応,ゲストハウス,旅館業,スマートロック,収益最大化",
   ].join(","),
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     url: "https://cleannest-hokkaido.com",
     siteName: "CleanNest Hokkaido",
     title: "札幌・北海道のインバウンド特化型民泊運営代行 | CleanNest Hokkaido",
-    description: "札幌・北海道でインバウンド需要に特化した民泊運営の完全代行サービス。外国人観光客向け物件の運営代行、清掃、ゲスト対応を一貫して提供し、オーナー様の収益を最大化します。",
+    description: "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
     images: [
       {
         url: "/images/ogp-image.jpg",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "札幌・北海道のインバウンド特化型民泊運営代行 | CleanNest Hokkaido",
-    description: "札幌・北海道でインバウンド需要に特化した民泊運営の完全代行サービス。外国人観光客向け物件の運営代行、清掃、ゲスト対応を一貫して提供します。",
+    description: "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
     images: ["/images/ogp-image.jpg"],
     site: "@cleannesthokkaido",
     creator: "@cleannesthokkaido",
