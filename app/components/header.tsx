@@ -35,13 +35,12 @@ export function Header({ currentPath = "/" }: HeaderProps) {
   }
 
   const navLinks = [
-    { href: "/#about", label: "会社概要" },
-    { href: "/services", label: "サービス" },
-    { href: "/plans", label: "プラン説明" },
-    { href: "/implementation-flow", label: "導入の流れ" },
-    { href: "/rental-properties", label: "民泊物件募集" },
-    { href: "/owner-recruitment", label: "オーナー様募集" },
-    { href: "/#contact", label: "お問い合わせ" },
+    { href: "/about", label: "CleanNest Hokkaidoとは" },
+    { href: "/plans", label: "料金プラン" },
+    { href: "/services", label: "民泊運営代行" },
+    { href: "/owner-recruitment", label: "民泊物件貸出" },
+    { href: "/rental-properties", label: "民泊物件紹介" },
+    { href: "/contact", label: "お問い合わせ" },
   ]
 
   return (

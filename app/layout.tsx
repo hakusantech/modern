@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from 'next/script'
 import { M_PLUS_1p, Noto_Sans_JP } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
@@ -96,6 +97,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         mPlus.variable
       )}
     >
+      {/* Google Analytics タグ */}
+      <Script 
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-4D2CDLLMZE"
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4D2CDLLMZE', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <body className="min-h-screen font-sans text-text-DEFAULT bg-base-500 overflow-x-hidden selection:bg-primary-500/30 selection:text-white">
         {/* クライアントコンポーネント */}
         <BackgroundEffects />
