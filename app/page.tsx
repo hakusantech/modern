@@ -372,18 +372,16 @@ export default function HomePage() {
                 {news.map((item, index) => (
                   <div
                     key={index}
-                    className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors"
+                    className="border-b border-gray-200 last:border-b-0 p-6"
                   >
-                    <Link href={item.link} className="block p-6">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                        <time className="text-sm text-gray-500 sm:w-32 flex-shrink-0">
-                          {item.date}
-                        </time>
-                        <h3 className="text-lg font-medium text-gray-900 hover:text-gold-600 transition-colors break-words">
-                          {item.title}
-                        </h3>
-                      </div>
-                    </Link>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                      <time className="text-sm text-gray-500 sm:w-32 flex-shrink-0">
+                        {item.date}
+                      </time>
+                      <h3 className="text-lg font-medium text-gray-900 break-words">
+                        {item.title}
+                      </h3>
+                    </div>
                   </div>
                 ))}
               </div>
