@@ -190,7 +190,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+    <div id="contact-form" className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
       <AnimatePresence mode="wait">
         {isSubmitted ? (
           <motion.div

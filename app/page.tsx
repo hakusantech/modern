@@ -640,7 +640,7 @@ export default function HomePage() {
               {/* フッターとCTAボタン */}
               <div className="px-6 py-6 bg-gray-50 text-center">
                 <Link 
-                  href="/plans"
+                  href="/plans#plans"
                   className="inline-block px-8 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 rounded shadow-md w-full font-medium"
                 >
                   詳細を見る
@@ -691,7 +691,7 @@ export default function HomePage() {
               {/* フッターとCTAボタン */}
               <div className="px-6 py-6 bg-blue-100 text-center">
                 <Link 
-                  href="/plans"
+                  href="/plans#plans"
                   className="inline-block px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded shadow-md w-full font-medium"
                 >
                   詳細を見る
@@ -721,7 +721,7 @@ export default function HomePage() {
           {/* 問い合わせCTA */}
           <div className="mt-8 text-center">
             <Link 
-              href="/contact"
+              href="/contact#contact-form"
               className="inline-flex items-center text-gray-900 hover:text-gold-600 transition-colors group"
             >
               詳しい料金についてはお問い合わせください
@@ -745,7 +745,7 @@ export default function HomePage() {
           </p>
           
           <Link 
-            href="/contact"
+            href="/contact#contact-form"
               className="inline-block px-12 py-5 bg-gold-500 text-white hover:bg-gold-600 transition-colors text-xl tracking-wide shadow-lg"
           >
               無料相談を予約する

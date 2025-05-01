@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle2, Building2, Users, Sparkles, MapPin, BarChart, Globe, TrendingUp, Target, Zap, Wind, Leaf, MountainSnow, ArrowDown } from "lucide-react"
+import { ArrowRight, CheckCircle2, Building2, Users, Sparkles, MapPin, BarChart, Globe, TrendingUp, Target, Zap, Wind, Leaf, MountainSnow, ArrowDown, Shield } from "lucide-react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 
@@ -311,7 +311,7 @@ export default function AboutPage() {
       </motion.section>
       {/* --- Concept Messages Section - END --- */}
 
-      {/* ミッションステートメント - 見出しだけに簡略化 */}
+      {/* 3つのS セクション */}
       <section className="py-24 md:py-32 relative overflow-hidden bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
@@ -327,7 +327,54 @@ export default function AboutPage() {
                 3つのS
               </span>
             </h2>
-            <div className="w-32 h-0.5 bg-gold-500 mx-auto mt-8 mb-8"></div>
+            <div className="w-32 h-0.5 bg-gold-500 mx-auto mt-8 mb-16"></div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            >
+              {[
+                {
+                  icon: Sparkles,
+                  title: "Sanitation",
+                  subtitle: "衛生",
+                  text: "宿泊施設としての清潔さを最優先に考え、ホテル品質の清掃基準と衛生管理を徹底しています。専門トレーニングを受けたスタッフによる徹底的な清掃と、高品質なリネン交換で、ゲストが安心して過ごせる空間を提供します。"
+                },
+                {
+                  icon: Shield,
+                  title: "Safety",
+                  subtitle: "安心・安全",
+                  text: "スマートロックやセキュリティシステムの導入により、物理的な安全を確保。24時間緊急対応体制と多言語サポートで、外国人旅行者も安心して滞在できる環境を整えています。地域の安全情報も提供し、安心な旅をサポートします。"
+                },
+                {
+                  icon: Leaf,
+                  title: "Sustainability",
+                  subtitle: "持続可能性",
+                  text: "地域社会との共生と環境への配慮を大切にし、長期的な視点で事業を展開しています。エコフレンドリーな清掃用品の使用、省エネルギー設備の導入、地域経済への貢献を通じて、持続可能な観光と不動産活用のモデルを目指します。"
+                }
+              ].map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover:border-gold-300 transition-all duration-300 hover:shadow-xl flex flex-col items-center text-center h-full"
+                >
+                  <div className="w-16 h-16 rounded-full bg-gold-50 flex items-center justify-center mb-6">
+                    <item.icon className="h-8 w-8 text-gold-500" />
+                  </div>
+                  <h3 className="text-2xl font-medium text-gray-900 mb-1">{item.title}</h3>
+                  <p className="text-xl text-gold-500 mb-4 font-light">{item.subtitle}</p>
+                  <p className="text-gray-600 leading-relaxed">
+                    {item.text}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -368,7 +415,7 @@ export default function AboutPage() {
                     なぜ北海道なのか？
                   </h3>
                   
-                  <p className="text-base leading-normal md:text-2xl text-center">
+                  <p className="text-base leading-normal md:text-2xl text-center text-white">
                     2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
                   </p>
                   <p className="text-3xl md:text-4xl text-center text-gold-300 font-light">

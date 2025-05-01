@@ -156,7 +156,7 @@ export default function HotelLinenPage() {
             
             <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl border border-gold-100">
               <Image
-                src="/placeholder.svg"
+                src="/images/cleaning-service.png"
                 alt="ホテルレベルのリネンサービス"
                 fill
                 className="object-cover"

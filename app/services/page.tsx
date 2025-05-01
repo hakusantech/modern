@@ -358,15 +358,6 @@ export default function ServicesPage() {
                 </p>
               </div>
             </div>
-            <div className="text-right">
-              <Link 
-                href="/services/minpaku" 
-                className="inline-flex items-center text-gold-600 border-b border-gold-600 pb-1 hover:text-gold-700 hover:border-gold-700 transition-colors"
-              >
-                詳細を見る
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
           </div>
           
           <div className="py-8 lg:py-16">
@@ -380,15 +371,6 @@ export default function ServicesPage() {
                   安定した収益が見込め、日本人観光客やビジネス客など幅広い層にアプローチできます。
                 </p>
               </div>
-            </div>
-            <div className="text-right">
-              <Link 
-                href="/services/ryokan" 
-                className="inline-flex items-center text-gold-600 border-b border-gold-600 pb-1 hover:text-gold-700 hover:border-gold-700 transition-colors"
-              >
-                詳細を見る
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
             </div>
           </div>
         </div>

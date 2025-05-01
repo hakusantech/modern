@@ -26,7 +26,7 @@ const mPlus = M_PLUS_1p({
 })
 
 export const metadata: Metadata = {
-  title: "CleanNest Hokkaido｜札幌・北海道のインバウンド特化型民泊運営代行",
+  title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅宿泊施設の管理委託はすべておまかせ",
   description:
     "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
   keywords: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US", "zh_CN", "ko_KR"],
     url: "https://cleannest-hokkaido.com",
     siteName: "CleanNest Hokkaido",
-    title: "札幌・北海道のインバウンド特化型民泊運営代行 | CleanNest Hokkaido",
+    title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅宿泊施設の管理委託はすべておまかせ",
     description: "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
     images: [
       {
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "札幌・北海道のインバウンド特化型民泊運営代行 | CleanNest Hokkaido",
+    title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅宿泊施設の管理委託はすべておまかせ",
     description: "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
     images: ["/images/ogp-image.jpg"],
     site: "@cleannesthokkaido",

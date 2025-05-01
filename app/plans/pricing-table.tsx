@@ -4,28 +4,63 @@ import { Badge } from "@/components/ui/badge"
 import { HelpCircle, CheckCircle2, XCircle } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
+// Define PricingRow component first
+function PricingRow({
+  title,
+  description,
+  price,
+  required,
+}: {
+  title: string
+  description: string
+  price: string
+  required?: boolean
+}) {
+  return (
+    <tr className="border-b border-gray-100 hover:bg-gray-50">
+      <td className="py-3 px-2 sm:px-4 align-top">
+        <div className="flex items-center">
+          <span className="font-medium text-gray-800">{title}</span>
+        </div>
+        <p className="text-xs text-gray-600 mt-1">{description}</p>
+      </td>
+      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
+        {required === true && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
+        {required === false && <XCircle className="h-5 w-5 text-red-500 mx-auto" />}
+        {required === undefined && <span className="text-gray-400">-</span>}
+      </td>
+      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
+        {required === false && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
+        {required === true && <XCircle className="h-5 w-5 text-red-500 mx-auto" />}
+        {required === undefined && <span className="text-gray-400">-</span>}
+      </td>
+      <td className="py-3 px-2 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200">{price}</td>
+    </tr>
+  )
+}
+
 export function PricingTable() {
   return (
     <div className="w-full">
       <TooltipProvider>
-        <Tabs defaultValue="fe-minpaku" className="w-full">
+        <Tabs defaultValue="fe-180" className="w-full">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8">
-            <TabsTrigger value="fe-minpaku" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
-              FEプラン (民泊)
+            <TabsTrigger value="fe-180" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
+              FEプラン (最大180日)
             </TabsTrigger>
-            <TabsTrigger value="fe-ryokan" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
-              FEプラン (旅館)
+            <TabsTrigger value="fe-365" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
+              FEプラン (最大365日)
             </TabsTrigger>
-            <TabsTrigger value="ws-minpaku" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm">
-              WSプラン (民泊)
+            <TabsTrigger value="ws-180" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm">
+              WSプラン (最大180日)
             </TabsTrigger>
-            <TabsTrigger value="ws-ryokan" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm">
-              WSプラン (旅館)
+            <TabsTrigger value="ws-365" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm">
+              WSプラン (最大365日)
             </TabsTrigger>
           </TabsList>
 
-          {/* FEプラン（民泊営業） */}
-          <TabsContent value="fe-minpaku">
+          {/* FEプラン（最大180日） */}
+          <TabsContent value="fe-180">
             <Card className="bg-white border-gray-200 shadow-lg">
               <CardHeader className="pb-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
@@ -33,9 +68,9 @@ export function PricingTable() {
                     <Badge className="mb-2 bg-gold-100 text-gold-600 hover:bg-gold-200 border-none">
                       ファミリー・エクスペリエンス
                     </Badge>
-                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">民泊営業プラン</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">最大180日営業プラン</CardTitle>
                     <CardDescription className="text-sm sm:text-base text-gray-600 mt-2">
-                      家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる民泊施設の運営をサポートします。
+                      家族での思い出作りに最適。北海道の自然や文化を体験できる施設の運営をサポートします。（年間最大180日まで）
                     </CardDescription>
                   </div>
                 </div>
@@ -69,7 +104,6 @@ export function PricingTable() {
                         description="旅館業法に関する申請"
                         price="70,000円〜"
                         required={true}
-                        tooltip="行政書士による申請代行費用です。事案により変動する場合があります。必要な場合のみ。"
                       />
                       <PricingRow
                         title="調査代行料"
@@ -88,14 +122,12 @@ export function PricingTable() {
                         description="コンセプトに合わせた家具家電・什器備品の選定・購入・設置（設置コスト含む）"
                         price="100万円"
                         required={true}
-                        tooltip="物件規模やコンセプトにより変動します。ご予算に応じた提案も可能です。"
                       />
                       <PricingRow
                         title="消耗品 提供・交換"
                         description="運営に必要な消耗品（シャンプー、タオル等）の初期設置・定期補充"
                         price="10,000円"
                         required={true}
-                        tooltip="施設の規模や稼働状況に応じて変動します。"
                       />
 
                       {/* 初期システム費用セクション */}
@@ -177,7 +209,6 @@ export function PricingTable() {
                         description="自社HP等で直接予約・決済を受ける機能（初期設定費別途）"
                         price="5,000円 + 100円/部屋"
                         required={false}
-                        tooltip="ブッキングエンジン①(5000円)と②(100円/部屋)の合算です。"
                       />
                       <PricingRow
                         title="決済連携機能"
@@ -202,8 +233,8 @@ export function PricingTable() {
             </Card>
           </TabsContent>
 
-          {/* FEプラン（旅館営業） */}
-          <TabsContent value="fe-ryokan">
+          {/* FEプラン（最大365日） */}
+          <TabsContent value="fe-365">
             <Card className="bg-white border-gray-200 shadow-lg">
               <CardHeader className="pb-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
@@ -211,9 +242,9 @@ export function PricingTable() {
                     <Badge className="mb-2 bg-gold-100 text-gold-600 hover:bg-gold-200 border-none">
                       ファミリー・エクスペリエンス
                     </Badge>
-                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">旅館営業プラン</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">最大365日営業プラン</CardTitle>
                     <CardDescription className="text-sm sm:text-base text-gray-600 mt-2">
-                      家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる旅館施設の運営をサポートします。
+                      家族での思い出作りに最適。北海道の自然や文化を体験できる施設の運営をサポートします。（旅館業許可）
                     </CardDescription>
                   </div>
                 </div>
@@ -232,7 +263,7 @@ export function PricingTable() {
                     <tbody>
                       {/* 基本料金セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
                           基本料金
                         </td>
                       </tr>
@@ -260,19 +291,17 @@ export function PricingTable() {
                         description="コンセプトに合わせた家具家電・什器備品の選定・購入・設置（設置コスト含む）"
                         price="別途見積"
                         required={true}
-                        tooltip="物件規模やコンセプトにより変動します。ご予算に応じた提案も可能です。"
                       />
                       <PricingRow
                         title="消耗品 提供・交換"
                         description="運営に必要な消耗品（シャンプー、タオル等）の初期設置・定期補充"
                         price="別途見積"
                         required={true}
-                        tooltip="施設の規模や稼働状況に応じて変動します。"
                       />
 
                       {/* 初期システム費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
                           初期システム費用
                         </td>
                       </tr>
@@ -287,7 +316,6 @@ export function PricingTable() {
                         description="旅館業法対応のための追加システム連携（施設単位）"
                         price="50,000円"
                         required={true}
-                        tooltip="旅館業営業に必要な帳簿管理システム等との連携設定です。"
                       />
                       <PricingRow
                         title="チェックイン用タブレット"
@@ -304,7 +332,7 @@ export function PricingTable() {
 
                       {/* ランニング費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -347,7 +375,7 @@ export function PricingTable() {
 
                       {/* オプション費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -356,7 +384,6 @@ export function PricingTable() {
                         description="自社HP等で直接予約・決済を受ける機能（初期設定費別途）"
                         price="5,000円 + 100円/部屋"
                         required={false}
-                        tooltip="ブッキングエンジン①(5000円)と②(100円/部屋)の合算です。"
                       />
                       <PricingRow
                         title="決済連携機能"
@@ -381,8 +408,8 @@ export function PricingTable() {
             </Card>
           </TabsContent>
 
-          {/* WSプラン（民泊営業） */}
-          <TabsContent value="ws-minpaku">
+          {/* WSプラン（最大180日） */}
+          <TabsContent value="ws-180">
             <Card className="bg-white border-gray-200 shadow-lg">
               <CardHeader className="pb-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
@@ -390,9 +417,9 @@ export function PricingTable() {
                     <Badge className="mb-2 bg-blue-100 text-blue-600 hover:bg-blue-200 border-none">
                       ワーカーズ・スマート
                     </Badge>
-                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">民泊営業プラン</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">最大180日営業プラン</CardTitle>
                     <CardDescription className="text-sm sm:text-base text-gray-600 mt-2">
-                      ビジネス利用やワーケーションに最適化。高速Wi-Fi、ワークスペースを備えたスマートな運営をサポートします。
+                      ビジネス利用やワーケーションに最適化。スマートな運営をサポートします。（年間最大180日まで）
                     </CardDescription>
                   </div>
                 </div>
@@ -426,7 +453,6 @@ export function PricingTable() {
                         description="住宅宿泊事業法に関する申請を行政書士がサポート（民泊運営には許認可が必須です）"
                         price="70,000円〜"
                         required={true}
-                        tooltip="行政書士による申請代行費用です。事案により変動する場合があります。"
                       />
                       <PricingRow
                         title="調査代行料"
@@ -439,14 +465,12 @@ export function PricingTable() {
                         description="家具家電・什器備品の選定・購入・設置"
                         price="別途見積"
                         required={true}
-                        tooltip="ワーク環境に必要な設備により変動します。"
                       />
                       <PricingRow
                         title="消耗品 提供・交換"
                         description="運営に必要な消耗品の初期設置・定期補充"
                         price="別途見積"
                         required={true}
-                        tooltip="施設の規模や稼働状況に応じて変動します。"
                       />
 
                       {/* 初期システム費用 */}
@@ -510,7 +534,6 @@ export function PricingTable() {
                         description="自社HP等で直接予約・決済を受ける機能（初期設定費別途）"
                         price="5,000円 + 100円/部屋"
                         required={false}
-                        tooltip="ブッキングエンジン①(5000円)と②(100円/部屋)の合算です。"
                       />
                       <PricingRow
                         title="決済連携機能"
@@ -535,8 +558,8 @@ export function PricingTable() {
             </Card>
           </TabsContent>
 
-          {/* WSプラン（旅館営業） */}
-          <TabsContent value="ws-ryokan">
+          {/* WSプラン（最大365日） */}
+          <TabsContent value="ws-365">
             <Card className="bg-white border-gray-200 shadow-lg">
               <CardHeader className="pb-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
@@ -544,9 +567,9 @@ export function PricingTable() {
                     <Badge className="mb-2 bg-blue-100 text-blue-600 hover:bg-blue-200 border-none">
                       ワーカーズ・スマート
                     </Badge>
-                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">旅館営業プラン</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl text-gray-900 font-light">最大365日営業プラン</CardTitle>
                     <CardDescription className="text-sm sm:text-base text-gray-600 mt-2">
-                      ビジネス利用やワーケーションに最適化。高速Wi-Fi、ワークスペースを備えたスマートな旅館施設の運営をサポート。
+                      ビジネス利用やワーケーションに最適化。スマートな施設の運営をサポートします。（旅館業許可）
                     </CardDescription>
                   </div>
                 </div>
@@ -593,14 +616,12 @@ export function PricingTable() {
                         description="家具家電・什器備品の選定・購入・設置"
                         price="別途見積"
                         required={true}
-                        tooltip="ワーク環境に必要な設備により変動します。"
                       />
                       <PricingRow
                         title="消耗品 提供・交換"
                         description="運営に必要な消耗品の初期設置・定期補充"
                         price="別途見積"
                         required={true}
-                        tooltip="施設の規模や稼働状況に応じて変動します。"
                       />
 
                       {/* 初期システム費用 */}
@@ -620,7 +641,6 @@ export function PricingTable() {
                         description="旅館業法対応のための追加システム連携（施設単位）"
                         price="50,000円"
                         required={true}
-                        tooltip="旅館業営業に必要な帳簿管理システム等との連携設定です。"
                       />
                       <PricingRow
                         title="チェックイン用タブレット"
@@ -689,7 +709,6 @@ export function PricingTable() {
                         description="自社HP等で直接予約・決済を受ける機能（初期設定費別途）"
                         price="5,000円 + 100円/部屋"
                         required={false}
-                        tooltip="ブッキングエンジン①(5000円)と②(100円/部屋)の合算です。"
                       />
                       <PricingRow
                         title="決済連携機能"
@@ -716,48 +735,6 @@ export function PricingTable() {
         </Tabs>
       </TooltipProvider>
     </div>
-  )
-}
-
-function PricingRow({
-  title,
-  description,
-  price,
-  required,
-  tooltip,
-}: {
-  title: string
-  description: string
-  price: string
-  required?: boolean
-  tooltip?: string
-}) {
-  return (
-    <tr className="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50">
-      <td className="py-3 px-2 sm:px-4 align-top">
-        <div className="flex items-center">
-          <span className="font-medium text-gray-800">{title}</span>
-          {tooltip && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <HelpCircle className="ml-1 h-3 w-3 text-gray-400 cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="max-w-xs text-xs">{tooltip}</p>
-              </TooltipContent>
-            </Tooltip>
-          )}
-        </div>
-        <p className="text-xs text-gray-500 mt-0.5">{description}</p>
-      </td>
-      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
-        {required === true && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
-      </td>
-      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
-        {required === false && <span className="text-gray-400">-</span>}
-      </td>
-      <td className="py-3 px-2 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200">{price}</td>
-    </tr>
   )
 }
 

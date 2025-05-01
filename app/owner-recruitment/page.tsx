@@ -59,14 +59,12 @@ export default function OwnerRecruitmentPage() {
                 一般賃貸・民泊・マンスリーを組み合わせた三位一体の運用で、安定した高収益を実現します。
               </p>
               
-              <div className="pt-6">
-                <Link 
-                  href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gold-500 hover:bg-gold-600 text-white text-lg font-medium rounded-md shadow-lg hover:shadow-xl transition-all group"
-                >
-                  無料相談を予約する
-                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+              <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                <Button size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white hover:from-amber-600 hover:to-yellow-600" asChild>
+                  <Link href="/contact#contact-form">
+                    無料相談を予約する
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -328,18 +326,10 @@ export default function OwnerRecruitmentPage() {
             <div className="flex flex-col justify-center">
               <div className="space-y-6">
                 <Link 
-                  href="/contact"
+                  href="/contact#contact-form"
                   className="inline-block w-full py-4 px-6 border border-white text-center text-white hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   無料相談を予約する
-                </Link>
-                
-                <Link 
-                  href="#"
-                  className="inline-flex items-center justify-center w-full py-4 px-6 text-center text-white hover:text-gray-300 transition-colors duration-300"
-                >
-                  資料をダウンロード
-                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
             </div>

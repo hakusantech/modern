@@ -79,7 +79,7 @@ export default function CleaningPage() {
               
               <div className="pt-4">
                 <Button className="bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-white font-normal px-8 py-6 h-auto text-lg shadow-lg shadow-gold-300/20 hover:shadow-xl hover:shadow-gold-300/30 transition-all duration-300 border-none" asChild>
-                  <Link href="/#contact">
+                  <Link href="/contact">
                     無料相談を予約する
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -510,7 +510,7 @@ export default function CleaningPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button className="bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-white font-normal px-8 py-6 h-auto text-lg shadow-lg shadow-gold-300/20 hover:shadow-xl hover:shadow-gold-300/30 transition-all duration-300 border-none" asChild>
-                    <Link href="/#contact">
+                    <Link href="/contact">
                       無料相談を予約する
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
