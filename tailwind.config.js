@@ -177,12 +177,42 @@ module.exports = {
           "0%, 100%": { opacity: 1 },
           "50%": { opacity: 0.5 },
         },
+        fall: {
+          '0%': {
+            transform: 'translateY(0) rotate(0deg) translateX(10px)',
+            opacity: 0
+          },
+          '5%': {
+            opacity: 0.3
+          },
+          '15%': {
+            opacity: 0.7
+          },
+          '25%': {
+            transform: 'translateY(25vh) translateX(-20px) rotate(90deg)',
+          },
+          '50%': {
+            transform: 'translateY(50vh) translateX(20px) rotate(180deg)',
+          },
+          '75%': {
+            transform: 'translateY(75vh) translateX(-20px) rotate(270deg)',
+            opacity: 0.8
+          },
+          '90%': {
+            opacity: 0.3
+          },
+          '100%': {
+            transform: 'translateY(110vh) translateX(10px) rotate(360deg)',
+            opacity: 0
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "floatUp 3s ease-in-out infinite",
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        'fall': 'fall 15s ease-in-out infinite'
       },
       fontFamily: {
         sans: ["var(--font-inter)", "var(--font-noto-sans)", "system-ui", "sans-serif"],

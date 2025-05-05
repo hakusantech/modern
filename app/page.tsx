@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRight, ArrowUpRight, ChevronRight, Clock, Shield, Users, Calendar, TrendingUp, Building, PieChart, Percent } from "lucide-react"
 import { Metadata } from "next"
 import { cn } from "@/lib/utils"
+import { SakuraEffect } from "@/components/sakura-effect"
 
 export const metadata: Metadata = {
   title: "CleanNest Hokkaido｜札幌・北海道のインバウンド特化型民泊運営代行",
@@ -167,74 +168,73 @@ const news = [
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
+      {/* Add SakuraEffect just for the home page */}
+      <SakuraEffect />
+      
       {/* 1. スライダー（キャッチーなバナー） - 高級感あるデザイン */}
       <section className="relative h-screen flex items-center overflow-hidden">
-        {/* Image Slider - Static version for now, would need a client component for actual slider */}
+        {/* Full-width background image */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/sapporo-tv-tower-illumination.jpg"
-            alt="Premium vacation rental management in Hokkaido"
-            fill
-            priority
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-black/60 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+          <div className="absolute inset-0">
+            <Image
+              src="/images/32481294_m.jpg"
+              alt="CleanNest Hokkaido 民泊運営"
+              fill
+              priority
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent" />
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="container relative z-10 px-4 sm:px-6 lg:px-8 text-center sm:text-left">
-          <div className="max-w-3xl mx-auto sm:mx-0">
-            <div className="inline-block px-4 py-1 bg-gold-500/20 border border-gold-400 rounded-full text-gold-300 mb-6">
-              <p className="text-xs sm:text-sm tracking-wide">地域貢献と収益性の両立を実現</p>
+        {/* Content Container - Full width with right-aligned content */}
+        <div className="container relative z-10 mx-auto h-full flex justify-end items-center px-4 sm:px-6 lg:px-8">
+          {/* Right-aligned content box */}
+          <div className="w-full max-w-xl bg-black/30 backdrop-blur-sm p-12 rounded-md border-l-4 border-gold-500">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-8 h-[1px] bg-gold-400"></div>
+              <p className="text-sm uppercase tracking-widest text-gold-300 font-light">Innovation × Luxury</p>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-6">
-              インバウンド専門民泊<br />
-              <span className="relative inline-block font-normal">
-                運営代行
-                <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-px bg-gold-500"></span>
-              </span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-light text-white leading-none tracking-tight mb-6">
+              <span className="block">インバウンド</span>
+              <span className="block font-normal text-gold-300">民泊運営代行</span>
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-white font-light mb-6 leading-relaxed">
-              眠っている不動産資産を<span className="text-gold-400 font-normal">北海道の魅力を伝える拠点</span>に。
+            <p className="text-xl text-white/80 font-light mb-8 leading-relaxed">
+              眠っている不動産資産を<span className="text-gold-300 font-normal">北海道の魅力を伝える拠点</span>に。
               <span className="hidden md:inline">
-                {" "}投資としての合理性と地域への貢献を両立させる、新しい不動産活用の形をご提案します。
+                {" "}投資としての合理性と地域への貢献を両立させる新しい不動産活用の形。
               </span>
             </p>
             
-            <ul className="mb-8 space-y-2 text-sm sm:text-base">
-              <li className="flex items-center text-white/90">
-                <div className="w-5 h-5 rounded-full border border-gold-400 flex-shrink-0 flex items-center justify-center mr-3">
-                  <div className="w-2 h-2 bg-gold-400 rounded-full"></div>
-                </div>
-                <span>空き家の有効活用で地域活性化に貢献</span>
-              </li>
-              <li className="flex items-center text-white/90">
-                <div className="w-5 h-5 rounded-full border border-gold-400 flex-shrink-0 flex items-center justify-center mr-3">
-                  <div className="w-2 h-2 bg-gold-400 rounded-full"></div>
-                </div>
-                <span>安定した収益で資産価値を最大化</span>
-              </li>
-              <li className="flex items-center text-white/90">
-                <div className="w-5 h-5 rounded-full border border-gold-400 flex-shrink-0 flex items-center justify-center mr-3">
-                  <div className="w-2 h-2 bg-gold-400 rounded-full"></div>
-                </div>
-                <span>管理の手間なく北海道の魅力を世界に発信</span>
-              </li>
-            </ul>
+            <div className="mb-10 space-y-3">
+              <div className="flex items-center text-white">
+                <div className="w-1 h-1 bg-gold-400 rounded-full mr-3"></div>
+                <span className="text-sm text-white">空き家の有効活用で地域活性化に貢献</span>
+              </div>
+              <div className="flex items-center text-white">
+                <div className="w-1 h-1 bg-gold-400 rounded-full mr-3"></div>
+                <span className="text-sm text-white">安定した収益で資産価値を最大化</span>
+              </div>
+              <div className="flex items-center text-white">
+                <div className="w-1 h-1 bg-gold-400 rounded-full mr-3"></div>
+                <span className="text-sm text-white">管理の手間なく北海道の魅力を世界に発信</span>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
                 href="/contact"
-                className="inline-block px-6 sm:px-8 py-3 sm:py-4 border border-white text-white hover:bg-white hover:text-black transition-all duration-300 text-base sm:text-lg tracking-wide"
+                className="group px-6 sm:px-8 py-3 border border-gold-500 text-white hover:bg-gold-500 hover:text-black transition-all duration-300 text-sm sm:text-base tracking-wide flex items-center justify-center"
               >
                 無料相談はこちら
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               
               <Link 
                 href="/about"
-                className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-white/10 text-white hover:bg-white/20 transition-all duration-300 text-base sm:text-lg tracking-wide"
+                className="px-6 sm:px-8 py-3 border border-gold-500 text-white hover:border-white/40 transition-all duration-300 text-sm sm:text-base tracking-wide flex items-center justify-center"
               >
                 私たちの想い
               </Link>
@@ -242,9 +242,12 @@ export default function HomePage() {
           </div>
         </div>
         
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gold-500/10 to-transparent z-0 pointer-events-none hidden sm:block"></div>
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/50 to-transparent z-0 pointer-events-none"></div>
+        {/* Left Decorative Element */}
+        <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-transparent to-transparent pointer-events-none">
+          <div className="absolute top-1/2 left-8 transform -translate-y-1/2">
+            <div className="h-64 w-1 bg-gold-400/20"></div>
+          </div>
+        </div>
       </section>
 
       {/* 2. CleanNestの想いとコンセプト */}
