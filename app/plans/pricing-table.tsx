@@ -1,8 +1,25 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { HelpCircle, CheckCircle2, XCircle } from "lucide-react"
+import { HelpCircle, CheckCircle2, XCircle, AlertCircle } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+
+// ヘルパーコンポーネント - チェックコラムの意味を説明するツールチップ
+function ColumnHelperTooltip({ children, text }: { children: React.ReactNode, text: string }) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className="inline-flex items-center cursor-help">
+          {children}
+          <AlertCircle className="h-3 w-3 ml-1 text-gray-400" />
+        </div>
+      </TooltipTrigger>
+      <TooltipContent className="max-w-xs p-2 text-xs bg-white text-gray-800 border border-gray-300">
+        <p>{text}</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}
 
 // Define PricingRow component first
 function PricingRow({
@@ -16,23 +33,42 @@ function PricingRow({
   price: string
   required?: boolean
 }) {
+  // 行の背景色を必須項目の場合は少し強調する
+  const rowBgClass = required === true 
+    ? "border-b border-gray-100 hover:bg-gray-50 bg-gray-50" 
+    : "border-b border-gray-100 hover:bg-gray-50";
+  
   return (
-    <tr className="border-b border-gray-100 hover:bg-gray-50">
+    <tr className={rowBgClass}>
       <td className="py-3 px-2 sm:px-4 align-top">
         <div className="flex items-center">
           <span className="font-medium text-gray-800">{title}</span>
+          {required === true && (
+            <span className="ml-2 text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">必須</span>
+          )}
+          {required === false && (
+            <span className="ml-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium">任意</span>
+          )}
         </div>
         <p className="text-xs text-gray-600 mt-1">{description}</p>
       </td>
       <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
-        {required === true && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
-        {required === false && <XCircle className="h-5 w-5 text-red-500 mx-auto" />}
-        {required === undefined && <span className="text-gray-400">-</span>}
+        {required === true ? (
+          <div className="flex items-center justify-center">
+            <CheckCircle2 className="h-5 w-5 text-green-500" />
+          </div>
+        ) : (
+          <span className="text-gray-400">-</span>
+        )}
       </td>
       <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
-        {required === false && <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />}
-        {required === true && <XCircle className="h-5 w-5 text-red-500 mx-auto" />}
-        {required === undefined && <span className="text-gray-400">-</span>}
+        {required === false ? (
+          <div className="flex items-center justify-center">
+            <CheckCircle2 className="h-5 w-5 text-green-500" />
+          </div>
+        ) : (
+          <span className="text-gray-400">-</span>
+        )}
       </td>
       <td className="py-3 px-2 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200">{price}</td>
     </tr>
@@ -44,6 +80,15 @@ export function PricingTable() {
     <div className="w-full">
       <TooltipProvider>
         <Tabs defaultValue="fe-180" className="w-full">
+          {/* 説明テキスト */}
+          <div className="bg-blue-50 p-4 mb-4 rounded-lg text-sm text-blue-800">
+            <div className="font-medium mb-1">料金表の見方</div>
+            <ul className="text-xs space-y-1 list-disc pl-4">
+              <li><span className="inline-flex items-center"><CheckCircle2 className="h-4 w-4 text-green-500 mr-1" />マークの付いている項目がそれぞれの列で必要または選択可能なオプションです</span></li>
+              <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full font-medium">必須</span>のラベルが付いている項目は各プランで必要な項目です</span></li>
+              <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full font-medium">任意</span>のラベルが付いている項目はオプション項目です</span></li>
+            </ul>
+          </div>
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8">
             <TabsTrigger value="fe-180" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
               FEプラン (最大180日)
