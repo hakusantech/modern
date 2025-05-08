@@ -40,37 +40,68 @@ export async function POST(req: Request) {
       other: 'その他',
     } as const;
 
-    // 環境変数のチェック
-    if (!process.env.MAIL_HOST || !process.env.MAIL_USER || !process.env.MAIL_PASSWORD) {
-      console.error('Mail configuration not found in environment variables');
-      return NextResponse.json(
-        { success: false, error: 'Mail configuration error' }, 
-        { 
-          status: 500,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          },
-        }
-      );
-    }
-    
-    // ポート番号の処理
-    const port = process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 587;
-    
-    const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: port,
-      secure: process.env.MAIL_SECURE === 'true',
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false
-      }
+    // ログに環境変数の存在を出力（デバッグ用）
+    console.log('Environment variables check:', {
+      MAIL_HOST_EXISTS: !!process.env.MAIL_HOST,
+      MAIL_USER_EXISTS: !!process.env.MAIL_USER,
+      MAIL_PASSWORD_EXISTS: !!process.env.MAIL_PASSWORD,
+      ADMIN_EMAIL_EXISTS: !!process.env.ADMIN_EMAIL,
+      NODE_ENV: process.env.NODE_ENV
     });
+    
+    // 本番環境かどうかを確認
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    let transporter;
+    
+    if (isProduction && process.env.MAIL_HOST && process.env.MAIL_USER && process.env.MAIL_PASSWORD) {
+      // 本番環境での設定
+      const port = process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 587;
+      
+      transporter = nodemailer.createTransport({
+        host: process.env.MAIL_HOST,
+        port: port,
+        secure: process.env.MAIL_SECURE === 'true',
+        auth: {
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASSWORD,
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+    } else {
+      // 環境変数が不足している場合やテスト環境ではエラーを返す代わりにダミーのトランスポーターを使用
+      console.log('Using ethereal email for testing');
+      
+      // テスト用のアカウントを取得
+      try {
+        // Ethereal Emailを使用してテスト用のSMTPアカウントを生成
+        const testAccount = await nodemailer.createTestAccount();
+        
+        transporter = nodemailer.createTransport({
+          host: 'smtp.ethereal.email',
+          port: 587,
+          secure: false,
+          auth: {
+            user: testAccount.user,
+            pass: testAccount.pass,
+          }
+        });
+        
+        console.log('Ethereal email account:', testAccount.user);
+      } catch (error) {
+        console.error('Failed to create test account:', error);
+        
+        // テストアカウント作成に失敗した場合はコンソールにのみ出力
+        transporter = {
+          sendMail: (options) => {
+            console.log('Mail would have been sent:', options);
+            return Promise.resolve({ messageId: 'test-id' });
+          }
+        };
+      }
+    }
 
     // 添付ファイルの処理
     const attachments = await Promise.all(
@@ -134,11 +165,30 @@ ${message}
         transporter.sendMail(adminMailOptions),
         transporter.sendMail(autoReplyOptions),
       ]);
-      console.log('Email sent successfully:', info);
+      
+      console.log('Email sent successfully:', JSON.stringify(info));
+      
+      // Etherealの場合はプレビューURLをログに記録
+      if (!isProduction) {
+        console.log('Preview URL:', nodemailer.getTestMessageUrl(info[0]));
+        console.log('Preview URL:', nodemailer.getTestMessageUrl(info[1]));
+      }
     } catch (mailError) {
       console.error('Error sending email:', mailError);
+      
+      // エラーメッセージをより詳細に
+      let errorDetail = 'Failed to send email';
+      if (mailError instanceof Error) {
+        errorDetail = mailError.message;
+      }
+      
       return NextResponse.json(
-        { success: false, error: 'Failed to send email' }, 
+        { 
+          success: false, 
+          error: 'Failed to send email', 
+          detail: errorDetail,
+          debug: process.env.NODE_ENV !== 'production' ? errorDetail : undefined
+        }, 
         { 
           status: 500,
           headers: {

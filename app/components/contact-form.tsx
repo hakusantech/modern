@@ -45,17 +45,47 @@ async function submitContactForm(formData: FormData) {
       body: form,
     });
 
-    if (!response.ok) {
-      throw new Error('サーバーへの送信に失敗しました');
-    }
+    // レスポンスのステータスコードをログに記録
+    console.log('API Response Status:', response.status);
 
+    // レスポンスのJSONを取得
     const data = await response.json();
+    
+    // サーバーからのレスポンスをログに記録
+    console.log('API Response Data:', data);
+
+    if (!response.ok) {
+      // サーバーから返されたエラー情報を使用
+      return { 
+        success: false, 
+        error: data.error || 'サーバーへの送信に失敗しました',
+        detail: data.detail || data.error || 'サーバーへの送信に失敗しました'
+      };
+    }
 
     // 成功したレスポンスを返す
     return { success: true };
   } catch (error) {
     console.error('送信エラー:', error);
-    return { success: false, error: '送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。' };
+    
+    // エラーメッセージの詳細を取得
+    let errorMessage = '送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。';
+    let errorDetail = '';
+    
+    if (error instanceof Error) {
+      errorDetail = error.message;
+      
+      // ネットワークエラーかどうかをチェック
+      if (error.message.includes('Failed to fetch') || error.message.includes('Network Error')) {
+        errorMessage = 'ネットワークエラーが発生しました。インターネット接続を確認してください。';
+      }
+    }
+    
+    return { 
+      success: false, 
+      error: errorMessage,
+      detail: errorDetail
+    };
   }
 }
 
@@ -174,10 +204,29 @@ export function ContactForm() {
       } else {
         // エラーメッセージを設定
         setSubmitError(result.error || "送信に失敗しました。もう一度お試しください。");
+        
+        // 詳細なエラーをコンソールに出力
+        if (result.detail) {
+          console.error("詳細エラー:", result.detail);
+        }
       }
     } catch (error) {
       console.error("送信エラー:", error)
-      setSubmitError("送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。")
+      
+      // エラーメッセージをより具体的に
+      let errorMessage = "送信中にエラーが発生しました。しばらく経ってからもう一度お試しください。";
+      
+      if (error instanceof Error) {
+        const networkError = error.message.includes("Failed to fetch") || 
+                            error.message.includes("Network Error") ||
+                            error.message.includes("network request failed");
+                            
+        if (networkError) {
+          errorMessage = "ネットワークエラーが発生しました。インターネット接続を確認してください。";
+        }
+      }
+      
+      setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false)
     }
