@@ -1183,7 +1183,7 @@ export default function PricingSimulator() {
 
           {/* Note box simplified */}
           <div className="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <p className="text-gray-700 text-sm">
+            <p className="text-gray-700 text-sm text-left">
               ※ 表示価格はすべて税抜きです。別途消費税がかかります。
               <br />※ こちらはシミュレーション結果であり、実際の料金は物件の状況や詳細な要件によって異なる場合があります。
               <br />※ 詳細なお見積りについては、お問い合わせください。

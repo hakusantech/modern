@@ -40,37 +40,19 @@ function PricingRow({
   
   return (
     <tr className={rowBgClass}>
-      <td className="py-3 px-2 sm:px-4 align-top">
-        <div className="flex items-center">
+      <td className="py-3 px-3 sm:px-4 align-top">
+        <div className="flex flex-wrap items-center">
           <span className="font-medium text-gray-800">{title}</span>
           {required === true && (
-            <span className="ml-2 text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">必須</span>
+            <span className="ml-1 sm:ml-2 text-xs bg-red-100 text-red-700 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">必須</span>
           )}
           {required === false && (
-            <span className="ml-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium">任意</span>
+            <span className="ml-1 sm:ml-2 text-xs bg-blue-50 text-blue-600 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">任意</span>
           )}
         </div>
-        <p className="text-xs text-gray-600 mt-1">{description}</p>
+        <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">{description}</p>
       </td>
-      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
-        {required === true ? (
-          <div className="flex items-center justify-center">
-            <CheckCircle2 className="h-5 w-5 text-green-500" />
-          </div>
-        ) : (
-          <span className="text-gray-400">-</span>
-        )}
-      </td>
-      <td className="py-3 px-2 sm:px-4 text-center align-middle border-l border-gray-200">
-        {required === false ? (
-          <div className="flex items-center justify-center">
-            <CheckCircle2 className="h-5 w-5 text-green-500" />
-          </div>
-        ) : (
-          <span className="text-gray-400">-</span>
-        )}
-      </td>
-      <td className="py-3 px-2 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200">{price}</td>
+      <td className="py-3 px-3 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200 min-w-[100px]">{price}</td>
     </tr>
   )
 }
@@ -84,23 +66,26 @@ export function PricingTable() {
           <div className="bg-blue-50 p-4 mb-4 rounded-lg text-sm text-blue-800">
             <div className="font-medium mb-1">料金表の見方</div>
             <ul className="text-xs space-y-1 list-disc pl-4">
-              <li><span className="inline-flex items-center"><CheckCircle2 className="h-4 w-4 text-green-500 mr-1" />マークの付いている項目がそれぞれの列で必要または選択可能なオプションです</span></li>
               <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full font-medium">必須</span>のラベルが付いている項目は各プランで必要な項目です</span></li>
-              <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full font-medium">任意</span>のラベルが付いている項目はオプション項目です</span></li>
+              <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full font-medium">任意</span>のラベルが付いている項目はオプションとなります</span></li>
             </ul>
           </div>
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8">
-            <TabsTrigger value="fe-180" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
-              FEプラン (最大180日)
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8 overflow-hidden gap-0.5">
+            <TabsTrigger value="fe-180" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
+              <span className="block">FEプラン</span>
+              <span className="block text-[10px] sm:text-xs">(最大180日)</span>
             </TabsTrigger>
-            <TabsTrigger value="fe-365" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm">
-              FEプラン (最大365日)
+            <TabsTrigger value="fe-365" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
+              <span className="block">FEプラン</span>
+              <span className="block text-[10px] sm:text-xs">(最大365日)</span>
             </TabsTrigger>
-            <TabsTrigger value="ws-180" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm">
-              WSプラン (最大180日)
+            <TabsTrigger value="ws-180" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
+              <span className="block">WSプラン</span>
+              <span className="block text-[10px] sm:text-xs">(最大180日)</span>
             </TabsTrigger>
-            <TabsTrigger value="ws-365" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm">
-              WSプラン (最大365日)
+            <TabsTrigger value="ws-365" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
+              <span className="block">WSプラン</span>
+              <span className="block text-[10px] sm:text-xs">(最大365日)</span>
             </TabsTrigger>
           </TabsList>
 
@@ -121,20 +106,18 @@ export function PricingTable() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
                   <table className="w-full border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
+                        <th className="py-3 px-3 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
+                        <th className="py-3 px-3 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200 min-w-[100px] w-28 sm:w-32">料金</th>
                       </tr>
                     </thead>
                     <tbody>
                       {/* 基本料金セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           基本料金
                         </td>
                       </tr>
@@ -177,7 +160,7 @@ export function PricingTable() {
 
                       {/* 初期システム費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           初期システム費用
                         </td>
                       </tr>
@@ -202,7 +185,7 @@ export function PricingTable() {
 
                       {/* ランニング費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -245,7 +228,7 @@ export function PricingTable() {
 
                       {/* オプション費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -264,8 +247,8 @@ export function PricingTable() {
                     </tbody>
                   </table>
                 </div>
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
-                  <p className="text-gray-600">
+                <div className="mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
+                  <p className="text-gray-600 leading-relaxed text-left">
                     ※ 表示価格はすべて税抜きです。別途消費税がかかります。
                     <br />※
                     運営代行料は最低利用料金が設定される場合があります。
@@ -295,20 +278,18 @@ export function PricingTable() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
                   <table className="w-full border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
+                        <th className="py-3 px-3 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
+                        <th className="py-3 px-3 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200 min-w-[100px] w-28 sm:w-32">料金</th>
                       </tr>
                     </thead>
                     <tbody>
                       {/* 基本料金セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           基本料金
                         </td>
                       </tr>
@@ -346,7 +327,7 @@ export function PricingTable() {
 
                       {/* 初期システム費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           初期システム費用
                         </td>
                       </tr>
@@ -366,7 +347,6 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
@@ -377,7 +357,7 @@ export function PricingTable() {
 
                       {/* ランニング費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -420,7 +400,7 @@ export function PricingTable() {
 
                       {/* オプション費用セクション */}
                       <tr className="bg-gray-50">
-                        <td colSpan={4} className="py-2 px-4 font-medium text-gold-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -439,8 +419,8 @@ export function PricingTable() {
                     </tbody>
                   </table>
                 </div>
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
-                  <p className="text-gray-600">
+                <div className="mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
+                  <p className="text-gray-600 leading-relaxed text-left">
                     ※ 表示価格はすべて税抜きです。別途消費税がかかります。
                     <br />※
                     運営代行料は最低利用料金が設定される場合があります。
@@ -470,20 +450,18 @@ export function PricingTable() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
                   <table className="w-full border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
+                        <th className="py-3 px-3 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
+                        <th className="py-3 px-3 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200 min-w-[100px] w-28 sm:w-32">料金</th>
                       </tr>
                     </thead>
                     <tbody>
                       {/* 基本料金 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           基本料金
                         </td>
                       </tr>
@@ -520,7 +498,7 @@ export function PricingTable() {
 
                       {/* 初期システム費用 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           初期システム費用
                         </td>
                       </tr>
@@ -534,7 +512,6 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
@@ -545,7 +522,7 @@ export function PricingTable() {
 
                       {/* ランニング費用 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -570,7 +547,7 @@ export function PricingTable() {
 
                       {/* オプション費用 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -589,8 +566,8 @@ export function PricingTable() {
                     </tbody>
                   </table>
                 </div>
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
-                  <p className="text-gray-600">
+                <div className="mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
+                  <p className="text-gray-600 leading-relaxed text-left">
                     ※ 表示価格はすべて税抜きです。別途消費税がかかります。
                     <br />※
                     運営代行料は最低利用料金が設定される場合があります。
@@ -620,20 +597,18 @@ export function PricingTable() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
                   <table className="w-full border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="py-3 px-2 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">必須</th>
-                        <th className="py-3 px-2 sm:px-4 text-center text-gray-900 font-medium w-16 border-l border-gray-200">任意</th>
-                        <th className="py-3 px-2 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200">料金</th>
+                        <th className="py-3 px-3 sm:px-4 text-left text-gray-900 font-medium">プラン内容</th>
+                        <th className="py-3 px-3 sm:px-4 text-right text-gray-900 font-medium border-l border-gray-200 min-w-[100px] w-28 sm:w-32">料金</th>
                       </tr>
                     </thead>
                     <tbody>
                       {/* 基本料金 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           基本料金
                         </td>
                       </tr>
@@ -671,7 +646,7 @@ export function PricingTable() {
 
                       {/* 初期システム費用 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           初期システム費用
                         </td>
                       </tr>
@@ -691,7 +666,6 @@ export function PricingTable() {
                         title="チェックイン用タブレット"
                         description="セルフチェックイン用端末（Lenovo推奨、9〜11インチ）"
                         price="45,000円"
-                        required={false}
                       />
                       <PricingRow
                         title="スマートロック連携キー"
@@ -702,7 +676,7 @@ export function PricingTable() {
 
                       {/* ランニング費用 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -745,7 +719,7 @@ export function PricingTable() {
 
                       {/* オプション費用 */}
                       <tr className="bg-gray-50">
-                        <td colSpan={3} className="py-2 px-4 font-medium text-blue-600">
+                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -764,8 +738,8 @@ export function PricingTable() {
                     </tbody>
                   </table>
                 </div>
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
-                  <p className="text-gray-600">
+                <div className="mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg text-xs sm:text-sm">
+                  <p className="text-gray-600 leading-relaxed text-left">
                     ※ 表示価格はすべて税抜きです。別途消費税がかかります。
                     <br />※
                     運営代行料は最低利用料金が設定される場合があります。
@@ -782,4 +756,3 @@ export function PricingTable() {
     </div>
   )
 }
-

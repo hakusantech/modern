@@ -1,3 +1,4 @@
+import { useIsMobile } from "@/hooks/use-mobile";
 // Since the existing code was omitted and the updates indicate undeclared variables,
 // I will assume the variables are used within the component's logic.
 // Without the original code, I'll declare them at the top of the file to resolve the errors.

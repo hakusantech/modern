@@ -34,7 +34,7 @@ function LuxuryPageLayout({ children }: LuxuryPageLayoutProps) {
       {/* Hero Section with Split Layout */}
       <div className="min-h-[70vh] lg:min-h-[90vh] bg-white relative">
         <div className="container mx-auto h-full">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 h-full">
+          <div className="flex flex-col lg:grid lg:grid-cols-5 h-full">
             {/* Mobile image (shown only on small screens) */}
             <div className="lg:hidden relative h-[40vh] mb-8">
               <Image
@@ -48,7 +48,7 @@ function LuxuryPageLayout({ children }: LuxuryPageLayoutProps) {
             </div>
             
             {/* Content */}
-            <div className="flex flex-col justify-center py-8 lg:py-20 pr-0 lg:pr-12">
+            <div className="flex flex-col justify-center py-8 lg:py-20 pr-0 lg:pr-12 lg:col-span-2">
               <nav className="flex mb-12" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 text-xs tracking-widest whitespace-nowrap">
                   <li className="inline-flex items-center">
@@ -136,7 +136,7 @@ function LuxuryPageLayout({ children }: LuxuryPageLayoutProps) {
             </div>
             
             {/* Right Image */}
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block lg:col-span-3">
               <div className="absolute inset-0 -right-[30%] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent z-10"></div>
                 <Image
@@ -214,7 +214,7 @@ interface ComparisonItemProps {
 function ComparisonItem({ item, minpaku, ryokan }: ComparisonItemProps) {
   return (
     <div className="grid grid-cols-1 gap-6 mb-6">
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-white rounded-lg shadow-sm p-6 border-2 border-gray-200">
         <div className="text-gray-900 mb-4 text-lg">{item}</div>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center">
@@ -320,13 +320,13 @@ const professionalServices = [
 // 民泊と旅館の比較データ
 const comparisonData = [
   { item: "運営コスト", minpaku: "比較的低い", ryokan: "比較的高い" },
-  { 
-    item: <span>年間営業日数<span className="text-xs block text-gold-600">OPERATION DAYS</span></span>,
+  {
+    item: <span>年間営業日数</span>,
     minpaku: "180日以内",
     ryokan: "制限なし"
   },
-  { 
-    item: <span>収益性<span className="text-xs block text-gold-600">PROFITABILITY</span></span>,
+  {
+    item: <span>収益性</span>,
     minpaku: "限定的",
     ryokan: "高い"
   },
@@ -347,11 +347,11 @@ export default function ServicesPage() {
         {/* スタイリッシュな縦並び特徴セクション */}
         <div className="max-w-5xl mx-auto mb-12 lg:mb-20">
           <div className="border-b border-gray-100 py-8 lg:py-16">
-            <div className="flex flex-col md:flex-row md:items-start gap-6 mb-6">
-              <h3 className="text-2xl md:text-3xl font-light md:w-1/3">民泊業の特徴</h3>
-              <div className="md:w-2/3 relative">
+            <div className="flex flex-col lg:flex-row lg:items-start gap-6 mb-6">
+              <h3 className="text-2xl lg:text-3xl font-light lg:w-1/3">民泊業の特徴</h3>
+              <div className="lg:w-2/3 relative">
                 <div className="absolute top-0 left-0 w-1 h-12 bg-gold-600"></div>
-                <p className="text-gray-600 pl-6 max-w-[36ch]">
+                <p className="text-gray-600 pl-6">
                   住宅宿泊事業法に基づき運営され、年間180日以内の営業制限がありますが、
                   住居専用地域でも営業が可能で、比較的少ない初期投資で始められるのが特徴です。
                   外国人観光客を中心としたインバウンド需要の取り込みに適しています。
@@ -361,11 +361,11 @@ export default function ServicesPage() {
           </div>
           
           <div className="py-8 lg:py-16">
-            <div className="flex flex-col md:flex-row md:items-start gap-6 mb-6">
-              <h3 className="text-2xl md:text-3xl font-light md:w-1/3">旅館業の特徴</h3>
-              <div className="md:w-2/3 relative">
+            <div className="flex flex-col lg:flex-row lg:items-start gap-6 mb-6">
+              <h3 className="text-2xl lg:text-3xl font-light lg:w-1/3">旅館業の特徴</h3>
+              <div className="lg:w-2/3 relative">
                 <div className="absolute top-0 left-0 w-1 h-12 bg-gold-600"></div>
-                <p className="text-gray-600 pl-6 max-w-[36ch]">
+                <p className="text-gray-600 pl-6">
                   旅館業法に基づき運営され、営業日数の制限はありませんが、
                   住居専用地域での営業はできず、設備基準も厳しいため初期投資が比較的高額になります。
                   安定した収益が見込め、日本人観光客やビジネス客など幅広い層にアプローチできます。
@@ -410,7 +410,7 @@ export default function ServicesPage() {
         subtitle="SERVICE CONTENTS"
         backgroundColor="bg-white"
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {serviceContents.map((service) => (
             <div key={service.id} className="bg-white border border-gray-100 group hover:border-gold-200 transition-colors">
               <div className="relative h-40 overflow-hidden">
@@ -453,7 +453,7 @@ export default function ServicesPage() {
         <div className="grid grid-cols-1 px-4 md:px-0 max-w-4xl mx-auto">
           {professionalServices.map((service) => (
             <div key={service.id} className="bg-white border border-gray-100 group hover:border-gold-200 transition-colors">
-              <div className="grid grid-cols-1 md:grid-cols-3">
+              <div className="grid grid-cols-1 md:grid-cols-4">
                 <div className="md:col-span-1 relative h-full min-h-[160px] overflow-hidden">
                   <Image
                     src={service.image || "/placeholder.svg"}
@@ -462,12 +462,12 @@ export default function ServicesPage() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="md:col-span-2 p-5 md:p-8">
+                <div className="md:col-span-3 p-5 md:p-8">
                   <h3 className="text-2xl font-light mb-4">{service.title}</h3>
                   <div className="w-10 h-px bg-gold-600 mb-4"></div>
                   <p className="text-gray-600 mb-6 max-w-[36ch]">{service.description}</p>
-                  <Link 
-                    href={service.href} 
+                  <Link
+                    href={service.href}
                     className="inline-flex items-center text-gold-600 border-b border-gold-600 pb-1 group-hover:text-gold-700 group-hover:border-gold-700 transition-colors"
                   >
                     詳細を見る

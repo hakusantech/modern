@@ -225,7 +225,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
                 href="/contact"
-                className="group px-6 sm:px-8 py-3 border border-gold-500 text-white hover:bg-gold-500 hover:text-black transition-all duration-300 text-sm sm:text-base tracking-wide flex items-center justify-center"
+                className="group px-6 sm:px-8 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 text-sm sm:text-base tracking-wide flex items-center justify-center rounded-md shadow-md"
               >
                 無料相談はこちら
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -233,9 +233,10 @@ export default function HomePage() {
               
               <Link 
                 href="/about"
-                className="px-6 sm:px-8 py-3 border border-gold-500 text-white hover:border-white/40 transition-all duration-300 text-sm sm:text-base tracking-wide flex items-center justify-center"
+                className="group px-6 sm:px-8 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 text-sm sm:text-base tracking-wide flex items-center justify-center rounded-md shadow-md"
               >
                 私たちの想い
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -304,10 +305,10 @@ export default function HomePage() {
               <div className="mt-12">
                 <Link 
                   href="/about"
-                  className="inline-flex items-center text-black border-b border-gold-500 pb-1 hover:border-gold-600 transition-colors group"
+                  className="inline-flex items-center px-6 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 rounded-md shadow-md group"
                 >
                   CleanNest Hokkaidoについて詳しく見る
-                  <ArrowRight className="ml-2 h-4 w-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -748,7 +749,7 @@ export default function HomePage() {
           
           <Link 
             href="/contact#contact-form"
-              className="inline-block px-12 py-5 bg-gold-500 text-white hover:bg-gold-600 transition-colors text-xl tracking-wide shadow-lg"
+            className="inline-block px-12 py-5 bg-gold-500 text-white hover:bg-gold-600 transition-colors text-xl tracking-wide shadow-lg rounded-md"
           >
               無料相談を予約する
           </Link>

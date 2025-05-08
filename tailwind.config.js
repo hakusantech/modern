@@ -240,6 +240,47 @@ module.exports = {
             transform: 'translateY(110vh) rotate(360deg) translateX(var(--swing-x1))',
             opacity: 0
           }
+        },
+        "sakura-fall": {
+          '0%': {
+            transform: 'translateY(0) scale(var(--scale-variation)) translateX(var(--swing-x1))',
+            opacity: 0
+          },
+          '3%': {
+            opacity: 0.2,
+            transform: 'translateY(3vh) scale(var(--scale-variation)) rotate(calc(var(--rotation-speed) * 0.05)) translateX(var(--swing-x2))'
+          },
+          '10%': {
+            opacity: 0.7,
+            transform: 'translateY(10vh) scale(calc(var(--scale-variation) * 1.05)) rotate(calc(var(--rotation-speed) * 0.15)) translateX(var(--swing-x3))'
+          },
+          '20%': {
+            transform: 'translateY(20vh) scale(calc(var(--scale-variation) * 0.98)) rotate(calc(var(--rotation-speed) * 0.35)) translateX(var(--swing-x4))'
+          },
+          '30%': {
+            transform: 'translateY(30vh) scale(var(--scale-variation)) rotate(calc(var(--rotation-speed) * 0.45)) translateX(var(--swing-x5))'
+          },
+          '40%': {
+            transform: 'translateY(40vh) scale(calc(var(--scale-variation) * 1.02)) rotate(calc(var(--rotation-speed) * 0.55)) translateX(var(--swing-x6))'
+          },
+          '50%': {
+            transform: 'translateY(50vh) scale(var(--scale-variation)) rotate(calc(var(--rotation-speed) * 0.65)) translateX(var(--swing-x7))'
+          },
+          '65%': {
+            transform: 'translateY(65vh) scale(calc(var(--scale-variation) * 0.95)) rotate(calc(var(--rotation-speed) * 0.75)) translateX(var(--swing-x8))'
+          },
+          '80%': {
+            transform: 'translateY(80vh) scale(var(--scale-variation)) rotate(calc(var(--rotation-speed) * 0.85)) translateX(var(--swing-x9))',
+            opacity: 0.9
+          },
+          '95%': {
+            transform: 'translateY(95vh) scale(calc(var(--scale-variation) * 1.03)) rotate(calc(var(--rotation-speed) * 0.95)) translateX(var(--swing-x1))',
+            opacity: 0.6
+          },
+          '100%': {
+            transform: 'translateY(110vh) scale(var(--scale-variation)) rotate(var(--rotation-speed)) translateX(var(--swing-x5))',
+            opacity: 0
+          }
         }
       },
       animation: {
@@ -248,7 +289,8 @@ module.exports = {
         "float": "floatUp 3s ease-in-out infinite",
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         'fall': 'fall 15s ease-in-out infinite',
-        'enhanced-fall': 'enhanced-fall var(--fall-duration) ease-in-out infinite var(--fall-delay)'
+        'enhanced-fall': 'enhanced-fall var(--fall-duration) ease-in-out infinite var(--fall-delay)',
+        'sakura-fall': 'sakura-fall var(--fall-duration) cubic-bezier(0.33, 1, 0.68, 1) infinite var(--fall-delay)'
       },
       fontFamily: {
         sans: ["var(--font-inter)", "var(--font-noto-sans)", "system-ui", "sans-serif"],

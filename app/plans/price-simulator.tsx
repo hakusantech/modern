@@ -859,9 +859,9 @@ function SimulatorContent({
           </div>
 
           <div className="text-xxs sm:text-xs md:text-sm text-gray-800 mt-3 sm:mt-4 p-2 sm:p-4 bg-gray-100 rounded-lg border border-gray-300">
-            <p className="font-medium">※ 表示価格はすべて税抜きです。別途消費税がかかります。</p>
-            <p className="font-medium">※ 運営代行料は最低利用料金が設定される場合があります。</p>
-            <p className="font-medium">※ 実際の費用は物件状況により変動します。詳細はお問合せください。</p>
+            <p className="font-medium text-left">※ 表示価格はすべて税抜きです。別途消費税がかかります。</p>
+            <p className="font-medium text-left">※ 運営代行料は最低利用料金が設定される場合があります。</p>
+            <p className="font-medium text-left">※ 実際の費用は物件状況により変動します。詳細はお問合せください。</p>
           </div>
         </CardContent>
       </Card>
