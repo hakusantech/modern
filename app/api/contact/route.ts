@@ -3,6 +3,27 @@ import nodemailer from 'nodemailer';
 
 // ✅ Node.js runtime 明示
 export const runtime = 'nodejs';
+// Next.js App Routerの設定
+export const dynamic = 'force-dynamic';
+// 許可するHTTPメソッドを明示的に設定
+export const allowedMethods = ['POST', 'OPTIONS'];
+// revalidateを0に設定して常に新しいレスポンスを返す
+export const revalidate = 0;
+
+// OPTIONSリクエスト用のハンドラ（CORS対策）
+export async function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+    }
+  );
+}
 
 export async function POST(req: Request) {
   try {
@@ -26,11 +47,11 @@ export async function POST(req: Request) {
     } as const;
 
     const transporter = nodemailer.createTransport({
-      host: 'sv16415.xserver.jp', // Xserverのメールサーバー
-      port: 587,
-      secure: false,
+      host: process.env.MAIL_HOST,
+      port: Number(process.env.MAIL_PORT),
+      secure: process.env.MAIL_SECURE === 'true',
       auth: {
-        user: 'info@cleannest-hokkaido.jp',
+        user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASSWORD,
       },
       tls: {
@@ -96,9 +117,29 @@ ${message}
       transporter.sendMail(autoReplyOptions),
     ]);
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json(
+      { success: true }, 
+      { 
+        status: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      }
+    );
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json(
+      { success: false }, 
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      }
+    );
   }
 }
