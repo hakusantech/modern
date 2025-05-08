@@ -366,7 +366,7 @@ export function Header() {
               </nav>
               {/* 電話番号と営業時間 (Mobile) */}
               <div className="mt-6 pt-4 border-t border-primary-500/20 text-center">
-                 <a href="tel:011-827-7441" className="font-semibold text-base text-white hover:text-primary-300 transition-colors d-block">011-827-7441</a>
+                 <a href="tel:011-827-7441" className="font-semibold text-base text-white hover:text-primary-300 transition-colors block sm:text-2xl font-bold" style={{ color: '#D4AF37' }}>011-827-7441</a>
                  <p className="text-sm text-gray-300 mt-1">9:30〜18:30（土日除く）</p>
               </div>
             </SheetContent>
