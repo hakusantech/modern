@@ -541,8 +541,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* オーナー募集バナーを追加 */}
-      <section className="py-20 bg-gold-50 border-y-4 border-gold-500">
+      {/* オーナー募集バナー - PCのみ表示 */}
+      <section className="hidden md:block py-20 bg-gold-50 border-y-4 border-gold-500">
         <div className="container mx-auto px-4">
           <Link href="/owner-recruitment/" className="block group">
             <div className="relative overflow-hidden rounded-lg shadow-2xl hover:shadow-2xl transition-shadow duration-300 bg-white border-2 border-gold-500">
@@ -564,8 +564,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-32 md:py-40 text-center relative bg-white">
+      {/* CTA - PCのみ表示 */}
+      <section className="hidden md:block py-32 md:py-40 text-center relative bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -763,13 +763,13 @@ export default function AboutPage() {
                 </p>
               </motion.div>
               
-              {/* 最終CTA部分 - シンプル化したボタン */}
+              {/* 最終CTA部分 - PCのみ表示 */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
                 viewport={{ once: true, amount: 0.5 }}
-                className="flex flex-col items-center"
+                className="hidden md:flex flex-col items-center"
               >
                 <p className="text-2xl text-gray-900 mb-10 max-w-2xl mx-auto text-center leading-relaxed font-medium bg-white/90 py-4 px-6 rounded-lg shadow-lg">
                   あなたの物件が秘めている可能性を、私たちと一緒に最大限に引き出しませんか？
