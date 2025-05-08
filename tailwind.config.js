@@ -205,6 +205,41 @@ module.exports = {
             transform: 'translateY(110vh) translateX(10px) rotate(360deg)',
             opacity: 0
           }
+        },
+        "enhanced-fall": {
+          '0%': {
+            transform: 'translateY(0) rotate(0deg) translateX(var(--swing-x1))',
+            opacity: 0
+          },
+          '5%': {
+            opacity: 0.3,
+            transform: 'translateY(5vh) rotate(20deg) translateX(var(--swing-x2))'
+          },
+          '15%': {
+            opacity: 0.7,
+            transform: 'translateY(15vh) rotate(60deg) translateX(var(--swing-x3))'
+          },
+          '30%': {
+            transform: 'translateY(30vh) rotate(120deg) translateX(var(--swing-x4))'
+          },
+          '50%': {
+            transform: 'translateY(50vh) rotate(180deg) translateX(var(--swing-x5))'
+          },
+          '65%': {
+            transform: 'translateY(65vh) rotate(240deg) translateX(var(--swing-x4))'
+          },
+          '80%': {
+            transform: 'translateY(80vh) rotate(300deg) translateX(var(--swing-x3))',
+            opacity: 0.8
+          },
+          '90%': {
+            transform: 'translateY(90vh) rotate(340deg) translateX(var(--swing-x2))',
+            opacity: 0.4
+          },
+          '100%': {
+            transform: 'translateY(110vh) rotate(360deg) translateX(var(--swing-x1))',
+            opacity: 0
+          }
         }
       },
       animation: {
@@ -212,7 +247,8 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "floatUp 3s ease-in-out infinite",
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        'fall': 'fall 15s ease-in-out infinite'
+        'fall': 'fall 15s ease-in-out infinite',
+        'enhanced-fall': 'enhanced-fall var(--fall-duration) ease-in-out infinite var(--fall-delay)'
       },
       fontFamily: {
         sans: ["var(--font-inter)", "var(--font-noto-sans)", "system-ui", "sans-serif"],

@@ -18,6 +18,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-darkgray-800 hover:text-snow-100",
         link: "text-snow-300 underline-offset-4 hover:underline",
         gold: "bg-ice-600 text-white hover:bg-ice-700 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-ice-500",
+        silver: "bg-silver-100 text-black hover:bg-silver-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5",
+        luxury: "bg-luxury-800 text-secondary-foreground hover:bg-luxury-700",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -48,4 +50,3 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
-

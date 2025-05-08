@@ -3,8 +3,8 @@ import Script from 'next/script'
 import { M_PLUS_1p, Noto_Sans_JP } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
-import { UnifiedHeader } from "@/components/unified-header"
-import { Footer } from "@/components/footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { Toaster } from "@/components/ui/toaster"
 import { NoisePattern } from "@/components/noise-pattern"
 import { BackgroundEffects } from "@/components/background-effects"
@@ -26,7 +26,7 @@ const mPlus = M_PLUS_1p({
 })
 
 export const metadata: Metadata = {
-  title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅宿泊施設の管理委託はすべておまかせ",
+  title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅寿泊施設の管理委託はすべておまかせ",
   description:
     "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
   keywords: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US", "zh_CN", "ko_KR"],
     url: "https://cleannest-hokkaido.com",
     siteName: "CleanNest Hokkaido",
-    title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅宿泊施設の管理委託はすべておまかせ",
+    title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅寿泊施設の管理委託はすべておまかせ",
     description: "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
     images: [
       {
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅宿泊施設の管理委託はすべておまかせ",
+    title: "札幌のインバウンド専門民泊運営代行業者「CleanNest Hokkaido」 | 住宅寿泊施設の管理委託はすべておまかせ",
     description: "札幌の民泊運営代行は「CleanNest Hokkaido」におまかせ！市内を中心にインバウンド旅行客に特化した民泊業と旅館業を企画から運用までフルサポートしています。",
     images: ["/images/ogp-image.jpg"],
     site: "@cleannesthokkaido",
@@ -122,7 +122,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NoisePattern />
         
         <div className="flex flex-col min-h-screen">
-          <UnifiedHeader />
+          <Header />
           <main className="flex-1 pt-20">{children}</main>
           <Footer />
         </div>

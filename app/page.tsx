@@ -3,7 +3,7 @@ import Link from "next/link"
 import { ArrowRight, ArrowUpRight, ChevronRight, Clock, Shield, Users, Calendar, TrendingUp, Building, PieChart, Percent } from "lucide-react"
 import { Metadata } from "next"
 import { cn } from "@/lib/utils"
-import { SakuraEffect } from "@/components/sakura-effect"
+import { SakuraEffect } from "@/components/effects/sakura"
 
 export const metadata: Metadata = {
   title: "CleanNest Hokkaido｜札幌・北海道のインバウンド特化型民泊運営代行",
@@ -168,17 +168,16 @@ const news = [
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
-      {/* Add SakuraEffect just for the home page */}
-      <SakuraEffect />
-      
       {/* 1. スライダー（キャッチーなバナー） - 高級感あるデザイン */}
       <section className="relative h-screen flex items-center overflow-hidden">
+        {/* リアルな桜エフェクトをヒーローセクションに適用 */}
+        <SakuraEffect />
         {/* Full-width background image */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0">
             <Image
-              src="/images/32481294_m.jpg"
-              alt="CleanNest Hokkaido 民泊運営"
+              src="/3.png"
+              alt="CleanNest Hokkaido 民泊運営 - 五稜郭タワーと桜"
               fill
               priority
               className="object-cover object-center"
@@ -770,4 +769,3 @@ export default function HomePage() {
     </main>
   )
 }
-
