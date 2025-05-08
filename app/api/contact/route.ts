@@ -3,12 +3,6 @@ import nodemailer from 'nodemailer';
 
 // ✅ Node.js runtime 明示
 export const runtime = 'nodejs';
-// Next.js App Routerの設定
-export const dynamic = 'force-dynamic';
-// 許可するHTTPメソッドを明示的に設定
-export const allowedMethods = ['POST', 'OPTIONS'];
-// revalidateを0に設定して常に新しいレスポンスを返す
-export const revalidate = 0;
 
 // OPTIONSリクエスト用のハンドラ（CORS対策）
 export async function OPTIONS() {
