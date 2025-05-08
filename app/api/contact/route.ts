@@ -40,9 +40,28 @@ export async function POST(req: Request) {
       other: 'その他',
     } as const;
 
+    // 環境変数のチェック
+    if (!process.env.MAIL_HOST || !process.env.MAIL_USER || !process.env.MAIL_PASSWORD) {
+      console.error('Mail configuration not found in environment variables');
+      return NextResponse.json(
+        { success: false, error: 'Mail configuration error' }, 
+        { 
+          status: 500,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          },
+        }
+      );
+    }
+    
+    // ポート番号の処理
+    const port = process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 587;
+    
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
-      port: Number(process.env.MAIL_PORT),
+      port: port,
       secure: process.env.MAIL_SECURE === 'true',
       auth: {
         user: process.env.MAIL_USER,
@@ -64,10 +83,13 @@ export async function POST(req: Request) {
       })
     );
 
+    // 管理者メールアドレスのチェック
+    const adminEmail = process.env.ADMIN_EMAIL || 'info@cleannest-hokkaido.jp';
+    
     // 管理者宛メール（添付ファイル付き）
     const adminMailOptions = {
       from: 'info@cleannest-hokkaido.jp',
-      to: process.env.ADMIN_EMAIL,
+      to: adminEmail,
       subject: `【お問い合わせ】${map[inquiryType as keyof typeof map]}`,
       text: `
 名前: ${name}
@@ -106,10 +128,27 @@ ${message}
       `,
     };
 
-    await Promise.all([
-      transporter.sendMail(adminMailOptions),
-      transporter.sendMail(autoReplyOptions),
-    ]);
+    try {
+      // メール送信試行
+      const info = await Promise.all([
+        transporter.sendMail(adminMailOptions),
+        transporter.sendMail(autoReplyOptions),
+      ]);
+      console.log('Email sent successfully:', info);
+    } catch (mailError) {
+      console.error('Error sending email:', mailError);
+      return NextResponse.json(
+        { success: false, error: 'Failed to send email' }, 
+        { 
+          status: 500,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          },
+        }
+      );
+    }
 
     return NextResponse.json(
       { success: true }, 
@@ -123,9 +162,17 @@ ${message}
       }
     );
   } catch (err) {
-    console.error(err);
+    // 詳細なエラーログ
+    console.error('Contact form submission error:', err);
+    
+    // エラーメッセージの抽出
+    let errorMessage = 'サーバーエラーが発生しました';
+    if (err instanceof Error) {
+      errorMessage = err.message;
+    }
+    
     return NextResponse.json(
-      { success: false }, 
+      { success: false, error: errorMessage }, 
       { 
         status: 500,
         headers: {
