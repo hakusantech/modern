@@ -81,7 +81,6 @@ export const metadata: Metadata = {
     other: [
     ]
   },
-  manifest: "/site.webmanifest",
   verification: {
     google: "7wjuzirx-E_57wKdFQm1AvCVc1p10USoBq671o5r2HM",
   },
