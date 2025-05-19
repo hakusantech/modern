@@ -134,7 +134,7 @@ async function sendEmailWithResend(
   const adminEmailRes = await resend.emails.send({
     from: mailFrom,
     to: mailTo.split(','),
-    reply_to: email,
+    replyTo: email,
     subject: `【お問い合わせ】${map[inquiryType as keyof typeof map]}`,
     text: `
 名前: ${name}
@@ -170,6 +170,15 @@ ${message}
 
 ※このメールは自動送信されています。
 このメールに返信いただいても対応できかねますのでご了承ください。
+
+/// 札幌のインバウンド民泊運営代行はおまかせ ///
+┏┏┏　CleanNest Hokkaido
+┏┏┏　〒062-0933 札幌市豊平区平岸三条8-6-1信和リッチ2階
+┏┏┏　URL ：https://www.cleannest-hokkaido.jp/
+┏┏┏　Mail：info@cleannest-hokkaido.jp
+┏┏┏　TEL：011-827-7441
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●受付：平日9:30～18:30　●定休日【土・日曜日・祝日】
     `,
   });
 
@@ -249,6 +258,15 @@ ${message}
 
 ※このメールは自動送信されています。
 このメールに返信いただいても対応できかねますのでご了承ください。
+
+/// 札幌のインバウンド民泊運営代行はおまかせ ///
+┏┏┏　CleanNest Hokkaido
+┏┏┏　〒062-0933 札幌市豊平区平岸三条8-6-1信和リッチ2階
+┏┏┏　URL ：https://www.cleannest-hokkaido.jp/
+┏┏┏　Mail：info@cleannest-hokkaido.jp
+┏┏┏　TEL：011-827-7441
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●受付：平日9:30～18:30　●定休日【土・日曜日・祝日】
     `,
   };
 

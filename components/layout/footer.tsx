@@ -39,7 +39,6 @@ export function Footer() {
                       <p className="text-gray-700">〒062-0933 北海道札幌市豊平区平岸三条8-6-1 信和リッチ2階</p>
                     </div>
                   </div>
-                  
                   <div className="flex items-start">
                     <Mail className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
@@ -49,23 +48,56 @@ export function Footer() {
                       </a>
                     </div>
                   </div>
-                  
                   <div className="flex items-start">
                     <Phone className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
                       <h3 className="font-medium text-gray-900 mb-1">電話番号</h3>
-                      <a href="tel:011-827-7441" className="text-gray-700 hover:text-gold-700 transition-colors">
+                      <a
+                        href="tel:011-827-7441"
+                        className="text-2xl font-bold text-gold-600 hover:text-gold-700 transition-colors tracking-wider underline"
+                        style={{ letterSpacing: "0.05em" }}
+                      >
                         011-827-7441
                       </a>
                     </div>
                   </div>
-                  
                   <div className="flex items-start">
                     <Clock className="h-5 w-5 text-gold-600 mt-1 mr-3 flex-shrink-0" />
                     <div>
                       <h3 className="font-medium text-gray-900 mb-1">営業時間</h3>
                       <p className="text-gray-700">9:30〜18:30（土日除く）</p>
                     </div>
+                  </div>
+                </div>
+                {/* 駐車場セクション（大きめ・目立つ） */}
+                <div className="my-8 p-6 rounded-xl border-2 border-gold-300 bg-gold-50 flex flex-col items-center gap-8 shadow-lg">
+                  <h3 className="text-2xl font-bold text-gold-700 mb-2">駐車場</h3>
+                  <p className="text-base text-gold-800 mb-4">駐車場は「4番」をご利用ください。</p>
+                  {/* ストリートビュー */}
+                  <div className="w-full flex justify-center">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!4v1747225336270!6m8!1m7!1s7sA0RdTM1yAk4l47txq-9w!2m2!1d43.03411164587536!2d141.3678601232641!3f177.33!4f-6.359999999999999!5f0.4000000000000002"
+                      width="600"
+                      height="450"
+                      style={{ border: 0, borderRadius: '12px' }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="max-w-xl"
+                    />
+                  </div>
+                  {/* 通常の地図 */}
+                  <div className="w-full flex justify-center">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.017964073964!2d141.3678601232641!3d43.03411164587536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0b299e2e2e2e2e%3A0x0000000000000000!2z44CSMDYyLTA5MzMgS2l0YWthLCBIaXJhZ2lzaSwgV2FyZCwgU2FwcG9ybywgSGl5b3NoaSwgOC0yLTA!5e0!3m2!1sja!2sjp!4v1747225336270!5m2!1sja!2sjp&t=m&z=20"
+                      width="600"
+                      height="450"
+                      style={{ border: 0, borderRadius: '12px' }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="max-w-xl"
+                    />
                   </div>
                 </div>
                 
@@ -90,7 +122,7 @@ export function Footer() {
                   allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="relative z-10 grayscale contrast-125"
+                  className="relative z-10"
                 />
               </div>
             </div>

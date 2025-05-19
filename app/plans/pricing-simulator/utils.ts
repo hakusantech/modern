@@ -1,149 +1,62 @@
-import { PriceOption, PlanType, BusinessType, SelectedOptions, ResultOption } from "./types";
-import { pricingData } from "./data";
+import { PlanType, BusinessType } from "./types";
+import { feeConfig } from "./data";
 
 /**
- * 価格をフォーマットする関数
+ * Formats a number to a localized currency string (Japanese Yen)
  */
-export const formatPrice = (price: number | string): string => {
-  if (typeof price === "number") {
-    return new Intl.NumberFormat("ja-JP").format(price) + "円";
-  }
-  return price as string;
+export const formatCurrency = (amount: number): string => {
+  return amount.toLocaleString("ja-JP");
 };
 
 /**
- * 初期選択状態を生成する関数
+ * Parses a string input to a number, removing non-numeric characters
  */
-export const generateInitialOptions = (plan: PlanType, businessType: BusinessType): SelectedOptions => {
-  const initialOptions: SelectedOptions = {};
-
-  // 必須項目を選択状態に
-  [
-    ...pricingData.basicFees,
-    ...pricingData.systemFees,
-    ...pricingData.runningCosts,
-    ...pricingData.optionalCosts,
-  ].forEach((item: PriceOption) => {
-    if (item.required) {
-      initialOptions[item.id] = true;
-    } else if (item.requiredFor && item.requiredFor[plan][businessType]) {
-      initialOptions[item.id] = true;
-    } else {
-      initialOptions[item.id] = false;
-    }
-  });
-
-  return initialOptions;
+export const parseNumericInput = (input: string): number => {
+  const numericString = input.replace(/[^\d]/g, "");
+  return numericString === "" ? 0 : parseInt(numericString, 10);
 };
 
 /**
- * 料金を計算し結果オプションを生成する関数
+ * Calculates fee based on inputs
  */
-export const calculatePricing = (
-  selectedOptions: SelectedOptions,
-  plan: PlanType,
+export const calculateFee = (
+  planType: PlanType,
   businessType: BusinessType,
   roomCount: number,
-  estimatedMonthlyRevenue: number
-) => {
-  let initial = 0;
-  let monthly = 0;
-  let percentage = 0;
-  const results: ResultOption[] = [];
-
-  // 基本料金
-  pricingData.basicFees.forEach((fee) => {
-    if (selectedOptions[fee.id]) {
-      const price = fee.prices[plan][businessType];
-      if (typeof price === "number") {
-        if (fee.isPercentage) {
-          percentage += price;
-        } else {
-          initial += price;
-        }
-      }
-      // 結果に追加
-      results.push({
-        id: fee.id,
-        name: fee.name,
-        price: price,
-        selected: true,
-        monthly: false,
-        isPercentage: fee.isPercentage
-      });
+  expectedSales: number,
+  selectedOptions: string[]
+): number => {
+  // Get base fee from config
+  let baseFee = feeConfig.baseFees[planType];
+  
+  // Adjust by room count - ensure roomCount is at least 1
+  const validRoomCount = Math.max(1, roomCount);
+  const roomMultiplier = validRoomCount > 1 ? 1 + ((validRoomCount - 1) * 0.5) : 1;
+  baseFee = baseFee * roomMultiplier;
+  
+  // Adjust by business type
+  baseFee = baseFee * feeConfig.businessTypeMultiplier[businessType];
+  
+  // Add option fees
+  let optionFee = 0;
+  selectedOptions.forEach(option => {
+    if (option in feeConfig.optionFees) {
+      optionFee += feeConfig.optionFees[option as keyof typeof feeConfig.optionFees];
     }
   });
-
-  // システム料金
-  pricingData.systemFees.forEach((fee) => {
-    if (selectedOptions[fee.id]) {
-      const price = fee.prices[plan][businessType];
-      if (typeof price === "number") {
-        initial += price;
-      }
-      // 結果に追加
-      results.push({
-        id: fee.id,
-        name: fee.name,
-        price: price,
-        selected: true,
-        monthly: false
-      });
-    }
-  });
-
-  // ランニングコスト
-  pricingData.runningCosts.forEach((fee) => {
-    if (selectedOptions[fee.id]) {
-      const price = fee.prices[plan][businessType];
-      if (typeof price === "number") {
-        if (fee.perRoom) {
-          monthly += price * roomCount;
-        } else {
-          monthly += price;
-        }
-      }
-      // 結果に追加
-      results.push({
-        id: fee.id,
-        name: fee.name,
-        price: price,
-        selected: true,
-        monthly: true
-      });
-    }
-  });
-
-  // オプションコスト
-  pricingData.optionalCosts.forEach((fee) => {
-    if (selectedOptions[fee.id]) {
-      const price = fee.prices[plan][businessType];
-      if (typeof price === "number") {
-        if (fee.perRoom) {
-          monthly += price * roomCount;
-        } else {
-          monthly += price;
-        }
-      }
-      // 結果に追加
-      results.push({
-        id: fee.id,
-        name: fee.name,
-        price: price,
-        selected: true,
-        monthly: true
-      });
-    }
-  });
-
-  const commission = Math.round(estimatedMonthlyRevenue * (percentage / 100));
-
-  return {
-    initialCost: initial,
-    monthlyCost: monthly,
-    percentageCost: percentage,
-    monthlyCommission: commission,
-    totalMonthlyCost: monthly + commission,
-    resultOptions: results
-  };
-}; 
+  
+  // Apply revenue-based discount if applicable
+  let revenueDiscount = 0;
+  const { high, medium } = feeConfig.revenueDiscounts;
+  
+  // Ensure expectedSales is a non-negative number
+  const validExpectedSales = Math.max(0, expectedSales);
+  
+  if (validExpectedSales > high.threshold) {
+    revenueDiscount = high.rate;
+  } else if (validExpectedSales > medium.threshold) {
+    revenueDiscount = medium.rate;
+  }
+  
+  return Math.round((baseFee + optionFee) * (1 - revenueDiscount));
+};

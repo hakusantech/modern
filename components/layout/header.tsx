@@ -270,7 +270,7 @@ export function Header() {
         <div className="flex items-center space-x-4">
           {/* 電話番号と営業時間 (Desktop) */}
           <div className="hidden lg:flex flex-col items-end">
-            <a href="tel:011-827-7441" className="font-semibold text-base text-white hover:text-primary-300 transition-colors">011-827-7441</a>
+            <a href="tel:011-827-7441" className="font-bold text-lg text-gold-500 hover:text-gold-400 transition-colors">011-827-7441</a>
             <span className="text-xs text-gray-300 mt-0.5">9:30〜18:30（土日除く）</span>
           </div>
 
@@ -366,7 +366,7 @@ export function Header() {
               </nav>
               {/* 電話番号と営業時間 (Mobile) */}
               <div className="mt-6 pt-4 border-t border-primary-500/20 text-center">
-                 <a href="tel:011-827-7441" className="font-semibold text-base text-white hover:text-primary-300 transition-colors block sm:text-2xl font-bold" style={{ color: '#D4AF37' }}>011-827-7441</a>
+                 <a href="tel:011-827-7441" className="font-bold text-xl sm:text-2xl text-gold-500 hover:text-gold-400 transition-colors block">011-827-7441</a>
                  <p className="text-sm text-gray-300 mt-1">9:30〜18:30（土日除く）</p>
               </div>
             </SheetContent>

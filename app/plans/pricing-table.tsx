@@ -89,6 +89,80 @@ export function PricingTable() {
             </TabsTrigger>
           </TabsList>
 
+          {/* 説明テキスト - モダンなデザイン */}
+          <div className="bg-gradient-to-r from-gray-50 via-white to-gray-50 p-6 mb-8 rounded-lg text-sm text-gray-700 border border-gray-100 shadow-sm">
+            <div className="font-medium mb-3 text-gray-900 flex items-center">
+              <svg className="w-4 h-4 mr-2 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              料金表の見方
+            </div>
+            <ul className="text-xs space-y-2 text-gray-600">
+              <li className="flex items-center">
+                <span className="mr-2 flex-shrink-0 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                </span>
+                <span className="inline-flex items-center">
+                  <span className="mr-1.5 text-xs bg-red-50 text-red-700 px-2 py-0.5 rounded-full font-medium">必須</span>
+                  のラベルが付いている項目は各プランで必要な項目です
+                </span>
+              </li>
+              <li className="flex items-center">
+                <span className="mr-2 flex-shrink-0 w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                </span>
+                <span className="inline-flex items-center">
+                  <span className="mr-1.5 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium">任意</span>
+                  のラベルが付いている項目はオプションとなります
+                </span>
+              </li>
+            </ul>
+          </div>
+          
+          {/* タブリスト - モダンなデザイン */}
+          <div className="overflow-hidden mb-12">
+            <div className="flex justify-center">
+              <TabsList className="grid grid-cols-2 sm:grid-cols-4 bg-white rounded-xl border border-gray-200 p-1.5 gap-1 shadow-sm max-w-3xl">
+                <TabsTrigger 
+                  value="fe-180" 
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-500 data-[state=active]:to-gold-600 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                >
+                  <div className="text-center">
+                    <span className="block font-medium mb-1">FEプラン</span>
+                    <span className="block text-[10px] sm:text-xs opacity-80">(最大180日)</span>
+                  </div>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="fe-365" 
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-500 data-[state=active]:to-gold-600 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                >
+                  <div className="text-center">
+                    <span className="block font-medium mb-1">FEプラン</span>
+                    <span className="block text-[10px] sm:text-xs opacity-80">(最大365日)</span>
+                  </div>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="ws-180" 
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-600 data-[state=active]:to-gold-700 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                >
+                  <div className="text-center">
+                    <span className="block font-medium mb-1">WSプラン</span>
+                    <span className="block text-[10px] sm:text-xs opacity-80">(最大180日)</span>
+                  </div>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="ws-365" 
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-600 data-[state=active]:to-gold-700 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                >
+                  <div className="text-center">
+                    <span className="block font-medium mb-1">WSプラン</span>
+                    <span className="block text-[10px] sm:text-xs opacity-80">(最大365日)</span>
+                  </div>
+                </TabsTrigger>
+              </TabsList>
+            </div>
+          </div>
+
           {/* FEプラン（最大180日） */}
           <TabsContent value="fe-180">
             <Card className="bg-white border-gray-200 shadow-lg">
