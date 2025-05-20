@@ -21,6 +21,15 @@ export async function OPTIONS() {
   );
 }
 
+const corsHeaders = (status: number) => ({
+  status,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  },
+});
+
 // === メインハンドラ ===
 export async function POST(req: Request) {
   try {
@@ -57,15 +66,24 @@ export async function POST(req: Request) {
       })
     );
 
+    const inquiryDetailsText = `
+お名前: ${name}
+メールアドレス: ${email}
+電話番号: ${phone || '未入力'}
+お問い合わせ種別: ${map[inquiryType as keyof typeof map] || inquiryType}
+メッセージ内容:
+${message}
+`;
+
     // --- メール送信 ---
     try {
       // Resendを優先して使用
       if (process.env.RESEND_API_KEY) {
-        await sendEmailWithResend(name, email, phone, inquiryType, message, attachments, map);
+        await sendEmailWithResend(name, email, phone, inquiryType, message, attachments, map, inquiryDetailsText);
       } 
       // フォールバックとしてNodemailerを使用
       else if (process.env.MAIL_HOST && process.env.MAIL_USER && process.env.MAIL_PASSWORD) {
-        await sendEmailWithNodemailer(name, email, phone, inquiryType, message, attachments, map);
+        await sendEmailWithNodemailer(name, email, phone, inquiryType, message, attachments, map, inquiryDetailsText);
       } 
       // 両方設定されていない場合はエラー
       else {
@@ -122,12 +140,13 @@ async function sendEmailWithResend(
   inquiryType: string, 
   message: string, 
   attachments: any[],
-  map: Record<string, string>
+  map: Record<string, string>,
+  inquiryDetailsText: string
 ) {
   // Resendクライアント初期化
   const resend = new Resend(process.env.RESEND_API_KEY!);
   
-  const mailFrom = process.env.MAIL_FROM || "お問い合わせ <info@cleannest-hokkaido.jp>";
+  const mailFrom = process.env.MAIL_FROM || "CleanNest Hokkaido <info@cleannest-hokkaido.jp>";
   const mailTo = process.env.MAIL_TO || process.env.ADMIN_EMAIL || "info@cleannest-hokkaido.jp";
   
   // ------- 管理者向けメール -------
@@ -135,12 +154,12 @@ async function sendEmailWithResend(
     from: mailFrom,
     to: mailTo.split(','),
     replyTo: email,
-    subject: `【お問い合わせ】${map[inquiryType as keyof typeof map]}`,
+    subject: `【お問い合わせ】${map[inquiryType as keyof typeof map] || inquiryType}`,
     text: `
 名前: ${name}
 メール: ${email}
 電話番号: ${phone || '未入力'}
-お問い合わせ種類: ${map[inquiryType as keyof typeof map]}
+お問い合わせ種類: ${map[inquiryType as keyof typeof map] || inquiryType}
 
 メッセージ:
 ${message}
@@ -151,25 +170,34 @@ ${message}
   });
 
   // ------- 自動返信メール（添付なし） -------
-  const autoReplyRes = await resend.emails.send({
-    from: mailFrom,
-    to: email,
-    subject: '【Clean Nest Hokkaido】お問い合わせありがとうございます',
-    text: `
-${name} 様
+  const autoReplySubject = "【CleanNest Hokkaido】お問い合わせありがとうございます";
+  const autoReplyBody = `
+◤このメールは自動返信です◢
 
-Clean Nest Hokkaido へのお問い合わせありがとうございます。
-以下の内容でお問い合わせを受け付けました。
+${name}様
 
-お問い合わせ種類: ${map[inquiryType as keyof typeof map]}
-メッセージ:
-${message}
+この度はCleanNest Hokkaidoのサービスサイトよりお問い合わせいただき、誠にありがとうございます。
+このメールはお問い合わせフォームよりお問い合わせをいただいた方へ、自動返信によって送信されています。
 
-内容を確認の上、担当者より回答させていただきます。
-しばらくお待ちくださいますようお願いいたします。
+ご入力いただいた内容を確認の上、担当より通常1〜2営業日以内にご連絡差し上げます。
+内容によっては、確認にお時間を頂戴する場合がございますので、予めご了承ください。
 
-※このメールは自動送信されています。
-このメールに返信いただいても対応できかねますのでご了承ください。
+------------------------------------------------------------------------------------
+以下の内容でお問い合わせをお受けいたしました。
+改めて、担当者よりご連絡させていただきますので、今しばらくお待ちください。
+
+＜お問い合わせ内容＞
+${inquiryDetailsText}
+------------------------------------------------------------------------------------
+※本メールの到着より5営業日をすぎても弊社からのご連絡がない場合は
+お手数ではございますが弊社窓口までご連絡くださいますようお願い申し上げます。
+
+TEL：011-827-7441（受付時間：09:30 - 18:30）
+
+▼本メールは送信専用のため、ご返信には対応しておりません。
+ご不明点やご連絡事項がある場合は、以下のメールアドレスまたはお電話にてご連絡ください。
+
+今後ともCleanNest Hokkaidoをよろしくお願い申し上げます。
 
 /// 札幌のインバウンド民泊運営代行はおまかせ ///
 ┏┏┏　CleanNest Hokkaido
@@ -179,7 +207,13 @@ ${message}
 ┏┏┏　TEL：011-827-7441
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ●受付：平日9:30～18:30　●定休日【土・日曜日・祝日】
-    `,
+`;
+
+  const autoReplyRes = await resend.emails.send({
+    from: mailFrom,
+    to: email,
+    subject: autoReplySubject,
+    text: autoReplyBody,
   });
 
   console.log('Resend responses:', adminEmailRes, autoReplyRes);
@@ -194,7 +228,8 @@ async function sendEmailWithNodemailer(
   inquiryType: string, 
   message: string, 
   attachments: any[],
-  map: Record<string, string>
+  map: Record<string, string>,
+  inquiryDetailsText: string
 ) {
   // ポート番号の処理
   const port = process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 587;
@@ -223,12 +258,12 @@ async function sendEmailWithNodemailer(
   const adminMailOptions = {
     from: mailFrom,
     to: adminEmail,
-    subject: `【お問い合わせ】${map[inquiryType as keyof typeof map]}`,
+    subject: `【お問い合わせ】${map[inquiryType as keyof typeof map] || inquiryType}`,
     text: `
 名前: ${name}
 メール: ${email}
 電話番号: ${phone || '未入力'}
-お問い合わせ種類: ${map[inquiryType as keyof typeof map]}
+お問い合わせ種類: ${map[inquiryType as keyof typeof map] || inquiryType}
 
 メッセージ:
 ${message}
@@ -238,26 +273,35 @@ ${message}
     attachments: nodemailerAttachments,
   };
 
-  // 自動返信メール（添付なし）
-  const autoReplyOptions = {
-    from: mailFrom,
-    to: email,
-    subject: '【Clean Nest Hokkaido】お問い合わせありがとうございます',
-    text: `
-${name} 様
+  // ------- 自動返信メール（添付なし） -------
+  const autoReplySubject = "【CleanNest Hokkaido】お問い合わせありがとうございます";
+  const autoReplyBody = `
+◤このメールは自動返信です◢
 
-Clean Nest Hokkaido へのお問い合わせありがとうございます。
-以下の内容でお問い合わせを受け付けました。
+${name}様
 
-お問い合わせ種類: ${map[inquiryType as keyof typeof map]}
-メッセージ:
-${message}
+この度はCleanNest Hokkaidoのサービスサイトよりお問い合わせいただき、誠にありがとうございます。
+このメールはお問い合わせフォームよりお問い合わせをいただいた方へ、自動返信によって送信されています。
 
-内容を確認の上、担当者より回答させていただきます。
-しばらくお待ちくださいますようお願いいたします。
+ご入力いただいた内容を確認の上、担当より通常1〜2営業日以内にご連絡差し上げます。
+内容によっては、確認にお時間を頂戴する場合がございますので、予めご了承ください。
 
-※このメールは自動送信されています。
-このメールに返信いただいても対応できかねますのでご了承ください。
+------------------------------------------------------------------------------------
+以下の内容でお問い合わせをお受けいたしました。
+改めて、担当者よりご連絡させていただきますので、今しばらくお待ちください。
+
+＜お問い合わせ内容＞
+${inquiryDetailsText}
+------------------------------------------------------------------------------------
+※本メールの到着より5営業日をすぎても弊社からのご連絡がない場合は
+お手数ではございますが弊社窓口までご連絡くださいますようお願い申し上げます。
+
+TEL：011-827-7441（受付時間：09:30 - 18:30）
+
+▼本メールは送信専用のため、ご返信には対応しておりません。
+ご不明点やご連絡事項がある場合は、以下のメールアドレスまたはお電話にてご連絡ください。
+
+今後ともCleanNest Hokkaidoをよろしくお願い申し上げます。
 
 /// 札幌のインバウンド民泊運営代行はおまかせ ///
 ┏┏┏　CleanNest Hokkaido
@@ -267,7 +311,14 @@ ${message}
 ┏┏┏　TEL：011-827-7441
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ●受付：平日9:30～18:30　●定休日【土・日曜日・祝日】
-    `,
+`;
+
+  // 自動返信メール（添付なし）
+  const autoReplyOptions = {
+    from: mailFrom,
+    to: email,
+    subject: autoReplySubject,
+    text: autoReplyBody,
   };
 
   // メール送信
@@ -278,16 +329,4 @@ ${message}
   
   console.log('Nodemailer responses:', info);
   return info;
-}
-
-// CORS設定を含むレスポンスヘッダーを生成するヘルパー関数
-function corsHeaders(status: number) {
-  return {
-    status,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  };
 }
