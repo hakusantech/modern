@@ -62,33 +62,6 @@ export function PricingTable() {
     <div className="w-full">
       <TooltipProvider>
         <Tabs defaultValue="fe-180" className="w-full">
-          {/* 説明テキスト */}
-          <div className="bg-blue-50 p-4 mb-4 rounded-lg text-sm text-blue-800">
-            <div className="font-medium mb-1">料金表の見方</div>
-            <ul className="text-xs space-y-1 list-disc pl-4">
-              <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full font-medium">必須</span>のラベルが付いている項目は各プランで必要な項目です</span></li>
-              <li><span className="inline-flex items-center"><span className="mr-1 text-xs bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full font-medium">任意</span>のラベルが付いている項目はオプションとなります</span></li>
-            </ul>
-          </div>
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8 overflow-hidden gap-0.5">
-            <TabsTrigger value="fe-180" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
-              <span className="block">FEプラン</span>
-              <span className="block text-[10px] sm:text-xs">(最大180日)</span>
-            </TabsTrigger>
-            <TabsTrigger value="fe-365" className="data-[state=active]:bg-gold-500 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
-              <span className="block">FEプラン</span>
-              <span className="block text-[10px] sm:text-xs">(最大365日)</span>
-            </TabsTrigger>
-            <TabsTrigger value="ws-180" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
-              <span className="block">WSプラン</span>
-              <span className="block text-[10px] sm:text-xs">(最大180日)</span>
-            </TabsTrigger>
-            <TabsTrigger value="ws-365" className="data-[state=active]:bg-gold-600 data-[state=active]:text-white text-xs sm:text-sm px-1 sm:px-2 whitespace-normal h-auto py-2">
-              <span className="block">WSプラン</span>
-              <span className="block text-[10px] sm:text-xs">(最大365日)</span>
-            </TabsTrigger>
-          </TabsList>
-
           {/* 説明テキスト - モダンなデザイン */}
           <div className="bg-gradient-to-r from-gray-50 via-white to-gray-50 p-6 mb-8 rounded-lg text-sm text-gray-700 border border-gray-100 shadow-sm">
             <div className="font-medium mb-3 text-gray-900 flex items-center">
@@ -119,47 +92,79 @@ export function PricingTable() {
             </ul>
           </div>
           
-          {/* タブリスト - モダンなデザイン */}
-          <div className="overflow-hidden mb-12">
-            <div className="flex justify-center">
-              <TabsList className="grid grid-cols-2 sm:grid-cols-4 bg-white rounded-xl border border-gray-200 p-1.5 gap-1 shadow-sm max-w-3xl">
+          {/* タブリスト - 改善されたデザイン */}
+          <div className="mb-12">
+            <div className="text-center mb-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-2">プランを選択してください</h3>
+              <p className="text-sm text-gray-600">営業日数とプランタイプを組み合わせてお選びいただけます</p>
+            </div>
+            
+            <div className="max-w-5xl mx-auto">
+              <TabsList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-transparent gap-4 h-auto p-0">
                 <TabsTrigger 
                   value="fe-180" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-500 data-[state=active]:to-gold-600 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                  className="data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:border-gold-400 data-[state=active]:border-2 bg-white border border-gray-200 rounded-xl p-6 h-auto transition-all duration-300 hover:shadow-md hover:border-gray-300 cursor-pointer"
                 >
-                  <div className="text-center">
-                    <span className="block font-medium mb-1">FEプラン</span>
-                    <span className="block text-[10px] sm:text-xs opacity-80">(最大180日)</span>
+                  <div className="text-center space-y-2">
+                    <div className="text-gold-600 font-semibold text-base">FEプラン</div>
+                    <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">最大180日</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">ファミリー・エクスペリエンス<br/>家族向け体験重視</div>
                   </div>
                 </TabsTrigger>
+                
                 <TabsTrigger 
                   value="fe-365" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-500 data-[state=active]:to-gold-600 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                  className="data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:border-gold-400 data-[state=active]:border-2 bg-white border border-gray-200 rounded-xl p-6 h-auto transition-all duration-300 hover:shadow-md hover:border-gray-300 cursor-pointer"
                 >
-                  <div className="text-center">
-                    <span className="block font-medium mb-1">FEプラン</span>
-                    <span className="block text-[10px] sm:text-xs opacity-80">(最大365日)</span>
+                  <div className="text-center space-y-2">
+                    <div className="text-gold-600 font-semibold text-base">FEプラン</div>
+                    <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">最大365日</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">ファミリー・エクスペリエンス<br/>家族向け体験重視</div>
                   </div>
                 </TabsTrigger>
+                
                 <TabsTrigger 
                   value="ws-180" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-600 data-[state=active]:to-gold-700 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                  className="data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:border-blue-400 data-[state=active]:border-2 bg-white border border-gray-200 rounded-xl p-6 h-auto transition-all duration-300 hover:shadow-md hover:border-gray-300 cursor-pointer"
                 >
-                  <div className="text-center">
-                    <span className="block font-medium mb-1">WSプラン</span>
-                    <span className="block text-[10px] sm:text-xs opacity-80">(最大180日)</span>
+                  <div className="text-center space-y-2">
+                    <div className="text-blue-600 font-semibold text-base">WSプラン</div>
+                    <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">最大180日</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">ワーケーション・ステイ<br/>長期滞在・仕事重視</div>
                   </div>
                 </TabsTrigger>
+                
                 <TabsTrigger 
                   value="ws-365" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-gold-600 data-[state=active]:to-gold-700 data-[state=active]:text-white data-[state=active]:shadow-md text-xs sm:text-sm rounded-lg h-auto py-4 px-3 transition-all duration-300 data-[state=active]:translate-y-0 data-[state=active]:scale-100 hover:bg-gray-50"
+                  className="data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:border-blue-400 data-[state=active]:border-2 bg-white border border-gray-200 rounded-xl p-6 h-auto transition-all duration-300 hover:shadow-md hover:border-gray-300 cursor-pointer"
                 >
-                  <div className="text-center">
-                    <span className="block font-medium mb-1">WSプラン</span>
-                    <span className="block text-[10px] sm:text-xs opacity-80">(最大365日)</span>
+                  <div className="text-center space-y-2">
+                    <div className="text-blue-600 font-semibold text-base">WSプラン</div>
+                    <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">最大365日</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">ワーケーション・ステイ<br/>長期滞在・仕事重視</div>
                   </div>
                 </TabsTrigger>
               </TabsList>
+            </div>
+            
+            {/* プランの説明 */}
+            <div className="mt-6 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div className="bg-gradient-to-r from-gold-50 to-orange-50 p-4 rounded-lg border border-gold-200">
+                  <div className="flex items-center mb-2">
+                    <div className="w-3 h-3 bg-gold-500 rounded-full mr-2"></div>
+                    <span className="font-medium text-gold-700">FEプラン（ファミリー・エクスペリエンス）</span>
+                  </div>
+                  <p className="text-gray-600 text-xs">家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる宿泊施設の運営をサポートします。</p>
+                </div>
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border border-blue-200">
+                  <div className="flex items-center mb-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                    <span className="font-medium text-blue-700">WSプラン（ワーケーション・ステイ）</span>
+                  </div>
+                  <p className="text-gray-600 text-xs">ワーケーションや長期滞在のビジネス利用に最適なプラン。快適な仕事環境と滞在空間を提供します。</p>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -6,13 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Check, ChevronRight } from "lucide-react" // Removed HelpCircle as it wasn't used
-// Removed Tooltip imports as they weren't used
+import { Check, ChevronRight, AlertCircle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 
-// Pricing data remains the same
 const pricingData = {
   basicFees: [
     {
@@ -75,11 +73,11 @@ const pricingData = {
       required: true,
       prices: {
         fe: {
-          minpaku: 1000000,
+          minpaku: 1500000,
           ryokan: "別途見積",
         },
         ws: {
-          minpaku: "別途見積",
+          minpaku: 1000000,
           ryokan: "別途見積",
         },
       },
@@ -92,11 +90,11 @@ const pricingData = {
       required: true,
       prices: {
         fe: {
-          minpaku: 10000,
+          minpaku: 20000,
           ryokan: "別途見積",
         },
         ws: {
-          minpaku: "別途見積",
+          minpaku: 10000,
           ryokan: "別途見積",
         },
       },
@@ -370,7 +368,6 @@ const pricingData = {
   ],
 }
 
-// Plan options remain the same (data only)
 const planOptions = [
   {
     id: "fe",
@@ -386,7 +383,6 @@ const planOptions = [
   },
 ]
 
-// Business type options remain the same (data only)
 const businessTypeOptions = [
   {
     id: "minpaku",
@@ -401,7 +397,6 @@ const businessTypeOptions = [
   },
 ]
 
-// Interfaces remain the same
 interface PriceOption {
   id: string;
   name: string;
@@ -443,10 +438,10 @@ interface ResultOption {
   selected: boolean;
   monthly?: boolean;
   isPercentage?: boolean;
+  perRoom?: boolean;
 }
 
 export default function PricingSimulator() {
-  // State and core logic remain the same
   const [currentStep, setCurrentStep] = useState(1)
   const totalSteps = 5
   const [plan, setPlan] = useState<"fe" | "ws">("fe")
@@ -494,10 +489,10 @@ export default function PricingSimulator() {
       if (selectedOptions[fee.id]) {
         const price = fee.prices[plan][businessType]
         if (typeof price === "number") {
-          if (fee.isPercentage) {
+          if ('isPercentage' in fee && fee.isPercentage === true) {
             percentage += price
-          } else if (fee.monthly) {
-            if (fee.perRoom) {
+          } else if ('monthly' in fee && fee.monthly === true) {
+            if ('perRoom' in fee && fee.perRoom === true) {
               monthly += price * roomCount;
             } else {
               monthly += price;
@@ -511,8 +506,9 @@ export default function PricingSimulator() {
           name: fee.name,
           price: price,
           selected: true,
-          monthly: fee.monthly,
-          isPercentage: fee.isPercentage,
+          monthly: ('monthly' in fee) ? fee.monthly || false : false,
+          isPercentage: ('isPercentage' in fee) ? fee.isPercentage || false : false,
+          perRoom: ('perRoom' in fee) ? fee.perRoom || false : false,
         });
       }
     })
@@ -522,7 +518,7 @@ export default function PricingSimulator() {
     setMonthlyCost(monthly)
     setPercentageCost(percentage)
     setMonthlyCommission(commission)
-    setTotalMonthlyCost(monthly + commission) // Keep calculation consistent
+    setTotalMonthlyCost(monthly + commission)
     setResultOptions(results)
   }, [selectedOptions, plan, businessType, roomCount, estimatedMonthlyRevenue])
 
@@ -560,262 +556,375 @@ export default function PricingSimulator() {
     setEstimatedMonthlyRevenue(300000)
   }
 
-  // JSX with updated class names for black/white/gray theme
   return (
-    // Simplified border and kept white background
-    <div className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">
-      {/* Simplified header border and text colors */}
-      <div className="px-6 py-6 border-b border-gray-300">
-        <h3 className="text-2xl font-light text-black mb-2">料金シミュレーター</h3>
-        <p className="text-gray-700">
-          お客様の条件に合わせた概算料金をシミュレーションできます。
-        </p>
+    <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white border-b border-gray-200">
+        <div className="px-8 py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">料金シミュレーター</h3>
+              <p className="text-gray-600">
+                お客様の条件に合わせた概算料金をシミュレーションできます。
+              </p>
+            </div>
+            <div className="mt-4 sm:mt-0">
+              <div className="flex items-center space-x-2">
+                {[1, 2, 3, 4, 5].map((step) => (
+                  <div key={step} className="flex items-center">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
+                        step < currentStep
+                          ? "bg-green-500 text-white"
+                          : step === currentStep
+                          ? "bg-blue-500 text-white ring-4 ring-blue-200"
+                          : "bg-gray-200 text-gray-500"
+                      }`}
+                    >
+                      {step < currentStep ? "✓" : step}
+                    </div>
+                    {step < 5 && (
+                      <div
+                        className={`w-8 h-1 mx-2 transition-all duration-300 ${
+                          step < currentStep ? "bg-green-500" : "bg-gray-200"
+                        }`}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-sm text-gray-500">
+                  ステップ {currentStep} / {totalSteps}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="p-6">
-        {/* Step 1: プランタイプ選択 */}
+      <div className="p-8">
         <div className={`${currentStep === 1 ? "block" : "hidden"}`}>
-          <h4 className="text-xl font-medium text-black mb-6">ステップ1: プランタイプを選択</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Card Styling Updated */}
+          <div className="text-center mb-8">
+            <h4 className="text-2xl font-semibold text-gray-900 mb-3">プランタイプを選択</h4>
+            <p className="text-gray-600">あなたのニーズに最適なプランを選択してください</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <Card
               className={cn(
-                "cursor-pointer transition-all duration-200 hover:shadow-md",
+                "cursor-pointer transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1",
                 plan === "fe"
-                  ? "border-black bg-gray-100" // Selected: Black border, light gray bg
-                  : "border-gray-300 hover:border-gray-400" // Default: Gray border
+                  ? "border-2 border-blue-500 bg-blue-50 shadow-lg ring-4 ring-blue-100"
+                  : "border border-gray-200 hover:border-gray-300"
               )}
               onClick={() => setPlan("fe")}
             >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  {/* Badge Styling Updated */}
-                  <Badge variant="secondary" className="border border-gray-300">
+              <CardContent className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <Badge variant="secondary" className="bg-gold-100 text-gold-700 border-gold-200 px-3 py-1">
                     ファミリー・エクスペリエンス
                   </Badge>
                   {plan === "fe" && (
-                    // Checkmark Styling Updated
-                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
-                      <Check className="h-4 w-4 text-white" />
+                    <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                      <Check className="h-5 w-5 text-white" />
                     </div>
                   )}
                 </div>
-                {/* Text colors simplified */}
-                <h5 className="text-lg font-medium text-black mb-2">家族向け体験プラン</h5>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 leading-relaxed mb-3">
                   家族での思い出作りに最適なプラン。北海道の自然や文化を体験できる宿泊施設の運営をサポートします。
                 </p>
+                <h5 className="text-xl font-semibold text-gray-900 mb-3">家族向け体験プラン</h5>
+                <div className="mt-6 flex items-center text-sm text-gray-500">
+                  <div className="w-2 h-2 bg-gold-500 rounded-full mr-2"></div>
+                  家族連れ・観光客向け
+                </div>
               </CardContent>
             </Card>
 
             <Card
               className={cn(
-                "cursor-pointer transition-all duration-200 hover:shadow-md",
+                "cursor-pointer transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1",
                 plan === "ws"
-                  ? "border-black bg-gray-100" // Selected
-                  : "border-gray-300 hover:border-gray-400" // Default
+                  ? "border-2 border-blue-500 bg-blue-50 shadow-lg ring-4 ring-blue-100"
+                  : "border border-gray-200 hover:border-gray-300"
               )}
               onClick={() => setPlan("ws")}
             >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <Badge variant="secondary" className="border border-gray-300">
+              <CardContent className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200 px-3 py-1">
                     ワーケーション・ステイ
                   </Badge>
                   {plan === "ws" && (
-                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
-                      <Check className="h-4 w-4 text-white" />
+                    <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                      <Check className="h-5 w-5 text-white" />
                     </div>
                   )}
                 </div>
-                <h5 className="text-lg font-medium text-black mb-2">ワーケーション向けプラン</h5>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 leading-relaxed mb-3">
                   ワーケーションや長期滞在のビジネス利用に最適なプラン。快適な仕事環境と滞在空間を提供します。
                 </p>
+                <h5 className="text-xl font-semibold text-gray-900 mb-3">ワーケーション向けプラン</h5>
+                <div className="mt-6 flex items-center text-sm text-gray-500">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  ビジネス・長期滞在向け
+                </div>
               </CardContent>
             </Card>
           </div>
 
-          <div className="mt-8 flex justify-end">
-            {/* Button Styling Updated */}
+          <div className="mt-12 flex justify-center">
             <Button
               onClick={nextStep}
               disabled={!plan}
+              size="lg"
               className={cn(
-                "px-6",
+                "px-8 py-3 text-base font-medium transition-all duration-300",
                 plan
-                  ? "bg-black hover:bg-gray-800 text-white" // Enabled: Black bg
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed" // Disabled: Default gray
-              )}
-            >
-              次へ
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Step 2: 営業タイプ選択 */}
-        <div className={`${currentStep === 2 ? "block" : "hidden"}`}>
-          <h4 className="text-xl font-medium text-black mb-6">ステップ2: 営業タイプを選択</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Apply similar card/badge/checkmark style updates as Step 1 */}
-            <Card
-              className={cn(
-                "cursor-pointer transition-all duration-200 hover:shadow-md",
-                businessType === "minpaku"
-                  ? "border-black bg-gray-100"
-                  : "border-gray-300 hover:border-gray-400"
-              )}
-              onClick={() => setBusinessType("minpaku")}
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <Badge variant="secondary" className="border border-gray-300">
-                    民泊営業
-                  </Badge>
-                  {businessType === "minpaku" && (
-                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                  )}
-                </div>
-                <h5 className="text-lg font-medium text-black mb-2">住宅宿泊事業法（民泊）</h5>
-                <p className="text-gray-600 text-sm">
-                  住宅宿泊事業法に基づく民泊営業。年間提供日数の上限があり、手続きが比較的簡単です。
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card
-              className={cn(
-                "cursor-pointer transition-all duration-200 hover:shadow-md",
-                businessType === "ryokan"
-                  ? "border-black bg-gray-100"
-                  : "border-gray-300 hover:border-gray-400"
-              )}
-              onClick={() => setBusinessType("ryokan")}
-            >
-              <CardContent className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <Badge variant="secondary" className="border border-gray-300">
-                    旅館営業
-                  </Badge>
-                  {businessType === "ryokan" && (
-                    <div className="h-6 w-6 rounded-full bg-black flex items-center justify-center">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                  )}
-                </div>
-                <h5 className="text-lg font-medium text-black mb-2">旅館業法（簡易宿所）</h5>
-                <p className="text-gray-600 text-sm">
-                  旅館業法に基づく営業。年間日数制限がなく、法人・個人を問わず営業が可能です。
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-8 flex justify-between">
-            {/* Back button kept as outline */}
-            <Button
-              variant="outline"
-              onClick={prevStep}
-              className="border-gray-300 text-gray-700 hover:bg-gray-100"
-            >
-              戻る
-            </Button>
-            {/* Next button style updated */}
-            <Button
-              onClick={nextStep}
-              disabled={!businessType}
-              className={cn(
-                "px-6",
-                businessType
-                  ? "bg-black hover:bg-gray-800 text-white"
+                  ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
               )}
             >
-              次へ
-              <ChevronRight className="ml-2 h-4 w-4" />
+              次のステップへ
+              <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
 
-        {/* Step 3: 部屋数と売上予想 */}
-        <div className={`${currentStep === 3 ? "block" : "hidden"}`}>
-          <h4 className="text-xl font-medium text-black mb-6">ステップ3: 規模と売上予想</h4>
+        <div className={`${currentStep === 2 ? "block" : "hidden"}`}>
+          <div className="text-center mb-8">
+            <h4 className="text-2xl font-semibold text-gray-900 mb-3">営業タイプを選択</h4>
+            <p className="text-gray-600">営業日数の制限に応じて適切なタイプを選択してください</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <Card
+              className={cn(
+                "cursor-pointer transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1",
+                businessType === "minpaku"
+                  ? "border-2 border-blue-500 bg-blue-50 shadow-lg ring-4 ring-blue-100"
+                  : "border border-gray-200 hover:border-gray-300"
+              )}
+              onClick={() => setBusinessType("minpaku")}
+            >
+              <CardContent className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <Badge variant="secondary" className="bg-green-100 text-green-700 border-green-200 px-3 py-1">
+                    民泊営業
+                  </Badge>
+                  {businessType === "minpaku" && (
+                    <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                      <Check className="h-5 w-5 text-white" />
+                    </div>
+                  )}
+                </div>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  住宅宿泊事業法に基づく民泊営業。年間提供日数の上限があり、手続きが比較的簡単です。
+                </p>
+                <h5 className="text-xl font-semibold text-gray-900 mb-3">住宅宿泊事業法（民泊）</h5>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center text-green-600">
+                    <Check className="h-4 w-4 mr-2" />
+                    申請手続きが簡単
+                  </div>
+                  <div className="flex items-center text-orange-600">
+                    <AlertCircle className="h-4 w-4 mr-2" />
+                    年間180日まで
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-          <div className="space-y-6">
-            {/* Card border simplified */}
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                {/* Text colors simplified */}
-                <CardTitle className="text-lg font-medium text-black">
+            <Card
+              className={cn(
+                "cursor-pointer transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1",
+                businessType === "ryokan"
+                  ? "border-2 border-blue-500 bg-blue-50 shadow-lg ring-4 ring-blue-100"
+                  : "border border-gray-200 hover:border-gray-300"
+              )}
+              onClick={() => setBusinessType("ryokan")}
+            >
+              <CardContent className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-700 border-purple-200 px-3 py-1">
+                    旅館営業
+                  </Badge>
+                  {businessType === "ryokan" && (
+                    <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                      <Check className="h-5 w-5 text-white" />
+                    </div>
+                  )}
+                </div>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  旅館業法に基づく営業。年間日数制限がなく、法人・個人を問わず営業が可能です。
+                </p>
+                <h5 className="text-xl font-semibold text-gray-900 mb-3">旅館業法（簡易宿所）</h5>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center text-green-600">
+                    <Check className="h-4 w-4 mr-2" />
+                    年間日数制限なし
+                  </div>
+                  <div className="flex items-center text-blue-600">
+                    <Check className="h-4 w-4 mr-2" />
+                    年中営業可能
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 flex justify-between max-w-4xl mx-auto">
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              size="lg"
+              className="px-8 py-3 border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              前のステップ
+            </Button>
+            <Button
+              onClick={nextStep}
+              disabled={!businessType}
+              size="lg"
+              className={cn(
+                "px-8 py-3 text-base font-medium transition-all duration-300",
+                businessType
+                  ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              )}
+            >
+              次のステップへ
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+
+        <div className={`${currentStep === 3 ? "block" : "hidden"}`}>
+          <div className="text-center mb-8">
+            <h4 className="text-2xl font-semibold text-gray-900 mb-3">規模と売上予想</h4>
+            <p className="text-gray-600">運営する部屋数と予想売上を設定してください</p>
+          </div>
+
+          <div className="space-y-8 max-w-3xl mx-auto">
+            <Card className="border border-gray-200 shadow-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">1</span>
+                  </div>
                   部屋数を選択
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 ml-11">
                   運営する部屋数を選択してください
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex flex-col space-y-4">
-                  <div className="flex items-center justify-between">
-                    {/* Text color simplified */}
-                    <span className="text-sm font-medium text-gray-700">部屋数: {roomCount}室</span>
-                    <div className="flex items-center space-x-2">
-                      {/* +/- Buttons kept as outline */}
+              <CardContent className="pt-0">
+                <div className="bg-gray-50 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-lg font-semibold text-gray-900">部屋数: {roomCount}室</span>
+                    <div className="flex items-center space-x-3">
                       <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 w-8 p-0 flex items-center justify-center border-gray-300"
+                        className="h-10 w-10 p-0 rounded-lg border-gray-300 hover:bg-gray-100"
                         onClick={() => setRoomCount(Math.max(1, roomCount - 1))}
                       >
                         -
                       </Button>
+                      <span className="text-2xl font-bold text-blue-600 min-w-[3rem] text-center">{roomCount}</span>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 w-8 p-0 flex items-center justify-center border-gray-300"
+                        className="h-10 w-10 p-0 rounded-lg border-gray-300 hover:bg-gray-100"
                         onClick={() => setRoomCount(roomCount + 1)}
                       >
                         +
                       </Button>
                     </div>
                   </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                    {[1, 2, 3, 4, 5, 6].map((num) => (
+                      <Button
+                        key={num}
+                        variant="outline"
+                        size="sm"
+                        className={cn(
+                          "h-12 text-base transition-all duration-200",
+                          roomCount === num
+                            ? "bg-blue-500 text-white border-blue-500 shadow-lg"
+                            : "border-gray-300 hover:bg-gray-100"
+                        )}
+                        onClick={() => setRoomCount(num)}
+                      >
+                        {num}室
+                      </Button>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
+            <Card className="border border-gray-200 shadow-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">2</span>
+                  </div>
                   予想月間売上
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 ml-11">
                   全部屋の合計の月間予想売上を選択してください（運営手数料の計算に使用されます）
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    {/* Text colors simplified */}
-                    <span className="text-sm font-medium text-gray-700 mb-2 block">
-                      予想月間売上: {new Intl.NumberFormat('ja-JP').format(estimatedMonthlyRevenue)}円/月
-                    </span>
-                    {/* Range input accent color updated */}
-                    <input
-                      type="range"
-                      min="100000"
-                      max="2000000"
-                      step="50000"
-                      value={estimatedMonthlyRevenue}
-                      onChange={(e) => setEstimatedMonthlyRevenue(parseInt(e.target.value))}
-                      className="w-full accent-black" // Changed accent color
-                    />
-                    {/* Text colors simplified */}
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>10万円</span>
-                      <span>100万円</span>
-                      <span>200万円</span>
+              <CardContent className="pt-0">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
+                  <div className="text-center mb-6">
+                    <div className="text-3xl font-bold text-blue-600 mb-2">
+                      {new Intl.NumberFormat('ja-JP').format(estimatedMonthlyRevenue)}円
+                    </div>
+                    <div className="text-sm text-gray-600">予想月間売上</div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <input
+                        type="range"
+                        min="100000"
+                        max="2000000"
+                        step="50000"
+                        value={estimatedMonthlyRevenue}
+                        onChange={(e) => setEstimatedMonthlyRevenue(parseInt(e.target.value))}
+                        className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                        style={{
+                          background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${((estimatedMonthlyRevenue - 100000) / (2000000 - 100000)) * 100}%, #e5e7eb ${((estimatedMonthlyRevenue - 100000) / (2000000 - 100000)) * 100}%, #e5e7eb 100%)`
+                        }}
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-2">
+                        <span>10万円</span>
+                        <span>100万円</span>
+                        <span>200万円</span>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-2 block">
+                        直接入力（円）:
+                      </label>
+                      <input
+                        type="number"
+                        min="100000"
+                        max="2000000"
+                        step="10000"
+                        value={estimatedMonthlyRevenue}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value) || 0;
+                          if (value >= 100000 && value <= 2000000) {
+                            setEstimatedMonthlyRevenue(value);
+                          }
+                        }}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium"
+                        placeholder="100000"
+                      />
                     </div>
                   </div>
                 </div>
@@ -823,44 +932,48 @@ export default function PricingSimulator() {
             </Card>
           </div>
 
-          <div className="mt-8 flex justify-between">
+          <div className="mt-12 flex justify-between max-w-3xl mx-auto">
             <Button
               variant="outline"
               onClick={prevStep}
-              className="border-gray-300 text-gray-700 hover:bg-gray-100"
+              size="lg"
+              className="px-8 py-3 border-gray-300 text-gray-700 hover:bg-gray-50"
             >
-              戻る
+              前のステップ
             </Button>
-            {/* Next button style updated */}
             <Button
               onClick={nextStep}
-              className="bg-black hover:bg-gray-800 text-white px-6"
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
             >
-              次へ
-              <ChevronRight className="ml-2 h-4 w-4" />
+              次のステップへ
+              <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
 
-        {/* Step 4: オプション選択 */}
         <div className={`${currentStep === 4 ? "block" : "hidden"}`}>
-          <h4 className="text-xl font-medium text-black mb-6">ステップ4: オプションを選択</h4>
+          <div className="text-center mb-8">
+            <h4 className="text-2xl font-semibold text-gray-900 mb-3">オプションを選択</h4>
+            <p className="text-gray-600">必要なサービスを選択してください（必須項目は自動選択されています）</p>
+          </div>
 
-          <div className="space-y-6">
-            {/* Card border and text colors simplified */}
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
+          <div className="space-y-6 max-w-4xl mx-auto">
+            <Card className="border border-gray-200 shadow-sm">
+              <CardHeader className="pb-4 bg-gradient-to-r from-gold-50 to-yellow-50">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-gold-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-gold-600 font-semibold">💰</span>
+                  </div>
                   基本料金
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 ml-11">
                   初期費用と基本サービス料金
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {pricingData.basicFees.map((fee) => (
-                  <div key={fee.id} className="flex items-start">
-                    {/* Checkbox Styling Updated */}
+                  <div key={fee.id} className="flex items-start p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
                     <Checkbox
                       id={`basic-${fee.id}`}
                       checked={fee.required || selectedOptions[fee.id]}
@@ -868,262 +981,63 @@ export default function PricingSimulator() {
                         handleOptionChange(fee.id, checked as boolean)
                       }
                       disabled={fee.required}
-                      // Updated checked/disabled styles
                       className={cn(
-                        "data-[state=checked]:bg-black data-[state=checked]:border-black", // Checked: black bg/border
-                        fee.required ? "border-gray-400 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300" : "" // Disabled: gray border/checked bg
+                        "mt-1 h-5 w-5",
+                        fee.required 
+                          ? "border-gray-400 data-[state=checked]:bg-gray-400 data-[state=checked]:border-gray-400" 
+                          : "data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                       )}
                     />
-                    <div className="ml-3">
-                      {/* Text colors simplified */}
+                    <div className="ml-4 flex-1">
                       <label
                         htmlFor={`basic-${fee.id}`}
-                        className={cn("text-sm font-medium cursor-pointer", fee.required ? "text-gray-500" : "text-black")}
-                      >
-                        {fee.name}{" "}
-                        {fee.required && (
-                          <span className="text-xs text-gray-500 ml-1">必須</span>
+                        className={cn(
+                          "text-base font-medium cursor-pointer block",
+                          fee.required ? "text-gray-600" : "text-gray-900"
                         )}
-                      </label>
-                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
-                        {fee.description}
-                      </p>
-                      <p className="text-sm text-gray-700 mt-1">
-                        料金:{" "}
-                        <span className="font-medium">
-                          {formatPrice(
-                            fee.prices[plan][businessType]
-                          )}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Repeat simplification for System Fees, Running Costs, Optional Costs cards */}
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
-                  システム費用
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  予約・管理システムの初期費用
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {pricingData.systemFees.map((fee) => (
-                  <div key={fee.id} className="flex items-start">
-                    <Checkbox
-                      id={`system-${fee.id}`}
-                      checked={fee.required || selectedOptions[fee.id]}
-                      onCheckedChange={(checked) =>
-                        handleOptionChange(fee.id, checked as boolean)
-                      }
-                      disabled={fee.required}
-                       className={cn(
-                        "data-[state=checked]:bg-black data-[state=checked]:border-black",
-                        fee.required ? "border-gray-400 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300" : ""
-                      )}
-                    />
-                    <div className="ml-3">
-                       <label
-                        htmlFor={`system-${fee.id}`}
-                        className={cn("text-sm font-medium cursor-pointer", fee.required ? "text-gray-500" : "text-black")}
-                      >
-                        {fee.name}{" "}
-                        {fee.required && (
-                          <span className="text-xs text-gray-500 ml-1">必須</span>
-                        )}
-                      </label>
-                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
-                        {fee.description}
-                      </p>
-                      <p className="text-sm text-gray-700 mt-1">
-                        料金:{" "}
-                        <span className="font-medium">
-                          {formatPrice(
-                            fee.prices[plan][businessType]
-                          )}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
-                  月額費用
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  継続的な運営に必要な月額費用
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {pricingData.runningCosts.map((fee) => (
-                  <div key={fee.id} className="flex items-start">
-                    <Checkbox
-                      id={`running-${fee.id}`}
-                      checked={fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType]) || selectedOptions[fee.id]}
-                      onCheckedChange={(checked) =>
-                        handleOptionChange(fee.id, checked as boolean)
-                      }
-                      disabled={fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])}
-                      className={cn(
-                        "data-[state=checked]:bg-black data-[state=checked]:border-black",
-                        (fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])) ? "border-gray-400 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300" : ""
-                      )}
-                    />
-                    <div className="ml-3">
-                       <label
-                        htmlFor={`running-${fee.id}`}
-                        className={cn("text-sm font-medium cursor-pointer", (fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])) ? "text-gray-500" : "text-black")}
-                      >
-                        {fee.name}{" "}
-                        {(fee.required || (fee.requiredFor && fee.requiredFor[plan][businessType])) && (
-                          <span className="text-xs text-gray-500 ml-1">必須</span>
-                        )}
-                      </label>
-                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
-                        {fee.description}
-                      </p>
-                      <p className="text-sm text-gray-700 mt-1">
-                        料金:{" "}
-                        <span className="font-medium">
-                          {formatPrice(
-                            fee.prices[plan][businessType]
-                          )}
-                          {fee.monthly ? "/月" : ""}
-                          {fee.perRoom ? " (部屋毎)" : ""}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-             <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
-                  追加オプション
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  必要に応じて選択できる追加サービス
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {pricingData.optionalCosts.map((fee) => (
-                  <div key={fee.id} className="flex items-start">
-                    <Checkbox
-                      id={`option-${fee.id}`}
-                      checked={selectedOptions[fee.id]}
-                      onCheckedChange={(checked) =>
-                        handleOptionChange(fee.id, checked as boolean)
-                      }
-                      className="data-[state=checked]:bg-black data-[state=checked]:border-black"
-                    />
-                    <div className="ml-3">
-                      <label
-                        htmlFor={`option-${fee.id}`}
-                        className="text-sm font-medium text-black cursor-pointer"
                       >
                         {fee.name}
+                        {fee.required && (
+                          <span className="ml-2 text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full font-medium">必須</span>
+                        )}
                       </label>
-                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">
+                      <p className="text-sm text-gray-600 mt-1 leading-relaxed whitespace-pre-line">
                         {fee.description}
                       </p>
-                      <p className="text-sm text-gray-700 mt-1">
-                        料金:{" "}
-                        <span className="font-medium">
-                          {formatPrice(
-                            fee.prices[plan][businessType]
-                          )}
-                          {fee.monthly ? "/月" : ""}
-                          {fee.perRoom ? " (部屋毎)" : ""}
-                        </span>
+                      <p className="text-base font-semibold text-blue-600 mt-2">
+                        料金: {formatPrice(fee.prices[plan][businessType])}
                       </p>
                     </div>
                   </div>
                 ))}
               </CardContent>
             </Card>
-          </div>
 
-          <div className="mt-8 flex justify-between">
-            <Button
-              variant="outline"
-              onClick={prevStep}
-              className="border-gray-300 text-gray-700 hover:bg-gray-100"
-            >
-              戻る
-            </Button>
-            <Button
-              onClick={nextStep}
-              className="bg-black hover:bg-gray-800 text-white px-6"
-            >
-              次へ
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Step 5: 見積り結果 */}
-        <div className={`${currentStep === 5 ? "block" : "hidden"}`}>
-          <h4 className="text-xl font-medium text-black mb-6">見積り結果</h4>
-
-          <div className="space-y-6">
-            {/* Result cards simplified */}
-            <Card className="border-gray-300">
-              <CardHeader>
-                <CardTitle className="text-lg font-medium text-black">
-                  選択したプラン
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  {plan === "fe" ? "ファミリー・エクスペリエンス" : "ワーケーション・ステイ"} /{" "}
-                  {businessType === "minpaku" ? "民泊営業" : "旅館営業"} /
-                  {roomCount}部屋 /
-                  予想月売上: {formatPrice(estimatedMonthlyRevenue)}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
+            <Card className="border border-gray-200 shadow-sm">
+              <CardHeader className="pb-4 bg-gradient-to-r from-green-50 to-emerald-50">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-semibold">💰</span>
+                  </div>
                   初期費用
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {resultOptions
                     .filter(option => option.selected && !option.monthly && !option.isPercentage)
                     .map(option => (
-                      <div key={`${option.id}-initial`} className="flex justify-between items-center py-1">
-                        {/* Text colors simplified */}
-                        <span className="text-gray-700">{option.name}</span>
-                        <span className="font-medium text-gray-800">
+                      <div key={`${option.id}-initial`} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0">
+                        <span className="text-gray-700 font-medium">{option.name}</span>
+                        <span className="font-semibold text-gray-900 text-lg">
                           {formatPrice(option.price)}
                         </span>
                       </div>
                     ))}
 
-                  {resultOptions.some(option => option.selected && !option.monthly && !option.isPercentage && option.price === "別途見積") && (
-                    <div className="flex justify-between items-center py-1 text-gray-600">
-                      <span>別途見積もりが必要な項目が含まれます</span>
-                      <span>-</span>
-                    </div>
-                  )}
-
-                  {/* Separator simplified */}
-                  <Separator className="my-2 bg-gray-200" />
-                  <div className="flex justify-between items-center py-1">
-                    <span className="font-medium text-black">初期費用合計</span>
-                    <span className="font-bold text-black">
+                  <div className="flex justify-between items-center py-4 bg-green-50 rounded-lg px-4 mt-4">
+                    <span className="font-semibold text-green-800 text-lg">初期費用合計</span>
+                    <span className="font-bold text-green-800 text-xl">
                       {resultOptions.some(option => option.selected && !option.monthly && !option.isPercentage && option.price === "別途見積")
                         ? "一部別途見積"
                         : `${initialCost.toLocaleString()}円`}
@@ -1133,21 +1047,23 @@ export default function PricingSimulator() {
               </CardContent>
             </Card>
 
-            <Card className="border-gray-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium text-black">
+            <Card className="border border-gray-200 shadow-lg">
+              <CardHeader className="pb-4 bg-gradient-to-r from-blue-50 to-cyan-50">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">📅</span>
+                  </div>
                   月額費用
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                   {/* Fixed costs */}
-                   {resultOptions
+                <div className="space-y-3">
+                  {resultOptions
                     .filter(option => option.selected && option.monthly && !option.isPercentage)
                     .map(option => (
-                      <div key={`${option.id}-monthly`} className="flex justify-between items-center py-1">
-                         <span className="text-gray-700">{option.name}</span>
-                         <span className="font-medium text-gray-800">
+                      <div key={`${option.id}-monthly`} className="flex justify-between items-center py-3 border-b border-gray-100">
+                        <span className="text-gray-700 font-medium">{option.name}</span>
+                        <span className="font-semibold text-gray-900">
                           {typeof option.price === "number"
                             ? `${(option.perRoom ? option.price * roomCount : option.price).toLocaleString()}円/月`
                             : option.price}
@@ -1156,68 +1072,236 @@ export default function PricingSimulator() {
                       </div>
                    ))}
 
-                   {/* Percentage costs */}
                    {resultOptions.filter(option => option.selected && option.isPercentage).length > 0 && (
-                    <div className="flex justify-between items-center py-1 text-gray-700">
-                      <span>{resultOptions.find(o => o.selected && o.isPercentage)?.name} (予想売上 {formatPrice(estimatedMonthlyRevenue)} に対して)</span>
-                      <span>
-                        {formatPrice(monthlyCommission)}/月 ({resultOptions.find(o => o.selected && o.isPercentage)?.price}%)
+                    <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                      <span className="text-gray-700 font-medium">
+                        運営代行料（売上{formatPrice(estimatedMonthlyRevenue)}に対して）
+                      </span>
+                      <span className="font-semibold text-gray-900">
+                        {formatPrice(monthlyCommission)}/月 ({percentageCost}%)
                       </span>
                     </div>
                    )}
 
-                  <Separator className="my-2 bg-gray-200" />
-                  <div className="flex justify-between items-center py-1">
-                    <span className="font-medium text-black">月額費用合計 (概算)</span>
-                    <span className="font-bold text-black">
+                  <div className="flex justify-between items-center py-4 bg-blue-50 rounded-lg px-4 mt-4">
+                    <span className="font-semibold text-blue-800 text-lg">月額費用合計（概算）</span>
+                    <span className="font-bold text-blue-800 text-xl">
                       {`${(monthlyCost + monthlyCommission).toLocaleString()}円/月`}
                     </span>
                   </div>
-                   <p className="text-xs text-gray-500 pt-2">
-                      内訳: 固定費 {monthlyCost.toLocaleString()}円 + 成果報酬 (売上の{percentageCost}%) {monthlyCommission.toLocaleString()}円
-                    </p>
+                  
+                  <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg mt-3">
+                    内訳: 固定費 {monthlyCost.toLocaleString()}円 + 成果報酬 {monthlyCommission.toLocaleString()}円
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Note box simplified */}
-          <div className="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <p className="text-gray-700 text-sm text-left">
-              ※ 表示価格はすべて税抜きです。別途消費税がかかります。
-              <br />※ こちらはシミュレーション結果であり、実際の料金は物件の状況や詳細な要件によって異なる場合があります。
-              <br />※ 詳細なお見積りについては、お問い合わせください。
-            </p>
-          </div>
-
-          <div className="mt-8 flex justify-between">
+          <div className="mt-12 flex justify-between max-w-4xl mx-auto">
             <Button
               variant="outline"
               onClick={prevStep}
-              className="border-gray-300 text-gray-700 hover:bg-gray-100"
+              size="lg"
+              className="px-8 py-3 border-gray-300 text-gray-700 hover:bg-gray-50"
             >
-              戻る
+              前のステップ
+            </Button>
+            <Button
+              onClick={nextStep}
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
+            >
+              見積り結果を見る
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+
+        <div className={`${currentStep === 5 ? "block" : "hidden"}`}>
+          <div className="text-center mb-8">
+            <h4 className="text-2xl font-semibold text-gray-900 mb-3">見積り結果</h4>
+            <p className="text-gray-600">選択した条件に基づく概算料金をご確認ください</p>
+          </div>
+
+          <div className="space-y-6 max-w-4xl mx-auto">
+            <Card className="border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">📋</span>
+                  </div>
+                  選択したプラン
+                </CardTitle>
+                <div className="ml-11 space-y-2">
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+                      {plan === "fe" ? "ファミリー・エクスペリエンス" : "ワーケーション・ステイ"}
+                    </Badge>
+                    <Badge className="bg-green-100 text-green-700 border-green-200">
+                      {businessType === "minpaku" ? "民泊営業" : "旅館営業"}
+                    </Badge>
+                    <Badge className="bg-purple-100 text-purple-700 border-purple-200">
+                      {roomCount}部屋
+                    </Badge>
+                  </div>
+                  <p className="text-gray-600">
+                    予想月売上: <span className="font-semibold text-blue-600">{formatPrice(estimatedMonthlyRevenue)}</span>
+                  </p>
+                </div>
+              </CardHeader>
+            </Card>
+
+            <Card className="border border-gray-200 shadow-lg">
+              <CardHeader className="pb-4 bg-gradient-to-r from-green-50 to-emerald-50">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-semibold">💰</span>
+                  </div>
+                  初期費用
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {resultOptions
+                    .filter(option => option.selected && !option.monthly && !option.isPercentage)
+                    .map(option => (
+                      <div key={`${option.id}-initial`} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0">
+                        <span className="text-gray-700 font-medium">{option.name}</span>
+                        <span className="font-semibold text-gray-900 text-lg">
+                          {formatPrice(option.price)}
+                        </span>
+                      </div>
+                    ))}
+
+                  <div className="flex justify-between items-center py-4 bg-green-50 rounded-lg px-4 mt-4">
+                    <span className="font-semibold text-green-800 text-lg">初期費用合計</span>
+                    <span className="font-bold text-green-800 text-xl">
+                      {resultOptions.some(option => option.selected && !option.monthly && !option.isPercentage && option.price === "別途見積")
+                        ? "一部別途見積"
+                        : `${initialCost.toLocaleString()}円`}
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-gray-200 shadow-lg">
+              <CardHeader className="pb-4 bg-gradient-to-r from-blue-50 to-cyan-50">
+                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">📅</span>
+                  </div>
+                  月額費用
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {resultOptions
+                    .filter(option => option.selected && option.monthly && !option.isPercentage)
+                    .map(option => (
+                      <div key={`${option.id}-monthly`} className="flex justify-between items-center py-3 border-b border-gray-100">
+                        <span className="text-gray-700 font-medium">{option.name}</span>
+                        <span className="font-semibold text-gray-900">
+                          {typeof option.price === "number"
+                            ? `${(option.perRoom ? option.price * roomCount : option.price).toLocaleString()}円/月`
+                            : option.price}
+                          {option.perRoom && typeof option.price === 'number' && ` (${option.price.toLocaleString()}円/部屋)`}
+                        </span>
+                      </div>
+                   ))}
+
+                   {resultOptions.filter(option => option.selected && option.isPercentage).length > 0 && (
+                    <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                      <span className="text-gray-700 font-medium">
+                        運営代行料（売上{formatPrice(estimatedMonthlyRevenue)}に対して）
+                      </span>
+                      <span className="font-semibold text-gray-900">
+                        {formatPrice(monthlyCommission)}/月 ({percentageCost}%)
+                      </span>
+                    </div>
+                   )}
+
+                  <div className="flex justify-between items-center py-4 bg-blue-50 rounded-lg px-4 mt-4">
+                    <span className="font-semibold text-blue-800 text-lg">月額費用合計（概算）</span>
+                    <span className="font-bold text-blue-800 text-xl">
+                      {`${(monthlyCost + monthlyCommission).toLocaleString()}円/月`}
+                    </span>
+                  </div>
+                  
+                  <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg mt-3">
+                    内訳: 固定費 {monthlyCost.toLocaleString()}円 + 成果報酬 {monthlyCommission.toLocaleString()}円
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-4xl mx-auto">
+            <div className="flex items-start">
+              <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5 mr-3 flex-shrink-0" />
+              <div className="text-sm text-yellow-800">
+                <p className="font-medium mb-2">重要な注記事項</p>
+                <ul className="space-y-1 text-xs">
+                  <li>• 表示価格はすべて税抜きです。別途消費税がかかります。</li>
+                  <li>• こちらはシミュレーション結果であり、実際の料金は物件の状況や詳細な要件によって異なる場合があります。</li>
+                  <li>• 詳細なお見積りについては、お問い合わせください。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 flex justify-between max-w-4xl mx-auto">
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              size="lg"
+              className="px-8 py-3 border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              前のステップ
             </Button>
             <Button
               onClick={resetSimulator}
-              className="bg-black hover:bg-gray-800 text-white px-6"
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
             >
-              もう一度見積る
+              もう一度見積りする
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Footer kept neutral */}
-      <CardFooter className="bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-between">
-        <div className="text-sm text-gray-500">
-          ステップ {currentStep} / 5
+      <CardFooter className="bg-gray-50 px-8 py-6 border-t border-gray-200 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+        <div className="text-sm text-gray-500 mb-3 sm:mb-0">
+          お困りの際はお気軽にお問い合わせください
         </div>
-        {/* Link color simplified */}
-        <Link href="/contact" className="text-black hover:text-gray-700 text-sm font-medium">
+        <Link href="/contact" className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center transition-colors duration-200">
           詳細なお見積りを依頼
+          <ChevronRight className="ml-1 h-4 w-4" />
         </Link>
       </CardFooter>
     </div>
   )
 }
+
+const styles = `
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+`

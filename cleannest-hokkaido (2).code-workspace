@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "out/_next/static/chunks/app/services/cleaning"
+		},
+		{
+			"path": "out/services/cleaning"
+		},
+		{
+			"path": "../Cleannest-mock/cleannest-app"
+		},
+		{
+			"path": "../Cleannest-mock"
+		},
+		{
+			"path": "node_modules/dom-helpers/clear"
+		},
+		{
+			"path": "../../Documents/scrappers_mock/scrappers-frontend/node_modules/prettier-plugin-tailwindcss/dist/licenses/clear-module"
+		}
+	]
+}
