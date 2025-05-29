@@ -73,7 +73,7 @@ export function OptionSelector({ options, selectedOptions, onChange }: OptionSel
                   id={option.id}
                   checked={isSelected}
                   onCheckedChange={(checked) => onChange(option.id, checked === true)}
-                  className="mr-3"
+                  className="mr-3 border-gray-400 bg-white data-[state=checked]:bg-blue-600"
                 />
                 <Label htmlFor={option.id} className="cursor-pointer flex-1">
                   <span className="font-medium">{option.label}</span>
