@@ -379,95 +379,117 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* なぜ民泊が注目されているか - Mobile Optimized */}
-      <section className="py-16 md:py-32 lg:py-40 relative bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+      {/* なぜ民泊が注目されているか - Enhanced Visual Design */}
+      <section className="py-16 md:py-32 lg:py-40 relative bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
+        {/* 装飾的な背景要素 */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gold-500/5 rounded-full blur-3xl"></div>
+        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="max-w-7xl mx-auto text-white"
+            className="max-w-7xl mx-auto"
           >
-            {/* Mobile-optimized container */}
-            <div className="bg-white/5 backdrop-blur-sm p-6 md:p-10 lg:p-16 rounded-2xl border border-white/10 shadow-2xl w-full">
-              <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extralight mb-6 md:mb-12 text-center tracking-wider leading-tight text-white">
+            {/* Glass-morphism card with improved contrast */}
+            <div className="bg-gradient-to-br from-gray-900/80 to-black/90 backdrop-blur-md p-6 md:p-10 lg:p-16 rounded-2xl border border-white/15 shadow-2xl w-full">
+              {/* Main title with improved visibility */}
+              <motion.h2 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extralight mb-6 md:mb-12 text-center tracking-wider leading-tight text-white [text-shadow:0_2px_5px_rgba(0,0,0,0.3)]"
+              >
                 なぜいま民泊なのか？
-              </h2>
-              <div className="w-16 md:w-24 h-0.5 bg-gold-400 mx-auto mb-8 md:mb-16 opacity-80" />
+              </motion.h2>
+              <div className="w-16 md:w-32 h-1 bg-gradient-to-r from-gold-400 to-gold-500 mx-auto mb-8 md:mb-16 rounded-full shadow-lg" />
 
-              <div className="space-y-12 md:space-y-20">
-                {/* Why Hokkaido Section - Mobile Optimized */}
+              <div className="space-y-16 md:space-y-24">
+                {/* Why Hokkaido Section - Enhanced Visual */}
                 <div className="space-y-4 md:space-y-8">
-                  <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-center text-white tracking-wide">
+                  <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-center tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100 [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]">
                     なぜ北海道なのか？
                   </h3>
                   
-                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-center text-white leading-relaxed px-2">
+                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-center text-blue-50 leading-relaxed px-2 max-w-4xl mx-auto">
                     2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
                   </p>
-                  <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-center text-gold-300 font-light px-2">
+                  <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-center font-light px-2 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
                     彼らが求めるのは"ホテルライク"な旅ではありません。
                   </p>
                 </div>
                 
-                {/* Inbound Travel Data - Mobile Optimized */}
+                {/* Inbound Travel Data - Enhanced Visual */}
                 <div className="mx-auto w-full max-w-4xl">
-                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-6 md:mb-10 text-white uppercase tracking-widest text-center">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-8 md:mb-12 uppercase tracking-widest text-center text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.3)]">
                     北海道へのインバウンド旅行者推移
                   </h3>
                   
-                  {/* Mobile: Stack vertically, Desktop: Grid */}
+                  {/* Stats cards with dramatically improved visibility */}
                   <div className="flex flex-col space-y-4 md:grid md:grid-cols-3 md:gap-8 md:space-y-0 max-w-sm mx-auto md:max-w-none">
-                    <div className="bg-white/10 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-white/20">
+                    {/* 2024 - Current year highlighted */}
+                    <div className="bg-gradient-to-br from-amber-600/30 to-amber-700/20 backdrop-blur-md p-4 md:p-8 rounded-xl border border-amber-400/30 shadow-xl transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                       <div className="flex flex-col items-center">
-                        <span className="text-sm md:text-base uppercase tracking-wider text-gray-300 mb-2">2024</span>
-                        <span className="text-2xl md:text-3xl font-light text-white">3,687<span className="text-xs md:text-sm">万人</span></span>
-                        <div className="mt-2 md:mt-3 text-gold-300 text-sm md:text-lg uppercase tracking-wider font-medium">過去最高を記録</div>
+                        <span className="text-sm md:text-base uppercase tracking-wider text-amber-200 font-bold mb-2">2024</span>
+                        <span className="text-2xl md:text-5xl font-semibold text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+                          3,687<span className="text-xs md:text-sm text-white">万人</span>
+                        </span>
+                        <div className="mt-3 md:mt-4 bg-amber-400 text-amber-900 text-sm md:text-base uppercase tracking-wider font-bold py-1 px-3 rounded-full shadow-md">
+                          過去最高を記録
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="bg-white/10 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-white/20">
+                    {/* 2014 - Mid point with distinct color */}
+                    <div className="bg-gradient-to-br from-blue-600/30 to-blue-700/20 backdrop-blur-md p-4 md:p-8 rounded-xl border border-blue-400/30 shadow-xl transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                       <div className="flex flex-col items-center">
-                        <span className="text-sm md:text-lg uppercase tracking-wider text-gray-300 mb-2">2014</span>
-                        <span className="text-2xl md:text-4xl font-light text-white">1,341<span className="text-xs md:text-base">万人</span></span>
+                        <span className="text-sm md:text-lg uppercase tracking-wider text-blue-200 font-bold mb-2">2014</span>
+                        <span className="text-2xl md:text-5xl font-semibold text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+                          1,341<span className="text-xs md:text-base text-white">万人</span>
+                        </span>
                       </div>
                     </div>
                     
-                    <div className="bg-white/10 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-white/20">
+                    {/* 2004 - Earliest data point */}
+                    <div className="bg-gradient-to-br from-teal-600/30 to-teal-700/20 backdrop-blur-md p-4 md:p-8 rounded-xl border border-teal-400/30 shadow-xl transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                       <div className="flex flex-col items-center">
-                        <span className="text-sm md:text-lg uppercase tracking-wider text-gray-300 mb-2">2004</span>
-                        <span className="text-2xl md:text-4xl font-light text-white">614<span className="text-xs md:text-base">万人</span></span>
+                        <span className="text-sm md:text-lg uppercase tracking-wider text-teal-200 font-bold mb-2">2004</span>
+                        <span className="text-2xl md:text-5xl font-semibold text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+                          614<span className="text-xs md:text-base text-white">万人</span>
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Second Part Content - Mobile Optimized */}
-                <div className="space-y-6 md:space-y-10 px-2">
+                {/* Content with improved typography and contrast */}
+                <div className="space-y-8 md:space-y-12 px-2 max-w-4xl mx-auto">
                   <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
-                    <p className="mb-4 md:mb-6 text-white">
+                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
                       求められているのは、地域の暮らしに溶け込むような、リアルな日本体験。
                     </p>
-                    <p className="text-gold-300 font-medium">
+                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400 font-medium [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
                       そしてその受け皿となるのが、民泊です。
                     </p>
                   </div>
                   
                   <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
-                    <p className="mb-4 md:mb-6 text-white">
+                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
                       特に、世界有数の観光地でありながら、未開拓の可能性に満ちた北海道は、
                     </p>
-                    <p className="mb-4 md:mb-6 text-white">
+                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
                       "プライベートな宿"と"非日常の自然"を両立できる、極めて稀有なエリア。
                     </p>
                   </div>
                   
-                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl font-light text-white leading-relaxed">
-                    <p className="mb-4 md:mb-6">
+                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl font-light leading-relaxed">
+                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
                       ホテルでは成しえない、ローカルの「静寂」や「温かさ」、
                     </p>
-                    <p className="text-gold-300">
+                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
                       その価値に、世界中の旅行者が魅了され始めています。
                     </p>
                   </div>

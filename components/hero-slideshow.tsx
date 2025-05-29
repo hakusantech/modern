@@ -9,11 +9,11 @@ import { cn } from "@/lib/utils"
 // 1. SnowEffectコンポーネントをインポートします
 import { SnowEffect } from "./snow-effect"
 
-// スライドのデータを更新
+// スライドのデータを更新（WebP画像に最適化）
 const slides = [
   {
     id: 1,
-    image: "/images/sapporo-clock-tower.jpeg",
+    image: "/images/sapporo-clock-tower.jpeg", // jpeg形式はNext.jsのImage最適化コンポーネントで自動的にWebPに変換
     title: "インバウンド専門民泊運営代行",
     subtitle: "CleanNest Hokkaido",
     description: "北海道No.1を目指す",
@@ -24,7 +24,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/images/modern-traveler.png",
+    image: "/images/modern-traveler.png", // Next.jsのImage最適化コンポーネントで自動的にWebPに変換
     title: "インバウンド専門民泊運営代行",
     subtitle: "CleanNest Hokkaido",
     description: "北海道No.1を目指す",
@@ -35,7 +35,7 @@ const slides = [
   },
   {
     id: 3,
-    image: "/images/sapporo-tv-tower-illumination.jpg",
+    image: "/images/sapporo-tv-tower-illumination.jpg", // Next.jsのImage最適化コンポーネントで自動的にWebPに変換
     title: "インバウンド専門民泊運営代行",
     subtitle: "CleanNest Hokkaido",
     description: "北海道No.1を目指す",
@@ -122,6 +122,7 @@ export function HeroSlideshow() {
               sizes="100vw"
               className="object-cover"
               loading={index === 0 ? "eager" : "lazy"}
+              quality={75} // 品質を少し下げてファイルサイズを削減
             />
             <div className="absolute inset-0 bg-paleblue-900/30" />
             {/* 低性能デバイスでアニメーションを無効化 */}
