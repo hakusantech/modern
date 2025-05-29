@@ -380,19 +380,7 @@ export default function AboutPage() {
       </section>
 
       {/* なぜ民泊が注目されているか - Mobile Optimized */}
-      <section className="py-16 md:py-32 lg:py-40 relative">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/名称未設定のデザイン (2) (1).png"
-            alt="Luxury background image"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
-        </div>
-
+      <section className="py-16 md:py-32 lg:py-40 relative bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -402,8 +390,8 @@ export default function AboutPage() {
             className="max-w-7xl mx-auto text-white"
           >
             {/* Mobile-optimized container */}
-            <div className="bg-black/30 p-4 md:p-8 lg:p-16 rounded-lg [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] w-full">
-              <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extralight mb-6 md:mb-12 text-center tracking-wider leading-tight">
+            <div className="bg-white/5 backdrop-blur-sm p-6 md:p-10 lg:p-16 rounded-2xl border border-white/10 shadow-2xl w-full">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extralight mb-6 md:mb-12 text-center tracking-wider leading-tight text-white">
                 なぜいま民泊なのか？
               </h2>
               <div className="w-16 md:w-24 h-0.5 bg-gold-400 mx-auto mb-8 md:mb-16 opacity-80" />
@@ -431,25 +419,25 @@ export default function AboutPage() {
                   
                   {/* Mobile: Stack vertically, Desktop: Grid */}
                   <div className="flex flex-col space-y-4 md:grid md:grid-cols-3 md:gap-8 md:space-y-0 max-w-sm mx-auto md:max-w-none">
-                    <div className="bg-black/20 p-4 md:p-8 rounded-lg backdrop-blur-sm">
+                    <div className="bg-white/10 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-white/20">
                       <div className="flex flex-col items-center">
                         <span className="text-sm md:text-base uppercase tracking-wider text-gray-300 mb-2">2024</span>
-                        <span className="text-2xl md:text-3xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">3,687<span className="text-xs md:text-sm">万人</span></span>
-                        <div className="mt-2 md:mt-3 text-white text-sm md:text-lg uppercase tracking-wider">過去最高を記録</div>
+                        <span className="text-2xl md:text-3xl font-light text-white">3,687<span className="text-xs md:text-sm">万人</span></span>
+                        <div className="mt-2 md:mt-3 text-gold-300 text-sm md:text-lg uppercase tracking-wider font-medium">過去最高を記録</div>
                       </div>
                     </div>
                     
-                    <div className="bg-black/20 p-4 md:p-8 rounded-lg backdrop-blur-sm">
+                    <div className="bg-white/10 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-white/20">
                       <div className="flex flex-col items-center">
                         <span className="text-sm md:text-lg uppercase tracking-wider text-gray-300 mb-2">2014</span>
-                        <span className="text-2xl md:text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">1,341<span className="text-xs md:text-base">万人</span></span>
+                        <span className="text-2xl md:text-4xl font-light text-white">1,341<span className="text-xs md:text-base">万人</span></span>
                       </div>
                     </div>
                     
-                    <div className="bg-black/20 p-4 md:p-8 rounded-lg backdrop-blur-sm">
+                    <div className="bg-white/10 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-white/20">
                       <div className="flex flex-col items-center">
                         <span className="text-sm md:text-lg uppercase tracking-wider text-gray-300 mb-2">2004</span>
-                        <span className="text-2xl md:text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">614<span className="text-xs md:text-base">万人</span></span>
+                        <span className="text-2xl md:text-4xl font-light text-white">614<span className="text-xs md:text-base">万人</span></span>
                       </div>
                     </div>
                   </div>
@@ -458,19 +446,19 @@ export default function AboutPage() {
                 {/* Second Part Content - Mobile Optimized */}
                 <div className="space-y-6 md:space-y-10 px-2">
                   <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
-                    <p className="mb-4 md:mb-6">
+                    <p className="mb-4 md:mb-6 text-white">
                       求められているのは、地域の暮らしに溶け込むような、リアルな日本体験。
                     </p>
-                    <p>
+                    <p className="text-gold-300 font-medium">
                       そしてその受け皿となるのが、民泊です。
                     </p>
                   </div>
                   
                   <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
-                    <p className="mb-4 md:mb-6">
+                    <p className="mb-4 md:mb-6 text-white">
                       特に、世界有数の観光地でありながら、未開拓の可能性に満ちた北海道は、
                     </p>
-                    <p className="mb-4 md:mb-6">
+                    <p className="mb-4 md:mb-6 text-white">
                       "プライベートな宿"と"非日常の自然"を両立できる、極めて稀有なエリア。
                     </p>
                   </div>
@@ -479,7 +467,7 @@ export default function AboutPage() {
                     <p className="mb-4 md:mb-6">
                       ホテルでは成しえない、ローカルの「静寂」や「温かさ」、
                     </p>
-                    <p>
+                    <p className="text-gold-300">
                       その価値に、世界中の旅行者が魅了され始めています。
                     </p>
                   </div>
