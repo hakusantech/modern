@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import Image from 'next/image'
 
 interface SakuraPetal {
@@ -26,22 +26,53 @@ const petalImages = [
 ]
 
 export function SakuraEffect({ 
-  density = 60, 
+  density = 25, // 60から25に減らす 
   zIndex = 30,
   minSize = 15, 
-  maxSize = 35 
+  maxSize = 35,
+  disabled = false // アニメーション無効化オプション
 }: { 
   density?: number, 
   zIndex?: number,
   minSize?: number,
-  maxSize?: number 
+  maxSize?: number,
+  disabled?: boolean
 }) {
+  // デバイスパフォーマンスに基づく最適化
+  const [optimizedDensity, setOptimizedDensity] = useState(density)
   const [petals, setPetals] = useState<SakuraPetal[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const [containerWidth, setContainerWidth] = useState(0)
   const [containerHeight, setContainerHeight] = useState(0)
+  
+  // モバイルデバイスを検出して最適化
+  useEffect(() => {
+    // デバイスパフォーマンスに基づいて花びらの数を調整
+    const isMobile = window.innerWidth < 768
+    const isLowPerfDevice = window.navigator.hardwareConcurrency < 4
+    
+    if (isMobile && isLowPerfDevice) {
+      // 低性能モバイル: 花びらを大幅に減らす
+      setOptimizedDensity(Math.min(12, density))
+    } else if (isMobile) {
+      // モバイル: 花びらを減らす
+      setOptimizedDensity(Math.min(18, density))
+    } else if (isLowPerfDevice) {
+      // 低性能デスクトップ: 花びらを少し減らす
+      setOptimizedDensity(Math.min(20, density))
+    } else {
+      // 高性能デスクトップ: そのまま
+      setOptimizedDensity(density)
+    }
+  }, [density])
 
   useEffect(() => {
+    // アニメーションが無効化されている場合はスキップ
+    if (disabled) {
+      setPetals([])
+      return
+    }
+    
     // コンテナのサイズを取得
     if (containerRef.current) {
       const updateSize = () => {
@@ -52,19 +83,33 @@ export function SakuraEffect({
       // 初期化時にサイズを設定
       updateSize()
       
-      // リサイズイベントでサイズを更新
-      window.addEventListener('resize', updateSize)
+      // スロットリングを適用したリサイズハンドラー
+      let resizeTimeout: NodeJS.Timeout
+      const throttledResize = () => {
+        if (resizeTimeout) clearTimeout(resizeTimeout)
+        resizeTimeout = setTimeout(updateSize, 200)
+      }
+      
+      // リサイズイベントでサイズを更新（スロットリング適用）
+      window.addEventListener('resize', throttledResize)
       
       return () => {
-        window.removeEventListener('resize', updateSize)
+        window.removeEventListener('resize', throttledResize)
+        if (resizeTimeout) clearTimeout(resizeTimeout)
       }
     }
-  }, [])
+  }, [disabled])
 
   useEffect(() => {
+    // アニメーションが無効化されている場合はスキップ
+    if (disabled) {
+      setPetals([])
+      return
+    }
+    
     if (containerWidth === 0 || containerHeight === 0) return
     
-    const petalCount = density
+    const petalCount = optimizedDensity
     const newPetals: SakuraPetal[] = []
 
     for (let i = 0; i < petalCount; i++) {
@@ -95,10 +140,10 @@ export function SakuraEffect({
     }
 
     setPetals(newPetals)
-  }, [containerWidth, containerHeight, density, minSize, maxSize])
+  }, [containerWidth, containerHeight, optimizedDensity, minSize, maxSize, disabled])
 
-  // 風による揺れアニメーションのCSS変数を設定
-  const getAnimationStyles = (petal: SakuraPetal) => {
+  // パフォーマンス最適化: メモ化した風による揺れアニメーションのCSS変数を設定
+  const getAnimationStyles = useCallback((petal: SakuraPetal) => {
     // より自然な動きのための複雑なキーフレームを計算
     const baseAmplitude = petal.swingStrength
     const translateXValues = [
@@ -128,6 +173,11 @@ export function SakuraEffect({
       '--rotation-speed': `${petal.rotationSpeed}deg`,
       '--scale-variation': `${petal.scaleVariation}`
     } as React.CSSProperties
+  }, [])
+
+  // 条件付きレンダリングのためのチェック
+  if (disabled || petals.length === 0) {
+    return null
   }
 
   return (
@@ -152,7 +202,7 @@ export function SakuraEffect({
             animationDelay: `${petal.delay}s`
           }}
         >
-          {/* 実際の桜の花びら画像 */}
+          {/* 最適化された桜の花びら画像 */}
           <div 
             className="relative w-full h-full transform-gpu"
             style={{
@@ -168,7 +218,9 @@ export function SakuraEffect({
               style={{ 
                 transform: petal.blur ? 'rotate3d(1, 1, 1, 15deg)' : 'rotate3d(1, 0.5, 0, 10deg)'
               }}
-              priority={petal.delay < 2} // 最初に表示される花びらは優先的に読み込む
+              priority={petal.delay < 2} // 最初に表示される花びらのみ優先的に読み込む
+              loading={petal.delay < 5 ? "eager" : "lazy"} // 遅延読み込みを適用
+              unoptimized={false} // Next.jsの画像最適化を使用
             />
           </div>
         </div>

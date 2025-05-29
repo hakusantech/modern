@@ -11,41 +11,41 @@ export function Footer() {
       {/* <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-[100px] opacity-50 pointer-events-none"></div> */}
       
       {/* 上部セクション：お問い合わせ情報 - 二段構成に変更 */}
-      <div className="relative py-20 bg-white text-gray-700">
+      <div className="relative py-12 sm:py-16 md:py-20 bg-white text-gray-700">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             {/* タイトル部分 */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-8 sm:mb-12">
               <div className="inline-block mb-4">
                 <div className="relative">
-                  <span className="inline-block w-12 h-1 bg-gold-500"></span>
-                  <span className="inline-block w-3 h-3 rounded-full bg-gold-500 -mt-1 ml-1"></span>
+                  <span className="inline-block w-8 sm:w-12 h-1 bg-gold-500"></span>
+                  <span className="inline-block w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-gold-500 -mt-1 ml-1"></span>
                 </div>
               </div>
-              <h2 className="text-4xl font-bold mb-4 text-gray-900">お問い合わせ</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                札幌の民泊運営でお悩みの方はお気軽にご相談ください。<br />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-gray-900">お問い合わせ</h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                札幌の民泊運営でお悩みの方はお気軽にご相談ください。<br className="hidden sm:block" />
                 専門スタッフが丁寧にサポートいたします。
               </p>
             </div>
             
             {/* 二段構成のお問い合わせ情報 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 mb-8 sm:mb-12">
               {/* 左側：基本情報 */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start">
-                  <MapPin className="h-6 w-6 text-gold-600 mt-1 mr-4 flex-shrink-0" />
+                  <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-gold-600 mt-1 mr-3 sm:mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-lg">所在地</h3>
-                    <p className="text-gray-700 text-lg">〒062-0933 北海道札幌市豊平区平岸三条8-6-1 信和リッチ2階</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-base sm:text-lg">所在地</h3>
+                    <p className="text-sm sm:text-base md:text-lg text-gray-700">〒062-0933 北海道札幌市豊平区平岸三条8-6-1 信和リッチ2階</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <Mail className="h-6 w-6 text-gold-600 mt-1 mr-4 flex-shrink-0" />
+                  <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-gold-600 mt-1 mr-3 sm:mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-lg">メールアドレス</h3>
-                    <a href="mailto:info@cleannest-hokkaido.jp" className="text-gold-600 hover:text-gold-700 transition-colors text-lg font-medium underline">
+                    <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-base sm:text-lg">メールアドレス</h3>
+                    <a href="mailto:info@cleannest-hokkaido.jp" className="text-gold-600 hover:text-gold-700 transition-colors text-sm sm:text-base md:text-lg font-medium underline break-all">
                       info@cleannest-hokkaido.jp
                     </a>
                   </div>
@@ -53,14 +53,14 @@ export function Footer() {
               </div>
               
               {/* 右側：連絡先 */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start">
-                  <Phone className="h-6 w-6 text-gold-600 mt-1 mr-4 flex-shrink-0" />
+                  <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-gold-600 mt-1 mr-3 sm:mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-lg">電話番号</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-base sm:text-lg">電話番号</h3>
                     <a
                       href="tel:011-827-7441"
-                      className="text-3xl font-bold text-gold-600 hover:text-gold-700 transition-colors tracking-wider underline"
+                      className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-600 hover:text-gold-700 transition-colors tracking-wider underline btn-mobile block"
                       style={{ letterSpacing: "0.05em" }}
                     >
                       011-827-7441
@@ -69,26 +69,26 @@ export function Footer() {
                 </div>
                 
                 <div className="flex items-start">
-                  <Clock className="h-6 w-6 text-gold-600 mt-1 mr-4 flex-shrink-0" />
+                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-gold-600 mt-1 mr-3 sm:mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-lg">営業時間</h3>
-                    <p className="text-gray-700 text-lg">9:30〜18:30（土日除く）</p>
+                    <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-base sm:text-lg">営業時間</h3>
+                    <p className="text-sm sm:text-base md:text-lg text-gray-700">9:30〜18:30（土日除く）</p>
                   </div>
                 </div>
               </div>
             </div>
             
             {/* 駐車場セクション（大きめ・目立つ） */}
-            <div className="my-8 p-6 rounded-xl border-2 border-gold-300 bg-gold-50 shadow-lg">
-              <h3 className="text-2xl font-bold text-gold-700 mb-6 text-center">駐車場・アクセス情報</h3>
-              <p className="text-base text-gold-800 mb-6 text-center">駐車場は「4番」をご利用ください。</p>
+            <div className="my-6 sm:my-8 p-4 sm:p-6 rounded-xl border-2 border-gold-300 bg-gold-50 shadow-lg">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gold-700 mb-4 sm:mb-6 text-center">駐車場・アクセス情報</h3>
+              <p className="text-sm sm:text-base text-gold-800 mb-4 sm:mb-6 text-center">駐車場は「4番」をご利用ください。</p>
               
               {/* 2列レイアウト */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* 1列目：駐車場写真 + 経路図イラスト */}
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   <div>
-                    <h4 className="text-lg font-semibold text-gold-700 mb-3">駐車場（ストリートビュー）</h4>
+                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">駐車場（ストリートビュー）</h4>
                     <div className="relative aspect-video rounded-lg overflow-hidden">
                       <iframe
                         src="https://www.google.com/maps/embed?pb=!4v1747225336270!6m8!1m7!1s7sA0RdTM1yAk4l47txq-9w!2m2!1d43.03411164587536!2d141.3678601232641!3f177.33!4f-6.359999999999999!5f0.4000000000000002"
@@ -102,28 +102,25 @@ export function Footer() {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gold-700 mb-3">経路図・アクセスマップ</h4>
+                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">経路図・アクセスマップ</h4>
                     <div className="relative aspect-video rounded-lg overflow-hidden">
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.017964073964!2d141.3678601232641!3d43.03411164587536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0b299e2e2e2e2e%3A0x0000000000000000!2z44CSMDYyLTA5MzMgS2l0YWthLCBIaXJhZ2lzaSwgV2FyZCwgU2FwcG9ybywgSGl5b3NoaSwgOC0yLTA!5e0!3m2!1sja!2sjp!4v1747225336270!5m2!1sja!2sjp&t=m&z=20"
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0, borderRadius: '8px' }}
-                        allowFullScreen={true}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
+                      <Image
+                        src="/route-map.webp"
+                        alt="駐車場までの経路図・アクセスマップ"
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   </div>
                 </div>
                 
                 {/* 2列目：会社外観写真 + Googleマップ */}
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   <div>
-                    <h4 className="text-lg font-semibold text-gold-700 mb-3">会社外観</h4>
+                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">会社外観</h4>
                     <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
                       <Image
-                        src="/S__41631752 (1).jpg"
+                        src="/company-exterior.webp"
                         alt="CleanNest Hokkaido 会社外観"
                         fill
                         className="object-cover"
@@ -131,7 +128,7 @@ export function Footer() {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gold-700 mb-3">Google マップ</h4>
+                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">Google マップ</h4>
                     <div className="relative aspect-video rounded-lg overflow-hidden">
                       <iframe
                         src="https://maps.google.com/maps?q=%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E5%B9%B3%E5%B2%B8%E4%B8%89%E6%9D%A18-6-1%20%E4%BF%A1%E5%92%8C%E3%83%AA%E3%83%83%E3%83%81&t=&z=16&ie=UTF8&iwloc=&output=embed"
@@ -151,12 +148,12 @@ export function Footer() {
             {/* お問い合わせボタン */}
             <div className="text-center">
               <Button 
-                className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-12 py-6 h-auto rounded-lg font-medium text-xl shadow-lg shadow-gold-400/30 hover:shadow-xl hover:shadow-gold-400/40 transition-all duration-300" 
+                className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-8 sm:px-12 py-4 sm:py-6 h-auto rounded-lg font-medium text-base sm:text-lg md:text-xl shadow-lg shadow-gold-400/30 hover:shadow-xl hover:shadow-gold-400/40 transition-all duration-300 btn-mobile" 
                 asChild
               >
                 <Link href="/contact">
                   お問い合わせフォーム
-                  <ArrowUpRight className="ml-3 h-6 w-6" />
+                  <ArrowUpRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                 </Link>
               </Button>
             </div>
@@ -165,37 +162,38 @@ export function Footer() {
       </div>
       
       {/* 中間セクション：サイトマップ - 再構成 */}
-      <div className="py-16">
+      <div className="py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-10">
               {/* ロゴ */}
-              <div className="col-span-2 md:col-span-1">
-                <div className="flex items-center gap-3 mb-6">
+              <div className="col-span-1 sm:col-span-2 md:col-span-1">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                   <Image 
                     src="/images/snowflake-logo.png" 
                     alt="CleanNest Hokkaido" 
-                    width={40} 
-                    height={40}
+                    width={32} 
+                    height={32}
+                    className="sm:w-10 sm:h-10"
                   />
-                  <span className="text-xl font-bold text-white">CleanNest<br/>Hokkaido</span>
+                  <span className="text-lg sm:text-xl font-bold text-white leading-tight">CleanNest<br/>Hokkaido</span>
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
                   札幌を中心に民泊運営代行サービスを提供。インバウンド旅行客に特化し、予約管理から清掃まで一括サポートします。
                 </p>
               </div>
               
               {/* サービス情報 */}
               <div>
-                <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">サービス情報</h3>
-                <nav className="space-y-3">
-                  <Link href="/about" className="block text-gray-300 hover:text-white transition-colors">
+                <h3 className="text-white font-medium text-base sm:text-lg mb-4 sm:mb-5 border-b border-gold-500/30 pb-2">サービス情報</h3>
+                <nav className="space-y-2 sm:space-y-3">
+                  <Link href="/about" className="block text-sm sm:text-base text-gray-300 hover:text-white transition-colors">
                     CleanNest Hokkaidoとは
                   </Link>
-                  <Link href="/services" className="block text-gray-300 hover:text-white transition-colors">
+                  <Link href="/services" className="block text-sm sm:text-base text-gray-300 hover:text-white transition-colors">
                     民泊代行サービス一覧
                   </Link>
-                  <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors">
+                  <Link href="/contact" className="block text-sm sm:text-base text-gray-300 hover:text-white transition-colors">
                     取材申込みはこちら
                   </Link>
                 </nav>
@@ -203,13 +201,13 @@ export function Footer() {
               
               {/* 運営会社情報 */}
               <div>
-                <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">運営会社情報</h3>
-                <nav className="space-y-3">
+                <h3 className="text-white font-medium text-base sm:text-lg mb-4 sm:mb-5 border-b border-gold-500/30 pb-2">運営会社情報</h3>
+                <nav className="space-y-2 sm:space-y-3">
                   <a 
                     href="https://www.ehpcorp.net/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
                   >
                     運営会社 (株)EHP
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -218,7 +216,7 @@ export function Footer() {
                     href="https://www.ehpcorp.net/info" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
                   >
                     会社概要
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -227,7 +225,7 @@ export function Footer() {
                     href="https://www.ehpcorp.net/contact" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
                   >
                     お問い合わせ
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -237,13 +235,13 @@ export function Footer() {
               
               {/* 関連情報 */}
               <div>
-                <h3 className="text-white font-medium text-lg mb-5 border-b border-gold-500/30 pb-2">関連情報</h3>
-                <nav className="space-y-3">
+                <h3 className="text-white font-medium text-base sm:text-lg mb-4 sm:mb-5 border-b border-gold-500/30 pb-2">関連情報</h3>
+                <nav className="space-y-2 sm:space-y-3">
                   <a 
                     href="https://www.pref.hokkaido.lg.jp/kz/kkd/minpaku/portal.html"
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
                   >
                     北海道民泊ポータルサイト
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -252,7 +250,7 @@ export function Footer() {
                     href="https://www.mlit.go.jp/kankocho/minpaku/"
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
                   >
                     民泊制度ポータルサイト
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -268,10 +266,10 @@ export function Footer() {
       <div className="border-t border-gray-700/50 py-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-400 text-center md:text-left">
+            <p className="text-xs md:text-sm text-gray-400 text-center md:text-left">
               &copy; {new Date().getFullYear()} 株式会社EHP All Rights Reserved.
             </p>
-            <nav className="flex gap-4 text-sm">
+            <nav className="flex gap-4 text-xs md:text-sm">
               <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
                 プライバシーポリシー
               </Link>

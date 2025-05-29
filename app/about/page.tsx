@@ -379,8 +379,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* なぜ民泊が注目されているか - Luxury Fashion Brand Style */}
-      <section className="py-32 md:py-40 relative">
+      {/* なぜ民泊が注目されているか - Mobile Optimized */}
+      <section className="py-16 md:py-32 lg:py-40 relative">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -390,7 +390,7 @@ export default function AboutPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" /> {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -401,61 +401,64 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="max-w-7xl mx-auto text-white"
           >
-            {/* Single large transparent container with all content */}
-            <div className="bg-black/30 p-8 md:p-16 rounded-lg [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] w-full">
-              <h2 className="text-5xl md:text-7xl font-extralight mb-12 text-center tracking-wider leading-tight">
+            {/* Mobile-optimized container */}
+            <div className="bg-black/30 p-4 md:p-8 lg:p-16 rounded-lg [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] w-full">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extralight mb-6 md:mb-12 text-center tracking-wider leading-tight">
                 なぜいま民泊なのか？
               </h2>
-              <div className="w-24 h-0.5 bg-gold-400 mx-auto mb-16 opacity-80" />
+              <div className="w-16 md:w-24 h-0.5 bg-gold-400 mx-auto mb-8 md:mb-16 opacity-80" />
 
-              <div className="space-y-20">
-                {/* Why Hokkaido Section */}
-                <div className="space-y-8">
-                  <h3 className="text-4xl md:text-5xl font-light text-center text-white tracking-wide">
+              <div className="space-y-12 md:space-y-20">
+                {/* Why Hokkaido Section - Mobile Optimized */}
+                <div className="space-y-4 md:space-y-8">
+                  <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-center text-white tracking-wide">
                     なぜ北海道なのか？
                   </h3>
                   
-                  <p className="text-base leading-normal md:text-2xl text-center text-white">
+                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-center text-white leading-relaxed px-2">
                     2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
                   </p>
-                  <p className="text-3xl md:text-4xl text-center text-gold-300 font-light">
+                  <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-center text-gold-300 font-light px-2">
                     彼らが求めるのは"ホテルライク"な旅ではありません。
                   </p>
                 </div>
                 
-                {/* Inbound Travel Data */}
+                {/* Inbound Travel Data - Mobile Optimized */}
                 <div className="mx-auto w-full max-w-4xl">
-                  <h3 className="text-2xl md:text-3xl font-light mb-10 text-white uppercase tracking-widest text-center">北海道へのインバウンド旅行者推移</h3>
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-6 md:mb-10 text-white uppercase tracking-widest text-center">
+                    北海道へのインバウンド旅行者推移
+                  </h3>
                   
-                  <div className="grid grid-cols-1 max-w-xs mx-auto md:max-w-none md:grid-cols-3 gap-8 w-4/5">
-                    <div className="bg-black/20 p-8 rounded-lg backdrop-blur-sm">
+                  {/* Mobile: Stack vertically, Desktop: Grid */}
+                  <div className="flex flex-col space-y-4 md:grid md:grid-cols-3 md:gap-8 md:space-y-0 max-w-sm mx-auto md:max-w-none">
+                    <div className="bg-black/20 p-4 md:p-8 rounded-lg backdrop-blur-sm">
                       <div className="flex flex-col items-center">
-                        <span className="text-base uppercase tracking-wider text-gray-300 mb-2">2024</span>
-                        <span className="text-3xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">3,687<span className="text-sm">万人</span></span>
-                        <div className="mt-3 text-white text-lg uppercase tracking-wider">過去最高を記録</div>
+                        <span className="text-sm md:text-base uppercase tracking-wider text-gray-300 mb-2">2024</span>
+                        <span className="text-2xl md:text-3xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">3,687<span className="text-xs md:text-sm">万人</span></span>
+                        <div className="mt-2 md:mt-3 text-white text-sm md:text-lg uppercase tracking-wider">過去最高を記録</div>
                       </div>
                     </div>
                     
-                    <div className="bg-black/20 p-8 rounded-lg backdrop-blur-sm">
+                    <div className="bg-black/20 p-4 md:p-8 rounded-lg backdrop-blur-sm">
                       <div className="flex flex-col items-center">
-                        <span className="text-lg uppercase tracking-wider text-gray-300 mb-2">2014</span>
-                        <span className="text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">1,341<span className="text-base">万人</span></span>
+                        <span className="text-sm md:text-lg uppercase tracking-wider text-gray-300 mb-2">2014</span>
+                        <span className="text-2xl md:text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">1,341<span className="text-xs md:text-base">万人</span></span>
                       </div>
                     </div>
                     
-                    <div className="bg-black/20 p-8 rounded-lg backdrop-blur-sm">
+                    <div className="bg-black/20 p-4 md:p-8 rounded-lg backdrop-blur-sm">
                       <div className="flex flex-col items-center">
-                        <span className="text-lg uppercase tracking-wider text-gray-300 mb-2">2004</span>
-                        <span className="text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">614<span className="text-base">万人</span></span>
+                        <span className="text-sm md:text-lg uppercase tracking-wider text-gray-300 mb-2">2004</span>
+                        <span className="text-2xl md:text-4xl font-light text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">614<span className="text-xs md:text-base">万人</span></span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Second Part Content */}
-                <div className="space-y-10">
-                  <div className="text-2xl md:text-3xl leading-relaxed">
-                    <p className="mb-6">
+                {/* Second Part Content - Mobile Optimized */}
+                <div className="space-y-6 md:space-y-10 px-2">
+                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
+                    <p className="mb-4 md:mb-6">
                       求められているのは、地域の暮らしに溶け込むような、リアルな日本体験。
                     </p>
                     <p>
@@ -463,17 +466,17 @@ export default function AboutPage() {
                     </p>
                   </div>
                   
-                  <div className="text-2xl md:text-3xl leading-relaxed">
-                    <p className="mb-6">
+                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
+                    <p className="mb-4 md:mb-6">
                       特に、世界有数の観光地でありながら、未開拓の可能性に満ちた北海道は、
                     </p>
-                    <p className="mb-6">
+                    <p className="mb-4 md:mb-6">
                       "プライベートな宿"と"非日常の自然"を両立できる、極めて稀有なエリア。
                     </p>
                   </div>
                   
-                  <div className="text-2xl md:text-3xl font-light text-white leading-relaxed">
-                    <p className="mb-6">
+                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl font-light text-white leading-relaxed">
+                    <p className="mb-4 md:mb-6">
                       ホテルでは成しえない、ローカルの「静寂」や「温かさ」、
                     </p>
                     <p>

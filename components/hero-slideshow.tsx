@@ -119,10 +119,13 @@ export function HeroSlideshow() {
               alt={`札幌の民泊代行サービス - ${slide.title}。CleanNest Hokkaidoは札幌エリアの民泊運営を完全サポート。`}
               fill
               priority={index === 0}
+              sizes="100vw"
               className="object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
             />
             <div className="absolute inset-0 bg-paleblue-900/30" />
-            <SnowEffect />
+            {/* 低性能デバイスでアニメーションを無効化 */}
+            <SnowEffect count={60} size={2.5} speed={0.15} disabled={typeof window !== 'undefined' && ((window.navigator.hardwareConcurrency !== undefined && window.navigator.hardwareConcurrency < 4) || window.innerWidth < 768)} />
           </div>
 
           {/* コンテンツ */}
@@ -197,7 +200,7 @@ export function HeroSlideshow() {
       </div>
 
       {/* 雪のエフェクト - パラメータを調整 */}
-      <SnowEffect count={120} size={2.5} speed={0.15} />
+      <SnowEffect count={120} size={2.5} speed={0.15} disabled={typeof window !== 'undefined' && ((window.navigator.hardwareConcurrency !== undefined && window.navigator.hardwareConcurrency < 4) || window.innerWidth < 768)} />
     </div>
   )
 }

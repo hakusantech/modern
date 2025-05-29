@@ -116,7 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }}
       />
       <body className="min-h-screen font-sans text-text-DEFAULT bg-base-500 overflow-x-hidden selection:bg-primary-500/30 selection:text-white">
-        {/* クライアントコンポーネント */}
+        {/* 最適化されたクライアントコンポーネント */}
         <BackgroundEffects />
         <NoisePattern />
         
@@ -126,6 +126,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </div>
         <Toaster />
+        
+        {/* パフォーマンス最適化のためのスクリプト */}
+        <Script
+          id="performance-optimization"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // アニメーション最適化
+              document.addEventListener('DOMContentLoaded', function() {
+                try {
+                  // 低性能デバイスでアニメーションを無効化
+                  if ((navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4) || window.innerWidth < 768) {
+                    document.body.classList.add('reduce-animations');
+                  }
+                  
+                  // ページ表示の最適化
+                  setTimeout(function() {
+                    const style = document.createElement('style');
+                    style.textContent = '.reduce-animations * { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }';
+                    document.head.appendChild(style);
+                  }, 2000);
+                } catch (e) {
+                  console.log('Performance optimization error:', e);
+                }
+              });
+            `,
+          }}
+        />
       </body>
     </html>
   )
