@@ -22,7 +22,7 @@ interface SakuraPetal {
 
 // 桜の花びら画像パス
 const petalImages = [
-  '/ChatGPT Image 2025年5月9日 03_16_11.png',
+  '/images/sakura-petal1.png',
 ]
 
 export function SakuraEffect({ 

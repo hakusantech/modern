@@ -50,7 +50,7 @@ function PricingRow({
             <span className="ml-1 sm:ml-2 text-xs bg-blue-50 text-blue-600 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">任意</span>
           )}
         </div>
-        <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">{description}</p>
+        <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed hidden sm:block">{description}</p>
       </td>
       <td className="py-3 px-3 sm:px-4 text-right align-middle font-medium text-gray-700 border-l border-gray-200 min-w-[100px]">{price}</td>
     </tr>
@@ -195,8 +195,8 @@ export function PricingTable() {
                     </thead>
                     <tbody>
                       {/* 基本料金セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
                           基本料金
                         </td>
                       </tr>
@@ -238,8 +238,8 @@ export function PricingTable() {
                       />
 
                       {/* 初期システム費用セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-blue-700 text-sm sm:text-base">
                           初期システム費用
                         </td>
                       </tr>
@@ -263,8 +263,8 @@ export function PricingTable() {
                       />
 
                       {/* ランニング費用セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-green-100 to-green-50 border-l-4 border-green-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-green-700 text-sm sm:text-base">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -306,8 +306,8 @@ export function PricingTable() {
                       />
 
                       {/* オプション費用セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-purple-700 text-sm sm:text-base">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -367,8 +367,8 @@ export function PricingTable() {
                     </thead>
                     <tbody>
                       {/* 基本料金セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
                           基本料金
                         </td>
                       </tr>
@@ -405,8 +405,8 @@ export function PricingTable() {
                       />
 
                       {/* 初期システム費用セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-blue-700 text-sm sm:text-base">
                           初期システム費用
                         </td>
                       </tr>
@@ -435,8 +435,8 @@ export function PricingTable() {
                       />
 
                       {/* ランニング費用セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-green-100 to-green-50 border-l-4 border-green-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-green-700 text-sm sm:text-base">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -478,8 +478,8 @@ export function PricingTable() {
                       />
 
                       {/* オプション費用セクション */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-gold-600">
+                      <tr className="bg-gradient-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-purple-700 text-sm sm:text-base">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -539,8 +539,8 @@ export function PricingTable() {
                     </thead>
                     <tbody>
                       {/* 基本料金 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
                           基本料金
                         </td>
                       </tr>
@@ -576,8 +576,8 @@ export function PricingTable() {
                       />
 
                       {/* 初期システム費用 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-blue-700 text-sm sm:text-base">
                           初期システム費用
                         </td>
                       </tr>
@@ -600,8 +600,8 @@ export function PricingTable() {
                       />
 
                       {/* ランニング費用 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-green-100 to-green-50 border-l-4 border-green-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-green-700 text-sm sm:text-base">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -625,8 +625,8 @@ export function PricingTable() {
                       />
 
                       {/* オプション費用 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-purple-700 text-sm sm:text-base">
                           オプション費用（月額）
                         </td>
                       </tr>
@@ -686,8 +686,8 @@ export function PricingTable() {
                     </thead>
                     <tbody>
                       {/* 基本料金 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
                           基本料金
                         </td>
                       </tr>
@@ -724,8 +724,8 @@ export function PricingTable() {
                       />
 
                       {/* 初期システム費用 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-blue-700 text-sm sm:text-base">
                           初期システム費用
                         </td>
                       </tr>
@@ -754,8 +754,8 @@ export function PricingTable() {
                       />
 
                       {/* ランニング費用 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-green-100 to-green-50 border-l-4 border-green-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-green-700 text-sm sm:text-base">
                           ランニング費用（月額）
                         </td>
                       </tr>
@@ -797,8 +797,8 @@ export function PricingTable() {
                       />
 
                       {/* オプション費用 */}
-                      <tr className="bg-gray-50">
-                        <td colSpan={2} className="py-2 px-4 font-medium text-blue-600">
+                      <tr className="bg-gradient-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500">
+                        <td colSpan={2} className="py-3 px-4 font-semibold text-purple-700 text-sm sm:text-base">
                           オプション費用（月額）
                         </td>
                       </tr>

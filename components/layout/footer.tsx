@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button"
 
 export function Footer() {
   return (
-    <footer className="relative text-gray-300 bg-black">
+    <footer className="relative bg-white">
       {/* 装飾的な要素 */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent"></div>
       {/* <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-[100px] opacity-50 pointer-events-none"></div> */}
       
       {/* 上部セクション：お問い合わせ情報 - 二段構成に変更 */}
-      <div className="relative py-12 sm:py-16 md:py-20 bg-white text-gray-700">
+      <div className="relative py-12 sm:py-16 md:py-20 bg-gray-50 text-gray-700">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             {/* タイトル部分 */}
@@ -83,63 +83,70 @@ export function Footer() {
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gold-700 mb-4 sm:mb-6 text-center">駐車場・アクセス情報</h3>
               <p className="text-sm sm:text-base text-gold-800 mb-4 sm:mb-6 text-center">駐車場は「4番」をご利用ください。</p>
               
-              {/* 2列レイアウト */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                {/* 1列目：駐車場写真 + 経路図イラスト */}
-                <div className="space-y-4 sm:space-y-6">
-                  <div>
-                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">駐車場（ストリートビュー）</h4>
-                    <div className="relative aspect-video rounded-lg overflow-hidden">
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!4v1747225336270!6m8!1m7!1s7sA0RdTM1yAk4l47txq-9w!2m2!1d43.03411164587536!2d141.3678601232641!3f177.33!4f-6.359999999999999!5f0.4000000000000002"
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0, borderRadius: '8px' }}
-                        allowFullScreen={true}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">経路図・アクセスマップ</h4>
-                    <div className="relative aspect-video rounded-lg overflow-hidden">
-                      <Image
-                        src="/route-map.webp"
-                        alt="駐車場までの経路図・アクセスマップ"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+              {/* モバイル表示用のテキスト情報 */}
+              <div className="md:hidden p-4 bg-white rounded-lg border border-gold-200 mb-4">
+                <p className="text-gold-800 text-sm leading-relaxed">
+                  <strong>駐車場案内:</strong> 駐車場は「4番」にお停めください。詳細な位置情報は下記のGoogleマップでご確認いただけます。
+                </p>
+              </div>
+
+              {/* 2x2グリッドレイアウト（モバイルは縦一列） */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                {/* 左上：Google マップ */}
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">Google マップ</h4>
+                  <div className="relative aspect-video rounded-lg overflow-hidden">
+                    <iframe
+                      src="https://maps.google.com/maps?q=%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E5%B9%B3%E5%B2%B8%E4%B8%89%E6%9D%A18-6-1%20%E4%BF%A1%E5%92%8C%E3%83%AA%E3%83%83%E3%83%81&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, borderRadius: '8px' }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
                   </div>
                 </div>
-                
-                {/* 2列目：会社外観写真 + Googleマップ */}
-                <div className="space-y-4 sm:space-y-6">
-                  <div>
-                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">会社外観</h4>
-                    <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
-                      <Image
-                        src="/company-exterior.webp"
-                        alt="CleanNest Hokkaido 会社外観"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+
+                {/* 右上：会社外観 */}
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">会社外観</h4>
+                  <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                    <Image
+                      src="/company-exterior.webp"
+                      alt="CleanNest Hokkaido 会社外観"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <div>
-                    <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">Google マップ</h4>
-                    <div className="relative aspect-video rounded-lg overflow-hidden">
-                      <iframe
-                        src="https://maps.google.com/maps?q=%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E8%B1%8A%E5%B9%B3%E5%8C%BA%E5%B9%B3%E5%B2%B8%E4%B8%89%E6%9D%A18-6-1%20%E4%BF%A1%E5%92%8C%E3%83%AA%E3%83%83%E3%83%81&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0, borderRadius: '8px' }}
-                        allowFullScreen={true}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      />
-                    </div>
+                </div>
+
+                {/* 左下：経路図・アクセスマップ */}
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">経路図・アクセスマップ</h4>
+                  <div className="relative aspect-video rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/スクリーンショット 2025-06-02 18.24.58.png"
+                      alt="駐車場までの経路図・アクセスマップ"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* 右下：駐車場（ストリートビュー） */}
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-gold-700 mb-2 sm:mb-3">駐車場（ストリートビュー）</h4>
+                  <div className="relative aspect-video rounded-lg overflow-hidden">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!4v1747225336270!6m8!1m7!1s7sA0RdTM1yAk4l47txq-9w!2m2!1d43.03411164587536!2d141.3678601232641!3f177.33!4f-6.359999999999999!5f0.4000000000000002"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, borderRadius: '8px' }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
                   </div>
                 </div>
               </div>
@@ -162,7 +169,7 @@ export function Footer() {
       </div>
       
       {/* 中間セクション：サイトマップ - 再構成 */}
-      <div className="py-12 sm:py-16">
+      <div className="py-12 sm:py-16 border-t border-gray-200 bg-black">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-10">
@@ -178,7 +185,7 @@ export function Footer() {
                   />
                   <span className="text-lg sm:text-xl font-bold text-white leading-tight">CleanNest<br/>Hokkaido</span>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
                   札幌を中心に民泊運営代行サービスを提供。インバウンド旅行客に特化し、予約管理から清掃まで一括サポートします。
                 </p>
               </div>
@@ -187,13 +194,13 @@ export function Footer() {
               <div>
                 <h3 className="text-white font-medium text-base sm:text-lg mb-4 sm:mb-5 border-b border-gold-500/30 pb-2">サービス情報</h3>
                 <nav className="space-y-2 sm:space-y-3">
-                  <Link href="/about" className="block text-sm sm:text-base text-gray-300 hover:text-white transition-colors">
+                  <Link href="/about" className="block text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors">
                     CleanNest Hokkaidoとは
                   </Link>
-                  <Link href="/services" className="block text-sm sm:text-base text-gray-300 hover:text-white transition-colors">
+                  <Link href="/services" className="block text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors">
                     民泊代行サービス一覧
                   </Link>
-                  <Link href="/contact" className="block text-sm sm:text-base text-gray-300 hover:text-white transition-colors">
+                  <Link href="/contact" className="block text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors">
                     取材申込みはこちら
                   </Link>
                 </nav>
@@ -207,7 +214,7 @@ export function Footer() {
                     href="https://www.ehpcorp.net/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors"
                   >
                     運営会社 (株)EHP
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -216,7 +223,7 @@ export function Footer() {
                     href="https://www.ehpcorp.net/info" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors"
                   >
                     会社概要
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -225,7 +232,7 @@ export function Footer() {
                     href="https://www.ehpcorp.net/contact" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors"
                   >
                     お問い合わせ
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -241,7 +248,7 @@ export function Footer() {
                     href="https://www.pref.hokkaido.lg.jp/kz/kkd/minpaku/portal.html"
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors"
                   >
                     北海道民泊ポータルサイト
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -250,7 +257,7 @@ export function Footer() {
                     href="https://www.mlit.go.jp/kankocho/minpaku/"
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center text-sm sm:text-base !text-white hover:!text-gold-300 transition-colors"
                   >
                     民泊制度ポータルサイト
                     <ExternalLink className="ml-1 h-3 w-3" />
@@ -263,17 +270,17 @@ export function Footer() {
       </div>
       
       {/* コピーライトとポリシーリンク */}
-      <div className="border-t border-gray-700/50 py-8">
+      <div className="border-t border-gray-700/50 py-8 bg-black">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs md:text-sm text-gray-400 text-center md:text-left">
+            <p className="text-xs md:text-sm text-gray-300 text-center md:text-left">
               &copy; {new Date().getFullYear()} 株式会社EHP All Rights Reserved.
             </p>
             <nav className="flex gap-4 text-xs md:text-sm">
-              <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
                 プライバシーポリシー
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
                 利用規約
               </Link>
             </nav>

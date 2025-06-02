@@ -554,7 +554,7 @@ function SimulatorContent({
                   id="surveyService"
                   checked={options.surveyService}
                   onCheckedChange={() => handleOptionChange("surveyService")}
-                  className={`${accentBorder} h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:${accentBgDark} bg-white border-gray-400`}
+                  className="border-gray-400 h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:bg-black bg-white"
                 />
                 <Label htmlFor="surveyService" className="text-gray-800 font-medium text-sm sm:text-base">
                   調査代行料（申請要件調査・消防法確認など）
@@ -565,7 +565,7 @@ function SimulatorContent({
                   id="tablet" 
                   checked={options.tablet} 
                   onCheckedChange={() => handleOptionChange("tablet")} 
-                  className={`${accentBorder} h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:${accentBgDark} bg-white border-gray-400`}
+                  className="border-gray-400 h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:bg-black bg-white"
                 />
                 <Label htmlFor="tablet" className="text-gray-800 font-medium text-sm sm:text-base">
                   チェックイン用タブレット
@@ -576,7 +576,7 @@ function SimulatorContent({
                   id="smartLock"
                   checked={options.smartLock}
                   onCheckedChange={() => handleOptionChange("smartLock")}
-                  className={`${accentBorder} h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:${accentBgDark} bg-white border-gray-400`}
+                  className="border-gray-400 h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:bg-black bg-white"
                 />
                 <Label htmlFor="smartLock" className="text-gray-800 font-medium text-sm sm:text-base">
                   スマートロック連携キー
@@ -587,7 +587,7 @@ function SimulatorContent({
                   id="bookingEngine"
                   checked={options.bookingEngine}
                   onCheckedChange={() => handleOptionChange("bookingEngine")}
-                  className={`${accentBorder} h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:${accentBgDark} bg-white border-gray-400`}
+                  className="border-gray-400 h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:bg-black bg-white"
                 />
                 <Label htmlFor="bookingEngine" className="text-gray-800 font-medium text-sm sm:text-base">
                   自社予約エンジン
@@ -599,7 +599,7 @@ function SimulatorContent({
                     id="paymentIntegration"
                     checked={options.paymentIntegration}
                     onCheckedChange={() => handleOptionChange("paymentIntegration")}
-                    className={`${accentBorder} h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:${accentBgDark}`}
+                    className="border-gray-400 h-5 w-5 sm:h-5 sm:w-5 data-[state=checked]:bg-black bg-white"
                   />
                   <Label htmlFor="paymentIntegration" className="text-gray-800 font-medium text-sm sm:text-base">
                     決済連携機能

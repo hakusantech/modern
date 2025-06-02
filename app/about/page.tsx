@@ -107,6 +107,60 @@ export default function AboutPage() {
       </motion.section>
       {/* --- Enhanced Hero Section - END --- */}
 
+      {/* 私たちの強み */}
+      <section className="py-32 md:py-40 relative bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto"
+          >
+            <h2 className="text-4xl md:text-6xl font-light mb-24 text-center text-gray-900">
+              私たちの強み
+              <span className="block mt-6 text-2xl md:text-3xl text-gold-500 font-light">
+                CleanNestの特徴
+              </span>
+            </h2>
+            <div className="grid gap-8 md:grid-cols-3">
+              {[
+                {
+                  icon: Building2,
+                  title: "ワンストップで全てを支援",
+                  description: "企画設計から家具家電手配、行政対応、集客、清掃管理まで。あらゆる場面で確かなサポートを提供し、開業から運営まで伴走します。"
+                },
+                {
+                  icon: Users,
+                  title: "不動産×民泊のプロフェッショナルチーム",
+                  description: "代行専業業者ではできない、不動産の視点と管理力。売却益・資産価値の向上までを見据えた運営が可能です。"
+                },
+                {
+                  icon: Sparkles,
+                  title: "無人化・スマート化による安心運営",
+                  description: "スマートロックやビデオ通話、多言語サポートを活用し、オーナーが現地にいなくても、世界中のゲストを迎えられる運営体制を実現します。"
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div className="bg-white rounded-2xl p-8 shadow-xl border border-gold-200 hover:border-gold-400 transition-all duration-300 h-full transform hover:-translate-y-2">
+                    <feature.icon className="w-10 h-10 md:w-12 md:h-12 shrink-0 text-gold-500 mb-6 md:mb-8 transform group-hover:scale-110 transition-transform duration-300" />
+                    <h3 className="text-2xl font-medium mb-4 text-gray-900">{feature.title}</h3>
+                    <p className="text-gray-700 leading-relaxed font-light text-lg">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* === NEW Problem / Goal / Solution Section START === */}
       <section 
         className="py-24 md:py-40 bg-black text-white overflow-hidden relative"
@@ -160,22 +214,29 @@ export default function AboutPage() {
               </div>
               <div className="w-full md:w-1/2 md:pl-16 relative">
                 <div className="relative z-10">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black border border-gold-500 text-gold-500 mb-6 text-4xl">
-                    01
-                  </div>
-                  <h3 className="text-xl font-medium text-gold-400 mb-2 uppercase tracking-wider">Challenge</h3>
-                  <h2 className="text-3xl font-light text-white mb-8">活用されずに眠る北海道の空き家</h2>
-                  <div className="space-y-4 text-gray-300 leading-relaxed">
-                    <p>
-                      観光地として世界から注目される北海道。
-                      その一方で、使われずに眠っている空き家が数多く存在しています。
-                    </p>
-                    <p>
-                      <strong className="text-white">2024年時点で、北海道の空き家率は15.6%（約45万戸）</strong>にものぼり、全国平均（13.8%）を上回る深刻な状況です。
-                    </p>
-                    <p>
-                      こうした未活用の不動産が各地に点在していることは、地域経済にとって大きな損失であり、同時に<strong className="text-gold-400">新たな価値を生み出す"ポテンシャル"</strong>でもあります。
-                    </p>
+                  <div className="absolute -left-8 -top-4 text-6xl md:text-8xl font-extralight text-gold-400/60 leading-none z-0">01</div>
+                  <div className="relative z-10 pl-16 md:pl-20 border-l-2 border-gold-500">
+                    <div className="bg-white p-8 shadow-lg border border-gray-100 hover:border-gold-300 transition-all duration-500 hover:shadow-xl">
+                      <h3 className="text-3xl md:text-4xl font-light text-gray-900 mb-8 tracking-wide leading-tight">
+                        なぜ北海道なのか？
+                      </h3>
+                      
+                      <div className="space-y-8">
+                        <p className="text-lg text-gray-700 leading-relaxed font-light">
+                          2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
+                        </p>
+                        
+                        <div className="relative bg-gray-50 p-8 border-l-4 border-gold-500 hover:bg-white transition-colors duration-300">
+                          <div className="absolute top-4 right-4 w-6 h-6 border border-gold-300 rotate-45"></div>
+                          <p className="text-xl font-light text-gray-900 leading-relaxed">
+                            彼らが求めるのは<br />
+                            <span className="text-gold-600 font-medium text-2xl">
+                              "ホテルライク"な旅ではありません。
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -379,247 +440,269 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* なぜ民泊が注目されているか - Enhanced Visual Design */}
-      <section className="py-16 md:py-32 lg:py-40 relative bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
-        {/* 装飾的な背景要素 */}
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gold-500/5 rounded-full blur-3xl"></div>
+      {/* なぜ民泊が注目されているか - 超洗練された高級ファッションブランド風デザイン */}
+      <section className="py-32 md:py-40 bg-white relative overflow-hidden">
+        {/* 装飾的背景要素 */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-300/30 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-300/30 to-transparent"></div>
+        <div className="absolute top-1/2 left-8 transform -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-gold-300/50 to-transparent hidden xl:block"></div>
+        <div className="absolute top-1/2 right-8 transform -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-gold-300/50 to-transparent hidden xl:block"></div>
         
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-7xl mx-auto"
-          >
-            {/* Glass-morphism card with improved contrast */}
-            <div className="bg-gradient-to-br from-gray-900/80 to-black/90 backdrop-blur-md p-6 md:p-10 lg:p-16 rounded-2xl border border-white/15 shadow-2xl w-full">
-              {/* Main title with improved visibility */}
-              <motion.h2 
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extralight mb-6 md:mb-12 text-center tracking-wider leading-tight text-white [text-shadow:0_2px_5px_rgba(0,0,0,0.3)]"
-              >
-                なぜいま民泊なのか？
-              </motion.h2>
-              <div className="w-16 md:w-32 h-1 bg-gradient-to-r from-gold-400 to-gold-500 mx-auto mb-8 md:mb-16 rounded-full shadow-lg" />
-
-              <div className="space-y-16 md:space-y-24">
-                {/* Why Hokkaido Section - Enhanced Visual */}
-                <div className="space-y-4 md:space-y-8">
-                  <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-center tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100 [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]">
-                    なぜ北海道なのか？
-                  </h3>
-                  
-                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-center text-blue-50 leading-relaxed px-2 max-w-4xl mx-auto">
-                    2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
-                  </p>
-                  <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-center font-light px-2 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-                    彼らが求めるのは"ホテルライク"な旅ではありません。
-                  </p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            
+            {/* タイトルセクション - より洗練 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="text-center mb-24 md:mb-32"
+            >
+              <div className="relative inline-block">
+                <div className="absolute -top-6 -left-6 w-12 h-12 border-l border-t border-gold-300/40"></div>
+                <div className="absolute -bottom-6 -right-6 w-12 h-12 border-r border-b border-gold-300/40"></div>
+                <div className="px-8 py-6">
+                  <p className="text-xs uppercase tracking-[0.4em] text-gold-600 mb-6 font-light">Market Insight</p>
+                  <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight text-gray-900 mb-8 leading-[0.9] tracking-tight">
+                    なぜいま
+                    <span className="block text-gold-600 font-light italic">民泊</span>
+                    <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">なのか？</span>
+                  </h2>
+                  <div className="flex justify-center items-center gap-4">
+                    <div className="w-8 h-px bg-gold-500"></div>
+                    <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
+                    <div className="w-8 h-px bg-gold-500"></div>
+                  </div>
                 </div>
-                
-                {/* Inbound Travel Data - Enhanced Visual */}
-                <div className="mx-auto w-full max-w-4xl">
-                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-8 md:mb-12 uppercase tracking-widest text-center text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.3)]">
-                    北海道へのインバウンド旅行者推移
-                  </h3>
-                  
-                  {/* Stats cards with dramatically improved visibility */}
-                  <div className="flex flex-col space-y-4 md:grid md:grid-cols-3 md:gap-8 md:space-y-0 max-w-sm mx-auto md:max-w-none">
-                    {/* 2024 - Current year highlighted */}
-                    <div className="bg-gradient-to-br from-amber-600/30 to-amber-700/20 backdrop-blur-md p-4 md:p-8 rounded-xl border border-amber-400/30 shadow-xl transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                      <div className="flex flex-col items-center">
-                        <span className="text-sm md:text-base uppercase tracking-wider text-amber-200 font-bold mb-2">2024</span>
-                        <span className="text-2xl md:text-5xl font-semibold text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
-                          3,687<span className="text-xs md:text-sm text-white">万人</span>
-                        </span>
-                        <div className="mt-3 md:mt-4 bg-amber-400 text-amber-900 text-sm md:text-base uppercase tracking-wider font-bold py-1 px-3 rounded-full shadow-md">
-                          過去最高を記録
+              </div>
+            </motion.div>
+
+            {/* メインコンテンツグリッド - より洗練 */}
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-start mb-24">
+              
+              {/* 左カラム - なぜ北海道なのか */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                viewport={{ once: true }}
+                className="lg:col-span-7 space-y-16"
+              >
+                {/* セクション番号と装飾 */}
+                <div className="relative">
+                  <div className="absolute -left-8 -top-4 text-6xl md:text-8xl font-extralight text-gold-400/60 leading-none z-0">01</div>
+                  <div className="relative z-10 pl-16 md:pl-20 border-l-2 border-gold-500">
+                    <div className="bg-white p-8 shadow-lg border border-gray-100 hover:border-gold-300 transition-all duration-500 hover:shadow-xl">
+                      <h3 className="text-3xl md:text-4xl font-light text-gray-900 mb-8 tracking-wide leading-tight">
+                        なぜ北海道なのか？
+                      </h3>
+                      
+                      <div className="space-y-8">
+                        <p className="text-lg text-gray-700 leading-relaxed font-light">
+                          2025年、日本の観光市場はかつてない追い風を受けています。訪日外国人観光客の数は過去最高を記録し、旅のスタイルもまた大きく変化しました。
+                        </p>
+                        
+                        <div className="relative bg-gray-50 p-8 border-l-4 border-gold-500 hover:bg-white transition-colors duration-300">
+                          <div className="absolute top-4 right-4 w-6 h-6 border border-gold-300 rotate-45"></div>
+                          <p className="text-xl font-light text-gray-900 leading-relaxed">
+                            彼らが求めるのは<br />
+                            <span className="text-gold-600 font-medium text-2xl">
+                              "ホテルライク"な旅ではありません。
+                            </span>
+                          </p>
                         </div>
                       </div>
                     </div>
-                    
-                    {/* 2014 - Mid point with distinct color */}
-                    <div className="bg-gradient-to-br from-blue-600/30 to-blue-700/20 backdrop-blur-md p-4 md:p-8 rounded-xl border border-blue-400/30 shadow-xl transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                      <div className="flex flex-col items-center">
-                        <span className="text-sm md:text-lg uppercase tracking-wider text-blue-200 font-bold mb-2">2014</span>
-                        <span className="text-2xl md:text-5xl font-semibold text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
-                          1,341<span className="text-xs md:text-base text-white">万人</span>
-                        </span>
+                  </div>
+                </div>
+
+                {/* 価値提案カード */}
+                <div className="space-y-8">
+                  <div className="bg-white p-8 border border-gray-200 hover:border-gold-400 hover:shadow-lg transition-all duration-500 relative group">
+                    <div className="absolute top-0 left-0 w-0 h-full bg-gold-50 transition-all duration-500 group-hover:w-2"></div>
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-8 h-8 bg-gold-100 rounded-full flex items-center justify-center">
+                          <div className="w-3 h-3 bg-gold-500 rounded-full"></div>
+                        </div>
+                        <div className="h-px bg-gold-300 flex-1"></div>
                       </div>
+                      <p className="text-lg text-gray-700 leading-relaxed font-light">
+                        求められているのは、地域の暮らしに溶け込むような、
+                        <span className="font-medium text-gold-600">リアルな日本体験</span>
+                      </p>
                     </div>
-                    
-                    {/* 2004 - Earliest data point */}
-                    <div className="bg-gradient-to-br from-teal-600/30 to-teal-700/20 backdrop-blur-md p-4 md:p-8 rounded-xl border border-teal-400/30 shadow-xl transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                      <div className="flex flex-col items-center">
-                        <span className="text-sm md:text-lg uppercase tracking-wider text-teal-200 font-bold mb-2">2004</span>
-                        <span className="text-2xl md:text-5xl font-semibold text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
-                          614<span className="text-xs md:text-base text-white">万人</span>
-                        </span>
+                  </div>
+                  
+                  <div className="bg-white p-8 border border-gray-200 hover:border-gold-400 hover:shadow-lg transition-all duration-500 relative group">
+                    <div className="absolute top-0 left-0 w-0 h-full bg-gold-50 transition-all duration-500 group-hover:w-2"></div>
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-8 h-8 bg-gold-100 rounded-full flex items-center justify-center">
+                          <div className="w-3 h-3 bg-gold-500 rounded-full"></div>
+                        </div>
+                        <div className="h-px bg-gold-300 flex-1"></div>
                       </div>
+                      <p className="text-lg text-gray-700 leading-relaxed font-light">
+                        そしてその受け皿となるのが、
+                        <span className="font-medium text-gold-600 text-xl">民泊</span>です。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* 右カラム - データ可視化 */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+                viewport={{ once: true }}
+                className="lg:col-span-5 space-y-8"
+              >
+                <div className="text-center mb-12">
+                  <div className="relative inline-block">
+                    <div className="absolute -top-2 -left-2 w-4 h-4 border-l border-t border-gold-300"></div>
+                    <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r border-b border-gold-300"></div>
+                    <div className="px-6 py-4">
+                      <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 tracking-wide">
+                        インバウンド旅行者推移
+                      </h3>
+                      <p className="text-gray-600 font-light text-sm uppercase tracking-widest">過去20年間の成長</p>
                     </div>
                   </div>
                 </div>
                 
-                {/* Content with improved typography and contrast */}
-                <div className="space-y-8 md:space-y-12 px-2 max-w-4xl mx-auto">
-                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
-                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
-                      求められているのは、地域の暮らしに溶け込むような、リアルな日本体験。
-                    </p>
-                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400 font-medium [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-                      そしてその受け皿となるのが、民泊です。
-                    </p>
-                  </div>
+                <div className="space-y-6">
+                  {/* 2024年 - プレミアムハイライト */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="relative group"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-gold-100 to-gold-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative bg-white border-2 border-gold-500 p-8 shadow-lg hover:shadow-2xl transition-all duration-500">
+                      <div className="absolute top-4 right-4 w-12 h-px bg-gold-400"></div>
+                      <div className="absolute top-4 right-4 w-px h-12 bg-gold-400"></div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-gold-600 text-sm font-medium uppercase tracking-[0.2em] mb-2 block">2024年</span>
+                          <div className="text-5xl md:text-6xl font-extralight text-gray-900 leading-none">
+                            3,687<span className="text-lg text-gray-500 ml-1">万人</span>
+                          </div>
+                        </div>
+                        <div className="bg-gold-500 text-white px-6 py-3 text-xs font-medium uppercase tracking-widest">
+                          過去最高
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
                   
-                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed">
-                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
-                      特に、世界有数の観光地でありながら、未開拓の可能性に満ちた北海道は、
-                    </p>
-                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
-                      "プライベートな宿"と"非日常の自然"を両立できる、極めて稀有なエリア。
-                    </p>
-                  </div>
+                  {/* 2014年 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    viewport={{ once: true }}
+                    className="bg-white border border-gray-200 p-6 hover:border-gold-400 hover:shadow-lg transition-all duration-500 group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-gray-500 text-xs font-medium uppercase tracking-[0.2em] mb-2 block">2014年</span>
+                        <div className="text-4xl font-light text-gray-900 leading-none">
+                          1,341<span className="text-base text-gray-500 ml-1">万人</span>
+                        </div>
+                      </div>
+                      <div className="text-gold-600 font-medium group-hover:text-gold-700 transition-colors">
+                        +175%
+                      </div>
+                    </div>
+                  </motion.div>
                   
-                  <div className="text-base sm:text-lg md:text-2xl lg:text-3xl font-light leading-relaxed">
-                    <p className="mb-4 md:mb-6 text-blue-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
-                      ホテルでは成しえない、ローカルの「静寂」や「温かさ」、
+                  {/* 2004年 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 1.0 }}
+                    viewport={{ once: true }}
+                    className="bg-white border border-gray-200 p-6 hover:border-gold-400 hover:shadow-lg transition-all duration-500 group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-gray-500 text-xs font-medium uppercase tracking-[0.2em] mb-2 block">2004年</span>
+                        <div className="text-4xl font-light text-gray-900 leading-none">
+                          614<span className="text-base text-gray-500 ml-1">万人</span>
+                        </div>
+                      </div>
+                      <div className="text-gray-400 font-light text-sm group-hover:text-gray-600 transition-colors">
+                        起点
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* 結論セクション - 最高級の洗練 */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center max-w-5xl mx-auto"
+            >
+              <div className="relative">
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-gold-300"></div>
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-px h-16 bg-gradient-to-t from-transparent to-gold-300"></div>
+                
+                <div className="bg-gray-50 border border-gray-200 p-16 md:p-20 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-24 h-24 border-l-2 border-t-2 border-gold-300/30"></div>
+                  <div className="absolute bottom-0 right-0 w-24 h-24 border-r-2 border-b-2 border-gold-300/30"></div>
+                  
+                  <div className="relative z-10">
+                    <h4 className="text-3xl md:text-4xl font-extralight text-gray-900 leading-relaxed mb-12 tracking-wide">
+                      特に、世界有数の観光地でありながら、<br />
+                      未開拓の可能性に満ちた
+                      <span className="font-light text-gold-600 italic"> 北海道</span>は、
+                    </h4>
+                    
+                    <div className="grid md:grid-cols-2 gap-8 mb-12">
+                      <div className="bg-white border border-gray-200 p-8 hover:border-gold-400 hover:shadow-lg transition-all duration-500 group">
+                        <div className="absolute top-2 right-2 w-4 h-4 border border-gold-300 rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p className="text-xl font-light text-gray-900 tracking-wide">
+                          "プライベートな宿"
+                        </p>
+                      </div>
+                      <div className="bg-white border border-gray-200 p-8 hover:border-gold-400 hover:shadow-lg transition-all duration-500 group">
+                        <div className="absolute top-2 right-2 w-4 h-4 border border-gold-300 rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p className="text-xl font-light text-gray-900 tracking-wide">
+                          "非日常の自然"
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-2xl font-extralight text-gray-900 leading-relaxed mb-12 tracking-wide">
+                      を両立できる、<span className="font-light text-gold-600 italic">極めて稀有なエリア</span>。
                     </p>
-                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-                      その価値に、世界中の旅行者が魅了され始めています。
-                    </p>
+                    
+                    <div className="bg-white border-2 border-gold-500 p-12 relative">
+                      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-gold-300"></div>
+                      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-gold-300"></div>
+                      <p className="text-xl md:text-2xl font-light text-gray-900 leading-relaxed tracking-wide">
+                        ホテルでは成しえない、ローカルの<span className="font-medium">「静寂」</span>や<span className="font-medium">「温かさ」</span>、<br />
+                        <span className="text-2xl md:text-3xl font-light text-gold-600 italic">
+                          その価値に、世界中の旅行者が魅了され始めています。
+                        </span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 私たちの強み */}
-      <section className="py-32 md:py-40 relative bg-gray-50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-6xl font-light mb-24 text-center text-gray-900">
-              私たちの強み
-              <span className="block mt-6 text-2xl md:text-3xl text-gold-500 font-light">
-                CleanNestの特徴
-              </span>
-            </h2>
-            <div className="grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  icon: Building2,
-                  title: "ワンストップで全てを支援",
-                  description: "企画設計から家具家電手配、行政対応、集客、清掃管理まで。あらゆる場面で確かなサポートを提供し、開業から運営まで伴走します。"
-                },
-                {
-                  icon: Users,
-                  title: "不動産×民泊のプロフェッショナルチーム",
-                  description: "代行専業業者ではできない、不動産の視点と管理力。売却益・資産価値の向上までを見据えた運営が可能です。"
-                },
-                {
-                  icon: Sparkles,
-                  title: "無人化・スマート化による安心運営",
-                  description: "スマートロックやビデオ通話、多言語サポートを活用し、オーナーが現地にいなくても、世界中のゲストを迎えられる運営体制を実現します。"
-                }
-              ].map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group"
-                >
-                  <div className="bg-white rounded-2xl p-8 shadow-xl border border-gold-200 hover:border-gold-400 transition-all duration-300 h-full transform hover:-translate-y-2">
-                    <feature.icon className="w-10 h-10 md:w-12 md:h-12 shrink-0 text-gold-500 mb-6 md:mb-8 transform group-hover:scale-110 transition-transform duration-300" />
-                    <h3 className="text-2xl font-medium mb-4 text-gray-900">{feature.title}</h3>
-                    <p className="text-gray-700 leading-relaxed font-light text-lg">{feature.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* オーナー募集バナー - PCのみ表示 */}
-      <section className="hidden md:block py-20 bg-gold-50 border-y-4 border-gold-500">
-        <div className="container mx-auto px-4">
-          <Link href="/owner-recruitment/" className="block group">
-            <div className="relative overflow-hidden rounded-lg shadow-2xl hover:shadow-2xl transition-shadow duration-300 bg-white border-2 border-gold-500">
-              <div className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12">
-                <div className="text-center md:text-left mb-6 md:mb-0">
-                  <h3 className="text-3xl md:text-4xl font-bold text-gold-600 mb-4">民泊オーナー様募集中</h3>
-                  <p className="text-xl md:text-2xl text-gray-800 font-medium">所有不動産を民泊として活用し、収益を最大化しませんか？</p>
-                  <p className="mt-2 text-lg text-gray-700">-戸建てやアパートを貸し出して賃料UP-</p>
-                </div>
-                <div className="flex-shrink-0">
-                  <div className="bg-gold-500 hover:bg-gold-600 text-white px-8 py-4 rounded-lg text-xl font-medium group-hover:scale-105 transition-transform duration-300 shadow-lg">
-                    詳細を見る
-                    <ArrowRight className="inline-block ml-2 h-5 w-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      {/* CTA - PCのみ表示 */}
-      <section className="hidden md:block py-32 md:py-40 text-center relative bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-6xl font-light mb-12 text-gray-900">
-              まずはお気軽に
-              <span className="block mt-6 text-transparent bg-clip-text bg-gradient-to-r from-gold-600 to-gold-400">
-                ご相談ください
-              </span>
-            </h2>
-            <p className="text-2xl text-gray-700 mb-16 max-w-2xl mx-auto leading-relaxed font-light">
-              民泊運営を始めたい方も、物件の活用にお悩みの方も――<br />
-              あなたの物件に秘められた可能性を、私たちが引き出します。
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-gold-500 hover:bg-gold-600 text-white text-xl h-16 px-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <Link href="/contact">
-                  無料相談・お問い合わせはこちら
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-gold-500 text-gray-800 hover:bg-gold-50 text-xl h-16 px-12 rounded-full"
-              >
-                <Link href="/services">
-                  サービス内容を詳しく見る
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -810,6 +893,29 @@ export default function AboutPage() {
         </div>
       </motion.section>
       {/* --- FINAL CONCLUDING TEXT - END --- */}
+
+      {/* オーナー募集バナー - フッター直前 */}
+      <section className="py-20 bg-gold-50 border-y-4 border-gold-500">
+        <div className="container mx-auto px-4">
+          <Link href="/owner-recruitment/" className="block group">
+            <div className="relative overflow-hidden rounded-lg shadow-2xl hover:shadow-2xl transition-shadow duration-300 bg-white border-2 border-gold-500">
+              <div className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12">
+                <div className="text-center md:text-left mb-6 md:mb-0">
+                  <h3 className="text-3xl md:text-4xl font-bold text-gold-600 mb-4">民泊オーナー様募集中</h3>
+                  <p className="text-xl md:text-2xl text-gray-800 font-medium">所有不動産を民泊として活用し、収益を最大化しませんか？</p>
+                  <p className="mt-2 text-lg text-gray-700">-戸建てやアパートを貸し出して賃料UP-</p>
+                </div>
+                <div className="flex-shrink-0">
+                  <div className="bg-gold-500 hover:bg-gold-600 text-white px-8 py-4 rounded-lg text-xl font-medium group-hover:scale-105 transition-transform duration-300 shadow-lg">
+                    詳細を見る
+                    <ArrowRight className="inline-block ml-2 h-5 w-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
 
     </div>
   )

@@ -167,27 +167,6 @@ export default function PlansPage() {
             <div className="mb-16">
               <PricingTable />
             </div>
-
-            <div className="mt-16 text-center">
-              <Card className="bg-white border-gold-200 shadow-lg p-8 max-w-3xl mx-auto">
-                <h3 className="text-xl font-medium mb-4 text-gray-900">カスタムプランも承ります</h3>
-                <p className="text-gray-600 mb-6">
-                  お客様の特別なニーズに合わせたカスタムプランをご提案いたします。
-                  長期滞在、グループ旅行、特別なイベントなど、どんなご要望もお気軽にご相談ください。
-                </p>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-gray-800 border-gold-500 hover:bg-gold-50"
-                  asChild
-                >
-                  <Link href="/contact">
-                    カスタムプランのご相談
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </Card>
-            </div>
           </div>
         </section>
 

@@ -1,29 +1,11 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight, ChevronRight, Clock, Shield, Users, Calendar, TrendingUp, Building, PieChart, Percent } from "lucide-react"
-import { Metadata } from "next"
 import { cn } from "@/lib/utils"
 import { SakuraEffect } from "@/components/effects/sakura"
-
-export const metadata: Metadata = {
-  title: "CleanNest Hokkaido｜札幌・北海道のインバウンド特化型民泊運営代行",
-  description: "札幌・北海道でインバウンド需要に特化した民泊運営の完全代行サービス。外国人観光客向け物件の多言語対応、清掃、24時間対応のゲストサポートで、オーナー様の収益を最大化します。北海道ナンバーワンを目指す民泊運営代行サービス。",
-  openGraph: {
-    title: "インバウンド特化型民泊運営代行 | CleanNest Hokkaido",
-    description: "札幌・北海道でインバウンド需要に特化した民泊運営の完全代行サービス。外国人観光客向け運営代行で収益最大化。",
-    images: [
-      {
-        url: "/images/sapporo-tv-tower-illumination.jpg",
-        width: 1200,
-        height: 630,
-        alt: "CleanNest Hokkaido - 札幌・北海道のインバウンド特化型民泊運営代行",
-      },
-    ],
-  },
-  verification: {
-    google: "7wjuzirx-E_57wKdFQm1AvCVc1p10USoBq671o5r2HM",
-  },
-}
+import { useState, useEffect } from "react"
 
 // 自動化サービスの特徴
 const automationFeatures = [
@@ -166,24 +148,199 @@ const news = [
 ];
 
 export default function HomePage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  
+  const heroImages = [
+    {
+      src: "/images/aoiike.webp",
+      alt: "北海道 青い池の美しい風景 - CleanNest Hokkaido",
+      title: "美瑛町の青い池",
+      description: "神秘的な青い水面が魅力"
+    },
+    {
+      src: "/images/yakei.webp", 
+      alt: "北海道の美しい夜景 - CleanNest Hokkaido",
+      title: "札幌の夜景",
+      description: "きらめく街の明かり"
+    },
+    {
+      src: "/images/rabender.webp",
+      alt: "北海道 ラベンダー畑の風景 - CleanNest Hokkaido",
+      title: "富良野のラベンダー畑",
+      description: "紫の絨毯が広がる絶景"
+    }
+  ];
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % heroImages.length
+      );
+    }, 6000); // 6秒に延長
+
+    return () => clearInterval(interval);
+  }, [heroImages.length, isPlaying]);
+
+  const goToSlide = (index: number) => {
+    setCurrentImageIndex(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentImageIndex((prevIndex) => 
+      (prevIndex + 1) % heroImages.length
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
     <main className="min-h-screen bg-white">
       {/* 1. スライダー（キャッチーなバナー） - 高級感あるデザイン */}
-      <section className="relative h-screen flex items-center overflow-hidden">
+      <section 
+        className="relative h-screen flex items-center overflow-hidden group"
+        onMouseEnter={() => setIsPlaying(false)}
+        onMouseLeave={() => setIsPlaying(true)}
+      >
         {/* リアルな桜エフェクトをヒーローセクションに適用 */}
-        <SakuraEffect />
-        {/* Full-width background image */}
+        {/* <SakuraEffect /> */}
+        
+        {/* Enhanced background images with slide and parallax effects - すべてのデバイスで表示 */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0">
-            <Image
-              src="/3.webp"
-              alt="CleanNest Hokkaido 民泊運営 - 五稜郭タワーと桜"
-              fill
-              priority
-              className="object-cover object-center"
+          {heroImages.map((image, index) => (
+            <div 
+              key={index}
+              className={cn(
+                "absolute inset-0 transition-all duration-1000 ease-in-out",
+                index === currentImageIndex 
+                  ? "opacity-100 scale-100" 
+                  : index === (currentImageIndex - 1 + heroImages.length) % heroImages.length
+                    ? "opacity-0 scale-105 -translate-x-full"
+                    : "opacity-0 scale-95 translate-x-full"
+              )}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                priority={index === 0}
+                className="object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent" />
+              
+              {/* Image overlay info - PC/タブレットのみ表示 */}
+              <div className={cn(
+                "absolute bottom-20 left-8 text-white transition-all duration-700 delay-300 hidden md:block",
+                index === currentImageIndex ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              )}>
+                <h3 className="text-xl font-medium mb-1">{image.title}</h3>
+                <p className="text-sm text-white/80">{image.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* スマホ用の追加オーバーレイ - より強いグラデーション */}
+        <div className="absolute inset-0 z-5 md:hidden bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
+
+        {/* Navigation arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 group"
+        >
+          <svg className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 group"
+        >
+          <svg className="w-6 h-6 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Enhanced image indicators - PC/タブレット */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 hidden md:flex items-center space-x-3 bg-black/20 backdrop-blur-sm rounded-full px-6 py-3">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={cn(
+                "relative transition-all duration-500 ease-out",
+                index === currentImageIndex 
+                  ? "w-8 h-2" 
+                  : "w-2 h-2 hover:w-4"
+              )}
+            >
+              <div 
+                className={cn(
+                  "absolute inset-0 rounded-full transition-all duration-500",
+                  index === currentImageIndex 
+                    ? "bg-gold-400 shadow-lg shadow-gold-400/50" 
+                    : "bg-white/50 hover:bg-white/70"
+                )}
+              />
+              {index === currentImageIndex && (
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 animate-pulse" />
+              )}
+            </button>
+          ))}
+          
+          {/* Play/Pause toggle */}
+          <div className="ml-4 w-px h-4 bg-white/30" />
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="ml-2 p-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          >
+            {isPlaying ? (
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+              </svg>
+            ) : (
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile image indicators - スマホ用 */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 md:hidden flex items-center space-x-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={cn(
+                "transition-all duration-300",
+                index === currentImageIndex 
+                  ? "w-6 h-2 bg-white rounded-full" 
+                  : "w-2 h-2 bg-white/50 rounded-full"
+              )}
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent" />
-          </div>
+          ))}
+        </div>
+
+        {/* Mobile swipe area for navigation - スマホ用スワイプエリア */}
+        <div className="absolute inset-0 z-20 md:hidden flex">
+          <button
+            onClick={prevSlide}
+            className="flex-1 opacity-0"
+            aria-label="前の画像"
+          />
+          <button
+            onClick={nextSlide}
+            className="flex-1 opacity-0"
+            aria-label="次の画像"
+          />
         </div>
 
         {/* Content Container - Full width with right-aligned content */}
@@ -313,7 +470,7 @@ export default function HomePage() {
               </div>
             </div>
             
-            <div className="order-1 lg:order-2 relative h-[400px] sm:h-[500px] md:h-[600px]">
+            <div className="order-1 lg:order-2 relative h-[400px] sm:h-[500px] md:h-[600px] hidden lg:block">
               {/* 画像コンテナ - 3つの画像を配置 */}
               {/* 画像1: 富良野 (メイン、背面) */}
               <div className="absolute inset-0 overflow-hidden rounded-lg shadow-xl">
@@ -356,6 +513,98 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 固定フローティングバナー */}
+      <div className="fixed bottom-4 right-4 z-50 hidden md:block">
+        <Link 
+          href="/owner-recruitment"
+          className="group block"
+        >
+          <div className="bg-white rounded-lg shadow-xl border-2 border-gold-300 p-4 hover:shadow-2xl transition-all duration-300 hover:scale-105 max-w-xs">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs uppercase tracking-wide text-gold-600 font-semibold bg-gold-100 px-2 py-1 rounded">OWNER募集</span>
+              <Building className="w-5 h-5 text-gold-500" />
+            </div>
+            <h4 className="text-sm font-medium text-gray-900 mb-1">
+              所有不動産を<span className="text-gold-600">民泊転貸</span>
+            </h4>
+            <p className="text-xs text-gray-600 mb-3">
+              賃料UP・空室リスク軽減
+            </p>
+            <div className="flex items-center justify-between">
+              <div className="flex gap-1">
+                <TrendingUp className="w-3 h-3 text-gold-500" />
+                <Shield className="w-3 h-3 text-gold-500" />
+                <Building className="w-3 h-3 text-gold-500" />
+              </div>
+              <div className="bg-gold-500 text-white px-3 py-1 rounded text-xs group-hover:bg-gold-600 transition-colors flex items-center">
+                詳細
+                <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      {/* スマホ用フローティングバナー */}
+      <div className="fixed bottom-4 right-4 z-50 md:hidden">
+        <Link 
+          href="/owner-recruitment"
+          className="group block"
+        >
+          <div className="bg-gold-500 text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="flex items-center gap-2">
+              <Building className="w-5 h-5" />
+              <span className="text-sm font-medium">OWNER募集</span>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      {/* スマホ用クイックアクションメニュー */}
+      <div className="fixed bottom-4 left-4 z-50 md:hidden">
+        <div className="flex flex-col gap-3">
+          {/* 電話ボタン */}
+          <a 
+            href="tel:011-827-7441"
+            className="group flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          </a>
+
+          {/* メールボタン */}
+          <a 
+            href="mailto:info@cleannest-hokkaido.com"
+            className="group flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+          </a>
+
+          {/* ホームボタン */}
+          <Link 
+            href="/"
+            className="group flex items-center justify-center w-12 h-12 bg-gray-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+          </Link>
+
+          {/* お問い合わせボタン */}
+          <Link 
+            href="/contact"
+            className="group flex items-center justify-center w-12 h-12 bg-gold-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+          </Link>
+        </div>
+      </div>
 
       {/* 3. 新着情報（NEWS） */}
       <section className="py-16 sm:py-24 md:py-32 bg-gray-50">
@@ -440,15 +689,15 @@ export default function HomePage() {
       </section>
 
       {/* 5. アイコン＆テキストで伝える自動化サービス */}
-      <section className="py-16 sm:py-24 md:py-32 bg-gray-900 text-white">
+      <section className="py-16 sm:py-24 md:py-32 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 md:mb-20">
-            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gold-400 mb-2 sm:mb-3">AUTOMATION</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 sm:mb-8">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gold-500 mb-2 sm:mb-3">AUTOMATION</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 sm:mb-8 text-gray-900">
               完全自動化された<br />
-              <span className="font-medium">次世代の民泊運営</span>
+              <span className="font-medium text-gold-500">次世代の民泊運営</span>
             </h2>
-            <p className="text-sm sm:text-base text-gray-300">
+            <p className="text-sm sm:text-base text-gray-600">
               最新のテクノロジーを駆使し、チェックインからチェックアウトまで
               完全に自動化された民泊運営を実現します。オーナー様の手間を最小限に、
               収益を最大限に。
@@ -458,12 +707,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
             {automationFeatures.map((feature, index) => (
               <div key={index} className="flex items-start">
-                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-400 flex items-center justify-center mr-4 sm:mr-5">
-                  <feature.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gold-400" />
+                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-500 flex items-center justify-center mr-4 sm:mr-5">
+                  <feature.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gold-500" />
                 </div>
                 <div>
-                  <h3 className="text-lg sm:text-xl font-medium mb-1 sm:mb-2">{feature.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-300">
+                  <h3 className="text-lg sm:text-xl font-medium mb-1 sm:mb-2 text-gray-900">{feature.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">
                     {feature.description}
                   </p>
                 </div>
@@ -558,13 +807,13 @@ export default function HomePage() {
       <section className="py-32 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <p className="text-sm uppercase tracking-[0.2em] text-gold-500 mb-3">PRICING</p>
-            <h2 className="text-4xl font-light text-gray-900 mb-8">
+            <p className="text-base sm:text-lg uppercase tracking-[0.2em] text-gold-500 mb-3">PRICING</p>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 mb-8">
               料金プラン
             </h2>
-            <p className="text-gray-600">
-              物件のタイプと運営スタイルに合わせた2つのプランをご用意しています。
-              お客様のニーズに最適なプランをお選びいただけます。
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
+              お客様のニーズに合わせた最適なプランをご用意しています。<br />
+              各プランの詳細をご確認ください。
             </p>
           </div>
           
@@ -580,31 +829,31 @@ export default function HomePage() {
               </div>
               
               {/* プラン特徴 */}
-              <div className="px-6 py-8 flex-grow">
+              <div className="px-6 py-8 flex-grow hidden md:block">
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-gold-500"></div>
                     </div>
-                    <p className="text-gray-700">家族連れや長期滞在のゲストに最適な運営スタイル</p>
+                    <p className="text-lg md:text-xl text-gray-700">家族連れや長期滞在のゲストに最適な運営スタイル</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-gold-500"></div>
                     </div>
-                    <p className="text-gray-700">快適性と体験価値を重視した設備とサービス</p>
+                    <p className="text-lg md:text-xl text-gray-700">快適性と体験価値を重視した設備とサービス</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-gold-500"></div>
                     </div>
-                    <p className="text-gray-700">安定した高評価レビューによるブランド構築</p>
+                    <p className="text-lg md:text-xl text-gray-700">安定した高評価レビューによるブランド構築</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gold-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-gold-500"></div>
                     </div>
-                    <p className="text-gray-700">長期的な収益と資産価値向上を重視</p>
+                    <p className="text-lg md:text-xl text-gray-700">長期的な収益と資産価値向上を重視</p>
                   </li>
                 </ul>
               </div>
@@ -613,7 +862,7 @@ export default function HomePage() {
               <div className="px-6 py-6 bg-gray-50 text-center">
                 <Link 
                   href="/plans#plans"
-                  className="inline-block px-8 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 rounded shadow-md w-full font-medium"
+                  className="inline-block px-8 py-3 bg-gold-500 text-white hover:bg-gold-600 transition-all duration-300 rounded shadow-md w-full font-medium text-lg"
                 >
                   詳細を見る
                 </Link>
@@ -631,31 +880,31 @@ export default function HomePage() {
               </div>
               
               {/* プラン特徴 */}
-              <div className="px-6 py-8 flex-grow bg-white">
+              <div className="px-6 py-8 flex-grow bg-white hidden md:block">
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                     </div>
-                    <p className="text-gray-800 font-medium">ビジネス利用や短期滞在者向けの効率的な運営</p>
+                    <p className="text-lg md:text-xl text-gray-800 font-medium">ビジネス利用や短期滞在者向けの効率的な運営</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                     </div>
-                    <p className="text-gray-800 font-medium">最大限の自動化システムで運営コストを最適化</p>
+                    <p className="text-lg md:text-xl text-gray-800 font-medium">最大限の自動化システムで運営コストを最適化</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                     </div>
-                    <p className="text-gray-800 font-medium">高稼働率と収益最大化を重視した運営戦略</p>
+                    <p className="text-lg md:text-xl text-gray-800 font-medium">高稼働率と収益最大化を重視した運営戦略</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
                       <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                     </div>
-                    <p className="text-gray-800 font-medium">スマートロック活用で遠隔チェックイン対応</p>
+                    <p className="text-lg md:text-xl text-gray-800 font-medium">スマートロック活用で遠隔チェックイン対応</p>
                   </li>
                 </ul>
               </div>
@@ -664,7 +913,7 @@ export default function HomePage() {
               <div className="px-6 py-6 bg-blue-100 text-center">
                 <Link 
                   href="/plans#plans"
-                  className="inline-block px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded shadow-md w-full font-medium"
+                  className="inline-block px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded shadow-md w-full font-medium text-lg"
                 >
                   詳細を見る
                 </Link>
@@ -675,14 +924,14 @@ export default function HomePage() {
           {/* 料金シミュレーター案内 */}
           <div className="mt-16 text-center">
             <div className="max-w-3xl mx-auto mb-6 p-8 bg-gray-50 rounded-lg shadow-md border border-gray-100">
-              <h3 className="text-xl font-medium text-gray-900 mb-4">料金シミュレーターで概算費用を確認</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-4">料金シミュレーターで概算費用を確認</h3>
+              <p className="text-lg md:text-xl text-gray-600 mb-6 leading-relaxed">
                 お持ちの物件の部屋数・運営スタイルに合わせた料金プランの概算費用を
                 シミュレーションで確認できます。
               </p>
               <Link 
                 href="/plans#simulator"
-                className="inline-flex items-center px-6 py-3 bg-gray-900 text-white hover:bg-gray-800 transition-all duration-300 rounded shadow-md font-medium"
+                className="inline-flex items-center px-6 py-3 bg-gray-900 text-white hover:bg-gray-800 transition-all duration-300 rounded shadow-md font-medium text-lg"
               >
                 料金シミュレーターを使う
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -694,10 +943,63 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link 
               href="/contact#contact-form"
-              className="inline-flex items-center text-gray-900 hover:text-gold-600 transition-colors group"
+              className="inline-flex items-center text-gray-900 hover:text-gold-600 transition-colors group text-lg md:text-xl"
             >
               詳しい料金についてはお問い合わせください
               <ChevronRight className="ml-1 h-4 w-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* オーナー募集セクション */}
+      <section className="py-16 sm:py-24 md:py-32 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-8 sm:mb-12">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gold-500 mb-2 sm:mb-3">OWNER RECRUITMENT</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 sm:mb-8 text-gray-900">
+                所有不動産を民泊オーナーに<br />
+                <span className="font-medium text-gold-500">転貸しませんか？</span>
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed">
+                戸建てやアパートを貸し出して賃料UP。空室リスクを軽減し、
+                <span className="text-gold-500 font-medium">安定した収益</span>を実現します。
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+              <div className="bg-gray-50 p-6 sm:p-8 rounded-lg border border-gray-200 hover:border-gold-300 transition-colors">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gold-100 rounded-lg flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                  <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-gold-500" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4 text-gray-900">賃料収入UP</h3>
+                <p className="text-sm sm:text-base text-gray-600">通常の賃貸より高い収益が期待できます</p>
+              </div>
+              
+              <div className="bg-gray-50 p-6 sm:p-8 rounded-lg border border-gray-200 hover:border-gold-300 transition-colors">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gold-100 rounded-lg flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                  <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-gold-500" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4 text-gray-900">空室リスク軽減</h3>
+                <p className="text-sm sm:text-base text-gray-600">安定した入居者確保でリスクを最小化</p>
+              </div>
+              
+              <div className="bg-gray-50 p-6 sm:p-8 rounded-lg border border-gray-200 hover:border-gold-300 transition-colors">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gold-100 rounded-lg flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                  <Building className="h-6 w-6 sm:h-8 sm:w-8 text-gold-500" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4 text-gray-900">管理不要</h3>
+                <p className="text-sm sm:text-base text-gray-600">運営・管理は全てお任せください</p>
+              </div>
+            </div>
+            
+            <Link 
+              href="/owner-recruitment"
+              className="inline-flex items-center px-8 sm:px-12 py-4 sm:py-6 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-medium transition-all duration-300 rounded-lg shadow-lg shadow-gold-400/30 hover:shadow-xl hover:shadow-gold-400/40 group btn-mobile text-base sm:text-lg"
+            >
+              オーナー募集の詳細を見る
+              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
@@ -725,17 +1027,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* オーナー募集リンク */}
-      <div className="fixed bottom-24 right-8 z-50 hidden md:block">
-        <Link 
-          href="/owner-recruitment/"
-          className="block p-4 bg-black text-white rounded-md shadow-lg hover:bg-gray-900 transition-colors transform hover:-translate-y-1 duration-300"
-        >
-          <p className="text-sm font-bold mb-1">所有不動産を民泊オーナーに転貸しませんか？</p>
-          <p className="text-xs">-戸建てやアパートを貸し出して賃料UP-</p>
-        </Link>
-      </div>
     </main>
   )
 }

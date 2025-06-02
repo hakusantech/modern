@@ -307,14 +307,14 @@ export function Header() {
                           {item.label}
                         </Link>
                         <button
-                          className="block w-full text-left px-4 py-2.5 text-sm text-primary-400 hover:text-primary-300 transition-all duration-200"
+                          className="block w-full text-left px-4 py-2 text-xs text-primary-400 hover:text-primary-500 transition-all duration-200"
                           onClick={() => setServiceDropdownOpen(!serviceDropdownOpen)}
                           aria-expanded={serviceDropdownOpen}
                         >
                           <span className="flex items-center">
                             サブメニューを{serviceDropdownOpen ? '閉じる' : '開く'}
                             <ChevronDown
-                              className={`ml-1.5 h-4 w-4 transition-transform duration-200 ${
+                              className={`ml-1 h-3 w-3 transition-transform duration-200 ${
                                 serviceDropdownOpen ? "rotate-180" : ""
                               }`}
                             />
@@ -341,7 +341,7 @@ export function Header() {
                                   }`}
                                   onClick={closeMenu}
                                 >
-                                  <span className="text-sm leading-tight">{service.label}</span>
+                                  <span>{service.label}</span>
                                 </Link>
                               ))}
                             </motion.div>
@@ -365,9 +365,9 @@ export function Header() {
                 ))}
               </nav>
               {/* 電話番号と営業時間 (Mobile) */}
-              <div className="mt-6 pt-5 border-t border-primary-500/20 text-center">
-                 <a href="tel:011-827-7441" className="font-bold text-xl text-gold-500 hover:text-gold-400 transition-colors block">011-827-7441</a>
-                 <p className="text-sm text-gray-300 mt-1.5">9:30〜18:30（土日除く）</p>
+              <div className="mt-6 pt-4 border-t border-primary-500/20 text-center">
+                 <a href="tel:011-827-7441" className="font-bold text-xl text-gold-500 hover:text-gold-400 transition-colors block mb-2 btn-mobile">011-827-7441</a>
+                 <p className="text-sm text-gray-300">9:30〜18:30（土日除く）</p>
               </div>
             </SheetContent>
           </Sheet>
