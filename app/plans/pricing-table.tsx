@@ -194,10 +194,10 @@ export function PricingTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* 基本料金セクション */}
+                      {/* 初期費用セクション */}
                       <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
                         <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
-                          基本料金
+                          初期費用（家具家電・什器備品設置費等を含む）
                         </td>
                       </tr>
                       <PricingRow
@@ -366,10 +366,10 @@ export function PricingTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* 基本料金セクション */}
+                      {/* 初期費用セクション */}
                       <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
                         <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
-                          基本料金
+                          初期費用（家具家電・什器備品設置費等を含む）
                         </td>
                       </tr>
                       <PricingRow
@@ -538,10 +538,10 @@ export function PricingTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* 基本料金 */}
+                      {/* 初期費用 */}
                       <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
                         <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
-                          基本料金
+                          初期費用（家具家電・什器備品設置費等を含む）
                         </td>
                       </tr>
                       <PricingRow
@@ -685,10 +685,10 @@ export function PricingTable() {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* 基本料金 */}
+                      {/* 初期費用 */}
                       <tr className="bg-gradient-to-r from-gold-100 to-gold-50 border-l-4 border-gold-500">
                         <td colSpan={2} className="py-3 px-4 font-semibold text-gold-700 text-sm sm:text-base">
-                          基本料金
+                          初期費用（家具家電・什器備品設置費等を含む）
                         </td>
                       </tr>
                       <PricingRow

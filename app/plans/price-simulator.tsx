@@ -518,18 +518,19 @@ function SimulatorContent({
           {/* 部屋数と想定売上 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="roomCount" className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">部屋数</Label>
+              <Label htmlFor="roomCount" className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">部屋数を入力してください</Label>
               <Input
                 id="roomCount"
                 type="number"
                 min="1"
                 value={roomCount}
                 onChange={(e) => { const val = parseInt(e.target.value, 10); setRoomCount(isNaN(val) || val < 1 ? 1 : val); }}
+                placeholder="例: 3"
                 className={`border-2 ${accentBorder} ${accentRing} focus:ring-2 focus:ring-offset-1 bg-white text-black font-medium text-lg sm:text-xl h-11 sm:h-14`}
               />
             </div>
             <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="revenue" className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">月間想定売上（円）</Label>
+              <Label htmlFor="revenue" className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">月間想定売上を入力してください（円）</Label>
               <Input
                 id="revenue"
                 type="text"
@@ -540,6 +541,7 @@ function SimulatorContent({
                   const val = e.target.value === '' ? 0 : parseInt(e.target.value.replace(/[^0-9]/g, ''), 10); 
                   setEstimatedRevenue(isNaN(val) ? 0 : val); 
                 }}
+                placeholder="例: 300000"
                 className={`border-2 ${accentBorder} ${accentRing} focus:ring-2 focus:ring-offset-1 bg-white text-black font-medium text-lg sm:text-xl h-11 sm:h-14`}
               />
             </div>
@@ -618,7 +620,7 @@ function SimulatorContent({
                 <div className="space-y-2 sm:space-y-2.5">
                   <div className="space-y-1">
                     <Label htmlFor="furniture-minpaku" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
-                      家具家電・什器備品 設置
+                      家具家電・什器備品の設置費用を入力してください
                     </Label>
                     <Input
                       id="furniture-minpaku"
@@ -632,12 +634,13 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
+                      placeholder="例: 1000000"
                       className={`border-gray-400 focus:ring-1 focus:ring-offset-0 ${accentRing} bg-white h-9 sm:h-11 text-base sm:text-lg`}
                     />
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="consumables-minpaku" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
-                      消耗品 提供・交換
+                      消耗品の提供・交換費用を入力してください
                     </Label>
                     <Input
                       id="consumables-minpaku"
@@ -651,6 +654,7 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
+                      placeholder="例: 10000"
                       className={`border-gray-400 focus:ring-1 focus:ring-offset-0 ${accentRing} bg-white h-9 sm:h-11 text-base sm:text-lg`}
                     />
                   </div>
@@ -661,7 +665,7 @@ function SimulatorContent({
                 <div className="space-y-2 sm:space-y-2.5">
                   <div className="space-y-1">
                     <Label htmlFor="furniture-ryokan" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
-                      家具家電・什器備品 設置
+                      家具家電・什器備品の設置費用を入力してください
                     </Label>
                     <Input
                       id="furniture-ryokan"
@@ -675,12 +679,13 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
+                      placeholder="例: 1500000"
                       className={`border-gray-400 focus:ring-1 focus:ring-offset-0 ${accentRing} bg-white h-9 sm:h-11 text-base sm:text-lg`}
                     />
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="consumables-ryokan" className="text-gray-800 font-medium text-xs sm:text-sm md:text-base">
-                      消耗品 提供・交換
+                      消耗品の提供・交換費用を入力してください
                     </Label>
                     <Input
                       id="consumables-ryokan"
@@ -694,6 +699,7 @@ function SimulatorContent({
                           Number.parseInt(e.target.value) || 0,
                         )
                       }
+                      placeholder="例: 20000"
                       className={`border-gray-400 focus:ring-1 focus:ring-offset-0 ${accentRing} bg-white h-9 sm:h-11 text-base sm:text-lg`}
                     />
                   </div>
@@ -843,75 +849,75 @@ function SimulatorContent({
                 <thead>
                   <tr className={`border-b ${accentBorder}`}>
                     <th scope="col" className="text-left py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap">項目</th>
-                    <th scope="col" className="text-right py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap px-1.5 sm:px-2">民泊営業</th>
+                    <th scope="col" className="text-left py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap px-1.5 sm:px-2">民泊営業</th>
                     <th scope="col" className="text-center py-2.5 sm:py-3 px-1.5 sm:px-2 w-7 sm:w-9">
                       <ArrowRightIcon className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${accentText} mx-auto`} />
                     </th>
-                    <th scope="col" className="text-right py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap px-1.5 sm:px-2">旅館営業</th>
-                    <th scope="col" className="text-right py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap px-1.5 sm:px-2">差額</th>
+                    <th scope="col" className="text-left py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap px-1.5 sm:px-2">旅館営業</th>
+                    <th scope="col" className="text-left py-2.5 sm:py-3 text-sm sm:text-base text-gray-800 font-semibold whitespace-nowrap px-1.5 sm:px-2">差額</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr className={`border-b border-gray-200 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap">初期費用</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.initialCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.initialCost)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.initialCost)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.initialCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.initialCost, results.minpaku.initialCost)}円
                     </td>
                   </tr>
                   <tr className={`border-b border-gray-200 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap">月額費用（システム等）</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.monthlyCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.monthlyCost)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.monthlyCost)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.monthlyCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.monthlyCost, results.minpaku.monthlyCost)}円
                     </td>
                   </tr>
                   <tr className={`border-b border-gray-200 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap">運営代行料（月額）</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.managementFee)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.managementFee)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.managementFee)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.managementFee)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.managementFee, results.minpaku.managementFee)}円
                     </td>
                   </tr>
                   <tr className={`border-b border-gray-200 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap">月額費用合計</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.totalMonthlyCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.minpaku.totalMonthlyCost)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.totalMonthlyCost)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>{formatCurrency(results.ryokan.totalMonthlyCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-medium text-gray-700 whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.totalMonthlyCost, results.minpaku.totalMonthlyCost)}円
                     </td>
                   </tr>
                   <tr className={`border-b border-gray-200 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-green-600 whitespace-nowrap">月間想定利益</td>
-                    <td className={`text-right text-sm sm:text-base font-semibold ${results.minpaku.estimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.minpaku.estimatedProfit)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-semibold ${results.minpaku.estimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.minpaku.estimatedProfit)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-semibold ${results.ryokan.estimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.ryokan.estimatedProfit)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-semibold whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-semibold ${results.ryokan.estimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.ryokan.estimatedProfit)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-semibold whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.estimatedProfit, results.minpaku.estimatedProfit)}円
                     </td>
                   </tr>
                   <tr className={`border-b-0 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-gray-900 whitespace-nowrap">年間総コスト</td>
-                    <td className={`text-right text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap`}>{formatCurrency(results.minpaku.yearlyCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap`}>{formatCurrency(results.minpaku.yearlyCost)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap`}>{formatCurrency(results.ryokan.yearlyCost)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap`}>{formatCurrency(results.ryokan.yearlyCost)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.yearlyCost, results.minpaku.yearlyCost)}円
                     </td>
                   </tr>
                   <tr className={`border-b-0 hover:${accentBgLight}`}>
                     <td className="py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-green-600 whitespace-nowrap">年間想定利益</td>
-                    <td className={`text-right text-sm sm:text-base font-semibold ${results.minpaku.yearlyEstimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.minpaku.yearlyEstimatedProfit)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-semibold ${results.minpaku.yearlyEstimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.minpaku.yearlyEstimatedProfit)}円</td>
                     <td></td>
-                    <td className={`text-right text-sm sm:text-base font-semibold ${results.ryokan.yearlyEstimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.ryokan.yearlyEstimatedProfit)}円</td>
-                    <td className={`text-right text-sm sm:text-base font-semibold whitespace-nowrap`}>
+                    <td className={`text-left text-sm sm:text-base font-semibold ${results.ryokan.yearlyEstimatedProfit >= 0 ? 'text-green-600' : 'text-red-600'} whitespace-nowrap`}>{formatCurrency(results.ryokan.yearlyEstimatedProfit)}円</td>
+                    <td className={`text-left text-sm sm:text-base font-semibold whitespace-nowrap`}>
                       {calculateDifference(results.ryokan.yearlyEstimatedProfit, results.minpaku.yearlyEstimatedProfit)}円
                     </td>
                   </tr>

@@ -98,13 +98,28 @@ export function ContactForm() {
     message: "",
     privacyPolicy: false,
   })
-  const [attachedFileNames, setAttachedFileNames] = useState<string[]>([])
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([])
 
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
+
+  // ファイルアップロードの設定
+  const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
+  const MAX_FILES = 5 // 最大5ファイル
+  const ALLOWED_TYPES = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'text/plain'
+  ]
 
   const inquiryTypes = [
     { value: "", label: "選択してください" },
@@ -136,11 +151,78 @@ export function ContactForm() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    setFormData((prev) => ({ ...prev, attachments: files }));
+    if (files) {
+      handleFilesAdd(Array.from(files));
+    }
+  }
+
+  // ファイル追加処理（バリデーション付き）
+  const handleFilesAdd = (newFiles: File[]) => {
+    const validFiles: File[] = [];
+    const errors: string[] = [];
+
+    newFiles.forEach(file => {
+      // ファイル数チェック
+      if (attachedFiles.length + validFiles.length >= MAX_FILES) {
+        errors.push(`ファイル数は最大${MAX_FILES}個までです`);
+        return;
+      }
+
+      // ファイルサイズチェック
+      if (file.size > MAX_FILE_SIZE) {
+        errors.push(`${file.name}: ファイルサイズが10MBを超えています`);
+        return;
+      }
+
+      // ファイルタイプチェック
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        errors.push(`${file.name}: サポートされていないファイル形式です`);
+        return;
+      }
+
+      // 重複チェック
+      if (attachedFiles.some(existingFile => existingFile.name === file.name && existingFile.size === file.size)) {
+        errors.push(`${file.name}: 同じファイルが既に選択されています`);
+        return;
+      }
+
+      validFiles.push(file);
+    });
+
+    if (errors.length > 0) {
+      setSubmitError(errors.join('\n'));
+    } else {
+      setSubmitError(null);
+    }
+
+    setAttachedFiles(prev => [...prev, ...validFiles]);
     
-    // ファイル名を保存
-    const fileNames = files ? Array.from(files).map(file => file.name) : [];
-    setAttachedFileNames(fileNames);
+    // FormDataを更新
+    const fileList = new DataTransfer();
+    [...attachedFiles, ...validFiles].forEach(file => fileList.items.add(file));
+    setFormData(prev => ({ ...prev, attachments: fileList.files }));
+  }
+
+  // 個別ファイル削除
+  const removeFile = (index: number) => {
+    const newFiles = attachedFiles.filter((_, i) => i !== index);
+    setAttachedFiles(newFiles);
+    
+    // FormDataを更新
+    const fileList = new DataTransfer();
+    newFiles.forEach(file => fileList.items.add(file));
+    setFormData(prev => ({ ...prev, attachments: fileList.files }));
+  }
+
+  // ドラッグ&ドロップ処理
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    handleFilesAdd(files);
   }
 
   const validateForm = () => {
@@ -200,7 +282,7 @@ export function ContactForm() {
           message: "",
           privacyPolicy: false,
         })
-        setAttachedFileNames([]);
+        setAttachedFiles([]);
       } else {
         // エラーメッセージを設定
         setSubmitError(result.error || "送信に失敗しました。もう一度お試しください。");
@@ -332,9 +414,13 @@ export function ContactForm() {
               {/* ファイルアップロード */}
               <div>
                 <label htmlFor="attachments" className="block text-sm font-medium text-gray-700 mb-1">
-                  添付ファイル <span className="text-gray-500 text-xs">(任意)</span>
+                  添付ファイル <span className="text-gray-500 text-xs">(任意、最大{MAX_FILES}ファイル)</span>
                 </label>
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                <div 
+                  className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-gold-400 transition-colors"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                >
                   <div className="space-y-1 text-center">
                     <Upload className="mx-auto h-12 w-12 text-gray-400" />
                     <div className="flex text-sm text-gray-600">
@@ -347,23 +433,52 @@ export function ContactForm() {
                           className="sr-only"
                           multiple
                           onChange={handleFileChange}
+                          accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.txt"
                         />
                       </label>
                       <p className="pl-1">またはドラッグ&ドロップ</p>
                     </div>
-                    <p className="text-xs text-gray-500">PDF, Word, Excel, 画像ファイルなど</p>
-                    {attachedFileNames.length > 0 && (
-                      <div className="mt-2 text-sm text-gray-500">
-                        <p>選択されたファイル:</p>
-                        <ul className="list-disc list-inside">
-                          {attachedFileNames.map((name, index) => (
-                            <li key={index}>{name}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                    <p className="text-xs text-gray-500">
+                      PDF, Word, Excel, 画像ファイルなど（1ファイル最大10MB）
+                    </p>
                   </div>
                 </div>
+
+                {/* アップロードされたファイル一覧 */}
+                {attachedFiles.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    <h4 className="text-sm font-medium text-gray-700">選択されたファイル ({attachedFiles.length}/{MAX_FILES})</h4>
+                    <div className="space-y-2">
+                      {attachedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-md border">
+                          <div className="flex items-center space-x-3">
+                            <div className="flex-shrink-0">
+                              <div className="w-8 h-8 bg-gold-100 rounded flex items-center justify-center">
+                                <Upload className="w-4 h-4 text-gold-600" />
+                              </div>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
+                              <p className="text-xs text-gray-500">
+                                {(file.size / 1024 / 1024).toFixed(2)} MB
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            className="flex-shrink-0 p-1 text-red-400 hover:text-red-600 transition-colors"
+                            title="ファイルを削除"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
